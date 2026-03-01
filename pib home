@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Political Insights BD — রাজনৈতিক বিশ্লেষণ ও কৌশলগত গবেষণা</title>
+<meta name="description" content="Bangladesh's leading political analysis, policy research, and strategic consulting platform. Data-driven insights for democratic transition.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;700;800&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — BD FLAG LIGHT THEME
+═══════════════════════════════════════════ */
+:root {
+  --green:      #006A4E;   /* Bangladesh flag green */
+  --green-d:    #004f3a;
+  --green-l:    #e6f2ee;
+  --green-ll:   #f0f8f5;
+  --red:        #F42A41;   /* Bangladesh flag red (circle) */
+  --red-d:      #c41f31;
+  --red-l:      #fff0f1;
+  --white:      #ffffff;
+  --off-white:  #f9fafb;
+  --cream:      #f5f3ef;
+  --ink:        #0d1117;
+  --ink-soft:   #1a2332;
+  --gray:       #5a6474;
+  --gray-l:     #8a95a3;
+  --border:     1px solid #dee2e8;
+  --border-d:   2px solid var(--ink);
+  --shadow-sm:  0 2px 8px rgba(0,0,0,.07);
+  --shadow-md:  0 8px 32px rgba(0,0,0,.10);
+  --shadow-lg:  0 20px 60px rgba(0,0,0,.12);
+  --radius-sm:  4px;
+  --radius:     8px;
+  --radius-lg:  14px;
+  --header-h:   84px;
+  --header-s:   62px;
+  --T:          0.3s cubic-bezier(.4,0,.2,1);
+}
+
+/* ═══════════════════════════════════════════  RESET  */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--white);
+  color:var(--ink);
+  overflow-x:hidden;
+  padding-top:var(--header-h);
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;font-family:inherit;}
+
+/* ═══════════════════════════════════════════
+   FIXED TRANSPARENT HEADER
+═══════════════════════════════════════════ */
+#hdr {
+  position:fixed;
+  top:0;left:0;right:0;
+  height:var(--header-h);
+  z-index:9999;
+  background:transparent;
+  transition:background var(--T), height var(--T), box-shadow var(--T), border-bottom var(--T);
+  border-bottom:1px solid transparent;
+}
+#hdr.scrolled {
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(18px) saturate(180%);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  height:var(--header-s);
+  border-bottom:var(--border);
+  box-shadow:0 2px 20px rgba(0,106,78,.08);
+}
+.hdr-inner{
+  max-width:1360px;width:92%;
+  margin:0 auto;height:100%;
+  display:flex;align-items:center;
+  justify-content:space-between;gap:2rem;
+}
+/* Logo */
+.hdr-logo img{
+  height:54px;width:auto;
+  transition:height var(--T),filter var(--T);
+  filter:brightness(0) invert(1);
+}
+#hdr.scrolled .hdr-logo img{height:42px;filter:none;}
+
+/* Nav links */
+.hdr-nav{display:flex;align-items:center;gap:1.6rem;}
+.hdr-nav a{
+  font-size:11.5px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);
+  position:relative;padding-bottom:3px;
+  white-space:nowrap;
+  transition:color var(--T);
+}
+#hdr.scrolled .hdr-nav a{color:var(--ink);}
+.hdr-nav a::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:0;height:2px;background:var(--green);
+  transition:width .25s ease;
+}
+.hdr-nav a:hover::after{width:100%;}
+.hdr-nav a:hover{color:var(--green)!important;}
+/* Active link */
+.hdr-nav a.active{color:var(--green)!important;}
+.hdr-nav a.active::after{width:100%;}
+
+/* CTA */
+.hdr-cta{
+  background:var(--red);color:#fff!important;
+  padding:9px 20px;
+  font-size:11px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  border-radius:var(--radius-sm);
+  border:none;
+  transition:background var(--T),transform .15s;
+  white-space:nowrap;
+}
+.hdr-cta::after{display:none!important;}
+.hdr-cta:hover{background:var(--red-d);transform:translateY(-2px);}
+
+/* Hamburger */
+.ham-btn{
+  display:none;flex-direction:column;
+  gap:5px;background:none;border:none;
+  padding:6px;
+}
+.ham-btn span{
+  display:block;width:26px;height:2px;
+  background:#fff;border-radius:2px;
+  transition:background var(--T),transform .3s;
+}
+#hdr.scrolled .ham-btn span{background:var(--ink);}
+.ham-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.ham-btn.open span:nth-child(2){opacity:0;}
+.ham-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ── MOBILE SOCIAL ICONS (left of logo) ── */
+.hdr-mob-social{
+  display:none;
+  align-items:center;
+  gap:.4rem;
+  flex-shrink:0;
+}
+.hdr-mob-icon{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;text-decoration:none;
+  border:1.5px solid rgba(0,0,0,.12);
+  color:var(--ink);
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  transition:all var(--T);
+  flex-shrink:0;
+}
+#hdr.scrolled .hdr-mob-icon{
+  background:var(--green-ll);
+  border-color:var(--green-l);
+  color:var(--ink);
+}
+.hdr-mob-icon.call-icon:hover,.hdr-mob-icon.call-icon:active{
+  background:var(--green);border-color:var(--green);color:#fff;
+  transform:scale(1.08);
+}
+.hdr-mob-icon.wa-icon:hover,.hdr-mob-icon.wa-icon:active{
+  background:#25d366;border-color:#25d366;color:#fff;
+  transform:scale(1.08);
+}
+
+/* Mobile Nav */
+.mob-nav{
+  display:none;position:fixed;
+  top:var(--header-s);left:0;right:0;
+  background:#fff;
+  border-bottom:2px solid var(--green);
+  box-shadow:var(--shadow-md);
+  flex-direction:column;padding:1rem 5%;
+  z-index:9998;
+  animation:slideDown .25s ease;
+}
+.mob-nav.open{display:flex;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+.mob-nav a{
+  font-size:.9rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;
+  color:var(--ink);padding:.8rem 0;
+  border-bottom:var(--border);
+  display:flex;align-items:center;gap:.6rem;
+}
+.mob-nav a:last-child{border:none;}
+.mob-nav a:hover{color:var(--green);}
+
+/* ═══════════════════════════════════════════
+   NEWS TICKER
+═══════════════════════════════════════════ */
+.ticker{
+  background:var(--green);
+  overflow:hidden;height:36px;
+  display:flex;align-items:center;
+  border-bottom:2px solid var(--green-d);
+  position:relative;
+}
+.ticker-label{
+  flex-shrink:0;background:var(--red);
+  color:#fff;font-size:9px;font-weight:900;
+  letter-spacing:.2em;text-transform:uppercase;
+  padding:0 1.2rem;height:100%;
+  display:flex;align-items:center;gap:6px;
+  white-space:nowrap;
+  z-index:2;
+}
+.ticker-label::after{
+  content:'';position:absolute;
+  left:68px;top:0;bottom:0;width:24px;
+  background:linear-gradient(90deg,var(--red),transparent);
+  pointer-events:none;
+}
+.ticker-track{overflow:hidden;flex:1;}
+.ticker-inner{
+  display:inline-flex;white-space:nowrap;
+  animation:ticker 36s linear infinite;
+  gap:0;
+}
+.ticker-inner span{
+  font-size:11px;font-weight:700;letter-spacing:.06em;
+  color:rgba(255,255,255,.92);padding:0 28px;
+  display:flex;align-items:center;gap:8px;
+}
+.ticker-inner span::before{
+  content:'●';font-size:6px;color:var(--red);opacity:.8;
+}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ═══════════════════════════════════════════
+   HERO — LIGHT BILINGUAL BOLD
+═══════════════════════════════════════════ */
+
+/* Header nav adapts to light hero */
+#hdr:not(.scrolled) .hdr-nav a { color: var(--ink) !important; }
+#hdr:not(.scrolled) .hdr-logo img { filter: none !important; }
+#hdr:not(.scrolled) .ham-btn span { background: var(--ink) !important; }
+
+#hero {
+  background: var(--white);
+  min-height: calc(100vh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--green);
+}
+
+/* BD flag colour wash — very subtle */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 85% 30%, rgba(0,106,78,.07) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 55% at 10% 80%, rgba(244,42,65,.05) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Large ghost letter watermark */
+#hero::after {
+  content: 'PIBD';
+  position: absolute;
+  right: -2rem;
+  bottom: -1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(8rem, 18vw, 18rem);
+  font-weight: 900;
+  color: rgba(0,106,78,.04);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: -.04em;
+}
+
+/* Top accent stripe — BD flag */
+.hero-flag-stripe {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--green) 60%, var(--red) 60%);
+  z-index: 1;
+}
+
+.hero-grid {
+  max-width: 1360px;
+  width: 92%;
+  margin: 0 auto;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 0;
+  align-items: center;
+  padding: 4.5rem 0 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── LEFT COLUMN ─── */
+.hero-left {
+  padding-right: 4.5rem;
+  border-right: 1.5px solid var(--green-l);
+}
+
+/* Bilingual eyebrow */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
+}
+.hero-eyebrow-bn {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: .02em;
+}
+.hero-eyebrow-divider {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+}
+.hero-eyebrow-en {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* The bilingual stacked title */
+.hero-title {
+  margin-bottom: 1.6rem;
+  line-height: 1;
+}
+.ht-line-en {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 5.5vw, 5.6rem);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  color: var(--ink);
+  line-height: .95;
+}
+.ht-line-en .hl-g { color: var(--green); }
+.ht-line-en .hl-r { color: var(--red); font-style: italic; }
+.ht-line-bn {
+  display: block;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.6rem);
+  font-weight: 700;
+  color: var(--gray);
+  line-height: 1.4;
+  margin-top: .35rem;
+  letter-spacing: .01em;
+}
+.ht-line-bn strong {
+  font-weight: 900;
+  color: var(--green);
+}
+
+/* Divider rule */
+.hero-rule {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: 1.6rem 0;
+}
+.hero-rule-line {
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), transparent);
+  flex: 1;
+  max-width: 120px;
+}
+.hero-rule-circle {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(244,42,65,.15);
+}
+
+/* Bilingual description */
+.hero-sub {
+  margin-bottom: 2.2rem;
+}
+.hero-sub-en {
+  font-size: .96rem;
+  font-weight: 500;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: .5rem;
+}
+.hero-sub-bn {
+  font-family: 'Noto Serif Bengali', sans-serif;
+  font-size: .88rem;
+  color: var(--gray-l);
+  line-height: 1.75;
+}
+
+.hero-btns { display: flex; gap: .9rem; flex-wrap: wrap; }
+
+.btn-g {
+  background: var(--green); color: #fff;
+  padding: 13px 26px; font-size: 11px; font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--green);
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: all var(--T);
+  box-shadow: 0 4px 14px rgba(0,106,78,.2);
+}
+.btn-g:hover { background: var(--green-d); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,106,78,.3); }
+
+.btn-ghost-w {
+  background: transparent; color: var(--ink);
+  padding: 13px 26px; font-size: 11px; font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--ink);
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: all var(--T);
+}
+.btn-ghost-w:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+
+/* ─── RIGHT COLUMN ─── */
+.hero-right {
+  padding-left: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Stat row */
+.hero-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .8rem;
+}
+.hstat {
+  background: var(--white);
+  border: 1.5px solid var(--green-l);
+  border-radius: var(--radius);
+  padding: 1.2rem .8rem;
+  text-align: center;
+  transition: all var(--T);
+  position: relative;
+  overflow: hidden;
+}
+.hstat::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+.hstat:hover { border-color: var(--green); box-shadow: 0 6px 18px rgba(0,106,78,.1); transform: translateY(-3px); }
+.hstat:hover::after { transform: scaleX(1); }
+.hstat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 900;
+  color: var(--green); line-height: 1;
+}
+.hstat-n sup { font-size: .9rem; color: var(--red); }
+.hstat-l { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gray); margin-top: .3rem; }
+
+/* Feature cards */
+.hero-feat-cards { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.hfc {
+  background: var(--white);
+  border: 1.5px solid var(--green-l);
+  border-radius: var(--radius);
+  padding: 1.2rem 1rem;
+  transition: all var(--T);
+  position: relative;
+  overflow: hidden;
+}
+.hfc::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--green);
+  transition: height .3s ease;
+}
+.hfc:hover::before { height: 100%; }
+.hfc:hover { border-color: var(--green); box-shadow: 0 6px 18px rgba(0,106,78,.1); transform: translateY(-3px); }
+.hfc-icon { font-size: 1.4rem; margin-bottom: .5rem; }
+.hfc-num { font-size: 9px; font-weight: 900; letter-spacing: .16em; color: var(--red); margin-bottom: .3rem; }
+.hfc-t { font-size: .84rem; font-weight: 800; color: var(--ink); margin-bottom: .2rem; }
+.hfc-d { font-size: .74rem; color: var(--gray); line-height: 1.45; font-family: 'Noto Serif Bengali', sans-serif; }
+
+/* Floating badge — "Live" */
+.hero-live-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--red-l);
+  border: 1px solid rgba(244,42,65,.25);
+  color: var(--red);
+  font-size: 9px; font-weight: 900;
+  letter-spacing: .16em; text-transform: uppercase;
+  padding: .38rem .9rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+.hero-live-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+  animation: pls 1.5s ease infinite;
+}
+
+@keyframes pls { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.6);} }
+
+/* ═══════════════════════════════════════════
+   IMPACT STATS BAR
+═══════════════════════════════════════════ */
+.impact-bar{
+  background:var(--green);
+  border-bottom:3px solid var(--green-d);
+}
+.impact-inner{
+  max-width:1360px;width:92%;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.impact-item{
+  padding:2rem 1.5rem;text-align:center;
+  border-right:1px solid rgba(255,255,255,.15);
+  position:relative;
+}
+.impact-item:last-child{border-right:none;}
+.impact-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.6rem;font-weight:900;color:#fff;line-height:1;
+}
+.impact-num span{color:#a8f3d8;}
+.impact-lbl{font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:.35rem;}
+.impact-desc{font-family:'Noto Serif Bengali',sans-serif;font-size:.76rem;color:rgba(255,255,255,.4);margin-top:.3rem;line-height:1.4;}
+
+/* ═══════════════════════════════════════════
+   SECTION UTILS
+═══════════════════════════════════════════ */
+.sec{padding:72px 0;}
+.sec-alt{background:var(--off-white);}
+.sec-green{background:var(--green-ll);}
+.sec-dark{background:var(--ink-soft);}
+.sec-w{background:#fff;}
+.wrap{max-width:1360px;width:92%;margin:0 auto;}
+
+.sec-tag{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--green);margin-bottom:.7rem;
+}
+.sec-tag::before{content:'';width:22px;height:2px;background:var(--green);}
+
+.sec-title{
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:clamp(1.9rem,3.5vw,3rem);
+  font-weight:900;line-height:1.12;
+  letter-spacing:-.02em;color:var(--ink);
+}
+.sec-title .hl-r{color:var(--red);}
+.sec-title .hl-g{color:var(--green);}
+.sec-sub{
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.94rem;color:var(--gray);line-height:1.75;
+  margin-top:.7rem;max-width:560px;
+}
+.sec-head{margin-bottom:2.8rem;}
+
+/* View More btn */
+.vm-wrap{text-align:center;margin-top:2.2rem;}
+.btn-vm{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;color:var(--green);
+  padding:11px 28px;font-size:11px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:2px solid var(--green);border-radius:var(--radius-sm);
+  transition:all var(--T);
+}
+.btn-vm:hover{background:var(--green);color:#fff;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,106,78,.2);}
+
+/* Section title row: heading + "view all" link */
+.sec-head-row{
+  display:flex;align-items:flex-end;
+  justify-content:space-between;gap:2rem;
+  flex-wrap:wrap;margin-bottom:2.8rem;
+}
+.view-all-link{
+  font-size:11px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--green);
+  display:inline-flex;align-items:center;gap:6px;
+  border-bottom:2px solid var(--green);padding-bottom:2px;
+  white-space:nowrap;transition:color var(--T),gap var(--T);
+}
+.view-all-link:hover{color:var(--red);border-color:var(--red);gap:10px;}
+
+/* ═══════════════════════════════════════════
+   WHAT WE DO — 4 PILLAR CARDS
+═══════════════════════════════════════════ */
+.pillars-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  border:2px solid var(--ink);
+}
+.pillar-card{
+  padding:2rem 1.6rem;
+  border-right:1px solid var(--ink);
+  background:#fff;
+  position:relative;overflow:hidden;
+  transition:background var(--T);
+}
+.pillar-card:last-child{border-right:none;}
+.pillar-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:4px;background:var(--green);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s ease;
+}
+.pillar-card:hover::after{transform:scaleX(1);}
+.pillar-card:hover{background:var(--green-ll);}
+.pillar-icon{
+  width:48px;height:48px;border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:1rem;
+  background:var(--green-l);
+  transition:background var(--T);
+}
+.pillar-card:hover .pillar-icon{background:var(--green);filter:grayscale(0);}
+.pillar-num{
+  font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;
+  color:var(--green-l);line-height:1;margin-bottom:.8rem;
+  transition:color var(--T);
+}
+.pillar-card:hover .pillar-num{color:var(--green-ll);}
+.pillar-label{
+  font-size:9px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--red);margin-bottom:.5rem;
+}
+.pillar-title{
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:1rem;font-weight:900;color:var(--ink);margin-bottom:.8rem;
+}
+.pillar-desc{
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.8rem;color:var(--gray);line-height:1.6;
+}
+.pillar-link{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:1rem;font-size:10px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);border-bottom:1px solid var(--green);
+  padding-bottom:1px;transition:color var(--T),gap var(--T);
+}
+.pillar-link:hover{color:var(--red);border-color:var(--red);gap:9px;}
+
+/* ═══════════════════════════════════════════
+   CONTENT CARDS — UNIVERSAL
+═══════════════════════════════════════════ */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1.4rem;
+}
+.cards-grid-4{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.4rem;
+}
+.post-card{
+  background:#fff;
+  border:var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  transition:transform var(--T),box-shadow var(--T),border-color var(--T);
+  display:flex;flex-direction:column;
+}
+.post-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-md);
+  border-color:var(--green);
+}
+.post-card-img{
+  height:185px;overflow:hidden;
+  background:var(--green-ll);
+  flex-shrink:0;position:relative;
+}
+.post-card-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .5s ease;
+}
+.post-card:hover .post-card-img img{transform:scale(1.06);}
+.post-type-badge{
+  position:absolute;top:.8rem;left:.8rem;
+  font-size:9px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;
+  padding:.35rem .8rem;border-radius:2px;color:#fff;
+}
+.badge-policy{background:var(--green);}
+.badge-research{background:var(--red);}
+.badge-report{background:var(--ink-soft);}
+.badge-insights{background:#7c4dff;}
+.badge-election{background:#e65100;}
+.badge-book{background:var(--green-d);}
+
+.post-card-body{padding:1.3rem;flex:1;display:flex;flex-direction:column;}
+.post-date{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-l);margin-bottom:.5rem;}
+.post-title{
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:1rem;font-weight:900;color:var(--ink);line-height:1.35;
+  margin-bottom:.7rem;
+}
+.post-excerpt{
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.8rem;color:var(--gray);line-height:1.6;
+  flex:1;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.post-readmore{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:1rem;font-size:10px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);
+  transition:gap var(--T),color var(--T);
+}
+.post-card:hover .post-readmore{gap:9px;color:var(--red);}
+
+/* Book card — portrait */
+.book-card{
+  background:#fff;border:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:transform var(--T),box-shadow var(--T),border-color var(--T);
+}
+.book-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:var(--green);}
+.book-cover{
+  aspect-ratio:3/4;overflow:hidden;
+  background:var(--green-ll);
+  border-bottom:var(--border);
+}
+.book-cover img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.book-card:hover .book-cover img{transform:scale(1.04);}
+.book-info{padding:1.2rem;}
+.book-title{font-family:'Playfair Display','Noto Serif Bengali',serif;font-size:.98rem;font-weight:900;color:var(--ink);margin-bottom:.4rem;}
+.book-desc{font-family:'Noto Serif Bengali',sans-serif;font-size:.78rem;color:var(--gray);line-height:1.5;}
+
+/* Loading skeleton */
+.skeleton{
+  background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);
+  background-size:200% 100%;
+  animation:sk .8s infinite;border-radius:var(--radius-sm);
+}
+@keyframes sk{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+/* ═══════════════════════════════════════════
+   SERVICES SECTION
+═══════════════════════════════════════════ */
+.services-wrap{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.4rem;margin-top:2.8rem;
+}
+.svc-card{
+  background:#fff;border:var(--border);
+  border-radius:var(--radius);
+  padding:2rem 1.8rem;
+  position:relative;overflow:hidden;
+  transition:all var(--T);
+  border-top:4px solid var(--green);
+}
+.svc-card:hover{
+  box-shadow:var(--shadow-md);
+  transform:translateY(-5px);
+  border-top-color:var(--red);
+}
+.svc-icon{
+  width:50px;height:50px;border-radius:var(--radius-sm);
+  background:var(--green-l);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:1.2rem;
+  transition:background var(--T);
+}
+.svc-card:hover .svc-icon{background:var(--green);}
+.svc-title{
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:1.05rem;font-weight:900;color:var(--ink);margin-bottom:.8rem;
+}
+.svc-list{list-style:none;display:flex;flex-direction:column;gap:.45rem;}
+.svc-list li{
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.8rem;color:var(--gray);
+  padding-left:1.1rem;position:relative;line-height:1.5;
+}
+.svc-list li::before{content:'→';position:absolute;left:0;color:var(--green);font-weight:900;}
+.svc-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:1.2rem;font-size:10px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);border-bottom:2px solid var(--green);
+  padding-bottom:1px;transition:color var(--T),border-color var(--T),gap var(--T);
+}
+.svc-cta:hover{color:var(--red);border-color:var(--red);gap:10px;}
+.svc-all-btn{
+  text-align:center;margin-top:2.5rem;
+}
+.btn-svc{
+  background:var(--green);color:#fff;
+  padding:14px 36px;font-size:12px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;
+  border-radius:var(--radius-sm);border:2px solid var(--green);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all var(--T);
+}
+.btn-svc:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,106,78,.25);}
+
+/* ═══════════════════════════════════════════
+   ELECTION MONITORING
+═══════════════════════════════════════════ */
+.election-wrap{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2rem;align-items:start;
+}
+.election-panel{
+  background:var(--ink-soft);
+  border-radius:var(--radius);
+  padding:2.5rem;color:#fff;
+  border:2px solid var(--ink);
+}
+.live-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(244,42,65,.2);border:1px solid rgba(244,42,65,.4);
+  color:#ff8090;font-size:9px;font-weight:900;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding:.4rem 1rem;border-radius:var(--radius-sm);margin-bottom:1.2rem;
+}
+.live-badge::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:#ff8090;
+  animation:pls 1.5s ease infinite;
+}
+.election-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-weight:900;color:#fff;line-height:1.2;margin-bottom:1rem;
+}
+.seat-bar-wrap{margin:1.5rem 0;}
+.seat-bar-lbl{font-size:9px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.5rem;}
+.seat-bar{height:10px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden;display:flex;}
+.sb-1{background:var(--green);width:70.7%;}
+.sb-2{background:var(--red);width:25.7%;}
+.sb-3{background:rgba(255,255,255,.15);flex:1;}
+.seat-legend{display:flex;gap:1.2rem;margin-top:.7rem;flex-wrap:wrap;}
+.sl-item{display:flex;align-items:center;gap:6px;font-size:10px;color:rgba(255,255,255,.5);font-weight:700;}
+.sl-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+
+.result-rows{display:flex;flex-direction:column;gap:.8rem;}
+.res-row{
+  display:flex;align-items:center;gap:1.2rem;
+  padding:1rem 1.2rem;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--radius-sm);
+  border-left:4px solid transparent;
+  transition:border-left-color var(--T);
+}
+.res-row.winner{border-left-color:var(--green);}
+.res-row.oppo{border-left-color:var(--red);}
+.res-row.other{border-left-color:rgba(255,255,255,.2);}
+.res-num{
+  font-family:'Playfair Display',serif;font-size:2.4rem;
+  font-weight:900;line-height:1;min-width:72px;
+}
+.res-num.gn{color:#6ee7c0;}
+.res-num.rd{color:#ff8090;}
+.res-num.wh{color:rgba(255,255,255,.6);}
+.res-info .res-party{font-size:.9rem;font-weight:800;color:#fff;margin-bottom:.2rem;}
+.res-info .res-status{font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:.06em;}
+
+/* Monitoring updates */
+.monitoring-panel{display:flex;flex-direction:column;gap:0;}
+.mon-header{
+  background:var(--green);color:#fff;
+  padding:1.2rem 1.8rem;
+  border-radius:var(--radius) var(--radius) 0 0;
+  display:flex;align-items:center;justify-content:space-between;
+  border:2px solid var(--green-d);border-bottom:none;
+}
+.mon-title{font-size:.9rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;}
+.mon-badge{
+  background:var(--red);color:#fff;
+  font-size:9px;font-weight:900;letter-spacing:.12em;
+  padding:.3rem .7rem;border-radius:2px;
+  display:flex;align-items:center;gap:5px;
+}
+.mon-badge::before{content:'●';font-size:6px;animation:pls 1.5s infinite;}
+.mon-list{
+  border:2px solid var(--green-d);border-top:none;
+  border-radius:0 0 var(--radius) var(--radius);
+  overflow:hidden;background:#fff;
+}
+.mon-item{
+  padding:1.1rem 1.5rem;border-bottom:var(--border);
+  display:flex;gap:1rem;align-items:flex-start;
+  transition:background var(--T);
+}
+.mon-item:last-child{border-bottom:none;}
+.mon-item:hover{background:var(--green-ll);}
+.mon-dot{
+  width:8px;height:8px;border-radius:50%;
+  flex-shrink:0;margin-top:.35rem;
+}
+.mon-dot.g{background:var(--green);}
+.mon-dot.r{background:var(--red);}
+.mon-dot.y{background:#f59e0b;}
+.mon-text{font-size:.84rem;font-weight:600;color:var(--ink);line-height:1.4;}
+.mon-meta{font-size:.72rem;color:var(--gray-l);margin-top:.2rem;}
+
+/* ═══════════════════════════════════════════
+   TOOLS & METHODOLOGY
+═══════════════════════════════════════════ */
+.tools-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.4rem;margin-top:2.8rem;
+}
+.tool-card{
+  background:#fff;border:var(--border);
+  border-radius:var(--radius);padding:1.8rem;
+  transition:all var(--T);
+  border-top:3px solid var(--green-l);
+}
+.tool-card:hover{
+  border-top-color:var(--green);
+  box-shadow:var(--shadow-md);transform:translateY(-4px);
+}
+.tool-icon{font-size:2rem;margin-bottom:.8rem;}
+.tool-title{font-size:.95rem;font-weight:800;color:var(--ink);margin-bottom:.5rem;}
+.tool-desc{font-family:'Noto Serif Bengali',sans-serif;font-size:.8rem;color:var(--gray);line-height:1.6;}
+.tool-tag{
+  display:inline-block;margin-top:.8rem;
+  background:var(--green-l);color:var(--green);
+  font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:.3rem .7rem;border-radius:2px;
+}
+
+/* ═══════════════════════════════════════════
+   VISION / ABOUT
+═══════════════════════════════════════════ */
+.vision-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
+}
+.vision-img{
+  position:relative;
+  border-radius:var(--radius-lg);overflow:hidden;
+  border:3px solid var(--green);
+  aspect-ratio:4/3;background:var(--green-ll);
+}
+.vision-img-inner{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--green) 0%,var(--green-d) 100%);
+  padding:2.5rem;text-align:center;
+}
+.vision-quote-big{
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:1.15rem;font-style:italic;color:rgba(255,255,255,.85);
+  line-height:1.7;
+}
+.vision-badge{
+  position:absolute;bottom:1.2rem;right:1.2rem;
+  background:var(--red);color:#fff;
+  font-size:9px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;
+  padding:.5rem 1rem;border-radius:var(--radius-sm);
+}
+.vision-text .vision-para{
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.93rem;color:var(--gray);line-height:1.8;margin-bottom:1.1rem;
+}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-top:.8rem;}
+.check-list li{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.87rem;font-weight:600;color:var(--ink);
+}
+.check-list li::before{
+  content:'✓';flex-shrink:0;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--green);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.62rem;font-weight:900;
+}
+.vision-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1.5rem;
+}
+.vs-item{
+  background:var(--green-ll);border-radius:var(--radius-sm);
+  padding:.9rem;text-align:center;
+  border:1px solid var(--green-l);
+}
+.vs-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--green);}
+.vs-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-top:.2rem;}
+
+/* ═══════════════════════════════════════════
+   FAQ
+═══════════════════════════════════════════ */
+.faq-inner{max-width:860px;margin:0 auto;}
+.faq-list{border-top:2px solid var(--green-l);}
+.faq-item{border-bottom:1px solid var(--green-l);}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;
+  padding:1.3rem 0;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:.96rem;font-weight:700;color:var(--ink);
+  transition:color var(--T);
+}
+.faq-q:hover{color:var(--green);}
+.faq-ico{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid var(--green-l);
+  background:var(--green-ll);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;font-weight:900;color:var(--green);flex-shrink:0;
+  transition:all .3s;
+}
+.faq-item.open .faq-ico{transform:rotate(45deg);background:var(--green);color:#fff;border-color:var(--green);}
+.faq-ans{max-height:0;overflow:hidden;transition:max-height .4s ease,padding-bottom .3s;}
+.faq-item.open .faq-ans{max-height:220px;padding-bottom:1.2rem;}
+.faq-ans p{font-family:'Noto Serif Bengali',sans-serif;font-size:.87rem;color:var(--gray);line-height:1.75;}
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+.contact-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+}
+.contact-info{display:flex;flex-direction:column;gap:1.2rem;}
+.contact-item{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1.4rem;background:#fff;
+  border:var(--border);border-radius:var(--radius);
+  border-left:4px solid var(--green);
+  transition:all var(--T);
+}
+.contact-item:hover{box-shadow:var(--shadow-sm);border-left-color:var(--red);}
+.contact-item-icon{
+  width:42px;height:42px;border-radius:var(--radius-sm);
+  background:var(--green-l);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.contact-item-label{font-size:9px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-l);margin-bottom:.3rem;}
+.contact-item-val{font-size:.95rem;font-weight:700;color:var(--ink);}
+.contact-item-val a{color:var(--green);}
+.contact-item-val a:hover{color:var(--red);}
+
+.contact-form{background:#fff;border:var(--border);border-radius:var(--radius);padding:2rem;}
+.form-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--ink);margin-bottom:1.5rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.form-group{margin-bottom:1rem;}
+.form-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:.4rem;display:block;}
+.form-input,.form-textarea{
+  width:100%;padding:11px 14px;
+  border:var(--border);border-radius:var(--radius-sm);
+  font-family:'DM Sans',sans-serif;font-size:.88rem;
+  background:#fff;color:var(--ink);
+  transition:border-color var(--T),box-shadow var(--T);outline:none;
+}
+.form-input:focus,.form-textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,106,78,.1);}
+.form-textarea{resize:vertical;min-height:110px;}
+.btn-submit{
+  width:100%;background:var(--green);color:#fff;
+  padding:13px;font-size:12px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:none;border-radius:var(--radius-sm);
+  transition:all var(--T);
+}
+.btn-submit:hover{background:var(--green-d);box-shadow:0 8px 20px rgba(0,106,78,.25);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════════════
+   CTA BAND
+═══════════════════════════════════════════ */
+.cta-band{
+  background:linear-gradient(135deg,var(--green) 0%,var(--green-d) 100%);
+  padding:5rem 0;text-align:center;
+  position:relative;overflow:hidden;
+  border-top:3px solid var(--green-d);
+}
+.cta-band::before{
+  content:'POLITICAL INSIGHTS BD';
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Playfair Display',serif;font-size:8rem;font-weight:900;
+  color:rgba(255,255,255,.04);white-space:nowrap;pointer-events:none;
+}
+/* BD circle emblem */
+.cta-emblem{
+  width:60px;height:60px;border-radius:50%;
+  background:var(--red);margin:0 auto 1.5rem;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;position:relative;z-index:1;
+  box-shadow:0 0 0 8px rgba(244,42,65,.2);
+}
+.cta-title{
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;
+  color:#fff;line-height:1.1;margin-bottom:.8rem;
+  position:relative;z-index:1;
+}
+.cta-desc{
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.98rem;color:rgba(255,255,255,.75);
+  margin-bottom:2rem;position:relative;z-index:1;
+}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-cta-w{
+  background:#fff;color:var(--green);
+  padding:13px 30px;font-size:11px;font-weight:900;
+  letter-spacing:.12em;text-transform:uppercase;
+  border-radius:var(--radius-sm);border:2px solid #fff;
+  display:inline-flex;align-items:center;gap:7px;
+  transition:all var(--T);
+}
+.btn-cta-w:hover{background:transparent;color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2);}
+.btn-cta-r{
+  background:var(--red);color:#fff;
+  padding:13px 30px;font-size:11px;font-weight:900;
+  letter-spacing:.12em;text-transform:uppercase;
+  border-radius:var(--radius-sm);border:2px solid var(--red);
+  display:inline-flex;align-items:center;gap:7px;
+  transition:all var(--T);
+}
+.btn-cta-r:hover{background:var(--red-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(244,42,65,.3);}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{background:var(--ink-soft);border-top:3px solid var(--green);}
+.ft-top{
+  max-width:1360px;width:92%;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;
+  gap:0;padding:3rem 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.ft-col{padding:0 2rem 0 0;}
+.ft-col:first-child{padding-right:3rem;}
+.ft-logo{height:46px;width:auto;filter:brightness(0) invert(1);margin-bottom:1.1rem;}
+.ft-about{font-family:'Noto Serif Bengali',sans-serif;font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.7;}
+.ft-social{display:flex;gap:.8rem;margin-top:1.2rem;}
+.ft-soc-btn{
+  width:34px;height:34px;border-radius:var(--radius-sm);
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:rgba(255,255,255,.5);
+  transition:all var(--T);text-decoration:none;
+}
+.ft-soc-btn:hover{background:var(--green);color:#fff;border-color:var(--green);}
+.ft-h{font-size:9px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.9rem;}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.ft-links a{font-size:.82rem;color:rgba(255,255,255,.45);transition:color var(--T);}
+.ft-links a:hover{color:#fff;}
+.ft-bottom{
+  max-width:1360px;width:92%;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 0;font-size:.75rem;
+  color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.8rem;
+}
+.ft-bottom a{color:var(--green);}
+.ft-flag-bar{
+  display:flex;align-items:center;gap:6px;
+}
+.ft-flag-g{width:16px;height:10px;background:var(--green);border-radius:1px;}
+.ft-flag-r{width:10px;height:10px;border-radius:50%;background:var(--red);}
+
+/* Scroll top */
+#scrollTopBtn{
+  position:fixed;bottom:1.8rem;right:1.8rem;
+  width:44px;height:44px;border-radius:var(--radius-sm);
+  background:var(--green);color:#fff;
+  border:none;font-size:1rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(12px);
+  transition:all var(--T);z-index:900;
+  box-shadow:0 4px 16px rgba(0,106,78,.35);
+}
+#scrollTopBtn.vis{opacity:1;transform:none;}
+#scrollTopBtn:hover{background:var(--green-d);transform:translateY(-2px)!important;}
+
+/* Reveal animation */
+[data-r]{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+[data-r].in{opacity:1;transform:none;}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:1200px){
+  .ft-top{grid-template-columns:1fr 1fr 1fr;}
+  .ft-col:nth-child(4),.ft-col:nth-child(5){margin-top:2rem;}
+  .tools-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:2.5rem;padding:3rem 0;}
+  .hero-left{padding-right:0;border-right:none;border-bottom:1.5px solid var(--green-l);padding-bottom:2.5rem;}
+  .hero-right{padding-left:0;}
+  .pillars-grid{grid-template-columns:repeat(2,1fr);}
+  .pillar-card:nth-child(2){border-right:none;}
+  .pillar-card:nth-child(3){border-right:1px solid var(--ink);}
+  .services-wrap{grid-template-columns:repeat(2,1fr);}
+  .election-wrap{grid-template-columns:1fr;}
+  .contact-wrap{grid-template-columns:1fr;}
+  .vision-wrap{grid-template-columns:1fr;}
+  .vision-img{max-width:500px;}
+  .impact-inner{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  :root{--header-h:66px;--header-s:58px;}
+  body{padding-top:var(--header-h);}
+  .hdr-nav,.hdr-cta{display:none;}
+  .ham-btn{display:flex;}
+  /* Mobile header: social icons left | logo centered | hamburger right */
+  .hdr-inner{position:relative;}
+  .hdr-mob-social{display:flex;}
+  .hdr-logo{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:1;
+  }
+  .hero-stat-row{grid-template-columns:repeat(3,1fr);}
+  .hero-feat-cards{grid-template-columns:1fr 1fr;}
+  .pillars-grid{grid-template-columns:1fr;}
+  .pillar-card{border-right:none!important;border-bottom:1px solid var(--ink);}
+  .pillar-card:last-child{border-bottom:none;}
+  .services-wrap{grid-template-columns:1fr;}
+  .cards-grid,.cards-grid-4{grid-template-columns:1fr 1fr;}
+  .tools-grid{grid-template-columns:1fr;}
+  .ft-top{grid-template-columns:1fr 1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .hero-stat-row{grid-template-columns:1fr 1fr;}
+  .hero-feat-cards{grid-template-columns:1fr;}
+  .cards-grid,.cards-grid-4{grid-template-columns:1fr;}
+  .impact-inner{grid-template-columns:1fr;}
+  .cta-band::before{font-size:3rem;}
+  .hero-btns{flex-direction:column;}
+  .hero-btns a{justify-content:center;}
+  .ft-top{grid-template-columns:1fr;}
+  .vision-stats{grid-template-columns:repeat(3,1fr);}
+  .ft-bottom{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+  HEADER — transparent → frosted white
+══════════════════════════════════════════ -->
+<header id="hdr">
+  <div class="hdr-inner">
+
+    <!-- LEFT: mobile social icons (hidden on desktop) | desktop: logo -->
+    <div class="hdr-mob-social" aria-label="Contact shortcuts">
+      <a href="tel:+8801989666676" class="hdr-mob-icon call-icon" title="Call us" aria-label="Call">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2z"/></svg>
+      </a>
+      <a href="https://wa.me/8801989666676" target="_blank" class="hdr-mob-icon wa-icon" title="WhatsApp" aria-label="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      </a>
+    </div>
+
+    <!-- CENTER: Logo (on desktop — left; on mobile — absolutely centered) -->
+    <a href="/" class="hdr-logo">
+      <img src="https://politicalinsightsbd.com/wp-content/uploads/2026/02/WhatsApp_Image_2025-12-21_at_07.18.21-removebg-preview-1.webp" alt="Political Insights BD">
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hdr-nav">
+      <a href="https://politicalinsightsbd.com/about/">About</a>
+      <a href="https://politicalinsightsbd.com/research/">Research</a>
+      <a href="https://politicalinsightsbd.com/policy/">Policy</a>
+      <a href="https://politicalinsightsbd.com/report/">Reports</a>
+      <a href="https://politicalinsightsbd.com/all-insights/">Insights</a>
+      <a href="https://politicalinsightsbd.com/services/">Services</a>
+    </nav>
+    <a href="https://wa.me/8801989666676" target="_blank" class="hdr-nav hdr-cta">Get in Touch</a>
+
+    <!-- RIGHT: Hamburger -->
+    <button class="ham-btn" id="hamBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+</header>
+<!-- Mobile Nav -->
+<div class="mob-nav" id="mobNav">
+  <a href="https://politicalinsightsbd.com/about/">🏛 About</a>
+  <a href="https://politicalinsightsbd.com/research/">🔬 Research</a>
+  <a href="https://politicalinsightsbd.com/policy/">📋 Policy</a>
+  <a href="https://politicalinsightsbd.com/report/">📄 Reports</a>
+  <a href="https://politicalinsightsbd.com/all-insights/">💡 All Insights</a>
+  <a href="https://politicalinsightsbd.com/services/">⚙️ Services</a>
+  <a href="https://wa.me/8801989666676" target="_blank" style="color:var(--green)!important;">📲 WhatsApp</a>
+  <a href="mailto:contact@pibbd.org" style="color:var(--green)!important;">✉️ contact@pibbd.org</a>
+</div>
+
+<!-- ══════════════════════════════════════════
+  HERO — LIGHT BILINGUAL BOLD
+══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-flag-stripe"></div>
+  <div class="wrap" style="flex:1;display:flex;flex-direction:column;">
+    <div class="hero-grid">
+
+      <!-- LEFT: Bilingual Bold Typography -->
+      <div class="hero-left">
+
+        <!-- Eyebrow: Bengali + English -->
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-bn">রাজনৈতিক বিশ্লেষক ও নীতি পরামর্শদাতা</span>
+          <span class="hero-eyebrow-divider"></span>
+          <span class="hero-eyebrow-en">Political Analyst & Policy Advisor</span>
+        </div>
+
+        <!-- Big bilingual stacked title -->
+        <h1 class="hero-title">
+          <span class="ht-line-en">
+            <span class="hl-g">Modern</span>
+            <span class="hl-r"> Political</span>
+          </span>
+          <span class="ht-line-en" style="color:var(--ink);">Analysis</span>
+          <span class="ht-line-bn">
+            <strong>আধুনিক রাজনৈতিক বিশ্লেষণ</strong>
+            ও <strong style="color:var(--red);">স্বচ্ছতা প্রতিষ্ঠা</strong>
+          </span>
+        </h1>
+
+        <!-- Decorative rule with BD circle -->
+        <div class="hero-rule">
+          <div class="hero-rule-line"></div>
+          <div class="hero-rule-circle"></div>
+          <div class="hero-rule-line" style="background:linear-gradient(90deg,transparent,var(--red));"></div>
+        </div>
+
+        <!-- Bilingual description -->
+        <div class="hero-sub">
+          <p class="hero-sub-en">Bangladesh's leading data-driven political analysis, policy research, and strategic consulting platform for democratic transition.</p>
+          <p class="hero-sub-bn">বাংলাদেশের রাজনৈতিক প্রেক্ষাপটে evidence-based insights এবং কৌশলগত পরামর্শ — গণতান্ত্রিক সংস্কারের পথে।</p>
+        </div>
+
+        <div class="hero-btns">
+          <a href="https://politicalinsightsbd.com/all-insights/" class="btn-g">Explore Insights ↓</a>
+          <a href="https://wa.me/8801989666676" target="_blank" class="btn-ghost-w">যোগাযোগ করুন →</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Stats + Feature Cards -->
+      <div class="hero-right">
+
+        <!-- Live tag -->
+        <div>
+          <div class="hero-live-tag">Election 2026 — Final Results Live</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="hero-stat-row">
+          <div class="hstat">
+            <div class="hstat-n">৮০<sup>+</sup></div>
+            <div class="hstat-l">বিশ্লেষণ</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-n">২<sup>+</sup></div>
+            <div class="hstat-l">বছর</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-n">১০<sup>+</sup></div>
+            <div class="hstat-l">প্রজেক্ট</div>
+          </div>
+        </div>
+
+        <!-- Feature cards -->
+        <div class="hero-feat-cards">
+          <div class="hfc">
+            <div class="hfc-icon">📊</div>
+            <div class="hfc-num">01</div>
+            <div class="hfc-t">Data Insights</div>
+            <div class="hfc-d">তথ্যভিত্তিক রাজনৈতিক বিশ্লেষণ</div>
+          </div>
+          <div class="hfc">
+            <div class="hfc-icon">🔬</div>
+            <div class="hfc-num">02</div>
+            <div class="hfc-t">Policy Research</div>
+            <div class="hfc-d">আন্তর্জাতিক মানের নীতি গবেষণা</div>
+          </div>
+          <div class="hfc">
+            <div class="hfc-icon">🗳️</div>
+            <div class="hfc-num">03</div>
+            <div class="hfc-t">Election 2026</div>
+            <div class="hfc-d">BNP+ ২১২ আসন — চূড়ান্ত ফলাফল</div>
+          </div>
+          <div class="hfc">
+            <div class="hfc-icon">🏛️</div>
+            <div class="hfc-num">04</div>
+            <div class="hfc-t">Governance</div>
+            <div class="hfc-d">সুশাসন ও স্বচ্ছতা কাঠামো</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  NEWS TICKER
+══════════════════════════════════════════ -->
+<div class="ticker">
+  <div class="ticker-label">🔴 Breaking</div>
+  <div class="ticker-track">
+    <div class="ticker-inner" id="tickerInner">
+      <span>Election 2026 Final Results: BNP Alliance 212 Seats</span>
+      <span>Constitutional Reform Watch — January 2026</span>
+      <span>ICT Policy Deep Dive — New Report Published</span>
+      <span>Transitional Justice: International Tribunal Update</span>
+      <span>Voter Sentiment Field Data — North Bengal Districts</span>
+      <span>Political Insights BD — আধুনিক রাজনৈতিক বিশ্লেষণ</span>
+      <span>Digital Manipulation and Modern Journalism — New Analysis</span>
+      <span>NCP–Jamaat Alliance Strategic Assessment</span>
+      <!-- duplicate -->
+      <span>Election 2026 Final Results: BNP Alliance 212 Seats</span>
+      <span>Constitutional Reform Watch — January 2026</span>
+      <span>ICT Policy Deep Dive — New Report Published</span>
+      <span>Transitional Justice: International Tribunal Update</span>
+      <span>Voter Sentiment Field Data — North Bengal Districts</span>
+      <span>Political Insights BD — আধুনিক রাজনৈতিক বিশ্লেষণ</span>
+      <span>Digital Manipulation and Modern Journalism — New Analysis</span>
+      <span>NCP–Jamaat Alliance Strategic Assessment</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+  IMPACT / WHAT WE DO
+══════════════════════════════════════════ -->
+<div class="impact-bar">
+  <div class="impact-inner">
+    <div class="impact-item"><div class="impact-num">৮০<span>+</span></div><div class="impact-lbl">Analysis Reports</div><div class="impact-desc">যাচাইকৃত রাজনৈতিক বিশ্লেষণ</div></div>
+    <div class="impact-item"><div class="impact-num">২<span>+</span></div><div class="impact-lbl">Years Active</div><div class="impact-desc">মাঠ পর্যায়ের নিরবচ্ছিন্ন অভিজ্ঞতা</div></div>
+    <div class="impact-item"><div class="impact-num">১০<span>+</span></div><div class="impact-lbl">Projects Done</div><div class="impact-desc">সফল নীতি প্রজেক্ট বাস্তবায়ন</div></div>
+    <div class="impact-item"><div class="impact-num">300</div><div class="impact-lbl">Seats Tracked</div><div class="impact-desc">২০২৬ নির্বাচনের পূর্ণ মনিটরিং</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+  WHAT WE COVER — 4 PILLARS
+══════════════════════════════════════════ -->
+<section class="sec sec-w">
+  <div class="wrap">
+    <div class="sec-head" data-r>
+      <div class="sec-tag">What We Cover</div>
+      <h2 class="sec-title">আমাদের মূল <span class="hl-g">গবেষণা ক্ষেত্র</span></h2>
+      <p class="sec-sub">বাংলাদেশের রাজনৈতিক রূপান্তর, নীতি নির্ধারণ ও সুশাসনে তথ্যভিত্তিক বিশ্লেষণ।</p>
+    </div>
+    <div class="pillars-grid" data-r>
+      <div class="pillar-card">
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon">📋</div>
+        <div class="pillar-label">Policy</div>
+        <h3 class="pillar-title">নীতি বিশ্লেষণ</h3>
+        <p class="pillar-desc">আন্তর্জাতিক মানে তুলনামূলক নীতি গবেষণা, কার্যকারিতা মূল্যায়ন ও data-driven সুপারিশমালা।</p>
+        <a href="https://politicalinsightsbd.com/policy/" class="pillar-link">Explore Policy →</a>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon">🔬</div>
+        <div class="pillar-label">Research</div>
+        <h3 class="pillar-title">গবেষণা</h3>
+        <p class="pillar-desc">Field-based political research, stakeholder analysis ও historical contextualization সহ গভীর তথ্য সংগ্রহ।</p>
+        <a href="https://politicalinsightsbd.com/research/" class="pillar-link">View Research →</a>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon">📄</div>
+        <div class="pillar-label">Report</div>
+        <h3 class="pillar-title">প্রতিবেদন</h3>
+        <p class="pillar-desc">চূড়ান্ত নির্বাচন রিপোর্ট, জেলাভিত্তিক ভোটার sentiment analysis ও নির্বাচনী পূর্বাভাস।</p>
+        <a href="https://politicalinsightsbd.com/report/" class="pillar-link">Read Reports →</a>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">04</div>
+        <div class="pillar-icon">💡</div>
+        <div class="pillar-label">Insights</div>
+        <h3 class="pillar-title">রাজনৈতিক Insights</h3>
+        <p class="pillar-desc">সমসাময়িক রাজনৈতিক ঘটনার দ্রুত বিশ্লেষণ, opinion pieces ও strategic commentary।</p>
+        <a href="https://politicalinsightsbd.com/all-insights/" class="pillar-link">All Insights →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  PUBLICATIONS / BOOKS
+══════════════════════════════════════════ -->
+<section class="sec sec-alt" id="publications">
+  <div class="wrap">
+    <div class="sec-head-row" data-r>
+      <div>
+        <div class="sec-tag">Publications</div>
+        <h2 class="sec-title">আমাদের <span class="hl-g">প্রকাশনা</span></h2>
+        <p class="sec-sub">গবেষণাভিত্তিক বই ও প্রকাশিত গ্রন্থ তালিকা।</p>
+      </div>
+      <a href="https://politicalinsightsbd.com/all-insights/" class="view-all-link">সব দেখুন →</a>
+    </div>
+    <div class="cards-grid" id="booksGrid">
+      <!-- Auto-populated -->
+      <div class="post-card" style="flex-direction:row;align-items:center;grid-column:1/-1;">
+        <div style="padding:1.5rem;color:var(--gray-l);font-size:.85rem;">Loading publications…</div>
+      </div>
+    </div>
+    <div class="vm-wrap">
+      <a href="https://politicalinsightsbd.com/all-insights/" class="btn-vm">View All Publications →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  POLICY POSTS
+══════════════════════════════════════════ -->
+<section class="sec sec-w" id="policySection">
+  <div class="wrap">
+    <div class="sec-head-row" data-r>
+      <div>
+        <div class="sec-tag">Policy</div>
+        <h2 class="sec-title">নীতি <span class="hl-r">বিশ্লেষণ</span></h2>
+        <p class="sec-sub">সাম্প্রতিক নীতি গবেষণা ও সুশাসন বিশ্লেষণ।</p>
+      </div>
+      <a href="https://politicalinsightsbd.com/policy/" class="view-all-link">সব দেখুন →</a>
+    </div>
+    <div class="cards-grid" id="policyGrid"></div>
+    <div class="vm-wrap">
+      <a href="https://politicalinsightsbd.com/policy/" class="btn-vm">View More Policy →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  RESEARCH POSTS
+══════════════════════════════════════════ -->
+<section class="sec sec-green" id="researchSection">
+  <div class="wrap">
+    <div class="sec-head-row" data-r>
+      <div>
+        <div class="sec-tag">Research</div>
+        <h2 class="sec-title">গবেষণা <span class="hl-g">প্রতিবেদন</span></h2>
+        <p class="sec-sub">মাঠ পর্যায়ের তথ্য সংগ্রহ ও বিজ্ঞানসম্মত বিশ্লেষণ।</p>
+      </div>
+      <a href="https://politicalinsightsbd.com/research/" class="view-all-link">সব দেখুন →</a>
+    </div>
+    <div class="cards-grid-4" id="researchGrid"></div>
+    <div class="vm-wrap">
+      <a href="https://politicalinsightsbd.com/research/" class="btn-vm">View More Research →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  REPORTS
+══════════════════════════════════════════ -->
+<section class="sec sec-w" id="reportSection">
+  <div class="wrap">
+    <div class="sec-head-row" data-r>
+      <div>
+        <div class="sec-tag">Reports</div>
+        <h2 class="sec-title">সর্বশেষ <span class="hl-r">রিপোর্ট</span></h2>
+        <p class="sec-sub">নির্বাচন, ভোটার ও জেলাভিত্তিক বিস্তারিত রিপোর্ট।</p>
+      </div>
+      <a href="https://politicalinsightsbd.com/report/" class="view-all-link">সব দেখুন →</a>
+    </div>
+    <div class="cards-grid" id="reportGrid"></div>
+    <div class="vm-wrap">
+      <a href="https://politicalinsightsbd.com/report/" class="btn-vm">View More Reports →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  ALL INSIGHTS
+══════════════════════════════════════════ -->
+<section class="sec sec-alt" id="insightsSection">
+  <div class="wrap">
+    <div class="sec-head-row" data-r>
+      <div>
+        <div class="sec-tag">All Insights</div>
+        <h2 class="sec-title">সর্বশেষ <span class="hl-g">বিশ্লেষণ</span></h2>
+        <p class="sec-sub">সকল রাজনৈতিক বিশ্লেষণ, opinion ও commentary একটি জায়গায়।</p>
+      </div>
+      <a href="https://politicalinsightsbd.com/all-insights/" class="view-all-link">সব দেখুন →</a>
+    </div>
+    <div class="cards-grid-4" id="insightsGrid"></div>
+    <div class="vm-wrap">
+      <a href="https://politicalinsightsbd.com/all-insights/" class="btn-vm">View All Insights →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  ELECTION RESULTS & MONITORING
+══════════════════════════════════════════ -->
+<section class="sec sec-w" id="election">
+  <div class="wrap">
+    <div class="sec-head" data-r>
+      <div class="sec-tag">Election Intelligence</div>
+      <h2 class="sec-title">নির্বাচন ফলাফল ও <span class="hl-r">মনিটরিং</span> ২০২৬</h2>
+      <p class="sec-sub">বাংলাদেশের ১৩তম সংসদীয় নির্বাচনের চূড়ান্ত আসন বণ্টন ও রিয়েল-টাইম আপডেট।</p>
+    </div>
+    <div class="election-wrap" data-r>
+      <div class="election-panel">
+        <div class="live-badge">Official Final Results — February 2026</div>
+        <h3 class="election-title">১৩তম সংসদ নির্বাচন — চূড়ান্ত ফলাফল</h3>
+        <div class="seat-bar-wrap">
+          <div class="seat-bar-lbl">মোট ৩০০ আসনের বণ্টন</div>
+          <div class="seat-bar">
+            <div class="sb-1"></div>
+            <div class="sb-2"></div>
+            <div class="sb-3"></div>
+          </div>
+          <div class="seat-legend">
+            <div class="sl-item"><div class="sl-dot" style="background:var(--green);"></div>BNP+ 212</div>
+            <div class="sl-item"><div class="sl-dot" style="background:var(--red);"></div>Jamaat+ 77</div>
+            <div class="sl-item"><div class="sl-dot" style="background:rgba(255,255,255,.25);"></div>Others 11</div>
+          </div>
+        </div>
+        <div class="result-rows">
+          <div class="res-row winner">
+            <div class="res-num gn">212</div>
+            <div class="res-info">
+              <div class="res-party">BNP ও জোট</div>
+              <div class="res-status">🏆 সংসদীয় সংখ্যাগরিষ্ঠতা — বিজয়ী</div>
+            </div>
+          </div>
+          <div class="res-row oppo">
+            <div class="res-num rd">77</div>
+            <div class="res-info">
+              <div class="res-party">Jamaat ও জোট</div>
+              <div class="res-status">🔴 প্রধান বিরোধী দল</div>
+            </div>
+          </div>
+          <div class="res-row other">
+            <div class="res-num wh">11</div>
+            <div class="res-info">
+              <div class="res-party">অন্যান্য ও স্বতন্ত্র</div>
+              <div class="res-status">⚪ সংখ্যালঘু অংশ</div>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:1.3rem;font-size:.7rem;color:rgba(255,255,255,.22);">*Political Insights Intelligence Unit কর্তৃক সংকলিত। সর্বশেষ আপডেট: ফেব্রুয়ারি ২০২৬।</p>
+      </div>
+      <div class="monitoring-panel">
+        <div class="mon-header">
+          <div class="mon-title">📡 Live Monitoring Updates</div>
+          <div class="mon-badge">Live</div>
+        </div>
+        <div class="mon-list">
+          <div class="mon-item">
+            <div class="mon-dot g"></div>
+            <div>
+              <div class="mon-text">BNP Alliance government formation process initiated</div>
+              <div class="mon-meta">Feb 2026 · ফলাফল আপডেট</div>
+            </div>
+          </div>
+          <div class="mon-item">
+            <div class="mon-dot r"></div>
+            <div>
+              <div class="mon-text">Jamaat অফিসিয়ালি বিরোধী দলের আসনে</div>
+              <div class="mon-meta">Feb 2026 · সংসদ আপডেট</div>
+            </div>
+          </div>
+          <div class="mon-item">
+            <div class="mon-dot y"></div>
+            <div>
+              <div class="mon-text">Constitutional reform committee formally convened</div>
+              <div class="mon-meta">Jan 2026 · সংস্কার কমিটি</div>
+            </div>
+          </div>
+          <div class="mon-item">
+            <div class="mon-dot g"></div>
+            <div>
+              <div class="mon-text">Interim governance handover timeline confirmed</div>
+              <div class="mon-meta">Jan 2026 · ক্ষমতা হস্তান্তর</div>
+            </div>
+          </div>
+          <div class="mon-item">
+            <div class="mon-dot r"></div>
+            <div>
+              <div class="mon-text">ICT policy framework under legislative review</div>
+              <div class="mon-meta">Jan 2026 · নীতি পর্যালোচনা</div>
+            </div>
+          </div>
+          <div class="mon-item">
+            <div class="mon-dot y"></div>
+            <div>
+              <div class="mon-text">Transitional justice tribunal proceedings continue</div>
+              <div class="mon-meta">Dec 2025 · বিচার প্রক্রিয়া</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  ANALYSIS STRATEGIES & TOOLS
+══════════════════════════════════════════ -->
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head" data-r>
+      <div class="sec-tag">Methodology & Tools</div>
+      <h2 class="sec-title">আমাদের <span class="hl-g">বিশ্লেষণ পদ্ধতি</span> ও টুলস</h2>
+      <p class="sec-sub">আন্তর্জাতিক মানের analytical frameworks এবং open-source intelligence tools ব্যবহার করে নির্ভুল রাজনৈতিক বিশ্লেষণ।</p>
+    </div>
+    <div class="tools-grid" data-r>
+      <div class="tool-card">
+        <div class="tool-icon">🖥️</div>
+        <h4 class="tool-title">OSINT Dashboard</h4>
+        <p class="tool-desc">Open-Source Intelligence সংগ্রহ ও বিশ্লেষণের জন্য কাস্টম ড্যাশবোর্ড। সামাজিক মাধ্যম, সরকারি উৎস ও স্থানীয় নেটওয়ার্ক থেকে রিয়েল-টাইম ডেটা।</p>
+        <span class="tool-tag">Intelligence</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">✅</div>
+        <h4 class="tool-title">Fact-Check Engine</h4>
+        <p class="tool-desc">রাজনৈতিক দাবি ও তথ্য যাচাইয়ের জন্য structured fact-checking প্রক্রিয়া। তথ্য উৎস ক্রস-ভেরিফিকেশন ও মিথ্যা তথ্য চিহ্নিতকরণ।</p>
+        <span class="tool-tag">Verification</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📈</div>
+        <h4 class="tool-title">Data Analytics Suite</h4>
+        <p class="tool-desc">ভোটার ডেমোগ্রাফিক বিশ্লেষণ, জেলাভিত্তিক trend tracking ও predictive modeling সহ quantitative political analysis।</p>
+        <span class="tool-tag">Analytics</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🗺️</div>
+        <h4 class="tool-title">Geopolitical Mapping</h4>
+        <p class="tool-desc">আঞ্চলিক ও জাতীয় রাজনৈতিক শক্তির ভৌগোলিক ম্যাপিং। নির্বাচনী এলাকাভিত্তিক শক্তি বিশ্লেষণ ও আসন পূর্বাভাস।</p>
+        <span class="tool-tag">Mapping</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🤝</div>
+        <h4 class="tool-title">Stakeholder Analysis</h4>
+        <p class="tool-desc">রাজনৈতিক অংশীদারদের অবস্থান, স্বার্থ ও প্রভাব বিশ্লেষণ। Alliance formation ও coalition dynamics সম্পর্কে কৌশলগত মানচিত্র।</p>
+        <span class="tool-tag">Strategy</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔭</div>
+        <h4 class="tool-title">Scenario Planning</h4>
+        <p class="tool-desc">ভবিষ্যৎ রাজনৈতিক পরিস্থিতির structured scenario analysis। বিভিন্ন নীতি ও নির্বাচনী পরিণতির সম্ভাব্যতা মূল্যায়ন।</p>
+        <span class="tool-tag">Forecasting</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  SERVICES
+══════════════════════════════════════════ -->
+<section class="sec sec-w" id="services">
+  <div class="wrap">
+    <div class="sec-head" data-r>
+      <div class="sec-tag">Services</div>
+      <h2 class="sec-title">আমাদের <span class="hl-r">সেবাসমূহ</span></h2>
+      <p class="sec-sub">রাজনৈতিক পরামর্শ থেকে নীতি গবেষণা — প্রতিটি সেবা বাংলাদেশের রাজনৈতিক বাস্তবতায় কাস্টমাইজড।</p>
+    </div>
+    <div class="services-wrap" data-r>
+      <div class="svc-card">
+        <div class="svc-icon">📋</div>
+        <h3 class="svc-title">নীতি বিশ্লেষণ ও গবেষণা</h3>
+        <ul class="svc-list">
+          <li>ডাটা-ড্রিভেন সুপারিশমালা</li>
+          <li>কার্যকারিতা মূল্যায়ন</li>
+          <li>তুলনামূলক নীতি বিশ্লেষণ</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/services/" class="svc-cta">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🎯</div>
+        <h3 class="svc-title">কৌশলগত পরামর্শ</h3>
+        <ul class="svc-list">
+          <li>ক্যাম্পেইন মেসেজিং ও কৌশল</li>
+          <li>সংকট ব্যবস্থাপনা</li>
+          <li>ভোটার গবেষণা ও বিশ্লেষণ</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/services/" class="svc-cta">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">⚖️</div>
+        <h3 class="svc-title">সুশাসন ও উন্নয়ন</h3>
+        <ul class="svc-list">
+          <li>স্বচ্ছতা কাঠামো তৈরি</li>
+          <li>প্রাতিষ্ঠানিক উন্নয়ন</li>
+          <li>সংস্কার পরিকল্পনা</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/services/" class="svc-cta">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🗳️</div>
+        <h3 class="svc-title">Election Strategy</h3>
+        <ul class="svc-list">
+          <li>নির্বাচনী কৌশল পরিকল্পনা</li>
+          <li>মিডিয়া ও ডিজিটাল কৌশল</li>
+          <li>তৃণমূল সংগঠন</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/services/" class="svc-cta">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📡</div>
+        <h3 class="svc-title">Media & Communications</h3>
+        <ul class="svc-list">
+          <li>Digital narrative strategy</li>
+          <li>Crisis communications</li>
+          <li>Stakeholder engagement</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/services/" class="svc-cta">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔭</div>
+        <h3 class="svc-title">Transitional Justice</h3>
+        <ul class="svc-list">
+          <li>মানবাধিকার লঙ্ঘন তদন্ত</li>
+          <li>আন্তর্জাতিক ট্রাইব্যুনাল বিশ্লেষণ</li>
+          <li>সত্য ও পুনর্মিলন প্রক্রিয়া</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/services/" class="svc-cta">Learn More →</a>
+      </div>
+    </div>
+    <div class="svc-all-btn">
+      <a href="https://politicalinsightsbd.com/services/" class="btn-svc">সকল সেবা দেখুন ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  VISION / ABOUT
+══════════════════════════════════════════ -->
+<section class="sec sec-green" id="about">
+  <div class="wrap">
+    <div class="vision-wrap" data-r>
+      <div class="vision-img">
+        <div class="vision-img-inner">
+          <p class="vision-quote-big">"আধুনিক বাংলাদেশের রাজনীতিতে স্বচ্ছতা ও জবাবদিহিতা প্রতিষ্ঠায় evidence-based analysis।"</p>
+        </div>
+        <div class="vision-badge">Our Vision</div>
+      </div>
+      <div class="vision-text">
+        <div class="sec-tag">আমাদের সম্পর্কে</div>
+        <h2 class="sec-title" style="margin-bottom:1.2rem;">রাজনৈতিক <span class="hl-g">বিশ্লেষক</span> ও পরামর্শদাতা</h2>
+        <p class="vision-para">আমি একজন রাজনৈতিক বিশ্লেষক এবং নীতি পরামর্শদাতা যিনি বাংলাদেশের সমসাময়িক রাজনৈতিক পরিবর্তন এবং সংস্কার প্রক্রিয়া নিয়ে গভীর বিশ্লেষণে নিয়োজিত।</p>
+        <p class="vision-para">জুলাই বিপ্লব পরবর্তী বাংলাদেশের রাজনৈতিক Transition, অন্তর্বর্তীকালীন সরকারের সংস্কার কর্মসূচি, এবং রাজনৈতিক দলগুলোর পুনর্গঠন প্রক্রিয়া আমার মূল গবেষণা ক্ষেত্র।</p>
+        <ul class="check-list" style="margin-bottom:1.5rem;">
+          <li>Real-time Political Tracking</li>
+          <li>Stakeholder Analysis</li>
+          <li>Scenario Planning</li>
+          <li>Historical Contextualization</li>
+        </ul>
+        <div class="vision-stats">
+          <div class="vs-item"><div class="vs-num">৮০+</div><div class="vs-lbl">Reports</div></div>
+          <div class="vs-item"><div class="vs-num">২+</div><div class="vs-lbl">Years</div></div>
+          <div class="vs-item"><div class="vs-num">১০+</div><div class="vs-lbl">Projects</div></div>
+        </div>
+        <a href="https://politicalinsightsbd.com/about/" class="btn-g" style="margin-top:1.5rem;display:inline-flex;">About Us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  FAQ
+══════════════════════════════════════════ -->
+<section class="sec sec-w" id="faq">
+  <div class="wrap">
+    <div class="sec-head" data-r style="text-align:center;">
+      <div class="sec-tag" style="justify-content:center;display:flex;">সাধারণ জিজ্ঞাসা</div>
+      <h2 class="sec-title">Common <span class="hl-g">Questions</span></h2>
+      <p class="sec-sub" style="max-width:520px;margin:0 auto;">আমাদের সেবা ও পদ্ধতি সম্পর্কে প্রায়শই জিজ্ঞাসিত প্রশ্নের উত্তর।</p>
+    </div>
+    <div class="faq-inner" data-r>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <button class="faq-q">পলিটিক্যাল ইনসাইটস বিডি কী কী সেবা প্রদান করে? <span class="faq-ico">+</span></button>
+          <div class="faq-ans"><p>আমরা প্রচারণা কৌশল, ভোটার গবেষণা, মিডিয়া ব্যবস্থাপনা, সংকট ব্যবস্থাপনা এবং তৃণমূল সংগঠন সহ পূর্ণাঙ্গ রাজনৈতিক পরামর্শ সেবা প্রদান করি। প্রতিটি সেবা বাংলাদেশের রাজনৈতিক প্রেক্ষাপট অনুযায়ী কাস্টমাইজড।</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">তথ্যের গোপনীয়তা কীভাবে নিশ্চিত করেন? <span class="faq-ico">+</span></button>
+          <div class="faq-ans"><p>আমরা কঠোর গোপনীয়তা প্রোটোকল মেনে চলি। এনক্রিপ্টেড ডেটা স্টোরেজ, নিরাপদ যোগাযোগ চ্যানেল ব্যবহার করি এবং প্রতিটি সদস্য আইনি গোপনীয়তা চুক্তিতে আবদ্ধ।</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">আপনারা কি সব দলের প্রার্থীদের সাথে কাজ করেন? <span class="faq-ico">+</span></button>
+          <div class="faq-ans"><p>হ্যাঁ, আমরা নিরপেক্ষ পরামর্শক প্রতিষ্ঠান। স্বার্থ-দ্বন্দ্ব এড়াতে একই নির্বাচনী এলাকায় বিরোধী প্রার্থীদের সাথে একসাথে কাজ করি না।</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Research report কমিশন করব কীভাবে? <span class="faq-ico">+</span></button>
+          <div class="faq-ans"><p>WhatsApp (+8801989666676) অথবা email (contact@pibbd.org)-এর মাধ্যমে যোগাযোগ করুন। আপনার প্রয়োজন আলোচনার পর কাস্টম policy papers, district-level analysis ও strategic briefings প্রদান করা হয়।</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">আপনাদের analysis কতটুকু নিরপেক্ষ? <span class="faq-ico">+</span></button>
+          <div class="faq-ans"><p>আমাদের লক্ষ্য সম্পূর্ণ evidence-based analysis। আমরা verified data, field research ও academic methodology ব্যবহার করি। কোনো রাজনৈতিক দলের পৃষ্ঠপোষকতায় নয়, স্বাধীনভাবে কাজ করি।</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  CONTACT
+══════════════════════════════════════════ -->
+<section class="sec sec-alt" id="contact">
+  <div class="wrap">
+    <div class="sec-head" data-r>
+      <div class="sec-tag">Contact</div>
+      <h2 class="sec-title">যোগাযোগ <span class="hl-g">করুন</span></h2>
+      <p class="sec-sub">আমাদের দলের সাথে সরাসরি কথা বলুন। পরামর্শ বা গবেষণার জন্য যেকোনো সময় যোগাযোগ করুন।</p>
+    </div>
+    <div class="contact-wrap" data-r>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">📲</div>
+          <div>
+            <div class="contact-item-label">WhatsApp</div>
+            <div class="contact-item-val"><a href="https://wa.me/8801989666676" target="_blank">+880 1989-666676</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-val"><a href="mailto:contact@pibbd.org">contact@pibbd.org</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-val">ঢাকা, বাংলাদেশ</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🌐</div>
+          <div>
+            <div class="contact-item-label">Website</div>
+            <div class="contact-item-val"><a href="https://politicalinsightsbd.com" target="_blank">politicalinsightsbd.com</a></div>
+          </div>
+        </div>
+        <div style="background:var(--green-ll);border:1px solid var(--green-l);border-radius:var(--radius);padding:1.4rem;border-left:4px solid var(--green);">
+          <div style="font-size:9px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem;">Our Vision</div>
+          <p style="font-family:'Noto Serif Bengali',sans-serif;font-size:.85rem;color:var(--gray);line-height:1.7;">বাংলাদেশের রাজনীতিতে আধুনিকায়ন ও স্বচ্ছতা প্রতিষ্ঠা করা এবং data-driven insights-এর মাধ্যমে গণতান্ত্রিক transition প্রক্রিয়াকে কার্যকর করা।</p>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-title">বার্তা পাঠান</div>
+        <div class="form-row">
+          <div class="form-group" style="margin:0;">
+            <label class="form-label">নাম</label>
+            <input type="text" class="form-input" placeholder="আপনার নাম">
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="email@example.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">বিষয়</label>
+          <input type="text" class="form-input" placeholder="কী বিষয়ে যোগাযোগ করছেন?">
+        </div>
+        <div class="form-group">
+          <label class="form-label">বার্তা</label>
+          <textarea class="form-textarea" placeholder="আপনার বার্তা লিখুন…"></textarea>
+        </div>
+        <button class="btn-submit" onclick="handleForm(this)">বার্তা পাঠান →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  CTA BAND
+══════════════════════════════════════════ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-emblem">🇧🇩</div>
+    <h2 class="cta-title">আজই আমাদের সাথে<br>যোগাযোগ করুন</h2>
+    <p class="cta-desc">বাংলাদেশের রাজনৈতিক সংস্কার ও গণতান্ত্রিক transition-এ<br>data-driven insights আপনার কৌশল শক্তিশালী করবে।</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/8801989666676" target="_blank" class="btn-cta-w">📲 WhatsApp করুন</a>
+      <a href="mailto:contact@pibbd.org" class="btn-cta-r">✉️ Email করুন</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+  FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="ft-top">
+    <div class="ft-col">
+      <img src="https://politicalinsightsbd.com/wp-content/uploads/2026/02/WhatsApp_Image_2025-12-21_at_07.18.21-removebg-preview-1.webp" class="ft-logo" alt="PIBD">
+      <p class="ft-about">বাংলাদেশের রাজনৈতিক প্রেক্ষাপটে আধুনিক পদ্ধতিতে নীতি বিশ্লেষণ ও কৌশলগত পরামর্শ প্রদানকারী একটি বিশেষায়িত গবেষণা প্রতিষ্ঠান।</p>
+      <div class="ft-social">
+        <a href="https://wa.me/8801989666676" target="_blank" class="ft-soc-btn" title="WhatsApp">📲</a>
+        <a href="mailto:contact@pibbd.org" class="ft-soc-btn" title="Email">✉️</a>
+        <a href="https://politicalinsightsbd.com" target="_blank" class="ft-soc-btn" title="Website">🌐</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <div class="ft-h">Pages</div>
+      <ul class="ft-links">
+        <li><a href="https://politicalinsightsbd.com/about/">About</a></li>
+        <li><a href="https://politicalinsightsbd.com/services/">Services</a></li>
+        <li><a href="https://politicalinsightsbd.com/all-insights/">All Insights</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <div class="ft-h">Research</div>
+      <ul class="ft-links">
+        <li><a href="https://politicalinsightsbd.com/research/">Research</a></li>
+        <li><a href="https://politicalinsightsbd.com/policy/">Policy</a></li>
+        <li><a href="https://politicalinsightsbd.com/report/">Reports</a></li>
+        <li><a href="https://politicalinsightsbd.com/all-insights/">Insights</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <div class="ft-h">Contact</div>
+      <ul class="ft-links">
+        <li><a href="https://wa.me/8801989666676" target="_blank">+880 1989-666676</a></li>
+        <li><a href="mailto:contact@pibbd.org">contact@pibbd.org</a></li>
+        <li><a href="#contact">Dhaka, Bangladesh</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <div class="ft-h">Quick Links</div>
+      <ul class="ft-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#election">Election 2026</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-flag-bar"><div class="ft-flag-g"></div><div class="ft-flag-r"></div><span style="margin-left:6px;">© 2026 <a href="https://politicalinsightsbd.com">Political Insights BD</a>. All rights reserved.</span></div>
+    <span>Built for transparency. Designed for democracy.</span>
+  </div>
+</footer>
+
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+<!-- ══════════════════════════════════════════
+  JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+/* ─── WORDPRESS REST API BASE ─── */
+const WP = 'https://politicalinsightsbd.com/wp-json/wp/v2';
+
+/* ─── STATIC FALLBACK DATA ─── */
+const fallbackPosts = [
+  { id:1, type:'report', title:'Election 2026', excerpt:'২০২৬ সালের নির্বাচন: ক্ষমতার শূন্যতা এবং একতরফা নির্বাচনী মাঠের কূটাভাস — গবেষণা অন্তর্দৃষ্টি।', date:'January 16, 2026', link:'https://politicalinsightsbd.com/election-2026/', img:'https://politicalinsightsbd.com/wp-content/uploads/2025/11/%E0%A6%B9%E0%A6%A0%E0%A6%BE%E0%A7%8E-%E0%A6%95%E0%A7%87%E0%A6%A8-%E0%A6%AC%E0%A6%BF%E0%A6%8F%E0%A6%A8%E0%A6%AA%E0%A6%BF-1-150x150.webp' },
+  { id:2, type:'policy', title:'আইসিটি বিভাগে ঘটে যাওয়া কিছু কাজ', excerpt:'ডিজিটাল সুরক্ষা আইন ও ভবিষ্যৎ আন্দোলনে তার প্রভাব নিয়ে গভীর তদন্ত।', date:'January 16, 2026', link:'https://politicalinsightsbd.com/%e0%a6%86%e0%a6%87%e0%a6%b8%e0%a6%bf%e0%a6%9f%e0%a6%bf-%e0%a6%ac%e0%a6%bf%e0%a6%ad%e0%a6%be%e0%a6%97%e0%a7%87-%e0%a6%98%e0%a6%9f%e0%a7%87-%e0%a6%af%e0%a6%be%e0%a6%93%e0%a6%af%e0%a6%bc%e0%a6%be/', img:'https://politicalinsightsbd.com/wp-content/uploads/2026/01/WhatsApp-Image-2026-01-16-at-22.29.53-e1768582120382-150x150.jpeg' },
+  { id:3, type:'research', title:'ভেনেজুয়েলা যুদ্ধ: তেল নয়, ডলারকে বাঁচানোর লড়াই', excerpt:'ভেনেজুয়েলা যুদ্ধ আসলে ডলারকে বাঁচানোর যুদ্ধ — একটি গভীর অর্থনৈতিক বিশ্লেষণ।', date:'January 10, 2026', link:'https://politicalinsightsbd.com/%e0%a6%ad%e0%a7%87%e0%a6%a8%e0%a7%87%e0%a6%9c%e0%a7%81%e0%a6%af%e0%a6%bc%e0%a7%87%e0%a6%b2%e0%a6%be-%e0%a6%af%e0%a7%81%e0%a6%a6%e0%a7%8d%e0%a6%a7-%e0%a6%a4%e0%a7%87%e0%a6%b2-%e0%a6%a8%e0%a6%af/', img:'https://politicalinsightsbd.com/wp-content/uploads/2026/01/image-150x150.png' },
+  { id:4, type:'research', title:'এনসিপি–জামাত জোট: রাজনৈতিক আত্মহত্যার পথে', excerpt:'জুলাই ২০২৪ পরবর্তী বাংলাদেশে window of opportunity বিশ্লেষণ।', date:'December 27, 2025', link:'https://politicalinsightsbd.com/%e0%a6%8f%e0%a6%a8%e0%a6%b8%e0%a6%bf%e0%a6%aa%e0%a6%bf-%e0%a6%9c%e0%a6%be%e0%a6%ae%e0%a6%be%e0%a6%a4-%e0%a6%9c%e0%a7%8b%e0%a6%9f-%e0%a6%8f%e0%a6%95%e0%a6%9f%e0%a6%bf-%e0%a6%b0%e0%a6%be/', img:'https://politicalinsightsbd.com/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-27-at-17.05.32-150x150.jpeg' },
+  { id:5, type:'research', title:'Digital Manipulation and Modern Journalism', excerpt:'ডিজিটাল ম্যানিপুলেশন ও মানসিক যুদ্ধের বৈশ্বিক প্রভাব ও সামাজিক ক্ষয়ক্ষতি।', date:'December 22, 2025', link:'https://politicalinsightsbd.com/digital-manipulation-and-modern-journalism-by-ahmad-rafi/', img:'https://politicalinsightsbd.com/wp-content/uploads/2025/12/Digital-manipulation-modern-Journalism-150x150.jpg' },
+  { id:6, type:'report', title:'THE MOTHER OF CORRUPTION', excerpt:'১৫ বছরে শেখ হাসিনা ও পরিবার বাংলাদেশকে পরিকল্পিতভাবে লুটে নিয়েছে — তথ্যভিত্তিক বিশ্লেষণ।', date:'December 9, 2025', link:'https://politicalinsightsbd.com/the-mother-of-corruption/', img:'https://politicalinsightsbd.com/wp-content/uploads/2025/12/Red-White-and-Black-Modern-Fashion-Instagram-Post-1-150x150.jpg' },
+];
+
+const fallbackBooks = [
+  { title:'Policy & Power', desc:'Shifting power dynamics in the administrative heart of Bangladesh.', img:'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&q=80', link:'https://politicalinsightsbd.com/all-insights/' },
+  { title:'The Silent Ballot', desc:'Decoding voter psychology and digital narratives for 2026.', img:'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&q=80', link:'https://politicalinsightsbd.com/all-insights/' },
+  { title:'Interim Reforms', desc:'Insights into constitutional changes during the interim period.', img:'https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&q=80', link:'https://politicalinsightsbd.com/all-insights/' },
+  { title:'Cyber Sovereignty', desc:'Data surveillance and its role in modern statecraft.', img:'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&q=80', link:'https://politicalinsightsbd.com/all-insights/' },
+];
+
+/* ─── CARD RENDERER ─── */
+function makeCard(post, badgeClass, badgeLabel) {
+  const img = post.img || (post._embedded?.['wp:featuredmedia']?.[0]?.source_url) || 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&q=60';
+  const title = post.title?.rendered ? post.title.rendered : post.title;
+  const excerpt = post.excerpt?.rendered
+    ? post.excerpt.rendered.replace(/<[^>]*>/g,'').slice(0,120)+'…'
+    : post.excerpt;
+  const date = post.date ? new Date(post.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : post.date;
+  const link = post.link || post.link;
+  return `
+    <a href="${link}" class="post-card" target="_blank">
+      <div class="post-card-img">
+        <img src="${img}" alt="${title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&q=60'">
+        <span class="post-type-badge ${badgeClass}">${badgeLabel}</span>
+      </div>
+      <div class="post-card-body">
+        <div class="post-date">${date}</div>
+        <h3 class="post-title">${title}</h3>
+        <p class="post-excerpt">${excerpt}</p>
+        <span class="post-readmore">Read More →</span>
+      </div>
+    </a>`;
+}
+
+function makeBookCard(book) {
+  return `
+    <a href="${book.link||'https://politicalinsightsbd.com/all-insights/'}" class="book-card" target="_blank">
+      <div class="book-cover">
+        <img src="${book.img}" alt="${book.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&q=60'">
+      </div>
+      <div class="book-info">
+        <div class="book-title">${book.title}</div>
+        <div class="book-desc">${book.desc}</div>
+      </div>
+    </a>`;
+}
+
+/* ─── FETCH WP POSTS BY CATEGORY ─── */
+async function fetchCategory(slug, limit) {
+  try {
+    const catRes = await fetch(`${WP}/categories?slug=${slug}&_fields=id`);
+    if (!catRes.ok) throw new Error();
+    const cats = await catRes.json();
+    if (!cats.length) throw new Error('no cat');
+    const catId = cats[0].id;
+    const res = await fetch(`${WP}/posts?_embed&per_page=${limit}&categories=${catId}&_fields=id,title,excerpt,date,link,_embedded`);
+    if (!res.ok) throw new Error();
+    return await res.json();
+  } catch(e) { return null; }
+}
+
+/* ─── FETCH & RENDER ALL SECTIONS ─── */
+async function loadSections() {
+  /* Policy */
+  const policyEl = document.getElementById('policyGrid');
+  const pData = await fetchCategory('policy', 3);
+  if (pData && pData.length) {
+    policyEl.innerHTML = pData.map(p => makeCard(p,'badge-policy','POLICY')).join('');
+  } else {
+    const fb = fallbackPosts.filter(p=>p.type==='policy').slice(0,3);
+    policyEl.innerHTML = (fb.length ? fb : fallbackPosts.slice(0,3)).map(p=>makeCard(p,'badge-policy','POLICY')).join('');
+  }
+
+  /* Research */
+  const researchEl = document.getElementById('researchGrid');
+  const rData = await fetchCategory('research', 4);
+  if (rData && rData.length) {
+    researchEl.innerHTML = rData.map(p => makeCard(p,'badge-research','RESEARCH')).join('');
+  } else {
+    researchEl.innerHTML = fallbackPosts.filter(p=>p.type==='research').slice(0,4).map(p=>makeCard(p,'badge-research','RESEARCH')).join('');
+  }
+
+  /* Report */
+  const reportEl = document.getElementById('reportGrid');
+  const rpData = await fetchCategory('report', 3);
+  if (rpData && rpData.length) {
+    reportEl.innerHTML = rpData.map(p => makeCard(p,'badge-report','REPORT')).join('');
+  } else {
+    reportEl.innerHTML = fallbackPosts.filter(p=>p.type==='report').slice(0,3).map(p=>makeCard(p,'badge-report','REPORT')).join('');
+  }
+
+  /* All Insights */
+  const insightsEl = document.getElementById('insightsGrid');
+  try {
+    const iRes = await fetch(`${WP}/posts?_embed&per_page=4&_fields=id,title,excerpt,date,link,_embedded`);
+    if (iRes.ok) {
+      const iData = await iRes.json();
+      insightsEl.innerHTML = iData.map(p => makeCard(p,'badge-insights','INSIGHTS')).join('');
+    } else throw new Error();
+  } catch(e) {
+    insightsEl.innerHTML = fallbackPosts.slice(0,4).map(p=>makeCard(p,'badge-insights','INSIGHTS')).join('');
+  }
+}
+
+/* ─── PUBLICATIONS / BOOKS ─── */
+async function loadBooks() {
+  const el = document.getElementById('booksGrid');
+  // Try WP custom post type 'books' or 'book'
+  let loaded = false;
+  try {
+    const res = await fetch(`${WP}/books?_embed&per_page=3`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.length) {
+        el.innerHTML = data.map(b => makeBookCard({
+          title: b.title?.rendered || b.title,
+          desc: b.excerpt?.rendered?.replace(/<[^>]*>/g,'').slice(0,100)||'',
+          img: b._embedded?.['wp:featuredmedia']?.[0]?.source_url||fallbackBooks[0].img,
+          link: b.link
+        })).join('');
+        loaded = true;
+      }
+    }
+  } catch(e){}
+  if (!loaded) {
+    el.innerHTML = fallbackBooks.slice(0,3).map(b=>makeBookCard(b)).join('');
+  }
+}
+
+/* ─── HEADER SCROLL ─── */
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('scrolled', window.scrollY > 80);
+  document.getElementById('scrollTopBtn').classList.toggle('vis', window.scrollY > 500);
+});
+
+/* ─── HAMBURGER ─── */
+const hamBtn = document.getElementById('hamBtn');
+const mobNav = document.getElementById('mobNav');
+hamBtn.addEventListener('click', () => {
+  hamBtn.classList.toggle('open');
+  mobNav.classList.toggle('open');
+});
+mobNav.querySelectorAll('a').forEach(a => a.addEventListener('click',() => {
+  hamBtn.classList.remove('open');
+  mobNav.classList.remove('open');
+}));
+
+/* ─── FAQ ─── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ─── SCROLL REVEAL ─── */
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('in'), i * 80);
+      revObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('[data-r]').forEach(el => revObs.observe(el));
+
+/* ─── CONTACT FORM ─── */
+function handleForm(btn) {
+  btn.textContent = '✓ পাঠানো হয়েছে!';
+  btn.style.background = 'var(--green-d)';
+  setTimeout(() => { btn.textContent = 'বার্তা পাঠান →'; btn.style.background = ''; }, 3000);
+  // Real integration: fetch to your WP contact endpoint or WPForms REST API
+}
+
+/* ─── INIT ─── */
+window.addEventListener('DOMContentLoaded', () => {
+  loadSections();
+  loadBooks();
+  if (window.scrollY > 80) hdr.classList.add('scrolled');
+});
+</script>
+</body>
+</html>
