@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@700;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans Bengali', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #fff;
+    }
+
+    /* ═══ NOTICE SECTION ═══ */
+    .notice-section {
+      padding: clamp(48px, 8vw, 88px) clamp(20px, 5vw, 48px);
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .notice-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 95% 10%, rgba(185,28,28,.04) 0%, transparent 45%),
+        radial-gradient(circle at 5% 90%,  rgba(22,101,52,.04) 0%, transparent 45%);
+      pointer-events: none;
+    }
+
+    .notice-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+
+    /* header */
+    .notice-header {
+      text-align: center;
+      margin-bottom: clamp(28px, 4vw, 48px);
+    }
+    .notice-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: #b91c1c;
+      background: rgba(185,28,28,.07);
+      border: 1px solid rgba(185,28,28,.18);
+      padding: 5px 14px; border-radius: 40px;
+      margin-bottom: 14px;
+    }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 6px #ef4444;
+      animation: blink 1.6s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    .notice-title {
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 900;
+      font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+      color: #0a2e14;
+    }
+    .notice-divider {
+      width: 56px; height: 3px;
+      background: linear-gradient(90deg, #b91c1c, #166534);
+      border-radius: 3px;
+      margin: 14px auto 0;
+    }
+
+    /* layout */
+    .notice-body {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: clamp(16px, 3vw, 28px);
+      align-items: start;
+    }
+
+    /* ── LEFT: urgent / latest 3 ── */
+    .notice-ticker-wrap {
+      background: linear-gradient(140deg, #7f1d1d, #b91c1c);
+      border-radius: 14px;
+      padding: 22px;
+      position: sticky;
+      top: 80px;
+    }
+    .notice-ticker-label {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 14px;
+    }
+    .notice-ticker-label .t-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #fca5a5;
+      animation: blink 1.6s infinite;
+    }
+    .notice-ticker { display: flex; flex-direction: column; gap: 10px; }
+
+    .ticker-item {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 9px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: clamp(.76rem, 2vw, .84rem);
+      line-height: 1.6;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: background .18s;
+    }
+    .ticker-item:hover { background: rgba(255,255,255,.18); }
+    .ticker-item .ti-date {
+      display: block;
+      font-size: .6rem;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .06em;
+      margin-bottom: 5px;
+    }
+    .ticker-item .ti-tag {
+      display: inline-block;
+      font-size: .58rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 20px;
+      margin-bottom: 6px;
+      background: rgba(34,197,94,.25); color: #86efac;
+    }
+
+    /* ── RIGHT: full list ── */
+    .notice-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .notice-item {
+      background: #fff;
+      border: 1px solid #e8f0ea;
+      border-radius: 12px;
+      padding: clamp(14px, 2.5vw, 20px) clamp(16px, 3vw, 24px);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      text-decoration: none;
+      position: relative; overflow: hidden;
+      transition: transform .18s, box-shadow .18s, border-color .18s;
+    }
+    .notice-item::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: #e8f0ea;
+      transition: background .2s;
+    }
+    .notice-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      border-color: #c8dfc9;
+    }
+    .notice-item:hover::before { background: #166534; }
+
+    .ni-date {
+      background: #f0faf2;
+      border: 1px solid #c8dfc9;
+      border-radius: 9px;
+      padding: 8px 10px;
+      text-align: center;
+      min-width: 46px;
+      flex-shrink: 0;
+    }
+    .ni-date .nd-day {
+      display: block;
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #0a4d2e;
+      line-height: 1;
+    }
+    .ni-date .nd-month {
+      display: block;
+      font-size: .58rem;
+      color: #4b8c5e;
+      letter-spacing: .06em;
+      margin-top: 2px;
+    }
+
+    .ni-content { flex: 1; min-width: 0; }
+    .ni-tag {
+      display: inline-block;
+      font-size: .58rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 2px 9px; border-radius: 20px;
+      margin-bottom: 7px;
+      background: rgba(22,101,52,.1); color: #166534;
+    }
+    .ni-tag.new { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+
+    .ni-title {
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 700;
+      font-size: clamp(.88rem, 2.2vw, 1rem);
+      color: #0a2e14;
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+    .ni-desc {
+      font-size: clamp(.74rem, 1.8vw, .82rem);
+      color: #6b7c6d;
+      line-height: 1.65;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .ni-arrow {
+      color: #9db59e;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: color .18s, transform .18s;
+    }
+    .notice-item:hover .ni-arrow { color: #166534; transform: translateX(4px); }
+
+    /* loading / empty states */
+    .notice-skeleton {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .skel-item {
+      background: #f3f4f6;
+      border-radius: 12px;
+      height: 88px;
+      animation: shimmer 1.4s infinite;
+      background: linear-gradient(90deg, #f3f4f6 25%, #e9ebec 50%, #f3f4f6 75%);
+      background-size: 200% 100%;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    .notice-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #9db59e;
+      font-size: .9rem;
+    }
+    .notice-error {
+      background: #fff5f5;
+      border: 1px solid #fecaca;
+      border-radius: 10px;
+      padding: 16px 20px;
+      color: #b91c1c;
+      font-size: .84rem;
+      text-align: center;
+    }
+
+    /* footer */
+    .notice-footer {
+      text-align: center;
+      margin-top: clamp(24px, 4vw, 36px);
+    }
+    .btn-view-all {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: .82rem 2rem;
+      border-radius: 9px;
+      background: linear-gradient(140deg, #166534, #0a4d2e);
+      color: #fff;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      font-size: .92rem; font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(22,101,52,.4);
+      border: 1px solid rgba(255,255,255,.12);
+      transition: transform .18s, box-shadow .18s;
+    }
+    .btn-view-all:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(22,101,52,.55);
+    }
+
+    /* mobile */
+    @media (max-width: 768px) {
+      .notice-body { grid-template-columns: 1fr; }
+      .notice-ticker-wrap { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="notice-section">
+  <div class="notice-inner">
+
+    <div class="notice-header">
+      <div class="notice-eyebrow">
+        <span class="live-dot"></span>
+        সর্বশেষ নোটিশ
+      </div>
+      <h2 class="notice-title">নোটিশ বোর্ড</h2>
+      <div class="notice-divider"></div>
+    </div>
+
+    <div class="notice-body">
+      <!-- LEFT urgent ticker -->
+      <div class="notice-ticker-wrap">
+        <div class="notice-ticker-label">
+          <span class="t-dot"></span> সাম্প্রতিক নোটিশ
+        </div>
+        <div class="notice-ticker" id="tickerList">
+          <!-- filled by JS -->
+          <div class="skel-item" style="height:70px"></div>
+          <div class="skel-item" style="height:70px"></div>
+          <div class="skel-item" style="height:70px"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT full list -->
+      <div class="notice-list" id="noticeList">
+        <div class="notice-skeleton">
+          <div class="skel-item"></div>
+          <div class="skel-item"></div>
+          <div class="skel-item"></div>
+          <div class="skel-item"></div>
+          <div class="skel-item"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice-footer">
+      <a href="https://mymensingh-sadar.bdnagoriksheba.com/" class="btn-view-all" target="_blank">
+        সকল নোটিশ দেখুন →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   WordPress REST API — auto-fetch posts
+   যখনই নতুন post হবে, এখানে auto show করবে।
+   
+   HOW IT WORKS:
+   - WordPress REST API: /wp-json/wp/v2/posts
+   - category filter: notice category slug দিন
+   - per_page: কতটা দেখাবে
+═══════════════════════════════════════════════════ */
+
+const WP_BASE   = 'https://mymensingh-sadar.bdnagoriksheba.com';
+
+// ── If you have a "notice" category, put its ID here.
+// Leave 0 to fetch all posts.
+const CATEGORY_ID = 0;
+
+const PER_PAGE_MAIN   = 5;   // right column
+const PER_PAGE_TICKER = 3;   // left urgent column
+
+const BN_MONTHS = ['জানু','ফেব্রু','মার্চ','এপ্রিল','মে','জুন',
+                   'জুলাই','আগস্ট','সেপ্টে','অক্টো','নভে','ডিসে'];
+
+function toBnDigit(n) {
+  return String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  return {
+    day:   toBnDigit(d.getDate()),
+    month: BN_MONTHS[d.getMonth()],
+    full:  toBnDigit(d.getDate()) + ' ' + BN_MONTHS[d.getMonth()] + ' ' + toBnDigit(d.getFullYear())
+  };
+}
+
+function stripHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+function isNew(dateStr) {
+  const diff = (Date.now() - new Date(dateStr)) / (1000 * 60 * 60 * 24);
+  return diff <= 7; // posted within 7 days = NEW
+}
+
+/* ── Build ticker item ── */
+function buildTickerItem(post) {
+  const date  = formatDate(post.date);
+  const title = post.title.rendered;
+  const newBadge = isNew(post.date)
+    ? '<span class="ti-tag">নতুন</span>'
+    : '';
+  return `
+    <a class="ticker-item" href="${post.link}" target="_blank" rel="noopener">
+      <span class="ti-date">${date.full}</span>
+      ${newBadge}
+      <div>${title}</div>
+    </a>`;
+}
+
+/* ── Build main list item ── */
+function buildNoticeItem(post) {
+  const date    = formatDate(post.date);
+  const title   = post.title.rendered;
+  const excerpt = stripHtml(post.excerpt.rendered).slice(0, 120) + '…';
+  const newTag  = isNew(post.date)
+    ? '<span class="ni-tag new">নতুন</span>'
+    : '<span class="ni-tag">নোটিশ</span>';
+
+  return `
+    <a class="notice-item" href="${post.link}" target="_blank" rel="noopener">
+      <div class="ni-date">
+        <span class="nd-day">${date.day}</span>
+        <span class="nd-month">${date.month}</span>
+      </div>
+      <div class="ni-content">
+        <div>${newTag}</div>
+        <div class="ni-title">${title}</div>
+        <div class="ni-desc">${excerpt}</div>
+      </div>
+      <span class="ni-arrow">›</span>
+    </a>`;
+}
+
+/* ── Fetch & render ── */
+async function loadNotices() {
+  const catParam = CATEGORY_ID ? `&categories=${CATEGORY_ID}` : '';
+  const url = `${WP_BASE}/wp-json/wp/v2/posts?per_page=${PER_PAGE_MAIN}&orderby=date&order=desc${catParam}&_fields=id,title,excerpt,date,link`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('API error ' + res.status);
+    const posts = await res.json();
+
+    const listEl   = document.getElementById('noticeList');
+    const tickerEl = document.getElementById('tickerList');
+
+    if (!posts.length) {
+      listEl.innerHTML   = '<div class="notice-empty">কোনো নোটিশ পাওয়া যায়নি।</div>';
+      tickerEl.innerHTML = '<div style="color:rgba(255,255,255,.5);font-size:.8rem;text-align:center;padding:12px">কোনো নোটিশ নেই।</div>';
+      return;
+    }
+
+    // Main list
+    listEl.innerHTML = posts.map(buildNoticeItem).join('');
+
+    // Ticker (first 3)
+    tickerEl.innerHTML = posts.slice(0, PER_PAGE_TICKER).map(buildTickerItem).join('');
+
+  } catch (err) {
+    document.getElementById('noticeList').innerHTML =
+      `<div class="notice-error">নোটিশ লোড হয়নি। পেজ রিফ্রেশ করুন।<br><small>${err.message}</small></div>`;
+    document.getElementById('tickerList').innerHTML =
+      `<div style="color:rgba(255,255,255,.6);font-size:.78rem;text-align:center;padding:12px">লোড হয়নি।</div>`;
+  }
+}
+
+loadNotices();
+</script>
+
+</body>
+</html>
