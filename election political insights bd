@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সেবাসমূহ — Political Insights BD</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green:       #006a4e;
+    --green-deep:  #004d38;
+    --green-light: #e6f4f0;
+    --green-mid:   #cce8e0;
+    --red:         #f42a41;
+    --red-deep:    #c0152a;
+    --red-light:   #fde8eb;
+    --red-mid:     #fbc8ce;
+    --white:       #ffffff;
+    --off-white:   #f8faf9;
+    --card-bg:     #ffffff;
+    --ink:         #1a2e26;
+    --muted:       #4d6b5e;
+    --border:      #d4e8e0;
+    --border-light:#e8f4ef;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans Bengali', sans-serif;
+    background: var(--off-white);
+    color: var(--ink);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  .flag-stripe {
+    height: 5px;
+    background: linear-gradient(90deg, var(--green) 50%, var(--red) 50%);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--green);
+    color: var(--white);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.04) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.04) 40px);
+    pointer-events: none;
+  }
+
+  .header-circle {
+    position: absolute;
+    right: -60px; top: 50%;
+    transform: translateY(-50%);
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,42,65,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-inner {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 40px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .logo-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+
+  .logo-icon {
+    width: 44px; height: 44px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    letter-spacing: 0.07em;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+  }
+
+  .header-tagline {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .header-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(26px, 5vw, 46px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--white);
+  }
+
+  .header-title span { color: #ffccd1; }
+
+  .header-desc {
+    max-width: 680px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.85;
+  }
+
+  .header-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    flex-wrap: wrap;
+  }
+
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #ffccd1;
+    font-weight: 700;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 28px; height: 2px;
+    background: var(--red);
+    border-radius: 2px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(20px, 3.5vw, 30px);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .section-sub {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 660px;
+    margin-bottom: 36px;
+  }
+
+  /* ── INTRO BOX ── */
+  .intro-box {
+    background: var(--green);
+    border-left: 4px solid var(--red);
+    border-radius: 10px;
+    padding: 30px 40px;
+    margin-bottom: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intro-box::after {
+    content: '🇧🇩';
+    position: absolute;
+    right: 32px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .intro-box p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.85);
+    max-width: 800px;
+  }
+
+  .intro-box p strong { color: #ffccd1; font-weight: 600; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green) 0%, var(--red) 100%);
+    border-radius: 2px;
+    margin: 0 0 52px;
+    opacity: 0.22;
+  }
+
+  /* ── CATEGORY TABS ── */
+  .category-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .cat-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 22px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Noto Sans Bengali', sans-serif;
+    cursor: pointer;
+    border: 2px solid var(--border);
+    background: var(--white);
+    color: var(--muted);
+    transition: all 0.22s ease;
+    line-height: 1.3;
+  }
+
+  .cat-tab:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: var(--green-light);
+  }
+
+  .cat-tab.active {
+    background: var(--green);
+    border-color: var(--green-deep);
+    color: var(--white);
+    box-shadow: 0 4px 16px rgba(0,106,78,0.28);
+  }
+
+  .cat-tab .tab-emoji { font-size: 17px; }
+
+  /* ── CATEGORY PANEL ── */
+  .cat-panel { display: none; animation: fadeUp 0.3s ease both; }
+  .cat-panel.visible { display: block; }
+
+  /* ── CAT HEADER BAND ── */
+  .cat-band {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green) 100%);
+    border-radius: 12px 12px 0 0;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cat-band::after {
+    content: attr(data-bg);
+    position: absolute;
+    right: 36px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 72px;
+    opacity: 0.1;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .cat-band-icon {
+    width: 54px; height: 54px;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+
+  .cat-band-info h3 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 20px;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .cat-band-info p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.62);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ── SERVICE ITEMS GRID ── */
+  .service-items {
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    background: var(--white);
+    overflow: hidden;
+    margin-bottom: 56px;
+  }
+
+  .service-items-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .si-card {
+    padding: 28px 30px 26px;
+    border-right: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    position: relative;
+    transition: background 0.18s, box-shadow 0.18s;
+  }
+
+  .si-card:nth-child(even) { border-right: none; }
+  .si-card:nth-last-child(-n+2) { border-bottom: none; }
+
+  .si-card:hover {
+    background: var(--green-light);
+  }
+
+  .si-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .si-icon {
+    width: 40px; height: 40px;
+    background: var(--green-light);
+    border: 1px solid var(--green-mid);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px;
+    flex-shrink: 0;
+  }
+
+  .si-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  .si-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.85;
+    margin-bottom: 14px;
+  }
+
+  .si-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .si-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .si-points li::before {
+    content: '▸';
+    color: var(--green);
+    font-size: 11px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .si-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 14px;
+  }
+
+  .si-tag {
+    font-size: 10.5px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: var(--green-light);
+    color: var(--green-deep);
+    border: 1px solid var(--green-mid);
+    letter-spacing: 0.03em;
+  }
+
+  .si-tag.red {
+    background: var(--red-light);
+    color: var(--red-deep);
+    border-color: var(--red-mid);
+  }
+
+  /* Cat panel footer — call for price strip */
+  .cat-cfp-strip {
+    padding: 18px 30px;
+    background: linear-gradient(90deg, var(--green-light) 0%, #f0faf6 100%);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .cfp-text {
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+
+  .cfp-text strong {
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .cfp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 7px;
+    font-size: 13.5px;
+    font-weight: 700;
+    font-family: 'Noto Sans Bengali', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .cfp-btn:hover {
+    background: var(--green-deep);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 16px rgba(0,106,78,0.28);
+  }
+
+  /* ── TABLE ── */
+  .table-section { margin-bottom: 68px; }
+
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0,106,78,0.07);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    font-size: 14px;
+  }
+
+  thead { background: var(--green); }
+
+  thead th {
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    white-space: nowrap;
+  }
+
+  thead th:first-child { color: #ffccd1; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border-light);
+    transition: background 0.15s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--green-light); }
+
+  tbody td {
+    padding: 15px 20px;
+    vertical-align: middle;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .election-type {
+    font-family: 'Noto Serif Bengali', serif;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .badge-done {
+    background: rgba(0,106,78,0.1);
+    color: var(--green-deep);
+    border: 1px solid rgba(0,106,78,0.25);
+  }
+
+  .badge-active {
+    background: var(--red-light);
+    color: var(--red-deep);
+    border: 1px solid var(--red-mid);
+  }
+
+  .badge-pending {
+    background: #f0f4f2;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .coverage-pill { font-size: 13px; color: var(--muted); }
+  .coverage-pill span { color: var(--green); font-weight: 600; }
+
+  tfoot tr { background: var(--green-light); }
+  tfoot td {
+    padding: 13px 20px;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── PRICING INBOX ── */
+  .pricing-inbox {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 68px;
+    box-shadow: 0 4px 24px rgba(0,106,78,0.07);
+  }
+
+  .inbox-header {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green) 100%);
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .inbox-header::after {
+    content: '📬';
+    position: absolute;
+    right: 44px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 72px;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  .inbox-header-icon {
+    width: 58px; height: 58px;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.22);
+    border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .inbox-header h3 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+
+  .inbox-header p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.6;
+  }
+
+  .inbox-body {
+    padding: 40px 40px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+
+  .form-label span { color: var(--red); margin-left: 2px; }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    font-size: 14px;
+    font-family: 'Noto Sans Bengali', sans-serif;
+    color: var(--ink);
+    background: var(--off-white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(0,106,78,0.1);
+    background: var(--white);
+  }
+
+  .form-textarea { resize: vertical; min-height: 120px; }
+
+  .form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234d6b5e' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+  }
+
+  .form-footer {
+    padding: 4px 40px 36px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .form-submit {
+    padding: 13px 32px;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-weight: 700;
+    font-family: 'Noto Sans Bengali', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .form-submit:hover {
+    background: var(--green-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0,106,78,0.3);
+  }
+
+  .form-whatsapp {
+    padding: 13px 24px;
+    background: #25D366;
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Noto Sans Bengali', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+
+  .form-whatsapp:hover {
+    background: #1fba58;
+    transform: translateY(-2px);
+  }
+
+  .form-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  .success-msg {
+    display: none;
+    background: var(--green-light);
+    border: 1px solid var(--green-mid);
+    border-radius: 8px;
+    padding: 16px 22px;
+    font-size: 14px;
+    color: var(--green-deep);
+    font-weight: 500;
+    margin: 0 40px 16px;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--green);
+    border-radius: 12px;
+    padding: 48px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    right: -50px; top: 50%;
+    transform: translateY(-50%);
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: var(--red);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .cta-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .cta-title em { color: #ffccd1; font-style: normal; }
+
+  .cta-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    max-width: 460px;
+  }
+
+  .cta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 26px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'Noto Sans Bengali', sans-serif;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary { background: var(--red); color: var(--white); }
+  .btn-primary:hover {
+    background: var(--red-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(244,42,65,0.35);
+  }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.25) !important;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.18);
+    color: var(--white);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-deep);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 26px 20px;
+    font-size: 13px;
+  }
+
+  footer a { color: #ffccd1; text-decoration: none; }
+  footer strong { color: rgba(255,255,255,0.75); }
+  .footer-flag { display: inline-block; margin-bottom: 8px; font-size: 20px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 760px) {
+    .service-items-grid { grid-template-columns: 1fr; }
+    .si-card { border-right: none; }
+    .si-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+    .si-card:last-child { border-bottom: none; }
+  }
+
+  @media (max-width: 640px) {
+    .header-inner { padding: 36px 20px 32px; }
+    main { padding: 36px 20px; }
+    .intro-box { padding: 22px 22px; }
+    .header-stats { gap: 20px; }
+    .cta-section { padding: 32px 24px; }
+    thead th { font-size: 10px; padding: 11px 12px; }
+    tbody td { padding: 12px 12px; }
+    .category-tabs { gap: 8px; }
+    .cat-tab { font-size: 12.5px; padding: 9px 14px; }
+    .cat-band { padding: 22px 20px; flex-wrap: wrap; gap: 12px; }
+    .cat-band::after { display: none; }
+    .si-card { padding: 22px 20px; }
+    .inbox-body { grid-template-columns: 1fr; padding: 24px 20px 16px; }
+    .form-group.full { grid-column: 1; }
+    .inbox-header { padding: 24px 20px; flex-wrap: wrap; gap: 14px; }
+    .inbox-header::after { display: none; }
+    .form-footer { padding: 4px 20px 28px; flex-direction: column; }
+    .form-note { margin-left: 0; }
+    .success-msg { margin: 0 20px 16px; }
+    .cat-cfp-strip { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="flag-stripe"></div>
+
+<header>
+  <div class="header-pattern"></div>
+  <div class="header-circle"></div>
+  <div class="header-inner">
+    <div class="logo-bar">
+      <div class="logo-icon">🏛</div>
+      <span class="logo-text">Political Insights BD</span>
+    </div>
+    <p class="header-tagline">রাজনৈতিক বিশ্লেষণ ও কৌশলগত গবেষণা</p>
+    <h1 class="header-title">আমাদের <span>সেবাসমূহ</span></h1>
+    <p class="header-desc">
+      বাংলাদেশের রাজনৈতিক দল, গবেষণা প্রতিষ্ঠান, আন্তর্জাতিক সংস্থা ও নীতি নির্ধারকদের জন্য evidence-based রাজনৈতিক বিশ্লেষণ ও কৌশলগত পরামর্শ।
+    </p>
+    <div class="header-stats">
+      <div class="stat"><span class="stat-num">৩০০</span><span class="stat-label">আসন মনিটরিং</span></div>
+      <div class="stat"><span class="stat-num">৪২,০০০+</span><span class="stat-label">ভোটকেন্দ্র</span></div>
+      <div class="stat"><span class="stat-num">৮০+</span><span class="stat-label">বিশ্লেষণ প্রতিবেদন</span></div>
+      <div class="stat"><span class="stat-num">২+</span><span class="stat-label">বছরের অভিজ্ঞতা</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="intro-box">
+    <p>
+      <strong>Political Insights BD</strong> বাংলাদেশের একমাত্র পূর্ণাঙ্গ data-driven রাজনৈতিক ইন্টেলিজেন্স প্ল্যাটফর্ম। যেকোনো নির্বাচনে একজন প্রার্থীর জন্য মনোনয়ন থেকে ফলাফল পর্যন্ত — মাঠ গবেষণা, ভোটার বিশ্লেষণ, সোশ্যাল মিডিয়া প্রচারণা পরিকল্পনা, গ্রাউন্ড ক্যাম্পেইন কৌশল, মিডিয়া ম্যানেজমেন্ট ও সংকট ব্যবস্থাপনা — সবকিছু একসাথে, সম্পূর্ণ data-based পদ্ধতিতে।
+    </p>
+  </div>
+
+  <div class="section-label">সেবার ক্যাটাগরি</div>
+  <h2 class="section-title">৪টি বিশেষায়িত সেবা ক্যাটাগরি</h2>
+  <p class="section-sub">যেকোনো নির্বাচনে — জাতীয় সংসদ, উপজেলা, ইউনিয়ন, পৌরসভা বা সিটি কর্পোরেশন — আমরা প্রার্থীর পাশে থাকি শুরু থেকে শেষ পর্যন্ত।</p>
+
+  <!-- TABS -->
+  <div class="category-tabs">
+    <button class="cat-tab active" onclick="showPanel('p1',this)">
+      <span class="tab-emoji">🏛️</span> নির্বাচন মনিটরিং ও ইন্টেলিজেন্স
+    </button>
+    <button class="cat-tab" onclick="showPanel('p2',this)">
+      <span class="tab-emoji">📊</span> ডেটা-চালিত রাজনৈতিক বিশ্লেষণ
+    </button>
+    <button class="cat-tab" onclick="showPanel('p3',this)">
+      <span class="tab-emoji">🎯</span> নির্বাচনী প্রচারণা কৌশল
+    </button>
+    <button class="cat-tab" onclick="showPanel('p4',this)">
+      <span class="tab-emoji">🔬</span> গবেষণা, নীতি ও প্রকাশনা
+    </button>
+  </div>
+
+  <!-- ═══════ PANEL 1: ELECTION MONITORING ═══════ -->
+  <div class="cat-panel visible" id="p1">
+    <div class="cat-band" data-bg="🏛️">
+      <div class="cat-band-icon">🏛️</div>
+      <div class="cat-band-info">
+        <h3>নির্বাচন মনিটরিং ও ইন্টেলিজেন্স</h3>
+        <p>জাতীয় সংসদ, উপজেলা পরিষদ, ইউনিয়ন পরিষদ, পৌরসভা ও সিটি কর্পোরেশন — সকল নির্বাচনে রিয়েল-টাইম পর্যবেক্ষণ ও ইন্টেলিজেন্স সংগ্রহ।</p>
+      </div>
+    </div>
+    <div class="service-items">
+      <div class="service-items-grid">
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">📡</div>
+            <div class="si-title">রিয়েল-টাইম ভোটকেন্দ্র মনিটরিং</div>
+          </div>
+          <p class="si-body">নির্বাচনের দিন ৪২,০০০+ ভোটকেন্দ্রে গ্রাউন্ড টিমের মাধ্যমে তাৎক্ষণিক তথ্য সংগ্রহ ও বিশ্লেষণ।</p>
+          <ul class="si-points">
+            <li>ভোটকেন্দ্রভিত্তিক ভোটার উপস্থিতি ট্র্যাকিং (ঘণ্টাওয়ারি)</li>
+            <li>নির্বাচনী অনিয়ম ও সহিংসতার তাৎক্ষণিক রিপোর্টিং</li>
+            <li>ঝুঁকিপ্রবণ বুথের হটস্পট ম্যাপিং ও আগাম সতর্কতা</li>
+            <li>গ্রাউন্ড এজেন্টদের সাথে লাইভ কমিউনিকেশন চ্যানেল</li>
+            <li>ভোটগণনা শুরু থেকে রিয়েল-টাইম ফলাফল সংকলন</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">রিয়েল-টাইম</span><span class="si-tag">হটস্পট ম্যাপ</span><span class="si-tag">লাইভ ট্র্যাকিং</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">🗺️</div>
+            <div class="si-title">সকল নির্বাচন ধরনে কভারেজ</div>
+          </div>
+          <p class="si-body">যেকোনো স্তরের নির্বাচনে প্রার্থী থেকে দল — প্রত্যেকের জন্য কাস্টম মনিটরিং পরিকল্পনা।</p>
+          <ul class="si-points">
+            <li>জাতীয় সংসদ নির্বাচন — ৩০০টি আসন পূর্ণ কভারেজ</li>
+            <li>উপজেলা পরিষদ — ৪৯৫টি উপজেলা চেয়ারম্যান ও ভাইস চেয়ারম্যান</li>
+            <li>ইউনিয়ন পরিষদ — ৪,৫৭১টি ইউপি চেয়ারম্যান ও সদস্য পদ</li>
+            <li>পৌরসভা নির্বাচন — ৩৩০টি পৌরসভা মেয়র ও কাউন্সিলর</li>
+            <li>সিটি কর্পোরেশন উপনির্বাচন — মেয়র ও কাউন্সিলর</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">জাতীয়</span><span class="si-tag">উপজেলা</span><span class="si-tag">ইউপি</span><span class="si-tag">পৌরসভা</span><span class="si-tag red">সিটি কর্প</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">👤</div>
+            <div class="si-title">প্রার্থী ও প্রতিপক্ষ ইন্টেলিজেন্স</div>
+          </div>
+          <p class="si-body">আসনের সকল প্রার্থীর বিস্তারিত প্রোফাইল তৈরি ও প্রতিপক্ষের কার্যক্রম সার্বক্ষণিক পর্যবেক্ষণ।</p>
+          <ul class="si-points">
+            <li>প্রার্থীর পারিবারিক, সামাজিক ও রাজনৈতিক পটভূমি বিশ্লেষণ</li>
+            <li>প্রতিটি প্রার্থীর শক্তি-দুর্বলতা-সুযোগ-হুমকি (SWOT) মূল্যায়ন</li>
+            <li>প্রতিপক্ষ প্রার্থীর মাঠ কার্যক্রম ও ভোটার যোগাযোগ ট্র্যাকিং</li>
+            <li>প্রতিপক্ষের প্রচারণা বার্তা ও কৌশল পর্যবেক্ষণ</li>
+            <li>সম্ভাব্য ভোটচুরি ও অনিয়মের আগাম সতর্কতা</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">প্রোফাইলিং</span><span class="si-tag">SWOT</span><span class="si-tag">প্রতিপক্ষ ট্র্যাকিং</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">📋</div>
+            <div class="si-title">নির্বাচন পূর্ব ও পরবর্তী ইন্টেলিজেন্স</div>
+          </div>
+          <p class="si-body">নির্বাচনের আগে থেকে ফলাফল বিশ্লেষণ পর্যন্ত সম্পূর্ণ চক্রজুড়ে কৌশলগত তথ্য সরবরাহ।</p>
+          <ul class="si-points">
+            <li>প্রি-ইলেকশন মাঠ রিপোর্ট — সম্ভাবনা ও ঝুঁকি মূল্যায়ন</li>
+            <li>মনোনয়ন প্রক্রিয়া ও প্রার্থিতা সিদ্ধান্তে তথ্যগত সহায়তা</li>
+            <li>নির্বাচনের দিন ঘণ্টাওয়ারি ব্রিফিং ও সতর্কতা বার্তা</li>
+            <li>ভোটগণনা পর্যবেক্ষণ ও ফলাফল যাচাইকরণ</li>
+            <li>পোস্ট-ইলেকশন সম্পূর্ণ বিশ্লেষণ ও পরবর্তী কৌশল নির্ধারণ</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">প্রি-ইলেকশন</span><span class="si-tag">ইলেকশন ডে</span><span class="si-tag red">পোস্ট-ইলেকশন</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="cat-cfp-strip">
+        <p class="cfp-text">মনিটরিং প্যাকেজের মূল্য নির্ভর করে আসন সংখ্যা, নির্বাচনের ধরন ও সময়সীমার উপর। <strong>কাস্টম কোটেশনের জন্য যোগাযোগ করুন।</strong></p>
+        <button class="cfp-btn" onclick="scrollToForm('নির্বাচন মনিটরিং ও ইন্টেলিজেন্স')">📬 মূল্য জানতে ইনবক্স করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ PANEL 2: DATA ANALYSIS ═══════ -->
+  <div class="cat-panel" id="p2">
+    <div class="cat-band" data-bg="📊">
+      <div class="cat-band-icon">📊</div>
+      <div class="cat-band-info">
+        <h3>ডেটা-চালিত রাজনৈতিক বিশ্লেষণ</h3>
+        <p>বুথ-ভিত্তিক ডেটা, ভোটার আচরণ গবেষণা, সুইং বিশ্লেষণ এবং নির্বাচনী পূর্বাভাস — সম্পূর্ণ evidence-based পদ্ধতিতে।</p>
+      </div>
+    </div>
+    <div class="service-items">
+      <div class="service-items-grid">
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">🗳️</div>
+            <div class="si-title">ভোটার আচরণ ও সুইং বিশ্লেষণ</div>
+          </div>
+          <p class="si-body">বিগত নির্বাচনের তথ্য ও বর্তমান পরিস্থিতি বিশ্লেষণ করে কোন ভোটার কোথায় সরে যেতে পারেন তা নির্ণয়।</p>
+          <ul class="si-points">
+            <li>বুথ-ভিত্তিক ঐতিহাসিক ভোট ডেটা বিশ্লেষণ (২০০৮ থেকে বর্তমান)</li>
+            <li>সুইং ভোটার সেগমেন্টেশন — কে, কোথায়, কতজন</li>
+            <li>ধর্মীয়, পেশাগত ও বয়সভিত্তিক ভোটার গ্রুপ বিশ্লেষণ</li>
+            <li>প্রতিটি ওয়ার্ড/বুথে প্রার্থীর আনুমানিক ভোট শেয়ার পূর্বাভাস</li>
+            <li>কৌশলগত বুথ চিহ্নিতকরণ — কোথায় বেশি মনোযোগ দিতে হবে</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">সুইং বিশ্লেষণ</span><span class="si-tag">বুথ ডেটা</span><span class="si-tag">পূর্বাভাস</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">🧭</div>
+            <div class="si-title">ডেমোগ্রাফিক ও জনগোষ্ঠী বিশ্লেষণ</div>
+          </div>
+          <p class="si-body">আসনের জনগোষ্ঠীর বিস্তারিত চিত্র তুলে ধরে কোন গোষ্ঠীকে কীভাবে টার্গেট করতে হবে তা নির্ধারণ।</p>
+          <ul class="si-points">
+            <li>ভোটার রেজিস্ট্রেশন ডেটা — বয়স, লিঙ্গ ও এলাকাভিত্তিক বিভাজন</li>
+            <li>পেশাজীবী গোষ্ঠী ম্যাপিং — কৃষক, ব্যবসায়ী, শিক্ষার্থী, শ্রমিক</li>
+            <li>ধর্মীয় ও সম্প্রদায়গত বিন্যাস বিশ্লেষণ</li>
+            <li>প্রভাবশালী পরিবার ও গোষ্ঠীর রাজনৈতিক অবস্থান নিরূপণ</li>
+            <li>নতুন ভোটার সংখ্যা ও তাদের সম্ভাব্য পছন্দ বিশ্লেষণ</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">ডেমোগ্রাফিক</span><span class="si-tag">গোষ্ঠী বিশ্লেষণ</span><span class="si-tag">টার্গেটিং</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">📈</div>
+            <div class="si-title">দলীয় শক্তি ও রাজনৈতিক ম্যাপিং</div>
+          </div>
+          <p class="si-body">আসনের রাজনৈতিক শক্তির মানচিত্র তৈরি — কোন দল কোথায় কতটা শক্তিশালী তার সম্পূর্ণ চিত্র।</p>
+          <ul class="si-points">
+            <li>প্রতিটি ওয়ার্ড ও ইউনিয়নে দলীয় শক্তির আনুমানিক মানচিত্র</li>
+            <li>আওয়ামী লীগ, বিএনপি, জামায়াত ও স্বতন্ত্র শক্তির তুলনামূলক চার্ট</li>
+            <li>গত নির্বাচনের চেয়ে পরিবর্তনের সম্ভাবনা বিশ্লেষণ</li>
+            <li>জোট গঠনের সম্ভাবনা ও তার প্রভাব হিসাব</li>
+            <li>বিরোধী ভোট বিভক্তির সুযোগ চিহ্নিতকরণ</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">দলীয় শক্তি</span><span class="si-tag">রাজনৈতিক ম্যাপ</span><span class="si-tag">জোট বিশ্লেষণ</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">💬</div>
+            <div class="si-title">Sentiment Analysis ও জনমত জরিপ</div>
+          </div>
+          <p class="si-body">এলাকার জনমত ও ভোটারদের প্রকৃত অনুভূতি বোঝার জন্য বৈজ্ঞানিক পদ্ধতিতে তথ্য সংগ্রহ ও বিশ্লেষণ।</p>
+          <ul class="si-points">
+            <li>দরজায় দরজায় ভোটার সাক্ষাৎকার ও মতামত সংগ্রহ</li>
+            <li>প্রার্থী সম্পর্কে ভোটারদের ইতিবাচক ও নেতিবাচক মনোভাব নিরূপণ</li>
+            <li>স্থানীয় সমস্যা ও ইস্যু র‍্যাংকিং — কোন বিষয়ে ভোটাররা বেশি সংবেদনশীল</li>
+            <li>প্রচারণা বার্তার কার্যকারিতা পরীক্ষা (A/B message testing)</li>
+            <li>মনিটরিং ইন্টারভাল অনুযায়ী ট্রেন্ড পরিবর্তনের ধারাবাহিক রিপোর্ট</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">Sentiment Analysis</span><span class="si-tag">জনমত জরিপ</span><span class="si-tag red">A/B Testing</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="cat-cfp-strip">
+        <p class="cfp-text">বিশ্লেষণ প্যাকেজের খরচ নির্ভর করে আসনের পরিধি ও গভীরতার উপর। <strong>আপনার আসনের জন্য কাস্টম কোটেশন পান।</strong></p>
+        <button class="cfp-btn" onclick="scrollToForm('ডেটা-চালিত রাজনৈতিক বিশ্লেষণ')">📬 মূল্য জানতে ইনবক্স করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ PANEL 3: CAMPAIGN STRATEGY ═══════ -->
+  <div class="cat-panel" id="p3">
+    <div class="cat-band" data-bg="🎯">
+      <div class="cat-band-icon">🎯</div>
+      <div class="cat-band-info">
+        <h3>নির্বাচনী প্রচারণা কৌশল</h3>
+        <p>মনোনয়ন থেকে ভোটের দিন — গ্রাউন্ড প্রচারণা, সোশ্যাল মিডিয়া পরিকল্পনা, মিডিয়া ম্যানেজমেন্ট ও সংকট মোকাবেলায় সম্পূর্ণ কৌশলগত সহায়তা।</p>
+      </div>
+    </div>
+    <div class="service-items">
+      <div class="service-items-grid">
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">🗓️</div>
+            <div class="si-title">সম্পূর্ণ ক্যাম্পেইন কৌশল পরিকল্পনা</div>
+          </div>
+          <p class="si-body">নির্বাচন ঘোষণার দিন থেকে ভোটের দিন পর্যন্ত দিনক্ষণ নির্ধারিত সম্পূর্ণ কর্মপরিকল্পনা।</p>
+          <ul class="si-points">
+            <li>ক্যাম্পেইন টাইমলাইন ও মাইলস্টোন ক্যালেন্ডার তৈরি</li>
+            <li>ভোটার সেগমেন্ট অনুযায়ী আলাদা কৌশল নির্ধারণ</li>
+            <li>সীমিত সম্পদের সর্বোচ্চ ব্যবহারের জন্য অগ্রাধিকার তালিকা</li>
+            <li>কৌশলগত সভা, পথসভা ও দরজায় দরজায় প্রচারণার সূচি</li>
+            <li>শেষ সপ্তাহের বিশেষ পুশ স্ট্র্যাটেজি ও ভোটার মোবিলাইজেশন পরিকল্পনা</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">টাইমলাইন</span><span class="si-tag">কর্মপরিকল্পনা</span><span class="si-tag">মোবিলাইজেশন</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">📱</div>
+            <div class="si-title">সোশ্যাল মিডিয়া প্রচারণা পরিকল্পনা</div>
+          </div>
+          <p class="si-body">Facebook, YouTube, WhatsApp ও টিকটক — প্রতিটি প্ল্যাটফর্মে ভোটারদের কাছে পৌঁছানোর বিস্তারিত ডিজিটাল কৌশল।</p>
+          <ul class="si-points">
+            <li>Facebook পেজ ও গ্রুপ কৌশল — কনটেন্ট ক্যালেন্ডার ও পোস্টিং শিডিউল</li>
+            <li>YouTube চ্যানেল কন্টেন্ট পরিকল্পনা — ভিডিও স্ক্রিপ্ট গাইডলাইন</li>
+            <li>WhatsApp গ্রুপ নেটওয়ার্ক গঠন ও বার্তা প্রচারের কৌশল</li>
+            <li>ভোটার সেগমেন্ট অনুযায়ী আলাদা কনটেন্ট ফরম্যাট ও বার্তা</li>
+            <li>পেইড বুস্টিং ও টার্গেটেড অ্যাড ক্যাম্পেইনের সুপারিশ</li>
+            <li>প্রতিপক্ষের ডিজিটাল প্রচারণার পাল্টা কৌশল নির্ধারণ</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">Facebook</span><span class="si-tag">YouTube</span><span class="si-tag">WhatsApp</span><span class="si-tag red">টার্গেটেড বুস্ট</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">📣</div>
+            <div class="si-title">প্রচারণা বার্তা ও কমিউনিকেশন কৌশল</div>
+          </div>
+          <p class="si-body">প্রার্থীর শক্তিকে তুলে ধরে ও ভোটারের মনে পৌঁছানো বার্তা তৈরিতে data-based পরামর্শ।</p>
+          <ul class="si-points">
+            <li>মূল নির্বাচনী বার্তা (core message) ও স্লোগান নির্ধারণ</li>
+            <li>বিভিন্ন ভোটার গোষ্ঠীর জন্য আলাদা বার্তা কাস্টমাইজেশন</li>
+            <li>পোস্টার, লিফলেট ও ব্যানারের কনটেন্ট গাইডলাইন</li>
+            <li>মাইকিং, পথসভা ও গণসংযোগের বক্তব্য কাঠামো</li>
+            <li>স্থানীয় ইস্যুভিত্তিক ওয়াদা ও কর্মসূচির বার্তা তৈরি</li>
+            <li>ভোটারের প্রশ্নের পূর্বনির্ধারিত উত্তর প্রস্তুতি (FAQ Bank)</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">বার্তা কৌশল</span><span class="si-tag">স্লোগান</span><span class="si-tag">কনটেন্ট গাইড</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">🤝</div>
+            <div class="si-title">গ্রাউন্ড ক্যাম্পেইন ও মাঠকর্মী ব্যবস্থাপনা</div>
+          </div>
+          <p class="si-body">প্রতিটি বুথ ও ওয়ার্ডে কার্যকর মাঠ কার্যক্রম পরিচালনার জন্য সাংগঠনিক কাঠামো ও নির্দেশিকা।</p>
+          <ul class="si-points">
+            <li>বুথভিত্তিক কমিটি গঠন ও দায়িত্ব বণ্টনের কাঠামো</li>
+            <li>বাড়ি বাড়ি ভোটার যোগাযোগ (door-to-door canvassing) পরিকল্পনা</li>
+            <li>মাঠকর্মীদের প্রশিক্ষণ উপকরণ ও নির্দেশিকা তৈরি</li>
+            <li>বিশেষ ভোটার গোষ্ঠী সংযোগ — নারী, যুব, প্রবাসী পরিবার</li>
+            <li>ভোটের দিন বুথ ম্যানেজমেন্ট ও ভোটার গেট-আউট পরিকল্পনা</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">গ্রাউন্ড ক্যাম্পেইন</span><span class="si-tag">বুথ কমিটি</span><span class="si-tag">ভোটার যোগাযোগ</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">📰</div>
+            <div class="si-title">মিডিয়া ম্যানেজমেন্ট ও পিআর কৌশল</div>
+          </div>
+          <p class="si-body">স্থানীয় ও জাতীয় মিডিয়ায় প্রার্থীর ইতিবাচক উপস্থিতি নিশ্চিত করার পরিকল্পনা।</p>
+          <ul class="si-points">
+            <li>স্থানীয় পত্রিকা ও অনলাইন পোর্টালে প্রেস কভারেজ কৌশল</li>
+            <li>প্রেস বিজ্ঞপ্তি ও সংবাদ সম্মেলনের সময়সূচি পরিকল্পনা</li>
+            <li>টেলিভিশন সাক্ষাৎকারের প্রস্তুতি ও মিডিয়া ট্রেনিং পরামর্শ</li>
+            <li>নেতিবাচক মিডিয়া কভারেজ মোকাবেলার পাল্টা কৌশল</li>
+            <li>সোশ্যাল মিডিয়া মনিটরিং ও ব্র্যান্ড সুনাম রক্ষা</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">মিডিয়া কভারেজ</span><span class="si-tag">প্রেস বিজ্ঞপ্তি</span><span class="si-tag">পিআর কৌশল</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">🚨</div>
+            <div class="si-title">সংকট ব্যবস্থাপনা ও প্রপাগান্ডা মোকাবেলা</div>
+          </div>
+          <p class="si-body">নির্বাচনী প্রচারণায় যেকোনো সংকট, গুজব বা প্রতিপক্ষের অপপ্রচারের বিরুদ্ধে তাৎক্ষণিক কৌশলগত প্রতিক্রিয়া।</p>
+          <ul class="si-points">
+            <li>সংকট প্রতিক্রিয়া প্রোটোকল তৈরি ও দলকে প্রস্তুত করা</li>
+            <li>মিথ্যা তথ্য ও অপপ্রচার দ্রুত খণ্ডনের কৌশল</li>
+            <li>প্রতিপক্ষের নেতিবাচক আক্রমণের পূর্বনির্ধারিত জবাব</li>
+            <li>নির্বাচনী সহিংসতা বা কারচুপির অভিযোগ মোকাবেলার পরিকল্পনা</li>
+            <li>২৪/৭ সংকট পরামর্শ সেবা (হটলাইন সাপোর্ট)</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag red">সংকট ব্যবস্থাপনা</span><span class="si-tag red">অপপ্রচার খণ্ডন</span><span class="si-tag">হটলাইন</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="cat-cfp-strip">
+        <p class="cfp-text">প্রচারণা কৌশল প্যাকেজ সম্পূর্ণ কাস্টম — আসন, সময়কাল ও প্রয়োজন অনুযায়ী। <strong>আজই যোগাযোগ করে বিস্তারিত জানুন।</strong></p>
+        <button class="cfp-btn" onclick="scrollToForm('নির্বাচনী প্রচারণা কৌশল')">📬 মূল্য জানতে ইনবক্স করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ PANEL 4: RESEARCH & POLICY ═══════ -->
+  <div class="cat-panel" id="p4">
+    <div class="cat-band" data-bg="🔬">
+      <div class="cat-band-icon">🔬</div>
+      <div class="cat-band-info">
+        <h3>গবেষণা, নীতি ও প্রকাশনা</h3>
+        <p>মাঠ জরিপ, নীতি বিশ্লেষণ, stakeholder গবেষণা ও আন্তর্জাতিক মানের প্রতিবেদন — রাজনৈতিক দল, NGO ও গবেষণা প্রতিষ্ঠানের জন্য।</p>
+      </div>
+    </div>
+    <div class="service-items">
+      <div class="service-items-grid">
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">🔍</div>
+            <div class="si-title">মাঠ পর্যায়ের গবেষণা ও জরিপ</div>
+          </div>
+          <p class="si-body">বৈজ্ঞানিক নমুনায়ন পদ্ধতিতে ভোটার মতামত ও রাজনৈতিক পরিস্থিতির গভীর মাঠ গবেষণা।</p>
+          <ul class="si-points">
+            <li>উপজেলা বা আসনভিত্তিক ভোটার মতামত জরিপ (কোয়ান্টিটেটিভ)</li>
+            <li>কোয়ালিটেটিভ FGD (Focus Group Discussion) ও গভীর সাক্ষাৎকার</li>
+            <li>স্থানীয় নেতৃস্থানীয় ও প্রভাবশালী ব্যক্তিদের মতামত সংকলন</li>
+            <li>পরিসংখ্যানগত বিশ্লেষণ ও ডেটা ভিজ্যুয়ালাইজেশন সহ পূর্ণ রিপোর্ট</li>
+            <li>গবেষণা ফলাফলের Presentation Deck অন্তর্ভুক্ত</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">মাঠ জরিপ</span><span class="si-tag">FGD</span><span class="si-tag">ডেটা ভিজ্যুয়াল</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">📄</div>
+            <div class="si-title">নীতি গবেষণা ও বিশ্লেষণী প্রতিবেদন</div>
+          </div>
+          <p class="si-body">আন্তর্জাতিক মানদণ্ড অনুযায়ী তুলনামূলক নীতি বিশ্লেষণ ও সংস্কার প্রস্তাবনা প্রণয়নে সহায়তা।</p>
+          <ul class="si-points">
+            <li>নির্বাচন ব্যবস্থা, সংবিধান ও সরকারি নীতির তুলনামূলক বিশ্লেষণ</li>
+            <li>সরকারি কর্মসূচির কার্যকারিতা মূল্যায়ন (impact assessment)</li>
+            <li>সংস্কার প্রস্তাবনা ও পলিসি পেপার তৈরি</li>
+            <li>আন্তর্জাতিক উন্নয়ন সংস্থার জন্য situation report</li>
+            <li>বাংলা ও ইংরেজি উভয় ভাষায় Executive Summary প্রদান</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">নীতি বিশ্লেষণ</span><span class="si-tag">পলিসি পেপার</span><span class="si-tag red">সংস্কার প্রস্তাব</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">🌐</div>
+            <div class="si-title">Stakeholder Analysis ও প্রেক্ষাপট গবেষণা</div>
+          </div>
+          <p class="si-body">রাজনৈতিক বাস্তবতার সম্পূর্ণ চিত্র বোঝার জন্য প্রভাবশালী পক্ষসমূহের অবস্থান ও স্বার্থ বিশ্লেষণ।</p>
+          <ul class="si-points">
+            <li>মূল stakeholder চিহ্নিতকরণ — দল, নাগরিক সমাজ, ব্যবসায়ী, ধর্মীয় নেতা</li>
+            <li>প্রতিটি stakeholder-এর অবস্থান, স্বার্থ ও প্রভাব ম্যাপিং</li>
+            <li>জাতীয় ও আন্তর্জাতিক রাজনৈতিক প্রেক্ষাপট বিশ্লেষণ</li>
+            <li>ঐতিহাসিক নির্বাচনী ও রাজনৈতিক প্যাটার্নের তুলনামূলক পর্যালোচনা</li>
+            <li>আঞ্চলিক ও দ্বিপক্ষীয় সম্পর্কের প্রভাব মূল্যায়ন</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">Stakeholder ম্যাপ</span><span class="si-tag">প্রেক্ষাপট বিশ্লেষণ</span><span class="si-tag">ঐতিহাসিক</span>
+          </div>
+        </div>
+
+        <div class="si-card">
+          <div class="si-card-top">
+            <div class="si-icon">📊</div>
+            <div class="si-title">নিয়মিত প্রতিবেদন ও প্রকাশনা</div>
+          </div>
+          <p class="si-body">রাজনৈতিক পরিস্থিতি সম্পর্কে সংস্থা বা দলকে সর্বদা আপডেট রাখতে নিয়মিত বিশ্লেষণী প্রতিবেদন।</p>
+          <ul class="si-points">
+            <li>মাসিক রাজনৈতিক পরিস্থিতি প্রতিবেদন (সংক্ষিপ্ত ও গভীর)</li>
+            <li>জেলাভিত্তিক ভোটার sentiment analysis রিপোর্ট</li>
+            <li>নির্বাচনী পূর্বাভাস ও সম্ভাবনার হালনাগাদ বিশ্লেষণ</li>
+            <li>আসন্ন নির্বাচন নিয়ে সাপ্তাহিক বা পাক্ষিক ব্রিফিং নোট</li>
+            <li>আন্তর্জাতিক মিডিয়া ও সংস্থার জন্য ইংরেজিতে প্রতিবেদন</li>
+          </ul>
+          <div class="si-tags">
+            <span class="si-tag">মাসিক রিপোর্ট</span><span class="si-tag">ব্রিফিং নোট</span><span class="si-tag red">আন্তর্জাতিক মানের</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="cat-cfp-strip">
+        <p class="cfp-text">গবেষণা প্রতিবেদনের খরচ বিষয়বস্তু, পরিধি ও ডেলিভারি সময়ের উপর নির্ভরশীল। <strong>বিস্তারিত জানতে এখনই যোগাযোগ করুন।</strong></p>
+        <button class="cfp-btn" onclick="scrollToForm('গবেষণা, নীতি ও প্রকাশনা')">📬 মূল্য জানতে ইনবক্স করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- PRICING INQUIRY INBOX -->
+  <!-- ══════════════════════════════════════ -->
+  <hr class="divider">
+
+  <div class="section-label">মূল্য ইনবক্স</div>
+  <h2 class="section-title" id="inquiry-anchor">মূল্য জানতে ইনবক্স করুন</h2>
+  <p class="section-sub">সমস্ত প্যাকেজের মূল্য কাস্টম — আসন, নির্বাচনের ধরন ও প্রয়োজন অনুযায়ী নির্ধারিত হয়। ফর্মটি পূরণ করুন, আমরা ২৪ ঘণ্টার মধ্যে সাড়া দেব।</p>
+
+  <div class="pricing-inbox">
+    <div class="inbox-header">
+      <div class="inbox-header-icon">✉️</div>
+      <div>
+        <h3>মূল্য ও প্যাকেজ সম্পর্কে জিজ্ঞাসা করুন</h3>
+        <p>আপনার নির্বাচন, এলাকা ও প্রয়োজন জানান — আমরা কাস্টম কোটেশন সহ সাড়া দেব।</p>
+      </div>
+    </div>
+
+    <div id="inbox-success" class="success-msg">
+      ✅ আপনার অনুরোধ সফলভাবে পাঠানো হয়েছে! আমরা ২৪ ঘণ্টার মধ্যে আপনার সাথে যোগাযোগ করব।
+    </div>
+
+    <div class="inbox-body">
+      <div class="form-group">
+        <label class="form-label">আপনার নাম <span>*</span></label>
+        <input type="text" class="form-input" id="f-name" placeholder="সম্পূর্ণ নাম লিখুন">
+      </div>
+      <div class="form-group">
+        <label class="form-label">মোবাইল নম্বর <span>*</span></label>
+        <input type="tel" class="form-input" id="f-phone" placeholder="+880 1X XX-XXXXXX">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ইমেইল ঠিকানা</label>
+        <input type="email" class="form-input" id="f-email" placeholder="example@domain.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">প্রতিষ্ঠান / দল / নির্বাচনী পদ</label>
+        <input type="text" class="form-input" id="f-org" placeholder="যেমন: চেয়ারম্যান প্রার্থী, বিএনপি ঢাকা-৫">
+      </div>
+      <div class="form-group">
+        <label class="form-label">সেবার ক্যাটাগরি <span>*</span></label>
+        <select class="form-select" id="f-category">
+          <option value="">— কোন ধরনের সেবা প্রয়োজন? —</option>
+          <option>নির্বাচন মনিটরিং ও ইন্টেলিজেন্স</option>
+          <option>ডেটা-চালিত রাজনৈতিক বিশ্লেষণ</option>
+          <option>নির্বাচনী প্রচারণা কৌশল</option>
+          <option>গবেষণা, নীতি ও প্রকাশনা</option>
+          <option>একাধিক সেবা একসাথে প্রয়োজন</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">নির্বাচনের ধরন</label>
+        <select class="form-select" id="f-elec">
+          <option value="">— কোন নির্বাচনের জন্য? —</option>
+          <option>জাতীয় সংসদ নির্বাচন</option>
+          <option>উপজেলা পরিষদ নির্বাচন</option>
+          <option>ইউনিয়ন পরিষদ নির্বাচন</option>
+          <option>পৌরসভা নির্বাচন</option>
+          <option>সিটি কর্পোরেশন নির্বাচন</option>
+          <option>নির্বাচন ছাড়া গবেষণা / পরামর্শ</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">বিস্তারিত চাহিদা / মন্তব্য <span>*</span></label>
+        <textarea class="form-textarea" id="f-message" placeholder="আপনার আসন বা এলাকার নাম, কোন সেবাগুলো প্রয়োজন, নির্বাচনের সম্ভাব্য তারিখ বা অন্য যেকোনো প্রশ্ন এখানে লিখুন…"></textarea>
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <button class="form-submit" onclick="submitForm()">📤 অনুরোধ পাঠান</button>
+      <a href="https://wa.me/8801989666676" class="form-whatsapp" target="_blank">💬 WhatsApp-এ এখনই কথা বলুন</a>
+      <span class="form-note">🔒 আপনার তথ্য সম্পূর্ণ গোপন রাখা হবে</span>
+    </div>
+  </div>
+
+  <!-- ELECTION TABLE -->
+  <hr class="divider">
+
+  <div class="table-section">
+    <div class="section-label">নির্বাচন ক্যালেন্ডার</div>
+    <h2 class="section-title">আসন্ন নির্বাচন — ২০২৬</h2>
+    <p class="section-sub">সকল আসন্ন নির্বাচনের স্ট্যাটাস, আসন সংখ্যা ও Political Insights BD-এর কভারেজ পরিকল্পনা।</p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>নির্বাচনের ধরন</th>
+            <th>মোট আসন / ইউনিট</th>
+            <th>বর্তমান স্ট্যাটাস</th>
+            <th>PIBD কভারেজ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>১</td>
+            <td><span class="election-type">১৩তম জাতীয় সংসদ নির্বাচন</span></td>
+            <td>৩০০ আসন</td>
+            <td><span class="badge badge-done">✔ সম্পন্ন</span></td>
+            <td><span class="coverage-pill"><span>পূর্ণাঙ্গ বিশ্লেষণ</span> সম্পন্ন</span></td>
+          </tr>
+          <tr>
+            <td>২</td>
+            <td><span class="election-type">ঢাকা উত্তর সিটি কর্পোরেশন উপনির্বাচন</span></td>
+            <td>১টি মেয়র পদ</td>
+            <td><span class="badge badge-active">⏳ তারিখ প্রক্রিয়াধীন</span></td>
+            <td><span class="coverage-pill"><span>মনিটরিং পরিকল্পনা</span> প্রস্তুত</span></td>
+          </tr>
+          <tr>
+            <td>৩</td>
+            <td><span class="election-type">উপজেলা পরিষদ নির্বাচন</span></td>
+            <td>৪৯৫ উপজেলা</td>
+            <td><span class="badge badge-pending">📋 সময়সূচি ঘোষণার অপেক্ষায়</span></td>
+            <td><span class="coverage-pill"><span>প্রি-অ্যানালিটিক্স</span> শুরু</span></td>
+          </tr>
+          <tr>
+            <td>৪</td>
+            <td><span class="election-type">ইউনিয়ন পরিষদ নির্বাচন</span></td>
+            <td>৪,৫৭১ ইউনিয়ন</td>
+            <td><span class="badge badge-pending">🔎 কমিশন পর্যালোচনাধীন</span></td>
+            <td><span class="coverage-pill"><span>ওয়ার্ডভিত্তিক ডেটা</span> সংগ্রহ চলমান</span></td>
+          </tr>
+          <tr>
+            <td>৫</td>
+            <td><span class="election-type">পৌরসভা নির্বাচন</span></td>
+            <td>৩৩০ পৌরসভা</td>
+            <td><span class="badge badge-pending">📅 তারিখ নির্ধারণ বাকি</span></td>
+            <td><span class="coverage-pill"><span>প্রোফাইলিং</span> পর্যায়ে</span></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">⚠ সময়সূচি বাংলাদেশ নির্বাচন কমিশনের আনুষ্ঠানিক ঘোষণার উপর নির্ভরশীল। Political Insights BD সকল নির্বাচনের সর্বশেষ তথ্য রিয়েল-টাইমে আপডেট করে থাকে।</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-left">
+      <h2 class="cta-title">আপনার <em>ইলেকশন জয়</em> নিশ্চিত করতে<br>আজই যোগাযোগ করুন</h2>
+      <p class="cta-sub">জাতীয় সংসদ, উপজেলা বা ইউনিয়ন — যেকোনো নির্বাচনে কৌশলগত সহায়তার জন্য আমরা প্রস্তুত।</p>
+    </div>
+    <div class="cta-right">
+      <a href="https://wa.me/8801989666676" class="cta-btn btn-primary">📲 WhatsApp করুন</a>
+      <a href="mailto:info@politicalinsightsbd.com" class="cta-btn btn-secondary">✉️ ইমেইল করুন</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-flag">🇧🇩</div>
+  <p>© 2026 <strong>Political Insights BD</strong> — রাজনৈতিক বিশ্লেষণ ও কৌশলগত গবেষণা</p>
+</footer>
+
+<script>
+  function showPanel(id, btn) {
+    document.querySelectorAll('.cat-panel').forEach(p => p.classList.remove('visible'));
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('visible');
+    btn.classList.add('active');
+    window.scrollTo({ top: btn.closest('.category-tabs').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function scrollToForm(cat) {
+    const sel = document.getElementById('f-category');
+    for (let o of sel.options) {
+      if (o.value === cat || o.text === cat) { sel.value = o.value; break; }
+    }
+    document.getElementById('inquiry-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function submitForm() {
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const cat = document.getElementById('f-category').value;
+    const msg = document.getElementById('f-message').value.trim();
+    if (!name || !phone || !cat || !msg) {
+      alert('অনুগ্রহ করে নাম, মোবাইল নম্বর, সেবার ক্যাটাগরি ও বিস্তারিত চাহিদা পূরণ করুন।');
+      return;
+    }
+    const ok = document.getElementById('inbox-success');
+    ok.style.display = 'block';
+    ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    ['f-name','f-phone','f-email','f-org','f-message'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-category').value = '';
+    document.getElementById('f-elec').value = '';
+  }
+</script>
+
+</body>
+</html>
