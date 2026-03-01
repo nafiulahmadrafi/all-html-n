@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@700;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans Bengali', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #f7fdf9;
+    }
+
+    /* ═══ SECTION ═══ */
+    .mv-section {
+      padding: clamp(48px, 8vw, 88px) clamp(20px, 5vw, 48px);
+      background: #f7fdf9;
+      position: relative;
+      overflow: hidden;
+    }
+    .mv-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(22,101,52,.06) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(185,28,28,.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .mv-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+
+    /* header */
+    .mv-header {
+      text-align: center;
+      margin-bottom: clamp(32px, 5vw, 52px);
+    }
+    .mv-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: #166534;
+      background: rgba(22,101,52,.08);
+      border: 1px solid rgba(22,101,52,.2);
+      padding: 5px 14px; border-radius: 40px;
+      margin-bottom: 14px;
+    }
+    .mv-title {
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 900;
+      font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+      color: #0a2e14;
+      line-height: 1.28;
+    }
+    .mv-divider {
+      width: 56px; height: 3px;
+      background: linear-gradient(90deg, #166534, #b91c1c);
+      border-radius: 3px;
+      margin: 14px auto 0;
+    }
+
+    /* grid */
+    .mv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(16px, 3vw, 28px);
+    }
+
+    .mv-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: clamp(24px, 4vw, 36px);
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 2px 16px rgba(0,0,0,.05), 0 8px 40px rgba(0,0,0,.04);
+      position: relative; overflow: hidden;
+      transition: transform .22s, box-shadow .22s;
+    }
+    .mv-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.1);
+    }
+    .mv-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 16px 16px 0 0;
+    }
+    .mv-card.mission::before { background: linear-gradient(90deg, #0a4d2e, #22c55e); }
+    .mv-card.vision::before  { background: linear-gradient(90deg, #7f1d1d, #ef4444); }
+    .mv-card.value::before   { background: linear-gradient(90deg, #92400e, #f59e0b); }
+
+    .mv-card-watermark {
+      position: absolute; bottom: -12px; right: -12px;
+      font-size: 6rem; opacity: .04;
+      pointer-events: none; user-select: none; line-height: 1;
+    }
+
+    .mv-card-icon {
+      width: 50px; height: 50px;
+      border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+    .mission .mv-card-icon { background: rgba(22,101,52,.1); }
+    .vision  .mv-card-icon { background: rgba(185,28,28,.1); }
+    .value   .mv-card-icon { background: rgba(217,119,6,.1); }
+
+    .mv-card-label {
+      font-size: .63rem; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .mission .mv-card-label { color: #166534; }
+    .vision  .mv-card-label { color: #b91c1c; }
+    .value   .mv-card-label { color: #d97706; }
+
+    .mv-card-title {
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 900;
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      color: #0a2e14;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .mv-card-text {
+      font-size: clamp(.8rem, 1.8vw, .88rem);
+      color: #4b5e4c;
+      line-height: 1.85;
+    }
+
+    .mv-values-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .mv-values-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: clamp(.78rem, 1.8vw, .87rem);
+      color: #4b5e4c;
+      line-height: 1.6;
+    }
+    .mv-values-list .bullet {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      background: rgba(217,119,6,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* mobile */
+    @media (max-width: 768px) {
+      .mv-grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 480px) and (max-width: 768px) {
+      .mv-grid { grid-template-columns: repeat(2, 1fr); }
+      .mv-card.value { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="mv-section">
+  <div class="mv-inner">
+
+    <div class="mv-header">
+      <div class="mv-eyebrow">🎯 আমাদের লক্ষ্য ও দর্শন</div>
+      <h2 class="mv-title">মিশন, ভিশন ও মূল্যবোধ</h2>
+      <div class="mv-divider"></div>
+    </div>
+
+    <div class="mv-grid">
+
+      <div class="mv-card mission">
+        <span class="mv-card-watermark">🎯</span>
+        <div class="mv-card-icon">🎯</div>
+        <div class="mv-card-label">Mission · আমাদের মিশন</div>
+        <h3 class="mv-card-title">নাগরিক সেবায় স্বচ্ছতা ও জবাবদিহিতা</h3>
+        <p class="mv-card-text">প্রতিটি নাগরিকের কাছে সরকারি সেবা সহজলভ্য ও স্বচ্ছভাবে পৌঁছে দেওয়া এবং স্থানীয় প্রশাসনে জবাবদিহিমূলক শাসনব্যবস্থা নিশ্চিত করা।</p>
+      </div>
+
+      <div class="mv-card vision">
+        <span class="mv-card-watermark">🔭</span>
+        <div class="mv-card-icon">🔭</div>
+        <div class="mv-card-label">Vision · আমাদের ভিশন</div>
+        <h3 class="mv-card-title">ন্যায্য, ডিজিটাল ও নাগরিকবান্ধব ময়মনসিংহ</h3>
+        <p class="mv-card-text">২০৩০ সালের মধ্যে ময়মনসিংহ সদরকে বাংলাদেশের সবচেয়ে স্বচ্ছ ও ডিজিটালভাবে সংযুক্ত জেলায় পরিণত করা, যেখানে প্রতিটি নাগরিক তার অধিকার সম্পর্কে ক্ষমতায়িত।</p>
+      </div>
+
+      <div class="mv-card value">
+        <span class="mv-card-watermark">⚖️</span>
+        <div class="mv-card-icon">⚖️</div>
+        <div class="mv-card-label">Values · আমাদের মূল্যবোধ</div>
+        <h3 class="mv-card-title">আমরা যে নীতিতে বিশ্বাস করি</h3>
+        <ul class="mv-values-list">
+          <li><span class="bullet">🔓</span><span><strong>স্বচ্ছতা</strong> — সব তথ্য উন্মুক্তভাবে</span></li>
+          <li><span class="bullet">🤝</span><span><strong>জবাবদিহিতা</strong> — প্রশাসন জনগণের কাছে দায়বদ্ধ</span></li>
+          <li><span class="bullet">⚖️</span><span><strong>ন্যায্যতা</strong> — সকলের সমান অধিকার</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
