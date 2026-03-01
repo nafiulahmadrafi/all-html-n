@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Political Insights BD | Research & Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;700;800&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+============================================================ */
+:root {
+  --red:     #c4303a;
+  --red-dark:#9e1f28;
+  --black:   #0a0a0a;
+  --ink:     #111111;
+  --white:   #ffffff;
+  --cream:   #f7f5f0;
+  --gray:    #666666;
+  --border:  2px solid var(--ink);
+  --header-h: 88px;
+  --hdr-small: 64px;
+  --radius: 0px;
+  --shadow-hover: 8px 8px 0 var(--red);
+  --shadow-hover-b: 8px 8px 0 var(--black);
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+  padding-top:var(--header-h);
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+
+/* ============================================================
+   FIXED TRANSPARENT HEADER
+============================================================ */
+#header {
+  position:fixed;
+  top:0;left:0;right:0;
+  height:var(--header-h);
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  /* transparent over hero */
+  background:transparent;
+  transition:background var(--transition), height var(--transition), box-shadow var(--transition), border-bottom var(--transition);
+  border-bottom:2px solid transparent;
+}
+
+/* once user scrolls: white frosted with border */
+#header.scrolled {
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  height:var(--hdr-small);
+  border-bottom:var(--border);
+  box-shadow:0 4px 0 var(--ink);
+}
+
+.hdr-inner {
+  max-width:1300px;
+  width:90%;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:2rem;
+}
+
+/* Logo */
+.hdr-logo img {
+  height:58px;
+  width:auto;
+  transition:height var(--transition), filter var(--transition);
+  filter:brightness(0) invert(1); /* white on transparent header */
+}
+#header.scrolled .hdr-logo img {
+  height:44px;
+  filter:none; /* natural color on white header */
+}
+
+/* Nav */
+.hdr-nav {display:flex;align-items:center;gap:2rem;}
+.hdr-nav a {
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.9);
+  position:relative;
+  padding-bottom:3px;
+  transition:color var(--transition);
+}
+#header.scrolled .hdr-nav a {color:var(--ink);}
+.hdr-nav a::after {
+  content:'';
+  position:absolute;
+  bottom:0;left:0;
+  width:0;height:2px;
+  background:var(--red);
+  transition:width .25s ease;
+}
+.hdr-nav a:hover::after {width:100%;}
+.hdr-nav a:hover {color:var(--red)!important;}
+
+/* CTA button */
+.hdr-cta {
+  background:var(--red);
+  color:#fff!important;
+  padding:10px 22px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  border:2px solid rgba(255,255,255,0.5);
+  transition:background var(--transition),border-color var(--transition),transform .15s;
+  white-space:nowrap;
+}
+#header.scrolled .hdr-cta {border-color:var(--ink);}
+.hdr-cta:hover {background:var(--red-dark);transform:translateY(-2px);}
+.hdr-cta::after{display:none!important;}
+
+/* Hamburger */
+.hamburger {
+  display:none;
+  flex-direction:column;
+  gap:6px;
+  cursor:pointer;
+  background:none;
+  border:none;
+  padding:4px;
+}
+.hamburger span {
+  display:block;width:28px;height:2px;
+  background:#fff;
+  transition:background var(--transition),transform .3s;
+  border-radius:1px;
+}
+#header.scrolled .hamburger span {background:var(--ink);}
+
+/* Mobile nav */
+.mobile-nav {
+  display:none;
+  position:fixed;
+  top:var(--hdr-small);left:0;right:0;
+  background:#fff;
+  border-bottom:var(--border);
+  padding:1.5rem 5vw 2rem;
+  flex-direction:column;
+  gap:0;
+  z-index:9998;
+  box-shadow:0 8px 0 var(--ink);
+}
+.mobile-nav.open {display:flex;}
+.mobile-nav a {
+  font-size:.9rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--ink);
+  padding:.9rem 0;
+  border-bottom:1px solid #e0e0e0;
+}
+.mobile-nav a:last-child{border:none;}
+
+/* ============================================================
+   TICKER / MARQUEE
+============================================================ */
+.ticker-wrap {
+  background:var(--red);
+  border-bottom:var(--border);
+  overflow:hidden;
+  height:38px;
+  display:flex;
+  align-items:center;
+}
+.ticker-inner {
+  display:flex;
+  white-space:nowrap;
+  animation:ticker 28s linear infinite;
+  gap:0;
+}
+.ticker-inner span {
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#fff;
+  padding:0 40px;
+}
+.ticker-inner span::before {
+  content:'●';
+  margin-right:16px;
+  opacity:.6;
+}
+@keyframes ticker {
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+#hero {
+  background:#fff;
+  border-bottom:var(--border);
+  position:relative;
+  overflow:hidden;
+  min-height:calc(100vh - var(--header-h));
+  display:flex;
+  flex-direction:column;
+}
+
+/* The big editorial top strip */
+.hero-top {
+  border-bottom:var(--border);
+  display:grid;
+  grid-template-columns:1fr 2fr 1fr;
+}
+.hero-column {border-right:var(--border);}
+.hero-column:last-child{border-right:none;}
+
+.hero-label {
+  padding:1rem 1.5rem;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gray);
+  border-bottom:var(--border);
+}
+
+.hero-main {
+  padding:4rem 2rem 3rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.hero-kicker {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:1.5rem;
+}
+.hero-kicker::before {
+  content:'';
+  display:block;
+  width:32px;height:2px;
+  background:var(--red);
+}
+
+.hero-title {
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:clamp(2.8rem,5.5vw,5.5rem);
+  font-weight:900;
+  line-height:1.02;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  margin-bottom:1.5rem;
+}
+.hero-title em {
+  font-style:italic;
+  color:var(--red);
+}
+
+.hero-desc {
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:1.05rem;
+  line-height:1.75;
+  color:var(--gray);
+  max-width:540px;
+  margin-bottom:2.5rem;
+}
+
+.hero-actions {display:flex;gap:1rem;flex-wrap:wrap;}
+
+.btn-solid {
+  background:var(--ink);
+  color:#fff;
+  padding:14px 28px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  border:2px solid var(--ink);
+  cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all var(--transition);
+}
+.btn-solid:hover {background:var(--red);border-color:var(--red);transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink);}
+
+.btn-ghost {
+  background:transparent;
+  color:var(--ink);
+  padding:14px 28px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  border:2px solid var(--ink);
+  cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all var(--transition);
+}
+.btn-ghost:hover {transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink);}
+
+/* Hero right column: stats */
+.hero-stats {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:2rem 1.5rem;
+  gap:0;
+}
+.hero-stat {
+  padding:1.5rem 0;
+  border-bottom:1px solid #e0e0e0;
+}
+.hero-stat:last-child{border-bottom:none;}
+.hero-stat-num {
+  font-family:'Playfair Display',serif;
+  font-size:3rem;
+  font-weight:900;
+  color:var(--ink);
+  line-height:1;
+}
+.hero-stat-num sup {color:var(--red);font-size:1.5rem;}
+.hero-stat-label {
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gray);
+  margin-top:.3rem;
+}
+
+/* Hero left column: feature card */
+.hero-feature {
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:1.5rem;
+  gap:0;
+  background:var(--ink);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+.hero-feature::before {
+  content:'POLITICAL\AINSIGHTS';
+  white-space:pre;
+  position:absolute;
+  top:-1rem;left:-1rem;
+  font-family:'Playfair Display',serif;
+  font-size:5rem;
+  font-weight:900;
+  color:rgba(255,255,255,0.04);
+  line-height:.9;
+  pointer-events:none;
+}
+.hero-feature-tag {
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:.7rem;
+}
+.hero-feature-title {
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:1.1rem;
+  font-weight:900;
+  color:#fff;
+  line-height:1.3;
+  margin-bottom:.6rem;
+}
+.hero-feature-desc {
+  font-size:.78rem;
+  color:rgba(255,255,255,.5);
+  line-height:1.5;
+}
+
+/* ============================================================
+   STATS BAR
+============================================================ */
+.stats-bar {
+  background:var(--ink);
+  border-bottom:var(--border);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+.stats-bar-item {
+  padding:2rem 2.5rem;
+  border-right:1px solid rgba(255,255,255,.1);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+.stats-bar-item:last-child{border-right:none;}
+.stats-bar-num {
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;
+  font-weight:900;
+  color:#fff;
+  line-height:1;
+}
+.stats-bar-num span{color:var(--red);}
+.stats-bar-lbl {
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+  margin-top:.4rem;
+}
+
+/* ============================================================
+   SECTION UTILS
+============================================================ */
+.section {padding:80px 5%;}
+.section-alt {background:#fff;}
+.section-dark {background:var(--ink);}
+
+.s-label {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:.8rem;
+}
+.s-label::before {content:'';width:24px;height:2px;background:var(--red);}
+
+.s-heading {
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:clamp(2rem,4vw,3.5rem);
+  font-weight:900;
+  line-height:1.1;
+  letter-spacing:-.02em;
+  color:var(--ink);
+}
+.s-heading-white {color:#fff;}
+
+.s-sub {
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.95rem;
+  color:var(--gray);
+  line-height:1.7;
+  margin-top:.8rem;
+  max-width:560px;
+}
+.s-sub-white{color:rgba(255,255,255,.55);}
+
+.section-head {margin-bottom:3.5rem;}
+
+/* ============================================================
+   INTELLIGENCE HUB (RESEARCH + BLOG)
+============================================================ */
+.intel-search {
+  width:100%;
+  max-width:700px;
+  padding:16px 22px;
+  border:var(--border);
+  background:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.06em;
+  outline:none;
+  margin:1.5rem 0 3rem;
+  display:block;
+  transition:box-shadow var(--transition);
+}
+.intel-search:focus {box-shadow:6px 6px 0 var(--red);}
+.intel-search::placeholder{color:#aaa;text-transform:uppercase;letter-spacing:.1em;}
+
+.intel-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:0;
+  border-top:var(--border);
+  border-left:var(--border);
+}
+
+.intel-card {
+  border-right:var(--border);
+  border-bottom:var(--border);
+  background:#fff;
+  transition:transform var(--transition), box-shadow var(--transition);
+  position:relative;
+  overflow:hidden;
+}
+.intel-card:hover {
+  transform:translate(-4px,-4px);
+  box-shadow:var(--shadow-hover);
+  z-index:2;
+}
+
+.intel-card-img {
+  height:210px;
+  overflow:hidden;
+  border-bottom:var(--border);
+  background:var(--cream);
+  position:relative;
+}
+.intel-card-img img {
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .5s ease;
+}
+.intel-card:hover .intel-card-img img {transform:scale(1.05);}
+
+.intel-card-type {
+  position:absolute;
+  top:1rem;left:1rem;
+  background:var(--red);
+  color:#fff;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  padding:5px 10px;
+}
+
+.intel-card-body {padding:1.8rem 1.6rem 2rem;}
+.intel-card-date {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--gray);
+  margin-bottom:.6rem;
+}
+.intel-card-title {
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:1.25rem;
+  font-weight:900;
+  line-height:1.3;
+  color:var(--ink);
+  margin-bottom:.8rem;
+}
+.intel-card-excerpt {
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.83rem;
+  color:var(--gray);
+  line-height:1.65;
+  margin-bottom:1.2rem;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.intel-card-link {
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink);
+  border-bottom:2px solid var(--red);
+  padding-bottom:2px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:color var(--transition), gap var(--transition);
+}
+.intel-card:hover .intel-card-link {color:var(--red);gap:12px;}
+
+.intel-no-results {
+  grid-column:1/-1;
+  text-align:center;
+  padding:4rem 2rem;
+  border-right:var(--border);
+  border-bottom:var(--border);
+}
+.intel-no-results h3 {
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  font-weight:900;
+  color:var(--gray);
+}
+
+/* ============================================================
+   SERVICES
+============================================================ */
+.services-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:var(--border);
+  border-left:var(--border);
+  margin-top:3rem;
+}
+.service-cell {
+  border-right:var(--border);
+  border-bottom:var(--border);
+  padding:2.5rem 2rem;
+  background:#fff;
+  position:relative;
+  overflow:hidden;
+  transition:background var(--transition);
+  cursor:default;
+}
+.service-cell::after {
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:4px;
+  background:var(--red);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s ease;
+}
+.service-cell:hover::after {transform:scaleX(1);}
+.service-cell:hover {background:var(--cream);}
+.service-num {
+  font-family:'Playfair Display',serif;
+  font-size:4.5rem;
+  font-weight:900;
+  color:#e8e4dc;
+  line-height:1;
+  margin-bottom:1rem;
+  transition:color var(--transition);
+}
+.service-cell:hover .service-num {color:#d4cec3;}
+.service-icon {
+  width:46px;height:46px;
+  background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;
+  margin-bottom:1.2rem;
+}
+.service-title {
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:1.1rem;
+  font-weight:900;
+  margin-bottom:1rem;
+}
+.service-list {list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.service-list li {
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.82rem;
+  color:var(--gray);
+  padding-left:1.1rem;
+  position:relative;
+  line-height:1.5;
+}
+.service-list li::before {content:'→';position:absolute;left:0;color:var(--red);font-weight:900;}
+
+/* ============================================================
+   ELECTION RESULTS
+============================================================ */
+.election-layout {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border:var(--border);
+  background:var(--ink);
+}
+.election-info {
+  padding:3.5rem;
+  border-right:1px solid rgba(255,255,255,.1);
+}
+.election-results {padding:3.5rem;}
+
+.result-card {
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  padding:1.4rem;
+  border:1px solid rgba(255,255,255,.08);
+  margin-bottom:1rem;
+  position:relative;
+  overflow:hidden;
+  transition:border-color var(--transition);
+}
+.result-card::before {
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:4px;
+}
+.result-card.winner::before {background:#d4a017;}
+.result-card.opposition::before {background:var(--red);}
+.result-card.others::before {background:rgba(255,255,255,.2);}
+.result-card:hover {border-color:rgba(255,255,255,.2);}
+
+.result-seats {
+  font-family:'Playfair Display',serif;
+  font-size:3rem;
+  font-weight:900;
+  line-height:1;
+  color:#fff;
+  min-width:90px;
+}
+.result-seats.gold {color:#d4a017;}
+.result-seats.crimson {color:#ff6b6b;}
+.result-party {font-size:.92rem;font-weight:800;color:#fff;margin-bottom:.3rem;}
+.result-status {font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:.08em;}
+
+.bar-wrap {margin-top:2rem;}
+.bar-label {font-size:9px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.5rem;}
+.bar-track {height:8px;background:rgba(255,255,255,.06);display:flex;border-radius:0;overflow:hidden;}
+.bar-fill-1 {background:#d4a017;width:70.7%;}
+.bar-fill-2 {background:var(--red);width:25.7%;}
+.bar-fill-3 {background:rgba(255,255,255,.15);width:3.6%;}
+.bar-legend {display:flex;gap:1.5rem;margin-top:.7rem;}
+.bar-legend-item {display:flex;align-items:center;gap:6px;font-size:10px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:.06em;}
+.bar-legend-dot {width:8px;height:8px;}
+.status-badge {
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,53,128,.25);
+  border:1px solid rgba(0,53,128,.5);
+  color:#7eb3ff;
+  font-size:9px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;
+  padding:.45rem 1rem;
+  margin-bottom:1.5rem;
+}
+.status-badge::before {
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#7eb3ff;
+  animation:blink 1.5s ease infinite;
+}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+.about-layout {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border-top:var(--border);
+  border-left:var(--border);
+}
+.about-col {
+  border-right:var(--border);
+  border-bottom:var(--border);
+  padding:3rem;
+}
+.about-quote {
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:1.15rem;
+  font-style:italic;
+  line-height:1.7;
+  border-left:4px solid var(--red);
+  padding:1.2rem 1.5rem;
+  background:var(--cream);
+  margin:1.5rem 0;
+  color:var(--ink);
+}
+.about-para {
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.92rem;
+  color:var(--gray);
+  line-height:1.8;
+  margin-bottom:1.2rem;
+}
+.check-list {list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-top:.8rem;}
+.check-list li {
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.87rem;font-weight:700;color:var(--ink);
+}
+.check-list li::before {
+  content:'✓';
+  flex-shrink:0;
+  width:22px;height:22px;
+  background:var(--red);
+  color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:900;
+}
+.research-card {
+  border:var(--border);
+  padding:1.3rem;
+  background:#fff;
+  margin-bottom:1rem;
+  transition:transform var(--transition),box-shadow var(--transition);
+}
+.research-card:hover {transform:translate(-4px,-4px);box-shadow:var(--shadow-hover-b);}
+.research-card h4 {
+  font-size:.87rem;font-weight:900;color:var(--ink);margin-bottom:.4rem;
+  display:flex;align-items:center;gap:8px;
+}
+.research-card h4::before {content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;}
+.research-card p {font-family:'Noto Serif Bengali',sans-serif;font-size:.78rem;color:var(--gray);line-height:1.5;}
+
+/* ============================================================
+   BOOKS
+============================================================ */
+.books-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:0;
+  border-top:var(--border);
+  border-left:var(--border);
+  margin-top:3rem;
+}
+.book-card {
+  border-right:var(--border);
+  border-bottom:var(--border);
+  background:#fff;
+  overflow:hidden;
+  transition:transform var(--transition),box-shadow var(--transition);
+}
+.book-card:hover {transform:translate(-4px,-4px);box-shadow:var(--shadow-hover);z-index:2;position:relative;}
+.book-cover {
+  aspect-ratio:2/3;
+  overflow:hidden;
+  border-bottom:var(--border);
+  background:var(--cream);
+}
+.book-cover img {width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.book-card:hover .book-cover img {transform:scale(1.04);}
+.book-info {padding:1.5rem 1.3rem 1.8rem;}
+.book-title {
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:1.05rem;font-weight:900;
+  color:var(--ink);margin-bottom:.5rem;
+}
+.book-desc {font-size:.8rem;color:var(--gray);line-height:1.55;}
+.view-more-wrap {text-align:center;margin-top:3rem;}
+
+/* ============================================================
+   FAQ
+============================================================ */
+.faq-list {border-top:var(--border);}
+.faq-item {border-bottom:var(--border);}
+.faq-q {
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:1.4rem 0;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:.97rem;font-weight:800;color:var(--ink);
+  transition:color var(--transition);
+}
+.faq-q:hover {color:var(--red);}
+.faq-icon {
+  width:30px;height:30px;
+  border:2px solid var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;font-weight:900;color:var(--ink);
+  flex-shrink:0;
+  transition:transform .3s,background var(--transition),color var(--transition);
+}
+.faq-item.open .faq-icon {transform:rotate(45deg);background:var(--red);border-color:var(--red);color:#fff;}
+.faq-answer {
+  max-height:0;overflow:hidden;
+  transition:max-height .4s ease,padding-bottom .3s;
+}
+.faq-item.open .faq-answer {max-height:200px;padding-bottom:1.2rem;}
+.faq-answer p {
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:.88rem;color:var(--gray);line-height:1.75;
+}
+
+/* ============================================================
+   CTA BAND
+============================================================ */
+.cta-band {
+  background:var(--red);
+  border-top:var(--border);
+  border-bottom:var(--border);
+  padding:5rem 5%;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.cta-band::before {
+  content:'INSIGHTS';
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Playfair Display',serif;
+  font-size:18rem;font-weight:900;
+  color:rgba(0,0,0,.06);
+  white-space:nowrap;
+  pointer-events:none;
+}
+.cta-title {
+  font-family:'Playfair Display','Noto Serif Bengali',serif;
+  font-size:clamp(2rem,4vw,3.5rem);
+  font-weight:900;
+  color:#fff;
+  line-height:1.1;
+  margin-bottom:1rem;
+  position:relative;
+}
+.cta-desc {
+  font-family:'Noto Serif Bengali',sans-serif;
+  font-size:1rem;
+  color:rgba(255,255,255,.8);
+  margin-bottom:2rem;
+  position:relative;
+}
+.btn-white-solid {
+  background:#fff;
+  color:var(--red);
+  padding:16px 36px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  border:2px solid #fff;
+  display:inline-flex;align-items:center;gap:8px;
+  position:relative;
+  transition:all var(--transition);
+}
+.btn-white-solid:hover {background:transparent;color:#fff;transform:translate(-3px,-3px);box-shadow:6px 6px 0 rgba(0,0,0,.3);}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer {
+  background:var(--ink);
+  border-top:var(--border);
+}
+.footer-top {
+  max-width:1300px;
+  width:90%;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.footer-col {
+  padding:3rem 2rem;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+.footer-col:last-child{border-right:none;}
+.footer-logo {height:44px;width:auto;filter:brightness(0) invert(1);margin-bottom:1.2rem;}
+.footer-about {font-family:'Noto Serif Bengali',sans-serif;font-size:.83rem;color:rgba(255,255,255,.45);line-height:1.7;}
+.footer-heading {font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.2rem;}
+.footer-links {list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+.footer-links a {font-size:.83rem;color:rgba(255,255,255,.5);transition:color var(--transition);}
+.footer-links a:hover {color:#fff;}
+.footer-bottom {
+  max-width:1300px;width:90%;margin:0 auto;
+  padding:1.5rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:.75rem;color:rgba(255,255,255,.25);
+  flex-wrap:wrap;gap:.5rem;
+}
+.footer-bottom a {color:var(--red);}
+
+/* Scroll top */
+.scroll-top-btn {
+  position:fixed;
+  bottom:2rem;right:2rem;
+  width:46px;height:46px;
+  background:var(--ink);
+  border:2px solid var(--ink);
+  color:#fff;
+  font-size:1.1rem;font-weight:900;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:1000;
+  opacity:0;transform:translateY(12px);
+  transition:all var(--transition);
+  text-decoration:none;
+}
+.scroll-top-btn.visible {opacity:1;transform:translateY(0);}
+.scroll-top-btn:hover {background:var(--red);border-color:var(--red);transform:translateY(-3px)!important;}
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+[data-r] {
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+[data-r].in {opacity:1;transform:none;}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media(max-width:1100px){
+  .hero-top {grid-template-columns:1fr 1fr;}
+  .hero-column:first-child{display:none;}
+  .stats-bar {grid-template-columns:repeat(2,1fr);}
+  .stats-bar-item:nth-child(2){border-right:none;}
+  .stats-bar-item:nth-child(3){border-top:1px solid rgba(255,255,255,.1);}
+  .services-grid {grid-template-columns:repeat(2,1fr);}
+  .about-layout {grid-template-columns:1fr;}
+  .election-layout {grid-template-columns:1fr;}
+  .election-info {border-right:none;border-bottom:1px solid rgba(255,255,255,.1);}
+  .footer-top {grid-template-columns:1fr 1fr;}
+}
+
+@media(max-width:768px){
+  :root{--header-h:68px;--hdr-small:60px;}
+  body{padding-top:var(--header-h);}
+  .hdr-nav {display:none;}
+  .hdr-cta {display:none;}
+  .hamburger {display:flex;}
+  .hero-top {grid-template-columns:1fr;}
+  .hero-stats {display:none;}
+  .stats-bar {grid-template-columns:1fr 1fr;}
+  .services-grid {grid-template-columns:1fr;}
+  .intel-grid {grid-template-columns:1fr;}
+  .books-grid {grid-template-columns:repeat(2,1fr);}
+  .footer-top {grid-template-columns:1fr;}
+  .footer-col{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);}
+  .footer-col:last-child{border-bottom:none;}
+  .footer-bottom {flex-direction:column;text-align:center;}
+  .cta-band::before{font-size:6rem;}
+}
+
+@media(max-width:480px){
+  .hero-actions{flex-direction:column;}
+  .hero-actions a{text-align:center;justify-content:center;}
+  .stats-bar{grid-template-columns:1fr;}
+  .stats-bar-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);}
+  .books-grid{grid-template-columns:1fr;}
+  .election-layout{border:none;border-top:var(--border);}
+  .election-info,.election-results{padding:2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     HEADER — transparent → scrolled white
+══════════════════════════════════════════════════ -->
+<header id="header">
+  <div class="hdr-inner">
+    <a href="https://politicalinsightsbd.com/" class="hdr-logo">
+      <img src="https://politicalinsightsbd.com/wp-content/uploads/2026/02/WhatsApp_Image_2025-12-21_at_07.18.21-removebg-preview-1.webp" alt="Political Insights BD">
+    </a>
+    <nav class="hdr-nav">
+      <a href="#hub">Research</a>
+      <a href="#services">Services</a>
+      <a href="#election">Election 2026</a>
+      <a href="#books">Books</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="https://wa.me/8801917575168" target="_blank" class="hdr-nav hdr-cta">Get in Touch</a>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#hub">Research & Reports</a>
+  <a href="#services">Services</a>
+  <a href="#election">Election 2026</a>
+  <a href="#books">Books</a>
+  <a href="#about">About</a>
+  <a href="#faq">FAQ</a>
+  <a href="https://wa.me/8801917575168" target="_blank" style="color:var(--red)!important;">📲 WhatsApp যোগাযোগ</a>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     TICKER
+══════════════════════════════════════════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>Election 2026 Analysis</span>
+    <span>BNP Alliance: 212 Seats</span>
+    <span>Constitutional Reform Watch</span>
+    <span>ICT Policy Deep Dive</span>
+    <span>Transitional Justice Report</span>
+    <span>Voter Sentiment Field Data</span>
+    <span>Political Insights BD</span>
+    <!-- duplicate for seamless loop -->
+    <span>Election 2026 Analysis</span>
+    <span>BNP Alliance: 212 Seats</span>
+    <span>Constitutional Reform Watch</span>
+    <span>ICT Policy Deep Dive</span>
+    <span>Transitional Justice Report</span>
+    <span>Voter Sentiment Field Data</span>
+    <span>Political Insights BD</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-top">
+    <div class="hero-column hero-feature">
+      <div class="hero-feature-tag">● Live Intelligence</div>
+      <div class="hero-feature-title">Election 2026 Final Results Now Available</div>
+      <div class="hero-feature-desc">Full seat distribution, alliance breakdown & transition timeline.</div>
+    </div>
+    <div class="hero-column hero-main">
+      <div class="hero-kicker">রাজনৈতিক বিশ্লেষক ও নীতি পরামর্শদাতা</div>
+      <h1 class="hero-title">
+        Data-Driven<br>
+        <em>Political</em><br>
+        Analysis
+      </h1>
+      <p class="hero-desc">বাংলাদেশের রাজনৈতিক প্রেক্ষাপটে আধুনিক পদ্ধতিতে নীতি বিশ্লেষণ এবং কৌশলগত পরামর্শ। Evidence-based insights-এর মাধ্যমে কার্যকর কৌশল প্রণয়ন।</p>
+      <div class="hero-actions">
+        <a href="#hub" class="btn-solid">Explore Research ↓</a>
+        <a href="https://wa.me/8801917575168" target="_blank" class="btn-ghost">Contact Us →</a>
+      </div>
+    </div>
+    <div class="hero-column hero-stats">
+      <div class="hero-label">Performance Metrics</div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">৮০<sup>+</sup></div>
+          <div class="hero-stat-label">গভীর বিশ্লেষণ</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">২<sup>+</sup></div>
+          <div class="hero-stat-label">বছরের অভিজ্ঞতা</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">১০<sup>+</sup></div>
+          <div class="hero-stat-label">সফল প্রজেক্ট</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     STATS BAR
+══════════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="stats-bar-item">
+    <div class="stats-bar-num">৮০<span>+</span></div>
+    <div class="stats-bar-lbl">Deep Analysis Reports</div>
+  </div>
+  <div class="stats-bar-item">
+    <div class="stats-bar-num">২<span>+</span></div>
+    <div class="stats-bar-lbl">বছরের অভিজ্ঞতা</div>
+  </div>
+  <div class="stats-bar-item">
+    <div class="stats-bar-num">১০<span>+</span></div>
+    <div class="stats-bar-lbl">Successful Projects</div>
+  </div>
+  <div class="stats-bar-item">
+    <div class="stats-bar-num">300</div>
+    <div class="stats-bar-lbl">Seats Tracked 2026</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     INTELLIGENCE HUB
+══════════════════════════════════════════════════ -->
+<section id="hub" class="section section-alt">
+  <div style="max-width:1300px;margin:0 auto;">
+    <div class="section-head" data-r>
+      <div class="s-label">Intelligence Hub</div>
+      <h2 class="s-heading">Research & <span style="color:var(--red);">Strategic</span> Reports</h2>
+      <p class="s-sub">বাংলাদেশের রাজনৈতিক পরিবর্তন নিয়ে গভীর বিশ্লেষণ, নীতি গবেষণা এবং মাঠ পর্যায়ের তথ্য।</p>
+    </div>
+
+    <input
+      type="search"
+      id="intel-search"
+      class="intel-search"
+      placeholder="Search Research, Policy, or Reports..."
+      oninput="filterIntel(this.value)"
+    >
+
+    <div id="intel-grid" class="intel-grid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════════════ -->
+<section id="services" class="section">
+  <div style="max-width:1300px;margin:0 auto;">
+    <div class="section-head" data-r>
+      <div class="s-label">Our Services</div>
+      <h2 class="s-heading">আমাদের প্রধান <span style="color:var(--red);">সেবাসমূহ</span></h2>
+    </div>
+    <div class="services-grid" data-r>
+      <div class="service-cell">
+        <div class="service-num">01</div>
+        <div class="service-icon">📋</div>
+        <h3 class="service-title">নীতি বিশ্লেষণ ও গবেষণা</h3>
+        <ul class="service-list">
+          <li>ডাটা-ড্রিভেন সুপারিশমালা</li>
+          <li>কার্যকারিতা মূল্যায়ন</li>
+          <li>তুলনামূলক নীতি বিশ্লেষণ</li>
+        </ul>
+      </div>
+      <div class="service-cell">
+        <div class="service-num">02</div>
+        <div class="service-icon">🎯</div>
+        <h3 class="service-title">কৌশলগত পরামর্শ</h3>
+        <ul class="service-list">
+          <li>ক্যাম্পেইন মেসেজিং</li>
+          <li>সংকট ব্যবস্থাপনা</li>
+          <li>ভোটার গবেষণা ও বিশ্লেষণ</li>
+        </ul>
+      </div>
+      <div class="service-cell">
+        <div class="service-num">03</div>
+        <div class="service-icon">⚖️</div>
+        <h3 class="service-title">সুশাসন ও উন্নয়ন</h3>
+        <ul class="service-list">
+          <li>স্বচ্ছতা কাঠামো তৈরি</li>
+          <li>প্রাতিষ্ঠানিক উন্নয়ন</li>
+          <li>সংস্কার পরিকল্পনা</li>
+        </ul>
+      </div>
+      <div class="service-cell">
+        <div class="service-num">04</div>
+        <div class="service-icon">🗳️</div>
+        <h3 class="service-title">Election Strategy</h3>
+        <ul class="service-list">
+          <li>নির্বাচনী কৌশল</li>
+          <li>মিডিয়া পরিকল্পনা</li>
+          <li>তৃণমূল সংগঠন</li>
+        </ul>
+      </div>
+      <div class="service-cell">
+        <div class="service-num">05</div>
+        <div class="service-icon">📡</div>
+        <h3 class="service-title">Media & Communication</h3>
+        <ul class="service-list">
+          <li>Digital narrative strategy</li>
+          <li>Crisis communications</li>
+          <li>Stakeholder engagement</li>
+        </ul>
+      </div>
+      <div class="service-cell">
+        <div class="service-num">06</div>
+        <div class="service-icon">🔭</div>
+        <h3 class="service-title">Transitional Justice</h3>
+        <ul class="service-list">
+          <li>মানবাধিকার বিশ্লেষণ</li>
+          <li>আন্তর্জাতিক ট্রাইব্যুনাল</li>
+          <li>সত্য ও পুনর্মিলন</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     ELECTION RESULTS
+══════════════════════════════════════════════════ -->
+<section id="election" class="section section-alt">
+  <div style="max-width:1300px;margin:0 auto;">
+    <div class="section-head" data-r>
+      <div class="s-label">Election Intelligence</div>
+      <h2 class="s-heading">Result Intelligence <span style="color:var(--red);">2026</span></h2>
+    </div>
+    <div class="election-layout" data-r>
+      <div class="election-info">
+        <div class="status-badge">Official Final Results — February 2026</div>
+        <p style="font-family:'Noto Serif Bengali',sans-serif;font-size:.92rem;color:rgba(255,255,255,.6);line-height:1.75;margin-bottom:2rem;">বাংলাদেশের ১৩তম সংসদীয় নির্বাচনের চূড়ান্ত ফলাফল ও আসন বণ্টনের বিশ্লেষণ — Political Insights Intelligence Unit কর্তৃক।</p>
+        <div class="bar-wrap">
+          <div class="bar-label">Total 300 Seats</div>
+          <div class="bar-track">
+            <div class="bar-fill-1"></div>
+            <div class="bar-fill-2"></div>
+            <div class="bar-fill-3"></div>
+          </div>
+          <div class="bar-legend">
+            <div class="bar-legend-item"><div class="bar-legend-dot" style="background:#d4a017;"></div>BNP+ 212</div>
+            <div class="bar-legend-item"><div class="bar-legend-dot" style="background:var(--red);"></div>Jamaat+ 77</div>
+            <div class="bar-legend-item"><div class="bar-legend-dot" style="background:rgba(255,255,255,.2);"></div>Others 10</div>
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;font-size:.7rem;color:rgba(255,255,255,.2);letter-spacing:.06em;">*Data compiled by Political Insights Intelligence Unit. Last updated February 2026.</p>
+      </div>
+      <div class="election-results">
+        <div class="result-card winner">
+          <div class="result-seats gold">212</div>
+          <div>
+            <div class="result-party">BNP & Allies</div>
+            <div class="result-status">🏆 Parliamentary Majority — Winner</div>
+          </div>
+        </div>
+        <div class="result-card opposition">
+          <div class="result-seats crimson">77</div>
+          <div>
+            <div class="result-party">Jamaat & Allies</div>
+            <div class="result-status">🔴 Main Opposition</div>
+          </div>
+        </div>
+        <div class="result-card others">
+          <div class="result-seats">11</div>
+          <div>
+            <div class="result-party">Others & Independents</div>
+            <div class="result-status">⚪ Minority</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════════ -->
+<section id="about" class="section">
+  <div style="max-width:1300px;margin:0 auto;">
+    <div class="section-head" data-r>
+      <div class="s-label">আমার সম্পর্কে</div>
+      <h2 class="s-heading">Analyst & <span style="color:var(--red);">Strategist</span></h2>
+    </div>
+    <div class="about-layout" data-r>
+      <div class="about-col">
+        <div class="s-label">Biography</div>
+        <p class="about-para">আমি একজন রাজনৈতিক বিশ্লেষক এবং নীতি পরামর্শদাতা যিনি বাংলাদেশের সমসাময়িক রাজনৈতিক পরিবর্তন এবং সংস্কার প্রক্রিয়া নিয়ে গভীর বিশ্লেষণে নিয়োজিত।</p>
+        <blockquote class="about-quote">"আমার লক্ষ্য হলো evidence-based analysis এবং strategic thinking-এর মাধ্যমে বাংলাদেশের রাজনৈতিক সংস্কার এবং গণতান্ত্রিক transition প্রক্রিয়াকে আরো কার্যকর করতে সহায়তা করা।"</blockquote>
+        <div class="s-label" style="margin-top:1.5rem;">Methodology</div>
+        <ul class="check-list" style="margin-top:.8rem;">
+          <li>Real-time Political Tracking</li>
+          <li>Stakeholder Analysis</li>
+          <li>Scenario Planning</li>
+          <li>Historical Contextualization</li>
+        </ul>
+      </div>
+      <div class="about-col">
+        <div class="s-label">Research Focus Areas</div>
+        <div style="margin-top:1rem;">
+          <div class="research-card">
+            <h4>রাজনৈতিক দল বিশ্লেষণ</h4>
+            <p>BNP-এর কৌশল, জামায়াতে ইসলামীর ভবিষ্যৎ অবস্থান, জোটের সমীকরণ এবং নতুন রাজনৈতিক শক্তির উত্থান বিশ্লেষণ।</p>
+          </div>
+          <div class="research-card">
+            <h4>Transitional Justice</h4>
+            <p>অতীতের মানবাধিকার লঙ্ঘন তদন্ত, আন্তর্জাতিক অপরাধ ট্রাইব্যুনাল বিশ্লেষণ এবং সত্য ও পুনর্মিলন প্রক্রিয়া।</p>
+          </div>
+          <div class="research-card">
+            <h4>Interim Governance</h4>
+            <p>অন্তর্বর্তীকালীন সরকারের কার্যকারিতা, রোডম্যাপ, নির্বাচন পরিকল্পনা এবং ক্ষমতা হস্তান্তর প্রক্রিয়া মূল্যায়ন।</p>
+          </div>
+          <div class="research-card">
+            <h4>Election Strategy</h4>
+            <p>নির্বাচন পূর্ব রাজনৈতিক প্রস্তুতি ও পুনর্বিন্যাস। Voter sentiment এবং demographic analysis।</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem;">
+          <span style="border:var(--border);background:#fff;padding:.4rem 1rem;font-size:.72rem;font-weight:900;display:inline-flex;align-items:center;gap:6px;">রাজনৈতিক পুনর্বিন্যাস<span style="color:var(--red);">● Active</span></span>
+          <span style="border:var(--border);background:#fff;padding:.4rem 1rem;font-size:.72rem;font-weight:900;display:inline-flex;align-items:center;gap:6px;">নির্বাচন প্রস্তুতি<span style="color:var(--red);">● Active</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     BOOKS
+══════════════════════════════════════════════════ -->
+<section id="books" class="section section-alt">
+  <div style="max-width:1300px;margin:0 auto;">
+    <div class="section-head" data-r>
+      <div class="s-label">Publication</div>
+      <h2 class="s-heading">My <span style="color:var(--red);">Books</span> List</h2>
+      <p class="s-sub" style="font-family:'Noto Serif Bengali',sans-serif;">আমার প্রকাশিত গ্রন্থ ও গবেষণা তালিকা</p>
+    </div>
+    <div id="books-grid" class="books-grid"></div>
+    <div class="view-more-wrap" id="view-more-wrap" style="display:none;">
+      <button onclick="showAllBooks()" class="btn-ghost" style="margin-top:.5rem;">View All Books →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     FAQ
+══════════════════════════════════════════════════ -->
+<section id="faq" class="section">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="section-head" data-r>
+      <div class="s-label">Support</div>
+      <h2 class="s-heading">সাধারণ <span style="color:var(--red);">জিজ্ঞাসাবলী</span></h2>
+      <p class="s-sub">আমাদের সেবা সম্পর্কে আপনার মনে থাকা প্রশ্নগুলোর উত্তর এখানে পাবেন।</p>
+    </div>
+    <div class="faq-list" data-r>
+      <div class="faq-item open">
+        <button class="faq-q">পলিটিক্যাল ইনসাইটস বিডি কী কী সেবা প্রদান করে?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><p>আমরা প্রচারণা কৌশল, ভোটার গবেষণা, মিডিয়া ব্যবস্থাপনা, সংকট ব্যবস্থাপনা এবং তৃণমূল সংগঠন সহ পূর্ণাঙ্গ রাজনৈতিক পরামর্শ সেবা প্রদান করি। আমাদের প্রতিটি সেবা বাংলাদেশের রাজনৈতিক প্রেক্ষাপট অনুযায়ী তৈরি।</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">তথ্যের গোপনীয়তা আপনারা কীভাবে নিশ্চিত করেন?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><p>আমরা অত্যন্ত কঠোর গোপনীয়তা প্রোটোকল মেনে চলি। এনক্রিপ্টেড ডেটা স্টোরেজ এবং নিরাপদ যোগাযোগ চ্যানেল ব্যবহারের পাশাপাশি আমাদের প্রতিটি সদস্য আইনি গোপনীয়তা চুক্তিতে বাধ্য থাকেন।</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">আপনারা কি সব দলের প্রার্থীদের সাথেই কাজ করেন?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><p>হ্যাঁ, আমরা একটি নিরপেক্ষ পরামর্শক প্রতিষ্ঠান। তবে স্বার্থের দ্বন্দ্ব এড়াতে আমরা একই নির্বাচনী এলাকায় একাধিক বিরোধী প্রার্থীর সাথে কাজ করি না।</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How do I commission a research report?<span class="faq-icon">+</span></button>
+        <div class="faq-answer"><p>You can reach us via WhatsApp or the contact page to discuss your research needs. We offer custom policy papers, district-level analysis, and strategic briefings tailored to your specific requirements.</p></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;" data-r>
+      <p style="font-family:'Noto Serif Bengali',sans-serif;font-size:.9rem;color:var(--gray);margin-bottom:1.5rem;">আরও কিছু জানার আছে? আমাদের প্রতিনিধি আপনার প্রশ্নের উত্তর দিতে প্রস্তুত।</p>
+      <a href="https://wa.me/8801917575168" target="_blank" class="btn-solid">সরাসরি কথা বলুন →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CTA BAND
+══════════════════════════════════════════════════ -->
+<section class="cta-band" data-r>
+  <h2 class="cta-title">আজই আমাদের সাথে<br>যোগাযোগ করুন</h2>
+  <p class="cta-desc">Data-driven insights-এর মাধ্যমে আপনার রাজনৈতিক কৌশল প্রণয়নে সহায়তা করি।</p>
+  <a href="https://wa.me/8801917575168" target="_blank" class="btn-white-solid">WhatsApp-এ যোগাযোগ ↗</a>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <img src="https://politicalinsightsbd.com/wp-content/uploads/2026/02/WhatsApp_Image_2025-12-21_at_07.18.21-removebg-preview-1.webp" class="footer-logo" alt="Political Insights BD">
+      <p class="footer-about">বাংলাদেশের রাজনৈতিক প্রেক্ষাপটে আধুনিক পদ্ধতিতে নীতি বিশ্লেষণ এবং কৌশলগত পরামর্শ প্রদানকারী একটি বিশেষায়িত গবেষণা প্রতিষ্ঠান।</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">নীতি বিশ্লেষণ</a></li>
+        <li><a href="#services">কৌশলগত পরামর্শ</a></li>
+        <li><a href="#services">সুশাসন উন্নয়ন</a></li>
+        <li><a href="#services">Election Strategy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Research</div>
+      <ul class="footer-links">
+        <li><a href="https://politicalinsightsbd.com/research/">Research Hub</a></li>
+        <li><a href="https://politicalinsightsbd.com/policy/">Policy Analysis</a></li>
+        <li><a href="https://politicalinsightsbd.com/all-insights/">All Insights</a></li>
+        <li><a href="#election">Election 2026</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Contact</div>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/8801917575168" target="_blank">WhatsApp</a></li>
+        <li><a href="https://politicalinsightsbd.com/contact/">Contact Page</a></li>
+        <li><a href="https://politicalinsightsbd.com/about/">About</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 <a href="https://politicalinsightsbd.com">Political Insights BD</a>. All rights reserved.</span>
+    <span>Designed for precision. Built for impact.</span>
+  </div>
+</footer>
+
+<a href="#" class="scroll-top-btn" id="scrollTop">↑</a>
+
+<!-- ══════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════ -->
+<script>
+/* ---------- DATA ---------- */
+const intelligenceData = [
+  {
+    type:"REPORT",
+    title:"Election 2026",
+    date:"January 16, 2026",
+    excerpt:"২০২৬ সালের নির্বাচন: ক্ষমতার শূন্যতা এবং একটি একতরফা নির্বাচনী মাঠের কূটাভাস গবেষণা অন্তর্দৃষ্টি ও বিশ্লেষণ।",
+    link:"https://politicalinsightsbd.com/election-2026/",
+    img:"https://politicalinsightsbd.com/wp-content/uploads/2025/11/হঠাৎ-কেন-বিএনপি-1-150x150.webp"
+  },
+  {
+    type:"POLICY",
+    title:"আইসিটি বিভাগে ঘটে যাওয়া কিছু কাজ",
+    date:"January 16, 2026",
+    excerpt:"ডিজিটাল সুরক্ষা আইন এবং ভবিষ্যৎ আন্দোলনে তার প্রভাব নিয়ে গভীর তদন্ত।",
+    link:"https://politicalinsightsbd.com/%e0%a6%86%e0%a6%87%e0%a6%b8%e0%a6%bf%e0%a6%9f%e0%a6%bf-%e0%a6%ac%e0%a6%bf%e0%a6%ad%e0%a6%be%e0%a6%97%e0%a7%87-%e0%a6%98%e0%a6%9f%e0%a7%87-%e0%a6%af%e0%a6%be%e0%a6%93%e0%a6%af%e0%a6%bc%e0%a6%be/",
+    img:"https://politicalinsightsbd.com/wp-content/uploads/2026/01/WhatsApp-Image-2026-01-16-at-22.29.53-e1768582120382-150x150.jpeg"
+  },
+  {
+    type:"ANALYSIS",
+    title:"ভেনেজুয়েলা যুদ্ধ: তেল নয়, ডলারকে বাঁচানোর লড়াই",
+    date:"January 10, 2026",
+    excerpt:"ভেনেজুয়েলা যুদ্ধ আসলে তেল নিয়ে নয়, বরং এটা ডলারকে বাঁচানোর যুদ্ধ — একটি গভীর অর্থনৈতিক বিশ্লেষণ।",
+    link:"https://politicalinsightsbd.com/%e0%a6%ad%e0%a7%87%e0%a6%a8%e0%a7%87%e0%a6%9c%e0%a7%81%e0%a6%af%e0%a6%bc%e0%a7%87%e0%a6%b2%e0%a6%be-%e0%a6%af%e0%a7%81%e0%a6%a6%e0%a7%8d%e0%a6%a7-%e0%a6%a4%e0%a7%87%e0%a6%b2-%e0%a6%a8%e0%a6%af/",
+    img:"https://politicalinsightsbd.com/wp-content/uploads/2026/01/image-150x150.png"
+  },
+  {
+    type:"ANALYSIS",
+    title:"এনসিপি–জামাত জোট: রাজনৈতিক আত্মহত্যার পথে",
+    date:"December 27, 2025",
+    excerpt:"বাংলাদেশের রাজনীতিতে window of opportunity — জুলাই ২০২৪-এর গণঅভ্যুত্থান পরবর্তী বিশ্লেষণ।",
+    link:"https://politicalinsightsbd.com/%e0%a6%8f%e0%a6%a8%e0%a6%b8%e0%a6%bf%e0%a6%aa%e0%a6%bf-%e0%a6%9c%e0%a6%be%e0%a6%ae%e0%a6%be%e0%a6%a4-%e0%a6%9c%e0%a7%8b%e0%a6%9f-%e0%a6%8f%e0%a6%95%e0%a6%9f%e0%a6%bf-%e0%a6%b0%e0%a6%be/",
+    img:"https://politicalinsightsbd.com/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-27-at-17.05.32-150x150.jpeg"
+  },
+  {
+    type:"RESEARCH",
+    title:"Digital Manipulation and Modern Journalism",
+    date:"December 22, 2025",
+    excerpt:"ডিজিটাল ম্যানিপুলেশন ও মানসিক যুদ্ধের বৈশ্বিক প্রভাব ও সামাজিক ক্ষয়ক্ষতি নিয়ে বিস্তারিত বিশ্লেষণ।",
+    link:"https://politicalinsightsbd.com/digital-manipulation-and-modern-journalism-by-ahmad-rafi/",
+    img:"https://politicalinsightsbd.com/wp-content/uploads/2025/12/Digital-manipulation-modern-Journalism-150x150.jpg"
+  },
+  {
+    type:"REPORT",
+    title:"THE MOTHER OF CORRUPTION",
+    date:"December 9, 2025",
+    excerpt:"১৫ বছরে শেখ হাসিনা ও তার পরিবার বাংলাদেশকে পরিকল্পিতভাবে লুটে নিয়েছে — একটি তথ্যভিত্তিক বিশ্লেষণ।",
+    link:"https://politicalinsightsbd.com/the-mother-of-corruption/",
+    img:"https://politicalinsightsbd.com/wp-content/uploads/2025/12/Red-White-and-Black-Modern-Fashion-Instagram-Post-1-150x150.jpg"
+  }
+];
+
+const booksData = [
+  { title:"Policy & Power", desc:"Shifting power dynamics in the administrative heart of Bangladesh.", img:"https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80" },
+  { title:"The Silent Ballot", desc:"Decoding voter psychology and digital narratives for 2026.", img:"https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&q=80" },
+  { title:"Interim Reforms", desc:"Insights into constitutional changes during the interim period.", img:"https://images.unsplash.com/photo-1532012197267-da84d127e765?w=600&q=80" },
+  { title:"Cyber Sovereignty", desc:"Data surveillance and its role in modern statecraft.", img:"https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&q=80" }
+];
+
+/* ---------- RENDER INTEL ---------- */
+function renderIntel(data) {
+  const grid = document.getElementById('intel-grid');
+  if (!data.length) {
+    grid.innerHTML = `<div class="intel-no-results"><h3>No results found.</h3></div>`;
+    return;
+  }
+  grid.innerHTML = data.map(item => `
+    <a href="${item.link}" class="intel-card">
+      <div class="intel-card-img">
+        <img src="${item.img}" alt="${item.title}" loading="lazy">
+        <div class="intel-card-type">${item.type}</div>
+      </div>
+      <div class="intel-card-body">
+        <div class="intel-card-date">${item.date}</div>
+        <h3 class="intel-card-title">${item.title}</h3>
+        <p class="intel-card-excerpt">${item.excerpt}</p>
+        <span class="intel-card-link">READ FULL →</span>
+      </div>
+    </a>
+  `).join('');
+}
+
+/* ---------- SEARCH ---------- */
+function filterIntel(q) {
+  const term = q.toLowerCase().trim();
+  if (!term) { renderIntel(intelligenceData); return; }
+  const filtered = intelligenceData.filter(d =>
+    d.title.toLowerCase().includes(term) ||
+    d.excerpt.toLowerCase().includes(term) ||
+    d.type.toLowerCase().includes(term)
+  );
+  renderIntel(filtered);
+}
+
+/* ---------- RENDER BOOKS ---------- */
+function renderBooks(limit) {
+  const grid = document.getElementById('books-grid');
+  const data = booksData.slice(0, limit);
+  grid.innerHTML = data.map(book => `
+    <div class="book-card">
+      <div class="book-cover"><img src="${book.img}" alt="${book.title}" loading="lazy"></div>
+      <div class="book-info">
+        <h3 class="book-title">${book.title}</h3>
+        <p class="book-desc">${book.desc}</p>
+      </div>
+    </div>
+  `).join('');
+  const vw = document.getElementById('view-more-wrap');
+  vw.style.display = booksData.length > limit ? 'block' : 'none';
+}
+
+function showAllBooks() {
+  renderBooks(booksData.length);
+  document.getElementById('view-more-wrap').style.display = 'none';
+}
+
+/* ---------- HEADER SCROLL ---------- */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset > 60;
+  header.classList.toggle('scrolled', scrolled);
+  document.getElementById('scrollTop').classList.toggle('visible', window.pageYOffset > 500);
+});
+
+/* ---------- HAMBURGER ---------- */
+const ham = document.getElementById('ham');
+const mobileNav = document.getElementById('mobileNav');
+ham.addEventListener('click', () => mobileNav.classList.toggle('open'));
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+/* ---------- FAQ ACCORDION ---------- */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ---------- SCROLL REVEAL ---------- */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('in'), i * 90);
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('[data-r]').forEach(el => revealObs.observe(el));
+
+/* ---------- INIT ---------- */
+window.addEventListener('DOMContentLoaded', () => {
+  renderIntel(intelligenceData);
+  renderBooks(3);
+  // Hero is above fold, mark as scrolled check
+  if (window.pageYOffset > 60) header.classList.add('scrolled');
+});
+</script>
+</body>
+</html>
