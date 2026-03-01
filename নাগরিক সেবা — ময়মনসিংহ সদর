@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>নাগরিক সেবা — ময়মনসিংহ সদর</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@700;900&family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans Bengali', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #f8fdf9;
+      color: #1a2e1b;
+    }
+
+    /* ════ HERO ════ */
+    .hero {
+      position: relative;
+      min-height: 52vh;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      filter: brightness(.85) saturate(1.1);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25) 0%, transparent 30%),
+        linear-gradient(0deg, rgba(6,38,20,.95) 0%, rgba(6,38,20,.7) 40%, transparent 75%);
+    }
+    .hero-topbar {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0a4d2e, #22c55e 45%, #b91c1c 65%, #7f1d1d);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      width: 100%;
+      padding: 0 clamp(20px,6vw,64px) clamp(40px,6vw,64px);
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 5px 14px;
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: #a7f3c0;
+      margin-bottom: 14px;
+    }
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #22c55e; box-shadow: 0 0 6px #22c55e;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+    .hero h1 {
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5.5vw, 3.6rem);
+      color: #fff;
+      line-height: 1.25;
+      text-shadow: 0 2px 20px rgba(0,0,0,.5);
+      margin-bottom: 10px;
+    }
+    .hero-sub {
+      font-size: clamp(.72rem, 2vw, .84rem);
+      color: rgba(255,255,255,.5);
+      letter-spacing: .2em; text-transform: uppercase;
+    }
+
+    /* ════ TABS NAV ════ */
+    .tabs-wrap {
+      background: #0a4d2e;
+      position: sticky; top: 0; z-index: 90;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-bottom: 3px solid #b91c1c;
+    }
+    .tabs-wrap::-webkit-scrollbar { display: none; }
+    .tabs {
+      display: flex; align-items: center;
+      min-width: max-content;
+      padding: 0 clamp(16px,4vw,40px);
+      gap: 0;
+    }
+    .tab-btn {
+      display: flex; align-items: center; gap: 7px;
+      padding: 16px 20px;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      font-size: clamp(.78rem, 2vw, .88rem);
+      font-weight: 600;
+      color: rgba(255,255,255,.6);
+      background: none; border: none; cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      white-space: nowrap;
+      transition: color .2s, border-color .2s;
+    }
+    .tab-btn:hover { color: rgba(255,255,255,.9); }
+    .tab-btn.active {
+      color: #fff;
+      border-bottom-color: #22c55e;
+    }
+    .tab-btn .ti { font-size: 1rem; }
+
+    /* ════ MAIN CONTENT ════ */
+    .main { max-width: 1200px; margin: 0 auto; padding: clamp(28px,5vw,56px) clamp(16px,4vw,40px); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn .3s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── Section label ── */
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 40px;
+      margin-bottom: 10px;
+    }
+    .sec-label.green { color: #166534; background: rgba(22,101,52,.1); border: 1px solid rgba(22,101,52,.2); }
+    .sec-label.red   { color: #b91c1c; background: rgba(185,28,28,.1); border: 1px solid rgba(185,28,28,.2); }
+    .sec-label.gold  { color: #d97706; background: rgba(217,119,6,.1);  border: 1px solid rgba(217,119,6,.2); }
+
+    .sec-title {
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: #0a2e14;
+      margin-bottom: 6px;
+    }
+    .sec-desc { font-size: clamp(.8rem,2vw,.9rem); color: #4b5e4c; margin-bottom: 28px; line-height: 1.7; }
+    .sec-divider { width: 48px; height: 3px; background: linear-gradient(90deg,#166534,#b91c1c); border-radius: 2px; margin-bottom: 28px; }
+
+    /* ── Portal cards ── */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: clamp(14px,2.5vw,22px);
+      margin-bottom: 36px;
+    }
+    .portal-card {
+      background: #fff;
+      border: 1px solid #e2e8e3;
+      border-radius: 14px;
+      padding: clamp(20px,3vw,28px);
+      text-decoration: none;
+      display: flex; align-items: flex-start; gap: 14px;
+      position: relative; overflow: hidden;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .portal-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg,#166534,#22c55e);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s;
+    }
+    .portal-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(0,0,0,.1); border-color: #c8dfc9; }
+    .portal-card:hover::before { transform: scaleX(1); }
+
+    .pc-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(22,101,52,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .pc-icon.red { background: rgba(185,28,28,.1); }
+
+    .pc-body {}
+    .pc-name {
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 700;
+      font-size: clamp(.9rem,2.2vw,1.05rem);
+      color: #0a2e14; margin-bottom: 5px; line-height: 1.3;
+    }
+    .pc-url {
+      font-size: .72rem; color: #166534;
+      font-weight: 600; letter-spacing: .04em;
+      background: rgba(22,101,52,.07); padding: 2px 8px; border-radius: 4px;
+      display: inline-block; margin-bottom: 8px;
+    }
+    .pc-desc { font-size: clamp(.74rem,1.8vw,.82rem); color: #6b7c6d; line-height: 1.65; }
+    .pc-arrow { margin-left: auto; color: #9db59e; font-size: 1.1rem; flex-shrink: 0; align-self: center; transition: transform .2s, color .2s; }
+    .portal-card:hover .pc-arrow { transform: translateX(4px); color: #166534; }
+
+    /* ── Upazila grid ── */
+    .upa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: clamp(10px,2vw,16px);
+    }
+    .upa-card {
+      background: #fff;
+      border: 1px solid #e2e8e3;
+      border-radius: 12px;
+      padding: 16px 18px;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 12px;
+      transition: transform .18s, box-shadow .18s, background .18s;
+      position: relative; overflow: hidden;
+    }
+    .upa-card::after {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: #22c55e;
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform .25s;
+    }
+    .upa-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.09); background: #f0faf2; }
+    .upa-card:hover::after { transform: scaleY(1); }
+    .upa-num {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(22,101,52,.1);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 900; font-size: .82rem; color: #166534;
+      flex-shrink: 0;
+    }
+    .upa-info {}
+    .upa-name { font-weight: 700; font-size: .9rem; color: #0a2e14; line-height: 1.2; }
+    .upa-url  { font-size: .62rem; color: #9db59e; margin-top: 2px; }
+
+    /* ── E-service cards ── */
+    .eservice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: clamp(12px,2vw,20px);
+    }
+    .es-card {
+      background: #fff;
+      border: 1px solid #e2e8e3;
+      border-radius: 14px;
+      padding: clamp(20px,3vw,26px);
+      text-decoration: none;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .es-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 14px 14px 0 0;
+    }
+    .es-card.c1::before { background: linear-gradient(90deg,#166534,#22c55e); }
+    .es-card.c2::before { background: linear-gradient(90deg,#7f1d1d,#ef4444); }
+    .es-card.c3::before { background: linear-gradient(90deg,#1e3a5f,#3b82f6); }
+    .es-card.c4::before { background: linear-gradient(90deg,#92400e,#f59e0b); }
+    .es-card.c5::before { background: linear-gradient(90deg,#4a044e,#a855f7); }
+
+    .es-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.1); }
+
+    .es-icon {
+      width: 50px; height: 50px; border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .es-card.c1 .es-icon { background: rgba(22,101,52,.1); }
+    .es-card.c2 .es-icon { background: rgba(185,28,28,.1); }
+    .es-card.c3 .es-icon { background: rgba(59,130,246,.1); }
+    .es-card.c4 .es-icon { background: rgba(245,158,11,.1); }
+    .es-card.c5 .es-icon { background: rgba(168,85,247,.1); }
+
+    .es-name {
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 700; font-size: clamp(.9rem,2.2vw,1.05rem);
+      color: #0a2e14; line-height: 1.3;
+    }
+    .es-url { font-size: .68rem; color: #9db59e; font-weight: 500; }
+    .es-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .76rem; font-weight: 700;
+      padding: 7px 14px; border-radius: 7px;
+      background: linear-gradient(140deg,#166534,#0a4d2e);
+      color: #fff; margin-top: auto;
+      transition: opacity .18s;
+      align-self: flex-start;
+    }
+    .es-btn:hover { opacity: .85; }
+
+    /* ── Citizen charter tip box ── */
+    .tip-box {
+      background: linear-gradient(135deg, #0a4d2e, #166534);
+      border-radius: 16px;
+      padding: clamp(24px,4vw,36px);
+      display: flex; gap: 20px; align-items: flex-start;
+      margin-top: 32px;
+    }
+    .tip-icon { font-size: 2rem; flex-shrink: 0; }
+    .tip-content {}
+    .tip-title {
+      font-family: 'Noto Serif Bengali', serif;
+      font-weight: 900; font-size: clamp(1rem,2.5vw,1.2rem);
+      color: #fff; margin-bottom: 8px;
+    }
+    .tip-text { font-size: clamp(.78rem,2vw,.88rem); color: rgba(255,255,255,.75); line-height: 1.75; }
+    .tip-text a { color: #86efac; font-weight: 600; text-decoration: none; }
+    .tip-text a:hover { text-decoration: underline; }
+
+    /* mobile */
+    @media (max-width: 480px) {
+      .upa-grid { grid-template-columns: repeat(2,1fr); }
+      .eservice-grid { grid-template-columns: 1fr; }
+      .tip-box { flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 360px) {
+      .upa-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <img class="hero-img"
+    src="https://mymensingh-sadar.bdnagoriksheba.com/wp-content/uploads/2026/02/images.jpeg"
+    alt="ময়মনসিংহ নাগরিক সেবা" loading="eager" />
+  <div class="hero-overlay"></div>
+  <div class="hero-topbar"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="dot"></span> ডিজিটাল নাগরিক সেবা</div>
+    <h1>ময়মনসিংহ সদর<br>নাগরিক সেবা পোর্টাল</h1>
+    <p class="hero-sub">Mymensingh Sadar · Nagorik Sheba · PIBBD</p>
+  </div>
+</section>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('portal')" data-tab="portal">
+      <span class="ti">🏛️</span> প্রধান পোর্টাল
+    </button>
+    <button class="tab-btn" onclick="switchTab('upazila')" data-tab="upazila">
+      <span class="ti">🗺️</span> উপজেলা পোর্টাল
+    </button>
+    <button class="tab-btn" onclick="switchTab('eservice')" data-tab="eservice">
+      <span class="ti">⚡</span> ই-সেবা
+    </button>
+    <button class="tab-btn" onclick="switchTab('charter')" data-tab="charter">
+      <span class="ti">📋</span> সিটিজেন চার্টার
+    </button>
+  </div>
+</div>
+
+<!-- ═══ CONTENT ═══ -->
+<div class="main">
+
+  <!-- TAB 1: প্রধান পোর্টাল -->
+  <div class="tab-panel active" id="tab-portal">
+    <div class="sec-label green">🏛️ সরকারি পোর্টাল</div>
+    <h2 class="sec-title">প্রধান সরকারি পোর্টাল লিঙ্ক</h2>
+    <div class="sec-divider"></div>
+    <div class="portal-grid">
+      <a class="portal-card" href="https://www.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="pc-icon">🏢</div>
+        <div class="pc-body">
+          <div class="pc-name">ময়মনসিংহ জেলা পোর্টাল</div>
+          <div class="pc-url">mymensingh.gov.bd</div>
+          <div class="pc-desc">জেলার ইতিহাস, পর্যটন এবং সকল সরকারি অফিসের লিঙ্ক পাওয়া যাবে।</div>
+        </div>
+        <span class="pc-arrow">›</span>
+      </a>
+      <a class="portal-card" href="https://www.mymensinghdiv.gov.bd" target="_blank" rel="noopener">
+        <div class="pc-icon">🗂️</div>
+        <div class="pc-body">
+          <div class="pc-name">ময়মনসিংহ বিভাগীয় পোর্টাল</div>
+          <div class="pc-url">mymensinghdiv.gov.bd</div>
+          <div class="pc-desc">ময়মনসিংহ বিভাগের সামগ্রিক তথ্য ও বিভাগীয় কার্যালয়ের লিঙ্ক।</div>
+        </div>
+        <span class="pc-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- TAB 2: উপজেলা -->
+  <div class="tab-panel" id="tab-upazila">
+    <div class="sec-label green">🗺️ উপজেলা পোর্টাল</div>
+    <h2 class="sec-title">ময়মনসিংহের সকল উপজেলা</h2>
+    <p class="sec-desc">উপজেলার নামে ক্লিক করলে সরাসরি সেই উপজেলার সরকারি পোর্টালে যাবেন।</p>
+    <div class="sec-divider"></div>
+    <div class="upa-grid">
+      <a class="upa-card" href="https://mymensinghsadar.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">১</div>
+        <div class="upa-info"><div class="upa-name">ময়মনসিংহ সদর</div><div class="upa-url">mymensinghsadar.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://trishal.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">২</div>
+        <div class="upa-info"><div class="upa-name">ত্রিশাল</div><div class="upa-url">trishal.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://valuka.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">৩</div>
+        <div class="upa-info"><div class="upa-name">ভালুকা</div><div class="upa-url">valuka.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://muktagacha.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">৪</div>
+        <div class="upa-info"><div class="upa-name">মুক্তাগাছা</div><div class="upa-url">muktagacha.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://gafargaon.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">৫</div>
+        <div class="upa-info"><div class="upa-name">গফরগাঁও</div><div class="upa-url">gafargaon.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://ishwarganj.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">৬</div>
+        <div class="upa-info"><div class="upa-name">ঈশ্বরগঞ্জ</div><div class="upa-url">ishwarganj.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://nandail.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">৭</div>
+        <div class="upa-info"><div class="upa-name">নান্দাইল</div><div class="upa-url">nandail.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://fulbaria.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">৮</div>
+        <div class="upa-info"><div class="upa-name">ফুলবাড়ীয়া</div><div class="upa-url">fulbaria.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://gouripur.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">৯</div>
+        <div class="upa-info"><div class="upa-name">গৌরীপুর</div><div class="upa-url">gouripur.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://phulpur.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">১০</div>
+        <div class="upa-info"><div class="upa-name">ফুলপুর</div><div class="upa-url">phulpur.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://tarakanda.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">১১</div>
+        <div class="upa-info"><div class="upa-name">তারাকান্দা</div><div class="upa-url">tarakanda.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://haluaghat.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">১২</div>
+        <div class="upa-info"><div class="upa-name">হালুয়াঘাট</div><div class="upa-url">haluaghat.mymensingh.gov.bd</div></div>
+      </a>
+      <a class="upa-card" href="https://dhobaura.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="upa-num">১৩</div>
+        <div class="upa-info"><div class="upa-name">ধোবাউড়া</div><div class="upa-url">dhobaura.mymensingh.gov.bd</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- TAB 3: ই-সেবা -->
+  <div class="tab-panel" id="tab-eservice">
+    <div class="sec-label red">⚡ সরাসরি আবেদন</div>
+    <h2 class="sec-title">গুরুত্বপূর্ণ ই-সেবা</h2>
+    <p class="sec-desc">নির্দিষ্ট কাজের জন্য সরাসরি এই লিঙ্কগুলো ব্যবহার করুন।</p>
+    <div class="sec-divider"></div>
+    <div class="eservice-grid">
+      <a class="es-card c1" href="https://land.gov.bd" target="_blank" rel="noopener">
+        <div class="es-icon">🏠</div>
+        <div class="es-name">ই-নামজারি (জমির খারিজ)</div>
+        <div class="es-url">land.gov.bd</div>
+        <span class="es-btn">আবেদন করুন →</span>
+      </a>
+      <a class="es-card c2" href="https://bdris.gov.bd" target="_blank" rel="noopener">
+        <div class="es-icon">📄</div>
+        <div class="es-name">অনলাইন জন্ম নিবন্ধন</div>
+        <div class="es-url">bdris.gov.bd</div>
+        <span class="es-btn">আবেদন করুন →</span>
+      </a>
+      <a class="es-card c3" href="https://services.nidw.gov.bd" target="_blank" rel="noopener">
+        <div class="es-icon">🪪</div>
+        <div class="es-name">ভোটার আইডি (NID) সেবা</div>
+        <div class="es-url">services.nidw.gov.bd</div>
+        <span class="es-btn">আবেদন করুন →</span>
+      </a>
+      <a class="es-card c4" href="https://epassport.gov.bd" target="_blank" rel="noopener">
+        <div class="es-icon">📘</div>
+        <div class="es-name">পাসপোর্ট আবেদন</div>
+        <div class="es-url">epassport.gov.bd</div>
+        <span class="es-btn">আবেদন করুন →</span>
+      </a>
+      <a class="es-card c5" href="https://forms.gov.bd" target="_blank" rel="noopener">
+        <div class="es-icon">📥</div>
+        <div class="es-name">সকল ফরম ডাউনলোড</div>
+        <div class="es-url">forms.gov.bd</div>
+        <span class="es-btn">ডাউনলোড করুন →</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- TAB 4: সিটিজেন চার্টার -->
+  <div class="tab-panel" id="tab-charter">
+    <div class="sec-label gold">📋 সেবা পাওয়ার নিয়ম</div>
+    <h2 class="sec-title">সিটিজেন চার্টার</h2>
+    <p class="sec-desc">কোন অফিসে কত দিনে সেবা পাওয়া যাবে তা জানুন।</p>
+    <div class="sec-divider"></div>
+
+    <div class="portal-grid">
+      <a class="portal-card" href="https://mymensinghsadar.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="pc-icon">📋</div>
+        <div class="pc-body">
+          <div class="pc-name">সিটিজেন চার্টার — ময়মনসিংহ সদর</div>
+          <div class="pc-url">mymensinghsadar.mymensingh.gov.bd</div>
+          <div class="pc-desc">উপজেলার সাইটে "আমাদের সেবা" বা "সিটিজেন চার্টার" মেন্যু থেকে দেখুন।</div>
+        </div>
+        <span class="pc-arrow">›</span>
+      </a>
+      <a class="portal-card" href="https://www.mymensingh.gov.bd" target="_blank" rel="noopener">
+        <div class="pc-icon red">🔗</div>
+        <div class="pc-body">
+          <div class="pc-name">সেবাকুঞ্জ — ময়মনসিংহ</div>
+          <div class="pc-url">mymensingh.gov.bd</div>
+          <div class="pc-desc">সকল সরকারি সেবা একত্রে পাওয়ার জন্য সেবাকুঞ্জ পোর্টাল ব্যবহার করুন।</div>
+        </div>
+        <span class="pc-arrow">›</span>
+      </a>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-icon">💡</div>
+      <div class="tip-content">
+        <div class="tip-title">টিপস: ই-ডিরেক্টরি থেকে যোগাযোগ</div>
+        <div class="tip-text">
+          ময়মনসিংহের জেলা বা উপজেলা লেভেলের কোনো নির্দিষ্ট দপ্তরের ফোন নম্বর দরকার হলে
+          পোর্টালের <strong>"ই-ডিরেক্টরি"</strong> অপশনে গিয়ে কর্মকর্তাদের সাথে
+          সরাসরি যোগাযোগের নম্বর পাবেন।
+          <br><br>
+          <a href="https://www.mymensingh.gov.bd" target="_blank">→ জেলা পোর্টাল ই-ডিরেক্টরি দেখুন</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .main -->
+
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector('[data-tab="' + id + '"]').classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
