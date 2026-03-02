@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>নাগরিক প্ল্যাটফর্ম | Royal Blue Platform</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@700;900&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- Core Styles --- */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      background-color: #f8fafc; /* Light Theme Background */
+      color: #1e293b;
+    }
+
+    .wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* --- Left Content --- */
+    .left-content {
+      flex: 1;
+      min-width: 320px;
+      padding-right: 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #e0e7ff; /* Light Royal Blue Background */
+      color: #1e40af; /* Royal Blue Text */
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border: 1px solid #c7d2fe;
+    }
+
+    .title {
+      font-family: 'Noto Serif Bengali', serif;
+      font-size: 48px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #0f172a;
+    }
+
+    .title span {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+      font-size: 18px;
+      color: #475569;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    /* --- Feature Box Style --- */
+    .feature-item {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      border-left: 6px solid #1e40af;
+      display: flex;
+      gap: 15px;
+    }
+
+    .feature-item h3 {
+      margin: 0 0 5px 0;
+      font-size: 18px;
+      color: #1e40af;
+    }
+
+    .feature-item p {
+      margin: 0;
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    /* --- Right Section --- */
+    .right-visual {
+      flex: 0.8;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 380px;
+      padding: 50px 30px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(30, 64, 175, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .logo-circle {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      color: #fbbf24; /* Gold Icon */
+    }
+
+    .main-card h2 {
+      margin: 0;
+      font-family: 'Noto Serif Bengali', serif;
+      color: #0f172a;
+    }
+
+    .main-card p {
+      color: #64748b;
+      margin-top: 5px;
+    }
+
+    /* --- Statistics --- */
+    .stats-row {
+      display: flex;
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .stat-box {
+      flex: 1;
+      background: #ffffff;
+      padding: 20px 10px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    }
+
+    .stat-box h4 {
+      margin: 0;
+      font-size: 22px;
+      color: #1e40af;
+    }
+
+    .stat-box p {
+      margin: 5px 0 0 0;
+      font-size: 12px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .wrapper { flex-direction: column; text-align: center; }
+      .feature-item { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="left-content">
+      <div class="badge">বাংলাদেশের প্রথম ডিজিটাল নাগরিক প্ল্যাটফর্ম</div>
+      
+      <h1 class="title">
+        আধুনিক, স্বচ্ছ ও<br>
+        <span>জবাবদিহিতামূলক</span> নাগরিক প্ল্যাটফর্ম
+      </h1>
+
+      <p class="tagline">নাগরিকের যে কোনো সমস্যায় — আমরা আপনার পাশে</p>
+
+      <div class="feature-item">
+        <div style="font-size: 24px;">🏛️</div>
+        <div>
+          <h3>সরকারি স্বচ্ছতা নিশ্চিতকরণ</h3>
+          <p>প্রতিটি অভিযোগ সরাসরি কর্তৃপক্ষের নিকট পৌঁছানো হয় এবং অগ্রগতি ট্র্যাক করা যায়।</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div style="font-size: 24px;">⚖️</div>
+        <div>
+          <h3>অধিকার সুরক্ষা ও সচেতনতা</h3>
+          <p>আপনার আইনগত অধিকার সম্পর্কে জানুন এবং অন্যায়ের বিরুদ্ধে সোচ্চার হোন।</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-visual">
+      <div class="main-card">
+        <div class="logo-circle">☀️</div>
+        <h2>নাগরিক প্ল্যাটফর্ম</h2>
+        <p>জনগণের ক্ষমতায়ন</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <h4>১২৫০+</h4>
+          <p>নাগরিক</p>
+        </div>
+        <div class="stat-box">
+          <h4>৪৫০+</h4>
+          <p>সমাধান</p>
+        </div>
+        <div class="stat-box">
+          <h4>৯৬%</h4>
+          <p>সন্তুষ্টি</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
