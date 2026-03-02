@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#0d47a1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>জাতীয় নাগরিক অভিযোগ বাক্স — নাগরিক ফোরাম বাংলাদেশ</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0d47a1;
+  --primary-light: #1976d2;
+  --primary-soft: rgba(13,71,161,0.08);
+  --gold: #d4af37;
+  --gold-soft: rgba(212,175,55,0.12);
+  --text-dark: #0a1b33;
+  --text-mid: #37475f;
+  --text-soft: #6b7fa3;
+  --text-muted: #a1b0c7;
+  --border: #c2d1e6;
+  --border-soft: rgba(13,71,161,0.1);
+  --bg-field: rgba(255,255,255,0.88);
+  --bg-card: rgba(255,255,255,0.76);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --shadow-card: 0 4px 30px rgba(13,71,161,0.07), 0 1px 6px rgba(0,0,0,0.04);
+  --shadow-btn: 0 5px 22px rgba(13,71,161,0.22);
+  --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+  --font-bn: 'Hind Siliguri', sans-serif;
+  --font-title: 'Tiro Bangla', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-bn);
+  background: linear-gradient(160deg, #e3f2fd 0%, #ffffff 40%, #fffde7 70%, #fff9c4 100%);
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 28px 16px 48px;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 10% 15%, rgba(13,71,161,0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 55% at 90% 85%, rgba(212,175,55,0.06) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Layout ─────────────────────────────────────── */
+.page-wrap {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Hero Header ────────────────────────────────── */
+.hero-header {
+  text-align: center;
+  margin-bottom: 22px;
+  animation: fadeDown 0.55s ease both;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.flag-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 14px;
+  gap: 0;
+}
+.flag-bar { background: var(--primary); height: 5px; width: 52px; border-radius: 3px; }
+.flag-circle {
+  background: var(--gold);
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  margin: 0 9px;
+  box-shadow: 0 2px 10px rgba(212,175,55,0.38);
+}
+
+.hero-icon { font-size: 46px; line-height: 1; margin-bottom: 10px; }
+
+.hero-title {
+  font-family: var(--font-title);
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: 700;
+  color: #0a2142;
+  line-height: 1.35;
+}
+.hero-title span {
+  background: linear-gradient(120deg, var(--primary) 30%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: clamp(12px, 3.2vw, 13.5px);
+  color: var(--text-mid);
+  margin-top: 8px;
+  line-height: 1.75;
+}
+
+.privacy-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-soft);
+  border: 1px solid var(--border-soft);
+  color: var(--primary);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-top: 12px;
+  letter-spacing: 0.3px;
+}
+
+/* ─── Form Card ──────────────────────────────────── */
+.form-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  padding: clamp(20px, 5vw, 36px) clamp(16px, 5vw, 32px);
+  box-shadow: var(--shadow-card);
+  animation: fadeUp 0.65s ease 0.1s both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Section Labels ─────────────────────────────── */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 12px;
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label:first-of-type { margin-top: 0; }
+.section-label::before {
+  content: '';
+  width: 3px; height: 14px;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--gold) 100%);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid rgba(13,71,161,0.08);
+  margin: 8px 0 0;
+}
+
+/* ─── Location Grid ──────────────────────────────── */
+.location-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ─── Field ──────────────────────────────────────── */
+.field-wrap { display: flex; flex-direction: column; gap: 5px; }
+
+.field-label {
+  font-size: 11.5px;
+  color: var(--text-mid);
+  font-weight: 600;
+}
+
+/* ─── Inputs ─────────────────────────────────────── */
+input, select, textarea {
+  width: 100%;
+  background: var(--bg-field);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-dark);
+  font-family: var(--font-bn);
+  font-size: 15px; /* 16px prevents iOS zoom, keep ≥ 16 to be safe — but 15px is fine on Android */
+  padding: 11px 14px;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Tap highlight */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent iOS zoom on focus (need font-size ≥ 16px or this trick) */
+@supports (-webkit-overflow-scrolling: touch) {
+  input, select, textarea { font-size: 16px; }
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 0 0 3px rgba(13,71,161,0.1);
+}
+
+input.error, select.error, textarea.error {
+  border-color: #e53935;
+  box-shadow: 0 0 0 3px rgba(229,57,53,0.09);
+}
+
+input::placeholder, textarea::placeholder { color: var(--text-muted); }
+select option { background: #fff; color: var(--text-dark); }
+select:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Touch targets: minimum 44px height for accessibility */
+input, select {
+  min-height: 44px;
+}
+
+.select-wrap { position: relative; }
+.select-wrap select { padding-right: 34px; cursor: pointer; }
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  pointer-events: none;
+  font-size: 13px;
+}
+
+.privacy-note {
+  font-size: 10.5px;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  opacity: 0.75;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.65;
+}
+
+.char-count {
+  font-size: 11px;
+  color: var(--text-soft);
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* ─── Upload Zone ────────────────────────────────── */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+  background: rgba(235,243,253,0.55);
+  position: relative;
+  color: var(--text-mid);
+  -webkit-tap-highlight-color: transparent;
+  min-height: 90px;
+}
+.upload-zone:hover, .upload-zone.dragover {
+  border-color: var(--primary);
+  background: rgba(13,71,161,0.04);
+}
+.upload-zone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%; height: 100%;
+  border: none; background: transparent; padding: 0;
+  font-size: 0; /* hide file dialog label on some browsers */
+}
+.upload-zone input[type="file"]:focus { box-shadow: none; }
+.upload-icon { font-size: 30px; margin-bottom: 5px; }
+.upload-text { font-size: 13.5px; font-weight: 500; }
+.upload-sub { font-size: 11px; color: var(--text-soft); margin-top: 3px; line-height: 1.5; }
+
+/* ─── Preview ────────────────────────────────────── */
+.preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.preview-item {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #f1f7fe;
+  flex-shrink: 0;
+}
+.preview-item img, .preview-item video {
+  width: 84px; height: 66px;
+  object-fit: cover;
+  display: block;
+}
+.preview-item .remove-btn {
+  position: absolute;
+  top: 3px; right: 3px;
+  width: 22px; height: 22px;
+  background: rgba(229,57,53,0.9);
+  border: none; border-radius: 50%;
+  color: #fff; font-size: 13px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.preview-item .file-name {
+  font-size: 9px; color: var(--text-mid);
+  padding: 3px 5px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 84px;
+}
+
+/* ─── Submit Button ──────────────────────────────── */
+.submit-btn {
+  width: 100%;
+  margin-top: 28px;
+  background: linear-gradient(120deg, var(--primary) 0%, var(--primary-light) 45%, var(--gold) 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  border: none;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-family: var(--font-bn);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 15px 24px;
+  min-height: 52px;
+  cursor: pointer;
+  transition: background-position 0.45s ease, transform 0.15s, box-shadow 0.2s;
+  box-shadow: var(--shadow-btn);
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.submit-btn:hover {
+  background-position: 100% 0%;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(13,71,161,0.28);
+}
+.submit-btn:active { transform: scale(0.97); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.spinner {
+  width: 20px; height: 20px;
+  border: 2.5px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: none;
+  flex-shrink: 0;
+}
+.submit-btn.loading .spinner { display: block; }
+.submit-btn.loading .btn-text { display: none; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Modal ──────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-overlay.show { opacity: 1; pointer-events: all; }
+
+.modal-box {
+  background: rgba(255,255,255,0.98);
+  border: 1.5px solid rgba(13,71,161,0.14);
+  border-radius: var(--radius-xl);
+  padding: clamp(26px, 6vw, 40px) clamp(20px, 6vw, 36px);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  transform: scale(0.88);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 20px 60px rgba(13,71,161,0.18);
+}
+.modal-overlay.show .modal-box { transform: scale(1); }
+.modal-icon { font-size: 56px; margin-bottom: 12px; }
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-title);
+  margin-bottom: 10px;
+}
+.modal-text {
+  font-size: 13.5px;
+  color: var(--text-mid);
+  line-height: 1.8;
+}
+.modal-text strong { color: var(--primary); }
+.modal-ref {
+  font-size: 12.5px;
+  color: #5c789e;
+  margin-top: 10px;
+  font-weight: 600;
+}
+.modal-close {
+  margin-top: 22px;
+  background: linear-gradient(120deg, var(--primary), var(--primary-light));
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-bn);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(13,71,161,0.22);
+  min-height: 46px;
+  -webkit-tap-highlight-color: transparent;
+}
+.modal-close:hover { transform: scale(1.04); box-shadow: 0 6px 20px rgba(13,71,161,0.28); }
+
+/* ─── Responsive ─────────────────────────────────── */
+
+/* Tablet (600px–900px) */
+@media (min-width: 600px) and (max-width: 899px) {
+  .location-row { grid-template-columns: 1fr 1fr 1fr; }
+  .name-row { grid-template-columns: 1fr 1fr; }
+}
+
+/* Mobile (< 600px) */
+@media (max-width: 599px) {
+  body { padding: 18px 12px 40px; }
+
+  .hero-header { margin-bottom: 18px; }
+  .hero-subtitle br { display: none; }
+
+  .form-card { padding: 20px 16px; border-radius: var(--radius-lg); }
+
+  .location-row { grid-template-columns: 1fr; gap: 10px; }
+  .name-row { grid-template-columns: 1fr; gap: 10px; }
+
+  .section-label { font-size: 10.5px; margin-top: 22px; }
+
+  input, select { font-size: 16px !important; } /* CRITICAL: prevents iOS auto-zoom */
+  textarea { font-size: 16px !important; min-height: 120px; }
+
+  .submit-btn { font-size: 15.5px; padding: 14px 18px; }
+
+  .preview-item img, .preview-item video { width: 76px; height: 60px; }
+  .preview-item .file-name { max-width: 76px; }
+
+  /* Stack privacy note inline on small screens */
+  .privacy-note { font-size: 10px; }
+}
+
+/* Small mobile (< 380px) */
+@media (max-width: 379px) {
+  .hero-icon { font-size: 38px; }
+  .privacy-strip { font-size: 10.5px; padding: 5px 12px; }
+  .form-card { padding: 16px 13px; }
+}
+
+/* Large desktop (> 900px) */
+@media (min-width: 900px) {
+  body { padding: 38px 24px 60px; }
+  .page-wrap { max-width: 780px; }
+  .form-card { padding: 40px 38px; border-radius: 26px; }
+  .hero-header { margin-bottom: 28px; }
+  .section-label { font-size: 11.5px; }
+  textarea { min-height: 145px; }
+}
+
+/* ─── Accessibility ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Focus visible for keyboard navigation */
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Safe area insets for notched phones */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  body { padding-bottom: calc(48px + env(safe-area-inset-bottom)); }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- Header -->
+  <div class="hero-header">
+    <div class="flag-strip">
+      <div class="flag-bar"></div>
+      <div class="flag-circle"></div>
+      <div class="flag-bar"></div>
+    </div>
+    <div class="hero-icon">🗳️</div>
+    <h1 class="hero-title">জাতীয় নাগরিক <span>অভিযোগ বাক্স</span></h1>
+    <p class="hero-subtitle">আপনার এলাকার যেকোনো সমস্যা, দুর্নীতি বা অনিয়মের কথা জানান।<br>আপনার পরিচয় সম্পূর্ণ গোপন রাখা হবে।</p>
+    <div class="privacy-strip">🔒 আপনার পরিচয় সম্পূর্ণ গোপন ও সুরক্ষিত</div>
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card">
+    <form id="complaintForm" novalidate>
+
+      <!-- Location -->
+      <div class="section-label">📍 আপনার এলাকা নির্বাচন করুন</div>
+      <div class="location-row">
+        <div class="field-wrap">
+          <label class="field-label" for="division">বিভাগ *</label>
+          <div class="select-wrap">
+            <select id="division" onchange="loadZila()" required aria-required="true">
+              <option value="">— বিভাগ —</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-wrap">
+          <label class="field-label" for="zila">জেলা *</label>
+          <div class="select-wrap">
+            <select id="zila" onchange="loadUpazila()" disabled required aria-required="true">
+              <option value="">— প্রথমে বিভাগ —</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-wrap">
+          <label class="field-label" for="upazila">উপজেলা *</label>
+          <div class="select-wrap">
+            <select id="upazila" disabled required aria-required="true">
+              <option value="">— প্রথমে জেলা —</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- Identity -->
+      <div class="section-label">👤 পরিচয় তথ্য</div>
+      <div class="name-row">
+        <div class="field-wrap">
+          <label class="field-label" for="name">আপনার নাম *</label>
+          <input type="text" id="name" placeholder="পূর্ণ নাম লিখুন" required aria-required="true" autocomplete="off" inputmode="text">
+          <div class="privacy-note">🔒 আপনার পরিচয় গোপন থাকবে</div>
+        </div>
+        <div class="field-wrap">
+          <label class="field-label" for="contact">মোবাইল / সোশ্যাল মিডিয়া লিংক</label>
+          <input type="text" id="contact" placeholder="+880... বা fb.com/yourprofile" autocomplete="off" inputmode="text">
+          <div class="privacy-note">🔒 শুধুমাত্র যোগাযোগের জন্য</div>
+        </div>
+      </div>
+
+      <hr class="section-divider" style="margin-top:20px;">
+
+      <!-- Complaint Type -->
+      <div class="section-label" style="margin-top:18px;">📋 অভিযোগের ধরন</div>
+      <div class="field-wrap">
+        <label class="field-label" for="complaintType">ধরন নির্বাচন করুন *</label>
+        <div class="select-wrap">
+          <select id="complaintType" required aria-required="true">
+            <option value="">— অভিযোগের ধরন নির্বাচন করুন —</option>
+            <option>দুর্নীতি ও ঘুষ</option>
+            <option>রাস্তাঘাট ও অবকাঠামো</option>
+            <option>শিক্ষা প্রতিষ্ঠান</option>
+            <option>স্বাস্থ্যসেবা</option>
+            <option>পানি ও বিদ্যুৎ</option>
+            <option>আইনশৃঙ্খলা</option>
+            <option>পরিবেশ দূষণ</option>
+            <option>ভূমি সমস্যা</option>
+            <option>অন্যান্য</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="section-divider" style="margin-top:20px;">
+
+      <!-- Message -->
+      <div class="section-label" style="margin-top:18px;">✍️ অভিযোগের বিবরণ</div>
+      <div class="field-wrap">
+        <label class="field-label" for="message">বিস্তারিত বিবরণ *</label>
+        <textarea
+          id="message"
+          placeholder="বিস্তারিত লিখুন — কী ঘটেছে, কখন ঘটেছে, কোথায় ঘটেছে এবং কারা জড়িত..."
+          maxlength="2000"
+          oninput="updateCharCount()"
+          required
+          aria-required="true"
+          inputmode="text"
+        ></textarea>
+        <div class="char-count"><span id="charCount">0</span> / 2000</div>
+      </div>
+
+      <hr class="section-divider" style="margin-top:20px;">
+
+      <!-- File Upload -->
+      <div class="section-label" style="margin-top:18px;">
+        📎 প্রমাণ সংযুক্ত করুন
+        <span style="font-weight:400;color:#788ba6;text-transform:none;letter-spacing:0;font-size:12px;">(ঐচ্ছিক)</span>
+      </div>
+      <div class="upload-zone" id="uploadZone" role="button" aria-label="ছবি বা ভিডিও আপলোড করুন">
+        <input type="file" id="fileInput" multiple accept="image/*,video/*" onchange="handleFiles(this.files)" aria-label="ফাইল নির্বাচন করুন">
+        <div class="upload-icon">📷</div>
+        <div class="upload-text">ছবি বা ভিডিও আপলোড করুন</div>
+        <div class="upload-sub">ক্লিক করুন অথবা ফাইল এখানে টেনে আনুন<br>সর্বোচ্চ ৫টি ফাইল • প্রতিটি সর্বোচ্চ ২৫MB</div>
+      </div>
+      <div class="preview-grid" id="previewGrid" aria-live="polite"></div>
+
+      <!-- Submit -->
+      <button type="submit" class="submit-btn" id="submitBtn" aria-label="অভিযোগ দাখিল করুন">
+        <div class="spinner" role="status" aria-label="অপেক্ষা করুন"></div>
+        <span class="btn-text">🚀 অভিযোগ দাখিল করুন</span>
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-icon">✅</div>
+    <div class="modal-title" id="modalTitle">অভিযোগ সফলভাবে গৃহীত হয়েছে</div>
+    <div class="modal-text">
+      আপনার অভিযোগটি আমাদের সিস্টেমে নথিভুক্ত করা হয়েছে। নাগরিক ফোরাম বাংলাদেশ-এর একটি বিশেষ টিম এটি পর্যালোচনা করে প্রয়োজনীয় পদক্ষেপ নেবে। আপনাকে ধন্যবাদ।
+    </div>
+    <div class="modal-ref" id="refNumber"></div>
+    <button class="modal-close" onclick="closeModal()">ঠিক আছে</button>
+  </div>
+</div>
+
+<script>
+// ── Bangladesh Geo Data ───────────────────────────
+var BD = {"ঢাকা":{"ঢাকা":["সাভার","ধামরাই","কেরানীগঞ্জ","নবাবগঞ্জ","দোহার"],"গাজীপুর":["গাজীপুর সদর","কালিয়াকৈর","কালীগঞ্জ","কাপাসিয়া","শ্রীপুর"],"মানিকগঞ্জ":["মানিকগঞ্জ সদর","সিংগাইর","সাটুরিয়া","হরিরামপুর","শিবালয়","ঘিওর","দৌলতপুর"],"মুন্সীগঞ্জ":["মুন্সীগঞ্জ সদর","শ্রীনগর","সিরাজদিখান","লৌহজং","গজারিয়া","টঙ্গিবাড়ী"],"নারায়ণগঞ্জ":["নারায়ণগঞ্জ সদর","আড়াইহাজার","বন্দর","রূপগঞ্জ","সোনারগাঁ"],"নরসিংদী":["নরসিংদী সদর","বেলাব","মনোহরদী","পলাশ","রায়পুরা","শিবপুর"],"ফরিদপুর":["ফরিদপুর সদর","আলফাডাঙ্গা","বোয়ালমারী","ভাঙ্গা","চরভদ্রাসন","মধুখালী","নগরকান্দা","সদরপুর","সালথা"],"কিশোরগঞ্জ":["কিশোরগঞ্জ সদর","অষ্টগ্রাম","বাজিতপুর","ভৈরব","হোসেনপুর","ইটনা","করিমগঞ্জ","কটিয়াদী","কুলিয়ারচর","মিঠামইন","নিকলী","পাকুন্দিয়া","তাড়াইল"],"মাদারীপুর":["মাদারীপুর সদর","কালকিনি","রাজৈর","শিবচর"],"গোপালগঞ্জ":["গোপালগঞ্জ সদর","কাশিয়ানী","কোটালীপাড়া","মুকসুদপুর","টুঙ্গিপাড়া"],"রাজবাড়ী":["রাজবাড়ী সদর","বালিয়াকান্দি","গোয়ালন্দ","কালুখালী","পাংশা"],"শরীয়তপুর":["শরীয়তপুর সদর","ভেদরগঞ্জ","ডামুড্যা","গোসাইরহাট","জাজিরা","নড়িয়া"],"টাঙ্গাইল":["টাঙ্গাইল সদর","বাসাইল","ভূঞাপুর","দেলদুয়ার","ধনবাড়ী","ঘাটাইল","গোপালপুর","কালিহাতী","মধুপুর","মির্জাপুর","নাগরপুর","সখিপুর"]},"চট্টগ্রাম":{"চট্টগ্রাম":["আনোয়ারা","বাঁশখালী","বোয়ালখালী","চন্দনাইশ","ফটিকছড়ি","হাটহাজারী","কর্ণফুলী","লোহাগাড়া","মিরসরাই","পটিয়া","রাউজান","রাঙ্গুনিয়া","সাতকানিয়া","সীতাকুণ্ড"],"কক্সবাজার":["কক্সবাজার সদর","চকরিয়া","কুতুবদিয়া","মহেশখালী","পেকুয়া","রামু","টেকনাফ","উখিয়া"],"রাঙামাটি":["রাঙামাটি সদর","বাঘাইছড়ি","বরকল","বিলাইছড়ি","জুরাছড়ি","কাপ্তাই","কাউখালী","লংগদু","নানিয়ারচর","রাজস্থলী"],"খাগড়াছড়ি":["খাগড়াছড়ি সদর","দিঘীনালা","গুইমারা","লক্ষ্মীছড়ি","মানিকছড়ি","মাটিরাঙা","মহালছড়ি","পানছড়ি","রামগড়"],"বান্দরবান":["বান্দরবান সদর","আলীকদম","লামা","নাইক্ষ্যংছড়ি","রোয়াংছড়ি","রুমা","থানচি"],"কুমিল্লা":["কুমিল্লা সদর","বরুড়া","ব্রাহ্মণপাড়া","বুড়িচং","চৌদ্দগ্রাম","দাউদকান্দি","দেবিদ্বার","হোমনা","লাকসাম","লালমাই","মেঘনা","মনোহরগঞ্জ","মুরাদনগর","নাঙ্গলকোট","তিতাস"],"ফেনী":["ফেনী সদর","ছাগলনাইয়া","দাগনভুঁইয়া","ফুলগাজী","পরশুরাম","সোনাগাজী"],"নোয়াখালী":["নোয়াখালী সদর","বেগমগঞ্জ","চাটখিল","কোম্পানীগঞ্জ","হাতিয়া","কবিরহাট","সেনবাগ","সোনাইমুড়ী","সুবর্ণচর"],"লক্ষ্মীপুর":["লক্ষ্মীপুর সদর","কমলনগর","রামগতি","রায়পুর","রামগঞ্জ"],"চাঁদপুর":["চাঁদপুর সদর","ফরিদগঞ্জ","হাজীগঞ্জ","হাইমচর","কচুয়া","মতলব দক্ষিণ","মতলব উত্তর","শাহরাস্তি"],"ব্রাহ্মণবাড়িয়া":["ব্রাহ্মণবাড়িয়া সদর","আখাউড়া","বাঞ্ছারামপুর","বিজয়নগর","কসবা","নাসিরনগর","নবীনগর","সরাইল"]},"রাজশাহী":{"রাজশাহী":["বাগমারা","বাঘা","চারঘাট","দুর্গাপুর","গোদাগাড়ী","মোহনপুর","পবা","পুঠিয়া","তানোর"],"চাঁপাইনবাবগঞ্জ":["চাঁপাইনবাবগঞ্জ সদর","ভোলাহাট","গোমস্তাপুর","নাচোল","শিবগঞ্জ"],"নওগাঁ":["নওগাঁ সদর","আত্রাই","বদলগাছি","ধামইরহাট","মান্দা","মহাদেবপুর","নিয়ামতপুর","পত্নীতলা","পোরশা","রাণীনগর","সাপাহার"],"নাটোর":["নাটোর সদর","বাগাতিপাড়া","বড়াইগ্রাম","গুরুদাসপুর","লালপুর","সিংড়া"],"পাবনা":["পাবনা সদর","আটঘরিয়া","বেড়া","ভাঙ্গুড়া","চাটমোহর","ফরিদপুর","ঈশ্বরদী","সাঁথিয়া","সুজানগর"],"সিরাজগঞ্জ":["সিরাজগঞ্জ সদর","বেলকুচি","চৌহালী","কামারখন্দ","কাজিপুর","রায়গঞ্জ","শাহজাদপুর","তাড়াশ","উল্লাপাড়া"],"বগুড়া":["বগুড়া সদর","আদমদীঘি","ধুনট","দুপচাঁচিয়া","গাবতলী","কাহালু","নন্দীগ্রাম","শাজাহানপুর","শেরপুর","শিবগঞ্জ","সোনাতলা"],"জয়পুরহাট":["জয়পুরহাট সদর","আক্কেলপুর","কালাই","ক্ষেতলাল","পাঁচবিবি"]},"খুলনা":{"খুলনা":["বটিয়াঘাটা","দাকোপ","ডুমুরিয়া","দিঘলিয়া","কয়রা","পাইকগাছা","ফুলতলা","রূপসা","তেরখাদা"],"বাগেরহাট":["বাগেরহাট সদর","চিতলমারী","ফকিরহাট","কচুয়া","মংলা","মোরেলগঞ্জ","মোল্লাহাট","রামপাল","শরণখোলা"],"সাতক্ষীরা":["সাতক্ষীরা সদর","আশাশুনি","দেবহাটা","কলারোয়া","কালীগঞ্জ","শ্যামনগর","তালা"],"যশোর":["যশোর সদর","অভয়নগর","বাঘারপাড়া","চৌগাছা","ঝিকরগাছা","কেশবপুর","মণিরামপুর","শার্শা"],"ঝিনাইদহ":["ঝিনাইদহ সদর","হরিণাকুণ্ডু","কালীগঞ্জ","কোটচাঁদপুর","মহেশপুর","শৈলকুপা"],"নড়াইল":["নড়াইল সদর","কালিয়া","লোহাগাড়া"],"মাগুরা":["মাগুরা সদর","মোহাম্মদপুর","শালিখা","শ্রীপুর"],"কুষ্টিয়া":["কুষ্টিয়া সদর","ভেড়ামারা","দৌলতপুর","খোকসা","কুমারখালী","মিরপুর"],"মেহেরপুর":["মেহেরপুর সদর","গাংনী","মুজিবনগর"],"চুয়াডাঙ্গা":["চুয়াডাঙ্গা সদর","আলমডাঙ্গা","দামুড়হুদা","জীবননগর"]},"বরিশাল":{"বরিশাল":["বরিশাল সদর","আগৈলঝাড়া","বাকেরগঞ্জ","বানারীপাড়া","গৌরনদী","হিজলা","মেহেন্দিগঞ্জ","মুলাদী","উজিরপুর"],"ভোলা":["ভোলা সদর","বোরহানউদ্দিন","চরফ্যাশন","দৌলতখান","লালমোহন","মনপুরা","তজুমদ্দিন"],"পটুয়াখালী":["পটুয়াখালী সদর","বাউফল","দশমিনা","গলাচিপা","কলাপাড়া","মির্জাগঞ্জ","রাঙ্গাবালী"],"পিরোজপুর":["পিরোজপুর সদর","ভান্ডারিয়া","ইন্দুরকানী","কাউখালী","মঠবাড়িয়া","নাজিরপুর","নেছারাবাদ"],"ঝালকাঠি":["ঝালকাঠি সদর","কাঁঠালিয়া","নলছিটি","রাজাপুর"],"বরগুনা":["বরগুনা সদর","আমতলী","বামনা","বেতাগী","পাথরঘাটা","তালতলী"]},"সিলেট":{"সিলেট":["সিলেট সদর","বালাগঞ্জ","বিয়ানীবাজার","বিশ্বনাথ","কোম্পানীগঞ্জ","ফেঞ্চুগঞ্জ","গোলাপগঞ্জ","গোয়াইনঘাট","জকিগঞ্জ","কানাইঘাট","ওসমানীনগর"],"মৌলভীবাজার":["মৌলভীবাজার সদর","বড়লেখা","জুড়ী","কমলগঞ্জ","কুলাউড়া","রাজনগর","শ্রীমঙ্গল"],"হবিগঞ্জ":["হবিগঞ্জ সদর","আজমিরীগঞ্জ","বানিয়াচং","বাহুবল","চুনারুঘাট","লাখাই","মাধবপুর","নবীগঞ্জ"],"সুনামগঞ্জ":["সুনামগঞ্জ সদর","বিশ্বম্ভরপুর","ছাতক","দিরাই","দোয়ারাবাজার","জগন্নাথপুর","জামালগঞ্জ","শাল্লা","তাহিরপুর","ধর্মপাশা","দক্ষিণ সুনামগঞ্জ"]},"রংপুর":{"রংপুর":["রংপুর সদর","বদরগঞ্জ","গঙ্গাচড়া","কাউনিয়া","মিঠাপুকুর","পীরগাছা","পীরগঞ্জ","তারাগঞ্জ"],"দিনাজপুর":["দিনাজপুর সদর","বিরামপুর","বিরল","বোচাগঞ্জ","চিরিরবন্দর","ফুলবাড়ী","ঘোড়াঘাট","হাকিমপুর","কাহারোল","খানসামা","নবাবগঞ্জ","পার্বতীপুর"],"নীলফামারী":["নীলফামারী সদর","ডিমলা","ডোমার","জলঢাকা","কিশোরগঞ্জ","সৈয়দপুর"],"গাইবান্ধা":["গাইবান্ধা সদর","ফুলছড়ি","গোবিন্দগঞ্জ","পলাশবাড়ী","সাদুল্লাপুর","সাঘাটা","সুন্দরগঞ্জ"],"কুড়িগ্রাম":["কুড়িগ্রাম সদর","ভুরুঙ্গামারী","চর রাজিবপুর","চিলমারী","ফুলবাড়ী","নাগেশ্বরী","রাজারহাট","রৌমারী","উলিপুর"],"লালমনিরহাট":["লালমনিরহাট সদর","আদিতমারী","হাতীবান্ধা","কালীগঞ্জ","পাটগ্রাম"],"ঠাকুরগাঁও":["ঠাকুরগাঁও সদর","বালিয়াডাঙ্গী","হরিপুর","পীরগঞ্জ","রাণীশংকৈল"],"পঞ্চগড়":["পঞ্চগড় সদর","আটোয়ারী","বোদা","দেবীগঞ্জ","তেতুলিয়া"]},"ময়মনসিংহ":{"ময়মনসিংহ":["ময়মনসিংহ সদর","ভালুকা","ধোবাউড়া","ফুলবাড়িয়া","গফরগাঁও","গৌরীপুর","হালুয়াঘাট","ঈশ্বরগঞ্জ","মুক্তাগাছা","নান্দাইল","ফুলপুর","তারাকান্দা"],"জামালপুর":["জামালপুর সদর","বকশীগঞ্জ","দেওয়ানগঞ্জ","ইসলামপুর","মাদারগঞ্জ","মেলান্দহ","সরিষাবাড়ী"],"শেরপুর":["শেরপুর সদর","ঝিনাইগাতী","নকলা","নালিতাবাড়ী","শ্রীবরদী"],"নেত্রকোণা":["নেত্রকোণা সদর","আটপাড়া","বারহাট্টা","দুর্গাপুর","কলমাকান্দা","কেন্দুয়া","খালিয়াজুরী","মদন","মোহনগঞ্জ","পূর্বধলা"]}};
+
+// ── Populate Divisions ────────────────────────────
+window.addEventListener('DOMContentLoaded', function () {
+  var d = document.getElementById('division');
+  Object.keys(BD).forEach(function (k) {
+    var o = document.createElement('option');
+    o.value = k; o.textContent = k;
+    d.appendChild(o);
+  });
+});
+
+function loadZila() {
+  var div = document.getElementById('division').value;
+  var z = document.getElementById('zila');
+  var u = document.getElementById('upazila');
+  z.innerHTML = '<option value="">— জেলা নির্বাচন করুন —</option>';
+  u.innerHTML = '<option value="">— প্রথমে জেলা —</option>';
+  u.disabled = true;
+  if (!div) { z.disabled = true; return; }
+  z.disabled = false;
+  Object.keys(BD[div]).forEach(function (k) {
+    var o = document.createElement('option');
+    o.value = k; o.textContent = k;
+    z.appendChild(o);
+  });
+}
+
+function loadUpazila() {
+  var div = document.getElementById('division').value;
+  var zila = document.getElementById('zila').value;
+  var u = document.getElementById('upazila');
+  u.innerHTML = '<option value="">— উপজেলা নির্বাচন করুন —</option>';
+  if (!zila) { u.disabled = true; return; }
+  u.disabled = false;
+  BD[div][zila].forEach(function (k) {
+    var o = document.createElement('option');
+    o.value = k; o.textContent = k;
+    u.appendChild(o);
+  });
+}
+
+// ── Error Cleanup Listeners ───────────────────────
+['division','zila','upazila','name','complaintType','message'].forEach(function (id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  ['change','input'].forEach(function (ev) {
+    el.addEventListener(ev, function () { el.classList.remove('error'); });
+  });
+});
+
+// ── File Upload ───────────────────────────────────
+var selectedFiles = [];
+
+function handleFiles(files) {
+  Array.from(files).forEach(function (f) {
+    if (selectedFiles.length >= 5) return;
+    if (f.size > 25 * 1024 * 1024) {
+      alert(f.name + ' ফাইলটি ২৫MB এর বেশি!');
+      return;
+    }
+    selectedFiles.push(f);
+  });
+  renderPreviews();
+  // Reset input so same file can be re-added after removal
+  document.getElementById('fileInput').value = '';
+}
+
+function renderPreviews() {
+  var g = document.getElementById('previewGrid');
+  g.innerHTML = '';
+  selectedFiles.forEach(function (f, i) {
+    var item = document.createElement('div');
+    item.className = 'preview-item';
+    var url = URL.createObjectURL(f);
+    if (f.type.startsWith('image/')) {
+      item.innerHTML = '<img src="' + url + '" alt="' + f.name + '"><div class="file-name">' + f.name + '</div>';
+    } else {
+      item.innerHTML = '<video src="' + url + '" muted></video><div class="file-name">' + f.name + '</div>';
+    }
+    var rm = document.createElement('button');
+    rm.className = 'remove-btn';
+    rm.innerHTML = '&times;';
+    rm.type = 'button';
+    rm.setAttribute('aria-label', f.name + ' সরান');
+    rm.addEventListener('click', (function (idx) {
+      return function () { selectedFiles.splice(idx, 1); renderPreviews(); };
+    })(i));
+    item.appendChild(rm);
+    g.appendChild(item);
+  });
+}
+
+// Drag & drop
+var zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover', function (e) { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', function () { zone.classList.remove('dragover'); });
+zone.addEventListener('drop', function (e) {
+  e.preventDefault(); zone.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+
+// ── Character Counter ─────────────────────────────
+function updateCharCount() {
+  document.getElementById('charCount').textContent = document.getElementById('message').value.length;
+}
+
+// ── Form Submit ───────────────────────────────────
+document.getElementById('complaintForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  var division = document.getElementById('division').value;
+  var zila = document.getElementById('zila').value;
+  var upazila = document.getElementById('upazila').value;
+  var name = document.getElementById('name').value.trim();
+  var contact = document.getElementById('contact').value.trim();
+  var complaintType = document.getElementById('complaintType').value;
+  var message = document.getElementById('message').value.trim();
+
+  var valid = true;
+  [['division', division], ['zila', zila], ['upazila', upazila],
+   ['name', name], ['complaintType', complaintType], ['message', message]]
+    .forEach(function (p) {
+      var el = document.getElementById(p[0]);
+      if (!p[1]) { el.classList.add('error'); valid = false; }
+      else { el.classList.remove('error'); }
+    });
+
+  if (!valid) {
+    // Scroll to first error on mobile
+    var firstError = document.querySelector('.error');
+    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  var btn = document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  var refNo = 'REF-' + Date.now().toString(36).toUpperCase();
+  var body = 'জাতীয় নাগরিক অভিযোগ\n' +
+    '========================================\n\n' +
+    'রেফারেন্স: ' + refNo + '\n' +
+    'তারিখ: ' + new Date().toLocaleString('bn-BD') + '\n\n' +
+    'বিভাগ: ' + division + '\nজেলা: ' + zila + '\nউপজেলা: ' + upazila + '\n\n' +
+    'নাম: ' + name + '\n' +
+    'যোগাযোগ: ' + (contact || 'প্রদান করা হয়নি') + '\n\n' +
+    'ধরন: ' + complaintType + '\n\n' +
+    'বিবরণ:\n' + message + '\n\n' +
+    'ফাইল: ' + (selectedFiles.length > 0 ? selectedFiles.map(function (f) { return f.name; }).join(', ') : 'নেই');
+
+  setTimeout(function () {
+    window.location.href =
+      'mailto:nagorikcomplain@gmail.com' +
+      '?subject=' + encodeURIComponent('[অভিযোগ] ' + complaintType + ' - ' + division + ', ' + zila + ' | ' + refNo) +
+      '&body=' + encodeURIComponent(body);
+
+    btn.classList.remove('loading');
+    btn.disabled = false;
+
+    document.getElementById('refNumber').textContent = 'রেফারেন্স নম্বর: ' + refNo;
+    document.getElementById('successModal').classList.add('show');
+
+    // Reset form
+    document.getElementById('complaintForm').reset();
+    selectedFiles = [];
+    renderPreviews();
+    document.getElementById('charCount').textContent = '0';
+    document.getElementById('zila').disabled = true;
+    document.getElementById('upazila').disabled = true;
+  }, 800);
+});
+
+function closeModal() {
+  document.getElementById('successModal').classList.remove('show');
+}
+
+// Close modal on backdrop click
+document.getElementById('successModal').addEventListener('click', function (e) {
+  if (e.target === this) closeModal();
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
