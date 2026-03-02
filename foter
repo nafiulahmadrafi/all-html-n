@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ ও যোগাযোগ · Political Insights BD</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@700;900&family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #064e3b; /* Deep Green */
+      --secondary: #b91c1c; /* Deep Red */
+      --text-main: #1e293b;
+      --text-light: #64748b;
+      --bg-soft: #f8fafc;
+      --border: #e2e8f0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans Bengali', sans-serif;
+      background: #ffffff;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    /* --- Typography & Headers --- */
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h1 {
+      font-family: 'Noto Serif Bengali', serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 4px;
+      background: var(--secondary);
+      margin: 0 auto 1.5rem;
+    }
+
+    /* --- FAQ Accordion Style --- */
+    .faq-wrapper {
+      max-width: 800px;
+      margin: 0 auto 5rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+
+    .faq-question {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .faq-question:hover { color: var(--primary); }
+
+    .faq-answer {
+      margin-top: 1rem;
+      color: var(--text-light);
+      font-size: 1rem;
+      display: none; /* Can be toggled with JS */
+    }
+
+    /* Show answer for now since no JS */
+    .faq-item:hover .faq-answer { display: block; }
+
+    /* --- Contact Section --- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
+      background: var(--bg-soft);
+      padding: 3rem;
+      border-radius: 24px;
+    }
+
+    .contact-info h2 {
+      font-family: 'Noto Serif Bengali', serif;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-list { list-style: none; margin-bottom: 2rem; }
+    .info-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .icon-circle {
+      width: 40px; height: 40px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    /* --- Professional Form --- */
+    .contact-form {
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    }
+
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      background: #fcfcfc;
+      transition: 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(6, 78, 59, 0.05);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-submit:hover { background: #042f24; transform: translateY(-2px); }
+
+    /* --- Slim Footer --- */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 4rem 1.5rem 2rem;
+      margin-top: 5rem;
+    }
+
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 3rem;
+    }
+
+    .footer-col h4 { color: #fff; margin-bottom: 1.5rem; font-size: 1.1rem; }
+    .footer-col a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 0.8rem; font-size: 0.95rem; }
+    .footer-col a:hover { color: var(--secondary); }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 850px) {
+      .contact-grid { grid-template-columns: 1fr; padding: 2rem; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header class="section-header">
+    <h1>সাধারণ জিজ্ঞাসা</h1>
+    <div class="divider"></div>
+    <p style="color: var(--text-light)">আমাদের সেবা ও পদ্ধতি সম্পর্কে বিস্তারিত জানুন</p>
+  </header>
+
+  <div class="faq-wrapper">
+    <div class="faq-item">
+      <div class="faq-question">পলিটিক্যাল ইনসাইটস বিডি কী ধরনের সেবা দেয়? <span>▾</span></div>
+      <div class="faq-answer">আমরা প্রচারণা কৌশল, ভোটার গবেষণা, মিডিয়া ব্যবস্থাপনা এবং তৃণমূল সংগঠন সহ পূর্ণাঙ্গ রাজনৈতিক পরামর্শ সেবা প্রদান করি।</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">তথ্যের গোপনীয়তা রক্ষা করা হয় কীভাবে? <span>▾</span></div>
+      <div class="faq-answer">আমরা কঠোর গোপনীয়তা নীতি অনুসরণ করি। আপনার সব ডেটা এনক্রিপ্টেড সার্ভারে সংরক্ষিত থাকে।</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">আপনাদের বিশ্লেষণ কতটুকু নিরপেক্ষ? <span>▾</span></div>
+      <div class="faq-answer">আমাদের প্রতিটি রিপোর্ট ডেটা-চালিত। কোনো রাজনৈতিক আদর্শ নয়, বরং বাস্তব তথ্যই আমাদের বিশ্লেষণের ভিত্তি।</div>
+    </div>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h2>সরাসরি যোগাযোগ</h2>
+      <p style="margin-bottom: 2rem; color: var(--text-light)">যেকোনো পরামর্শ বা গবেষণার জন্য আমাদের সাথে যুক্ত হোন।</p>
+      
+      <ul class="info-list">
+        <li><div class="icon-circle">📞</div> +880 1989-666676</li>
+        <li><div class="icon-circle">✉️</div> contact@pibbd.org</li>
+        <li><div class="icon-circle">📍</div> ঢাকা, বাংলাদেশ</li>
+      </ul>
+
+      <div style="display: flex; gap: 10px;">
+        <a href="#" style="text-decoration:none; background:#25d366; color:white; padding: 10px 20px; border-radius: 50px; font-weight:600; font-size:0.9rem;">WhatsApp</a>
+        <a href="#" style="text-decoration:none; background:var(--primary); color:white; padding: 10px 20px; border-radius: 50px; font-weight:600; font-size:0.9rem;">Email Us</a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <form>
+        <div class="form-group">
+          <label>আপনার নাম</label>
+          <input type="text" placeholder="পুরো নাম লিখুন">
+        </div>
+        <div class="form-group">
+          <label>ইমেইল এড্রেস</label>
+          <input type="email" placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+          <label>বিষয়</label>
+          <select>
+            <option>নির্বাচন করুন</option>
+            <option>গবেষণা রিপোর্ট</option>
+            <option>কৌশলগত পরামর্শ</option>
+            <option>অন্যান্য</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>আপনার বার্তা</label>
+          <textarea rows="4" placeholder="আপনার প্রশ্ন বা মতামত লিখুন..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">বার্তা পাঠান →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-col">
+      <h4 style="font-family: 'Noto Serif Bengali', serif; font-size: 1.5rem;">PIBD</h4>
+      <p style="font-size: 0.9rem; line-height: 1.6;">বাংলাদেশের প্রথম ডেটা-চালিত রাজনৈতিক গবেষণা ও পরামর্শক প্রতিষ্ঠান। আমরা গণতন্ত্রের আধুনিকায়নে কাজ করি।</p>
+    </div>
+    <div class="footer-col">
+      <h4>পেজ</h4>
+      <a href="#">আমাদের সম্পর্কে</a>
+      <a href="#">সেবাসমূহ</a>
+      <a href="#">গবেষণা</a>
+    </div>
+    <div class="footer-col">
+      <h4>রিসোর্স</h4>
+      <a href="#">পলিসি রিপোর্ট</a>
+      <a href="#">ইনসাইটস</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>অফিস</h4>
+      <p style="font-size: 0.9rem;">সকাল ১০টা - সন্ধ্যা ৬টা<br>শনিবার - বৃহস্পতিবার<br>ঢাকা, বাংলাদেশ</p>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2026 Political Insights BD. Built for transparency. Designed for democracy.
+  </div>
+</footer>
+
+</body>
+</html>
