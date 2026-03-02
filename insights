@@ -1,0 +1,63 @@
+<style>
+/* ডিজাইন এবং লেআউট ফিক্স */
+:root{
+  --green:#006A4E; --red:#F42A41; --ink:#0d1117; --gray:#5a6474;
+  --border:1px solid #dee2e8; --radius:8px;
+}
+.pibd-container { font-family: 'DM Sans', 'Noto Serif Bengali', sans-serif; color: var(--ink); padding: 20px 0; }
+.pibd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+.pibd-card { border: var(--border); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; transition: 0.3s; display: flex; flex-direction: column; background: #fff; }
+.pibd-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: var(--green); }
+.pibd-img { height: 180px; background: #f0f0f0; }
+.pibd-img img { width: 100%; height: 100%; object-fit: cover; }
+.pibd-body { padding: 15px; }
+.pibd-title { font-size: 1.1rem; font-weight: bold; margin: 10px 0; line-height: 1.4; color: var(--ink); }
+.pibd-date { font-size: 12px; color: var(--gray); text-transform: uppercase; }
+
+/* স্ক্রল রিভিল বন্ধ রাখা হয়েছে যাতে ব্ল্যাঙ্ক না দেখায় */
+[data-r] { opacity: 1 !important; transform: none !important; }
+</style>
+
+<div class="pibd-container">
+  <div class="pibd-grid" id="insightsGrid">
+    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">কন্টেন্ট লোড হচ্ছে...</div>
+  </div>
+</div>
+
+<script>
+(async function() {
+    const grid = document.getElementById('insightsGrid');
+    const API_URL = 'https://politicalinsightsbd.com/wp-json/wp/v2/posts?per_page=6&_embed';
+
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Network error');
+        const posts = await response.json();
+
+        if (posts.length === 0) {
+            grid.innerHTML = '<p>কোনো পোস্ট পাওয়া যায়নি।</p>';
+            return;
+        }
+
+        grid.innerHTML = posts.map(post => {
+            const thumb = post._embedded && post._embedded['wp:featuredmedia'] 
+                          ? post._embedded['wp:featuredmedia'][0].source_url 
+                          : 'https://via.placeholder.com/400x250?text=No+Image';
+            
+            return `
+                <a href="${post.link}" class="pibd-card" target="_blank">
+                    <div class="pibd-img"><img src="${thumb}" alt=""></div>
+                    <div class="pibd-body">
+                        <div class="pibd-date">${new Date(post.date).toLocaleDateString('bn-BD')}</div>
+                        <h3 class="pibd-title">${post.title.rendered}</h3>
+                    </div>
+                </a>
+            `;
+        }).join('');
+        
+    } catch (error) {
+        console.error('Fetch error:', error);
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: red;">ডাটা লোড করতে সমস্যা হচ্ছে। দয়া করে আপনার সাইটের API চেক করুন।</div>';
+    }
+})();
+</script>
