@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>আমাদের সম্পর্কে — নাগরিক পোর্টাল</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a5c3a;
+    --green-mid: #2d7d52;
+    --green-light: #4caf80;
+    --green-pale: #e8f5ee;
+    --green-mist: #f4faf7;
+    --gold: #c8a84b;
+    --gold-pale: #fdf8ec;
+    --red-bd: #c0392b;
+    --white: #ffffff;
+    --off-white: #f8faf9;
+    --text-dark: #0f2318;
+    --text-mid: #2e4d3a;
+    --text-muted: #6b8576;
+    --border: #d5e8dc;
+    --border-light: #eaf3ed;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Hind Siliguri', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    line-height: 1.7;
+  }
+
+  /* ── HERO ─────────────────────────────── */
+  .about-hero {
+    background: linear-gradient(160deg, var(--green-deep) 0%, #0f3d24 55%, #1a2e0f 100%);
+    padding: 72px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,168,75,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .about-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(76,175,128,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,168,75,0.15);
+    border: 1px solid rgba(200,168,75,0.35);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .about-hero h1 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 18px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .about-hero h1 span { color: var(--gold); }
+  .about-hero p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    max-width: 620px;
+    margin: 0 auto;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-line {
+    width: 60px; height: 3px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 24px auto 0;
+    border-radius: 2px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── WRAPPER ────────────────────────── */
+  .page-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px 80px;
+  }
+
+  /* ── SECTION LABEL ───────────────────── */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    background: var(--green-pale);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  .section-heading {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .section-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 640px;
+    line-height: 1.8;
+  }
+
+  /* ── INTRO SPLIT ─────────────────────── */
+  .intro-section {
+    margin-top: -44px;
+    position: relative;
+    z-index: 10;
+  }
+  .intro-card {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(26,92,58,0.13);
+    padding: 44px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    border: 1px solid var(--border-light);
+  }
+  .intro-text p {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.85;
+    margin-bottom: 14px;
+  }
+  .intro-highlight {
+    background: var(--green-mist);
+    border-left: 4px solid var(--green-mid);
+    border-radius: 0 12px 12px 0;
+    padding: 14px 20px;
+    font-size: 14.5px;
+    color: var(--text-mid);
+    font-style: italic;
+    margin-top: 8px;
+  }
+  .intro-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .stat-pill {
+    background: var(--green-mist);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .stat-pill-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(26,92,58,0.08);
+  }
+  .stat-pill-num {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green-deep);
+    line-height: 1;
+  }
+  .stat-pill-label {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  /* ── MISSION VISION ──────────────────── */
+  .mv-section {
+    margin-top: 60px;
+  }
+  .mv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .mv-card {
+    border-radius: 18px;
+    padding: 32px 30px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .mv-card.mission {
+    background: linear-gradient(135deg, var(--green-deep) 0%, #1e6b42 100%);
+    color: white;
+  }
+  .mv-card.vision {
+    background: var(--white);
+  }
+  .mv-card.values {
+    background: var(--gold-pale);
+    border-color: #e8d5a0;
+  }
+  .mv-card.approach {
+    background: var(--white);
+    border-color: var(--border);
+  }
+  .mv-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    pointer-events: none;
+  }
+  .mv-icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .mv-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .mv-card.mission .mv-title { color: rgba(255,255,255,0.95); }
+  .mv-card.vision .mv-title, .mv-card.approach .mv-title { color: var(--text-dark); }
+  .mv-card.values .mv-title { color: #5c3d00; }
+  .mv-text {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .mv-card.mission .mv-text { color: rgba(255,255,255,0.8); }
+  .mv-card.vision .mv-text, .mv-card.approach .mv-text { color: var(--text-mid); }
+  .mv-card.values .mv-text { color: #6b4c00; }
+
+  /* ── WHAT WE DO ──────────────────────── */
+  .what-section { margin-top: 64px; }
+  .what-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 32px;
+  }
+  .what-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border-light);
+    padding: 26px 22px;
+    transition: all 0.22s;
+    box-shadow: 0 2px 8px rgba(26,92,58,0.06);
+  }
+  .what-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 32px rgba(26,92,58,0.12);
+    border-color: var(--green-light);
+  }
+  .what-card-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .what-card h4 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .what-card p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+
+  /* ── SISTER ORGS ─────────────────────── */
+  .orgs-section { margin-top: 64px; }
+  .org-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 32px;
+  }
+  .org-card {
+    border-radius: 20px;
+    padding: 34px 32px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 4px 16px rgba(26,92,58,0.07);
+    transition: box-shadow 0.2s;
+  }
+  .org-card:hover { box-shadow: 0 10px 40px rgba(26,92,58,0.13); }
+  .org-card.political { border-top: 4px solid var(--green-mid); }
+  .org-card.fact { border-top: 4px solid #2980b9; }
+  .org-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .org-logo-box {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .org-card.political .org-logo-box { background: var(--green-pale); }
+  .org-card.fact .org-logo-box { background: #eaf4fb; }
+  .org-name {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.3;
+  }
+  .org-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .org-desc {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+  .org-badge-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .org-badge {
+    font-size: 11.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .org-card.political .org-badge { background: var(--green-pale); color: var(--green-deep); }
+  .org-card.fact .org-badge { background: #eaf4fb; color: #1a5276; }
+  .org-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    font-family: 'Hind Siliguri', sans-serif;
+    text-decoration: none;
+    transition: all 0.2s;
+    width: fit-content;
+    margin-top: 4px;
+  }
+  .org-card.political .org-btn {
+    background: var(--green-deep);
+    color: #fff;
+  }
+  .org-card.political .org-btn:hover { background: var(--green-mid); }
+  .org-card.fact .org-btn {
+    background: #2980b9;
+    color: #fff;
+  }
+  .org-card.fact .org-btn:hover { background: #1a6694; }
+
+  /* ── TEAM / PRINCIPLES ───────────────── */
+  .principles-section { margin-top: 64px; }
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .principle-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 24px 18px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .principle-card:hover {
+    border-color: var(--green-light);
+    box-shadow: 0 6px 24px rgba(26,92,58,0.1);
+  }
+  .principle-num {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--green-pale);
+    color: var(--green-deep);
+    font-weight: 800;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+    font-family: 'Noto Serif Bengali', serif;
+  }
+  .principle-card h4 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 7px;
+  }
+  .principle-card p {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── TIMELINE ────────────────────────── */
+  .timeline-section { margin-top: 64px; }
+  .timeline {
+    margin-top: 32px;
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--green-mid), var(--border));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 32px;
+    padding-left: 28px;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -32px; top: 4px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--green-mid);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tl-dot-inner {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green-mid);
+  }
+  .tl-year {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green-mid);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+  }
+  .tl-text {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+
+  /* ── CTA ─────────────────────────────── */
+  .cta-section {
+    margin-top: 64px;
+    background: linear-gradient(135deg, var(--green-deep) 0%, #0f3d24 100%);
+    border-radius: 22px;
+    padding: 52px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(200,168,75,0.1);
+    pointer-events: none;
+  }
+  .cta-section h3 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .cta-section p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 28px;
+    max-width: 520px;
+    margin-left: auto; margin-right: auto;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-btn {
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Hind Siliguri', sans-serif;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .cta-btn.primary {
+    background: var(--gold);
+    color: #1a2000;
+  }
+  .cta-btn.primary:hover { background: #d4b560; }
+  .cta-btn.secondary {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .cta-btn.secondary:hover { background: rgba(255,255,255,0.2); }
+
+  /* ── CONTACT STRIP ───────────────────── */
+  .contact-strip {
+    margin-top: 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .contact-strip h4 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+  .contact-strip p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .contact-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .contact-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .contact-chip.green {
+    background: var(--green-pale);
+    color: var(--green-deep);
+    border: 1px solid var(--border);
+  }
+  .contact-chip.green:hover { background: var(--border); }
+  .contact-chip.blue {
+    background: #eaf4fb;
+    color: #1a5276;
+    border: 1px solid #c2dff0;
+  }
+  .contact-chip.blue:hover { background: #d5ebf7; }
+
+  @media (max-width: 860px) {
+    .intro-card { grid-template-columns: 1fr; gap: 28px; padding: 28px 24px; }
+    .mv-grid, .org-cards { grid-template-columns: 1fr; }
+    .what-grid { grid-template-columns: 1fr 1fr; }
+    .principles-grid { grid-template-columns: 1fr 1fr; }
+    .about-hero h1 { font-size: 28px; }
+    .cta-section { padding: 36px 24px; }
+    .contact-strip { flex-direction: column; align-items: flex-start; }
+    .page-wrap { padding: 0 16px 60px; }
+    .about-hero { padding: 48px 20px 64px; }
+  }
+  @media (max-width: 560px) {
+    .what-grid { grid-template-columns: 1fr; }
+    .principles-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="hero-eyebrow">🏛️ আমাদের সম্পর্কে</div>
+  <h1>নাগরিকের পাশে,<br><span>সত্যের সন্ধানে</span></h1>
+  <p>দুর্নীতিমুক্ত, স্বচ্ছ ও জবাবদিহিমূলক বাংলাদেশ গড়তে নাগরিক পোর্টাল প্রতিদিন কাজ করে যাচ্ছে।</p>
+  <div class="hero-line"></div>
+</section>
+
+<div class="page-wrap">
+
+  <!-- INTRO -->
+  <section class="intro-section">
+    <div class="intro-card">
+      <div class="intro-text">
+        <div class="section-label">🌿 আমরা কারা</div>
+        <div class="section-heading">নাগরিক পোর্টাল</div>
+        <p><strong>নাগরিক পোর্টাল</strong> হলো <em>Political Insights BD</em>-এর একটি অঙ্গ প্রতিষ্ঠান। দেশের প্রতিটি সাধারণ নাগরিকের কাছে সরকারি সেবার সঠিক তথ্য পৌঁছে দেওয়া এবং নাগরিক অধিকার সম্পর্কে সচেতনতা তৈরি করাই আমাদের মূল উদ্দেশ্য।</p>
+        <p>আমরা বিশ্বাস করি — একজন সচেতন নাগরিকই পারেন দুর্নীতি ও অনিয়মের বিরুদ্ধে রুখে দাঁড়াতে। তাই সরকারের সহযোগী হিসেবে দেশের সার্বিক উন্নয়নে ও দুর্নীতি দূরীকরণে আমরা নিরলসভাবে কাজ করে যাচ্ছি।</p>
+        <div class="intro-highlight">
+          "তথ্যই শক্তি — সঠিক তথ্য জানলে প্রতিটি নাগরিক তার ন্যায্য অধিকার আদায় করতে পারবেন।"
+        </div>
+      </div>
+      <div class="intro-visual">
+        <div class="stat-pill">
+          <div class="stat-pill-icon">🏛️</div>
+          <div>
+            <div class="stat-pill-num">১৫+</div>
+            <div class="stat-pill-label">উপজেলা সেবা বিভাগ</div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-icon">✅</div>
+          <div>
+            <div class="stat-pill-num">১০০+</div>
+            <div class="stat-pill-label">ফ্যাক্ট চেক প্রতিবেদন</div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-icon">👥</div>
+          <div>
+            <div class="stat-pill-num">লক্ষ+</div>
+            <div class="stat-pill-label">মাসিক সেবাগ্রহীতা</div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-icon">🗺️</div>
+          <div>
+            <div class="stat-pill-num">৬৪</div>
+            <div class="stat-pill-label">জেলায় কার্যক্রম</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION VISION VALUES -->
+  <section class="mv-section">
+    <div class="section-label">🎯 আমাদের লক্ষ্য</div>
+    <div class="section-heading">মিশন, ভিশন ও মূল্যবোধ</div>
+    <div class="mv-grid">
+      <div class="mv-card mission">
+        <span class="mv-icon">🎯</span>
+        <div class="mv-title">আমাদের মিশন</div>
+        <div class="mv-text">সরকারি সেবার তথ্য সহজলভ্য করা, নাগরিক অধিকার সম্পর্কে সচেতনতা তৈরি করা এবং দুর্নীতি ও অনিয়মের বিরুদ্ধে তথ্যভিত্তিক সাংবাদিকতা ও নাগরিক সংগঠনের মাধ্যমে কার্যকর প্রতিরোধ গড়ে তোলা।</div>
+      </div>
+      <div class="mv-card vision">
+        <span class="mv-icon">🌅</span>
+        <div class="mv-title">আমাদের ভিশন</div>
+        <div class="mv-text">একটি স্বচ্ছ, জবাবদিহিমূলক ও দুর্নীতিমুক্ত বাংলাদেশ — যেখানে প্রতিটি নাগরিক তার ন্যায্য সরকারি সেবা পাবেন, সঠিক তথ্য জানবেন এবং নিজের অধিকার আদায়ে সক্ষম হবেন।</div>
+      </div>
+      <div class="mv-card values">
+        <span class="mv-icon">⚖️</span>
+        <div class="mv-title">আমাদের মূল্যবোধ</div>
+        <div class="mv-text">সততা, নিরপেক্ষতা, স্বচ্ছতা ও নাগরিকমুখী সেবা — এই চারটি মূল্যবোধ আমাদের প্রতিটি কার্যক্রমের ভিত্তি। আমরা কোনো রাজনৈতিক দল বা গোষ্ঠীর পক্ষে নই, আমরা জনগণের পক্ষে।</div>
+      </div>
+      <div class="mv-card approach">
+        <span class="mv-icon">🤝</span>
+        <div class="mv-title">আমাদের পদ্ধতি</div>
+        <div class="mv-text">তথ্য যাচাই, সরকারি পোর্টাল বিশ্লেষণ, মাঠ পর্যায়ের গবেষণা এবং ডিজিটাল মাধ্যমে নাগরিক শিক্ষার মাধ্যমে আমরা কাজ করি। সরকার ও নাগরিকের মধ্যে সেতু হিসেবে কাজ করাই আমাদের পদ্ধতি।</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DO -->
+  <section class="what-section">
+    <div class="section-label">💡 কার্যক্রম</div>
+    <div class="section-heading">আমরা যা করি</div>
+    <div class="section-sub">নাগরিক পোর্টাল বিভিন্ন কার্যক্রমের মাধ্যমে দেশের সাধারণ মানুষের জীবনমান উন্নয়নে কাজ করে।</div>
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="what-card-icon" style="background:#e8f5ee;">🏛️</div>
+        <h4>সরকারি সেবা তথ্যায়ন</h4>
+        <p>উপজেলা থেকে কেন্দ্রীয় সরকার পর্যন্ত সকল সেবার তথ্য সহজ ভাষায় নাগরিকের কাছে পৌঁছে দেওয়া।</p>
+      </div>
+      <div class="what-card">
+        <div class="what-card-icon" style="background:#fce4ec;">✅</div>
+        <h4>গুজব যাচাই ও ফ্যাক্ট চেক</h4>
+        <p>সামাজিক মাধ্যমে ছড়িয়ে পড়া ভুল তথ্য ও গুজব যাচাই করে সঠিক তথ্য প্রচার করা।</p>
+      </div>
+      <div class="what-card">
+        <div class="what-card-icon" style="background:#e3f2fd;">📣</div>
+        <h4>নাগরিক অধিকার সচেতনতা</h4>
+        <p>সাধারণ নাগরিকদের মৌলিক অধিকার, আইনি সুরক্ষা ও সরকারি সুবিধা সম্পর্কে সচেতন করা।</p>
+      </div>
+      <div class="what-card">
+        <div class="what-card-icon" style="background:#f3e5f5;">🔍</div>
+        <h4>দুর্নীতি পর্যবেক্ষণ</h4>
+        <p>তথ্য অধিকার আইন ব্যবহার করে সরকারি কার্যক্রমে অনিয়ম ও দুর্নীতি চিহ্নিত করে রিপোর্ট প্রকাশ।</p>
+      </div>
+      <div class="what-card">
+        <div class="what-card-icon" style="background:#fff3e0;">📊</div>
+        <h4>রাজনৈতিক বিশ্লেষণ</h4>
+        <p>নিরপেক্ষ ও তথ্যভিত্তিক রাজনৈতিক বিশ্লেষণ যা নাগরিকদের সঠিক সিদ্ধান্ত নিতে সহায়তা করে।</p>
+      </div>
+      <div class="what-card">
+        <div class="what-card-icon" style="background:#e8f5e9;">🤝</div>
+        <h4>সরকারের সহযোগী ভূমিকা</h4>
+        <p>সরকারি উদ্যোগ সম্পর্কে সচেতনতা তৈরি এবং সুশাসন প্রতিষ্ঠায় গঠনমূলক সহযোগিতা।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SISTER ORGANIZATIONS -->
+  <section class="orgs-section">
+    <div class="section-label">🔗 অঙ্গ প্রতিষ্ঠান</div>
+    <div class="section-heading">আমাদের প্ল্যাটফর্মসমূহ</div>
+    <div class="section-sub">নাগরিক পোর্টাল দুটি শক্তিশালী ডিজিটাল প্ল্যাটফর্মের সাথে যুক্ত — একটি রাজনৈতিক বিশ্লেষণের জন্য, আরেকটি ভুল তথ্য মোকাবেলার জন্য।</div>
+
+    <div class="org-cards">
+
+      <!-- Political Insights BD -->
+      <div class="org-card political">
+        <div class="org-logo-row">
+          <div class="org-logo-box">🏛️</div>
+          <div>
+            <div class="org-name">Political Insights BD</div>
+            <div class="org-tag">মাতৃ প্রতিষ্ঠান · রাজনৈতিক বিশ্লেষণ</div>
+          </div>
+        </div>
+        <div class="org-badge-row">
+          <span class="org-badge">রাজনৈতিক বিশ্লেষণ</span>
+          <span class="org-badge">নীতি গবেষণা</span>
+          <span class="org-badge">সুশাসন</span>
+        </div>
+        <div class="org-desc">
+          <strong>Political Insights BD</strong> হলো নাগরিক পোর্টালের মাতৃ প্রতিষ্ঠান। এটি বাংলাদেশের রাজনীতি, নীতিমালা ও সুশাসন বিষয়ক গভীর বিশ্লেষণ প্রকাশ করে। নিরপেক্ষ দৃষ্টিভঙ্গিতে রাজনৈতিক ঘটনাপ্রবাহ ব্যাখ্যা করা এবং সাধারণ নাগরিকদের সচেতন করাই এই প্ল্যাটফর্মের কাজ।
+        </div>
+        <a href="https://www.politicalinsightsbd.com" target="_blank" class="org-btn">
+          🌐 Political Insights BD সম্পর্কে জানুন →
+        </a>
+      </div>
+
+      <!-- FactCheck BD -->
+      <div class="org-card fact">
+        <div class="org-logo-row">
+          <div class="org-logo-box">🔎</div>
+          <div>
+            <div class="org-name">FactCheck BD</div>
+            <div class="org-tag">গুজব যাচাই · মিথ্যা তথ্য প্রতিরোধ</div>
+          </div>
+        </div>
+        <div class="org-badge-row">
+          <span class="org-badge">ফ্যাক্ট চেক</span>
+          <span class="org-badge">গুজব বন্ধ</span>
+          <span class="org-badge">তথ্য যাচাই</span>
+        </div>
+        <div class="org-desc">
+          সামাজিক মাধ্যমে প্রতিদিন হাজারো গুজব ও ভুল তথ্য ছড়িয়ে পড়ে। <strong>FactCheck BD</strong> সেই গুজব যাচাই করে সঠিক তথ্য প্রকাশ করে। যেকোনো সন্দেহজনক খবর বা ছবি যাচাই করতে এই প্ল্যাটফর্ম ব্যবহার করুন। গুজবে বিশ্বাস নয় — আগে যাচাই করুন।
+        </div>
+        <a href="https://www.factcheckbd.org" target="_blank" class="org-btn">
+          🔍 গুজব যাচাই করুন — FactCheck BD →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="principles-section">
+    <div class="section-label">📐 আমাদের নীতি</div>
+    <div class="section-heading">যে নীতিতে আমরা চলি</div>
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="principle-num">০১</div>
+        <h4>নিরপেক্ষতা</h4>
+        <p>কোনো দলীয় পরিচয় নয়, শুধু তথ্য ও ন্যায়বিচারের পক্ষে।</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">০২</div>
+        <h4>স্বচ্ছতা</h4>
+        <p>আমাদের তথ্যের উৎস সবসময় উন্মুক্ত ও যাচাইযোগ্য।</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">০৩</div>
+        <h4>জবাবদিহিতা</h4>
+        <p>আমাদের প্রতিটি প্রকাশনায় আমরা দায়বদ্ধ ও সংশোধনযোগ্য।</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">০৪</div>
+        <h4>নাগরিকমুখিতা</h4>
+        <p>সাধারণ মানুষের স্বার্থ ও অধিকারই আমাদের প্রথম অগ্রাধিকার।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY TIMELINE -->
+  <section class="timeline-section">
+    <div class="section-label">🗓️ আমাদের যাত্রা</div>
+    <div class="section-heading">কীভাবে শুরু হলো নাগরিক পোর্টাল</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-year">প্রতিষ্ঠা</div>
+        <div class="tl-title">Political Insights BD প্রতিষ্ঠা</div>
+        <div class="tl-text">রাজনৈতিক বিশ্লেষণ ও সুশাসন বিষয়ক সচেতনতা তৈরির উদ্দেশ্যে Political Insights BD যাত্রা শুরু করে।</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-year">সম্প্রসারণ</div>
+        <div class="tl-title">FactCheck BD চালু</div>
+        <div class="tl-text">সামাজিক মাধ্যমে ক্রমবর্ধমান গুজব ও মিথ্যা তথ্যের বিরুদ্ধে লড়তে FactCheck BD প্ল্যাটফর্ম চালু হয়।</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-year">নতুন উদ্যোগ</div>
+        <div class="tl-title">নাগরিক পোর্টাল যাত্রা শুরু</div>
+        <div class="tl-text">সরকারি সেবার তথ্য সহজলভ্য করতে ও নাগরিক অধিকার নিশ্চিত করতে নাগরিক পোর্টাল চালু হয়।</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-year">বর্তমান ও ভবিষ্যৎ</div>
+        <div class="tl-title">সারাদেশে সেবা বিস্তার</div>
+        <div class="tl-text">৬৪ জেলায় সকল উপজেলা পর্যায়ের সেবা তথ্য ডিজিটাল মাধ্যমে নাগরিকের কাছে পৌঁছানোর কাজ চলছে।</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h3>আমাদের সাথে যুক্ত হন</h3>
+    <p>দুর্নীতিমুক্ত বাংলাদেশ গড়তে আপনিও ভূমিকা রাখতে পারেন। গুজব ছড়াবেন না, আগে যাচাই করুন।</p>
+    <div class="cta-buttons">
+      <a href="https://www.politicalinsightsbd.com" target="_blank" class="cta-btn primary">🏛️ Political Insights BD ভিজিট করুন</a>
+      <a href="https://www.factcheckbd.org" target="_blank" class="cta-btn secondary">🔍 গুজব যাচাই করুন</a>
+    </div>
+  </section>
+
+  <!-- CONTACT STRIP -->
+  <div class="contact-strip">
+    <div>
+      <h4>📬 যোগাযোগ করুন</h4>
+      <p>যেকোনো তথ্য, পরামর্শ বা অভিযোগের জন্য আমাদের প্ল্যাটফর্মে যোগাযোগ করুন।</p>
+    </div>
+    <div class="contact-links">
+      <a href="https://www.politicalinsightsbd.com" target="_blank" class="contact-chip green">🌐 politicalinsightsbd.com</a>
+      <a href="https://www.factcheckbd.org" target="_blank" class="contact-chip blue">✅ factcheckbd.org</a>
+    </div>
+  </div>
+
+</div><!-- end page-wrap -->
+
+</body>
+</html>
