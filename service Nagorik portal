@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>\u0989\u09aa\u099c\u09c7\u09b2\u09be \u09a8\u09be\u0997\u09b0\u09bf\u0995 \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2 \u2014 \u09b8\u09c7\u09ac\u09be\u09b8\u09ae\u09c2\u09b9</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a5c3a;
+    --green-mid: #2d7d52;
+    --green-light: #4caf80;
+    --green-pale: #e8f5ee;
+    --green-mist: #f0faf4;
+    --red-bd: #c0392b;
+    --red-light: #fdf2f1;
+    --gold: #c8a84b;
+    --gold-light: #fdf8ec;
+    --sky: #2980b9;
+    --sky-light: #eaf4fb;
+    --purple: #7b5ea7;
+    --purple-light: #f3effb;
+    --orange: #e67e22;
+    --orange-light: #fef5eb;
+    --teal: #16a085;
+    --teal-light: #e8f8f5;
+    --slate: #34495e;
+    --slate-light: #eef2f5;
+    --text-dark: #1a2e23;
+    --text-mid: #3d5c4a;
+    --text-muted: #6b8576;
+    --white: #ffffff;
+    --border: #d5e8dc;
+    --shadow-sm: 0 2px 8px rgba(26,92,58,0.08);
+    --shadow-md: 0 6px 24px rgba(26,92,58,0.12);
+    --shadow-lg: 0 16px 48px rgba(26,92,58,0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Hind Siliguri', sans-serif;
+    background: #f7faf8;
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* HERO HEADER */
+  .hero {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 60%, var(--green-light) 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -60px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(200,168,75,0.12);
+    pointer-events: none;
+  }
+
+  .hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .hero-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-circle {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+  .logo-text h1 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .logo-text p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.3px;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .hero-main {
+    text-align: center;
+    padding: 44px 40px 36px;
+    position: relative; z-index: 1;
+  }
+  .hero-main h2 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .hero-main p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.82);
+    max-width: 580px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 4px;
+  }
+
+  /* FILTER TABS */
+  .filter-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .filter-tab {
+    padding: 16px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: none;
+    border-top: none; border-left: none; border-right: none;
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+  .filter-tab:hover { color: var(--green-mid); }
+  .filter-tab.active {
+    color: var(--green-deep);
+    border-bottom-color: var(--green-mid);
+    font-weight: 600;
+  }
+
+  /* MAIN LAYOUT */
+  .main-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 36px 32px 60px;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    margin-top: 44px;
+  }
+  .section-title:first-of-type { margin-top: 0; }
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .section-title h3 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+  .section-title span {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 400;
+    display: block;
+    margin-top: 2px;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+    margin-left: 8px;
+  }
+
+  /* SERVICE GRID */
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 12px;
+  }
+
+  /* SERVICE CARD */
+  .service-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+  .service-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+    border-color: transparent;
+  }
+
+  .card-header {
+    padding: 20px 22px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .card-icon {
+    width: 50px; height: 50px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .card-meta { flex: 1; }
+  .card-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.4;
+    margin-bottom: 5px;
+  }
+  .card-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-size: 11px;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+  .badge-cat {
+    background: var(--green-pale);
+    color: var(--green-deep);
+  }
+  .badge-seasonal {
+    background: #fff3e0;
+    color: #e65100;
+  }
+  .badge-online {
+    background: var(--sky-light);
+    color: var(--sky);
+  }
+
+  .card-body {
+    padding: 0 22px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .desc-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+    margin-top: 2px;
+  }
+  .card-desc {
+    font-size: 13.5px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .card-info-row {
+    display: flex;
+    gap: 12px;
+    margin: 14px 0;
+    padding: 12px;
+    background: var(--green-mist);
+    border-radius: 10px;
+    flex-wrap: wrap;
+  }
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-mid);
+  }
+  .info-item svg { flex-shrink: 0; }
+
+  .seasonal-box {
+    background: #fff8f0;
+    border: 1px solid #ffe0b2;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin: 8px 0 14px;
+  }
+  .seasonal-box .s-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--orange);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .seasonal-box .s-text {
+    font-size: 12.5px;
+    color: #6d4c2a;
+    line-height: 1.6;
+  }
+
+  .card-footer {
+    padding: 0 22px 20px;
+    display: flex;
+    gap: 10px;
+  }
+  .btn-primary {
+    flex: 1;
+    background: var(--green-mid);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Hind Siliguri', sans-serif;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover {
+    background: var(--green-deep);
+  }
+  .btn-secondary {
+    background: var(--green-pale);
+    color: var(--green-deep);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Hind Siliguri', sans-serif;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover {
+    background: var(--border);
+  }
+
+  /* COLOR VARIANTS for categories */
+  .c-health .card-icon { background: #fde8e8; }
+  .c-health .card-header { border-top: 3px solid #e57373; }
+  .c-health .btn-primary { background: #d32f2f; }
+  .c-health .btn-primary:hover { background: #b71c1c; }
+  .c-health .badge-cat { background: #fde8e8; color: #c62828; }
+  .c-health .card-info-row { background: #fff5f5; }
+
+  .c-agri .card-icon { background: #e8f5e9; }
+  .c-agri .card-header { border-top: 3px solid #66bb6a; }
+  .c-agri .btn-primary { background: #388e3c; }
+  .c-agri .btn-primary:hover { background: #2e7d32; }
+  .c-agri .badge-cat { background: #e8f5e9; color: #2e7d32; }
+  .c-agri .card-info-row { background: #f1f8f2; }
+
+  .c-edu .card-icon { background: #e3f2fd; }
+  .c-edu .card-header { border-top: 3px solid #42a5f5; }
+  .c-edu .btn-primary { background: #1565c0; }
+  .c-edu .btn-primary:hover { background: #0d47a1; }
+  .c-edu .badge-cat { background: #e3f2fd; color: #1565c0; }
+  .c-edu .card-info-row { background: #f0f8ff; }
+
+  .c-license .card-icon { background: #f3e5f5; }
+  .c-license .card-header { border-top: 3px solid #ab47bc; }
+  .c-license .btn-primary { background: #7b1fa2; }
+  .c-license .btn-primary:hover { background: #6a1b9a; }
+  .c-license .badge-cat { background: #f3e5f5; color: #7b1fa2; }
+  .c-license .card-info-row { background: #faf5ff; }
+
+  .c-infra .card-icon { background: #fff3e0; }
+  .c-infra .card-header { border-top: 3px solid #ffa726; }
+  .c-infra .btn-primary { background: #e65100; }
+  .c-infra .btn-primary:hover { background: #bf360c; }
+  .c-infra .badge-cat { background: #fff3e0; color: #e65100; }
+  .c-infra .card-info-row { background: #fff9f5; }
+
+  .c-disaster .card-icon { background: #fce4ec; }
+  .c-disaster .card-header { border-top: 3px solid #ef5350; }
+  .c-disaster .btn-primary { background: #b71c1c; }
+  .c-disaster .btn-primary:hover { background: #7f0000; }
+  .c-disaster .badge-cat { background: #fce4ec; color: #b71c1c; }
+  .c-disaster .card-info-row { background: #fff5f7; }
+
+  /* PETS SECTION */
+  .pets-section {
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin: 44px 0 20px;
+    border: 1px solid #c8e6c9;
+  }
+  .pets-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .pets-icon-big {
+    width: 60px; height: 60px;
+    border-radius: 18px;
+    background: #a5d6a7;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px;
+  }
+  .pets-header h3 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1b5e20;
+  }
+  .pets-header p {
+    font-size: 13px;
+    color: #388e3c;
+    margin-top: 3px;
+  }
+
+  /* SEASONAL NOTICE */
+  .seasonal-notice {
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3e0 100%);
+    border: 1px solid #ffe082;
+    border-radius: 16px;
+    padding: 22px 26px;
+    margin: 32px 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .sn-icon { font-size: 32px; flex-shrink: 0; margin-top: 2px; }
+  .sn-content h4 {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #e65100;
+    margin-bottom: 8px;
+  }
+  .sn-content p {
+    font-size: 13.5px;
+    color: #6d4c41;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  .portal-footer {
+    background: var(--green-deep);
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    padding: 28px 40px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .portal-footer strong { color: #fff; }
+  .portal-footer a { color: var(--gold); text-decoration: none; }
+
+  /* HIDDEN for filter */
+  .service-section { transition: opacity 0.2s; }
+  .service-section.hidden { display: none; }
+
+  @media (max-width: 768px) {
+    .hero-top { padding: 14px 20px; }
+    .hero-main { padding: 28px 20px 24px; }
+    .hero-main h2 { font-size: 24px; }
+    .filter-bar { padding: 0 16px; }
+    .main-wrapper { padding: 24px 16px 48px; }
+    .service-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-top">
+    <div class="hero-logo">
+      <div class="logo-circle">\ud83c\udfdb\ufe0f</div>
+      <div class="logo-text">
+        <h1>\u0989\u09aa\u099c\u09c7\u09b2\u09be \u09a8\u09be\u0997\u09b0\u09bf\u0995 \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2</h1>
+        <p>\u0997\u09a3\u09aa\u09cd\u09b0\u099c\u09be\u09a4\u09a8\u09cd\u09a4\u09cd\u09b0\u09c0 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09b8\u09b0\u0995\u09be\u09b0</p>
+      </div>
+    </div>
+    <div class="hero-badge">\u0987-\u09b8\u09c7\u09ac\u09be \u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0</div>
+  </div>
+  <div class="hero-main">
+    <h2>\u09b8\u0995\u09b2 \u09a8\u09be\u0997\u09b0\u09bf\u0995 \u09b8\u09c7\u09ac\u09be \u098f\u0995 \u099c\u09be\u09af\u09bc\u0997\u09be\u09af\u09bc</h2>
+    <p>\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af, \u09b6\u09bf\u0995\u09cd\u09b7\u09be, \u0995\u09c3\u09b7\u09bf, \u0985\u09ac\u0995\u09be\u09a0\u09be\u09ae\u09cb \u0993 \u09a6\u09c1\u09b0\u09cd\u09af\u09cb\u0997 \u2014 \u0989\u09aa\u099c\u09c7\u09b2\u09be\u09b0 \u09b8\u09ac \u09b8\u09c7\u09ac\u09be \u09b8\u09b9\u099c\u09c7 \u0996\u09c1\u0981\u099c\u09c1\u09a8 \u098f\u09ac\u0982 \u09b8\u09b0\u09be\u09b8\u09b0\u09bf \u0986\u09ac\u09c7\u09a6\u09a8 \u0995\u09b0\u09c1\u09a8\u0964</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">\u09e7\u09eb+</div>
+        <div class="stat-label">\u09b8\u09c7\u09ac\u09be \u09ac\u09bf\u09ad\u09be\u0997</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">\u09eb\u099f\u09bf</div>
+        <div class="stat-label">\u09aa\u09cd\u09b0\u09a7\u09be\u09a8 \u0995\u09cd\u09af\u09be\u099f\u09be\u0997\u09b0\u09bf</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">\u09e8\u09ea/\u09ed</div>
+        <div class="stat-label">\u0985\u09a8\u09b2\u09be\u0987\u09a8 \u09b8\u09c7\u09ac\u09be</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">\u09eb\u09ec\u09eb+</div>
+        <div class="stat-label">\u0989\u09aa\u099c\u09c7\u09b2\u09be</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FILTER TABS -->
+<nav class="filter-bar">
+  <button class="filter-tab active" onclick="filterSection('all', this)">\ud83d\udd37 \u09b8\u0995\u09b2 \u09b8\u09c7\u09ac\u09be</button>
+  <button class="filter-tab" onclick="filterSection('health', this)">\ud83c\udfe5 \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0993 \u0995\u09c3\u09b7\u09bf</button>
+  <button class="filter-tab" onclick="filterSection('edu', this)">\ud83d\udcda \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0993 \u09a6\u0995\u09cd\u09b7\u09a4\u09be</button>
+  <button class="filter-tab" onclick="filterSection('license', this)">\ud83d\udccb \u09b2\u09be\u0987\u09b8\u09c7\u09a8\u09cd\u09b8 \u0993 \u0986\u0987\u09a8</button>
+  <button class="filter-tab" onclick="filterSection('infra', this)">\ud83d\udd27 \u0985\u09ac\u0995\u09be\u09a0\u09be\u09ae\u09cb</button>
+  <button class="filter-tab" onclick="filterSection('disaster', this)">\ud83c\udd98 \u09a6\u09c1\u09b0\u09cd\u09af\u09cb\u0997 \u0993 \u09a4\u09cd\u09b0\u09be\u09a3</button>
+  <button class="filter-tab" onclick="filterSection('pets', this)">\ud83d\udc04 \u09aa\u09b6\u09c1 \u0993 \u09ae\u09ce\u09b8\u09cd\u09af</button>
+</nav>
+
+<!-- MAIN -->
+<main class="main-wrapper">
+
+  <!-- SEASONAL NOTICE -->
+  <div class="seasonal-notice">
+    <div class="sn-icon">\ud83c\udf0a</div>
+    <div class="sn-content">
+      <h4>\u26a0\ufe0f \u09ae\u09cc\u09b8\u09c1\u09ae\u09c0 \u09b8\u09a4\u09b0\u09cd\u0995\u09ac\u09be\u09b0\u09cd\u09a4\u09be \u2014 \u09b8\u0995\u09cd\u09b0\u09bf\u09af\u09bc \u09b8\u09c7\u09ac\u09be\u09b8\u09ae\u09c2\u09b9</h4>
+      <p>\u09ac\u09a8\u09cd\u09af\u09be \u09ae\u09cc\u09b8\u09c1\u09ae (\u099c\u09c1\u09a8\u2013\u09b8\u09c7\u09aa\u09cd\u099f\u09c7\u09ae\u09cd\u09ac\u09b0) \u0993 \u0998\u09c2\u09b0\u09cd\u09a3\u09bf\u099d\u09a1\u09bc \u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4\u09bf \u0995\u09be\u09b0\u09cd\u09af\u0995\u09cd\u09b0\u09ae \u099a\u09b2\u099b\u09c7\u0964 VGF/VGD \u09a4\u09be\u09b2\u09bf\u0995\u09be \u09a8\u09bf\u09ac\u09a8\u09cd\u09a7\u09a8, \u0986\u09b6\u09cd\u09b0\u09af\u09bc\u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0 \u09a4\u09a5\u09cd\u09af \u098f\u09ac\u0982 \u09a4\u09cd\u09b0\u09be\u09a3 \u09ac\u09bf\u09a4\u09b0\u09a3 \u09b8\u0982\u0995\u09cd\u09b0\u09be\u09a8\u09cd\u09a4 \u09b8\u09ac \u0986\u09aa\u09a1\u09c7\u099f \u09a8\u09bf\u099a\u09c7\u09b0 \u09a6\u09c1\u09b0\u09cd\u09af\u09cb\u0997 \u09ac\u09bf\u09ad\u09be\u0997\u09c7 \u09aa\u09be\u09ac\u09c7\u09a8\u0964 \u09b8\u09b0\u09cd\u09ac\u09b6\u09c7\u09b7 \u09a4\u09a5\u09cd\u09af\u09c7\u09b0 \u099c\u09a8\u09cd\u09af <a href="https://reliefweb.int/report/bangladesh/bangladesh-cyclone-early-action-protocol-2025-annual-report-eap-no-eap2021bd06-operation-no-mdrbd033-5-march-2026" target="_blank" style="color:#e65100;font-weight:600;">ReliefWeb \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2</a> \u09a6\u09c7\u0996\u09c1\u09a8\u0964</p>
+    </div>
+  </div>
+
+  <!-- \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 -->
+  <!-- SECTION 1: HEALTH & AGRICULTURE -->
+  <!-- \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 -->
+  <div class="service-section" id="section-health">
+    <div class="section-title">
+      <div class="section-icon" style="background:#fde8e8;">\ud83c\udfe5</div>
+      <div>
+        <h3>\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0993 \u0995\u09c3\u09b7\u09bf \u09b8\u09c7\u09ac\u09be</h3>
+        <span>Health & Agriculture \u2014 \u09b8\u09b0\u09be\u09b8\u09b0\u09bf \u09b8\u09b0\u0995\u09be\u09b0\u09bf \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2\u09c7 \u0986\u09ac\u09c7\u09a6\u09a8 \u0995\u09b0\u09c1\u09a8</span>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="service-grid">
+
+      <!-- Health Complex -->
+      <div class="service-card c-health">
+        <div class="card-header">
+          <div class="card-icon">\ud83c\udfe8</div>
+          <div class="card-meta">
+            <div class="card-title">\u0989\u09aa\u099c\u09c7\u09b2\u09be \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0995\u09ae\u09aa\u09cd\u09b2\u09c7\u0995\u09cd\u09b8 \u09b8\u09c7\u09ac\u09be</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af\u09b8\u09c7\u09ac\u09be</span>
+              <span class="badge badge-online">\u0985\u09a8\u09b2\u09be\u0987\u09a8 \u09a4\u09a5\u09cd\u09af</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">\ud83d\udccb \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf</div>
+          <div class="card-desc">\u0989\u09aa\u099c\u09c7\u09b2\u09be \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0995\u09ae\u09aa\u09cd\u09b2\u09c7\u0995\u09cd\u09b8\u09c7 \u09b8\u09b0\u09be\u09b8\u09b0\u09bf \u0997\u09bf\u09af\u09bc\u09c7 \u09ac\u09be \u09a8\u09cd\u09af\u09be\u09b6\u09a8\u09be\u09b2 \u09b9\u09c7\u09b2\u09a5 \u09b9\u09c7\u09b2\u09cd\u09aa\u09b2\u09be\u0987\u09a8 <strong>\u09e7\u09ec\u09e6\u09e6\u09e6</strong> \u09a8\u09ae\u09cd\u09ac\u09b0\u09c7 \u0995\u09b2 \u0995\u09b0\u09c1\u09a8\u0964 \u09b0\u09c7\u099c\u09bf\u09b8\u09cd\u099f\u09cd\u09b0\u09c7\u09b6\u09a8 \u0995\u09be\u0989\u09a8\u09cd\u099f\u09be\u09b0\u09c7 \u099c\u09be\u09a4\u09c0\u09af\u09bc \u09aa\u09b0\u09bf\u099a\u09af\u09bc\u09aa\u09a4\u09cd\u09b0 \u09a6\u09c7\u0996\u09bf\u09af\u09bc\u09c7 \u099f\u09cb\u0995\u09c7\u09a8 \u09a8\u09bf\u09a8\u0964</div>
+          <div class="card-info-row">
+            <div class="info-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#388e3c" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              \u09b8\u0995\u09be\u09b2 \u09ee\u099f\u09be \u2013 \u09ac\u09bf\u0995\u09be\u09b2 \u09eb\u099f\u09be
+            </div>
+            <div class="info-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#388e3c" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              \u09b8\u0995\u09b2\u09c7\u09b0 \u099c\u09a8\u09cd\u09af \u09ac\u09bf\u09a8\u09be\u09ae\u09c2\u09b2\u09cd\u09af\u09c7
+            </div>
+          </div>
+          <div class="card-info-row" style="margin-top:-4px;">
+            <div class="info-item" style="font-size:12px;">
+              <strong>\u09aa\u09be\u0993\u09af\u09bc\u09be \u09af\u09be\u09af\u09bc:</strong>&nbsp;\u09ac\u09b9\u09bf\u0983\u09ac\u09bf\u09ad\u09be\u0997 \u09b8\u09c7\u09ac\u09be, \u09b2\u09cd\u09af\u09be\u09ac \u09aa\u09b0\u09c0\u0995\u09cd\u09b7\u09be, \u09a1\u09be\u0995\u09cd\u09a4\u09be\u09b0 \u09aa\u09b0\u09be\u09ae\u09b0\u09cd\u09b6, \u09ad\u09b0\u09cd\u09a4\u09bf \u09b8\u09c1\u09ac\u09bf\u09a7\u09be
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://meghna.comilla.gov.bd/en/site/page/EeiW" target="_blank" class="btn-primary">\ud83d\udd17 \u09b8\u09c7\u09ac\u09be \u09a4\u09be\u09b2\u09bf\u0995\u09be \u09a6\u09c7\u0996\u09c1\u09a8</a>
+          <a href="https://www.researchgate.net/publication/342612505" target="_blank" class="btn-secondary">\ud83d\udcd6 \u09a4\u09a5\u09cd\u09af</a>
+        </div>
+      </div>
+
+      <!-- EPI Vaccination -->
+      <div class="service-card c-health">
+        <div class="card-header">
+          <div class="card-icon">\ud83d\udc89</div>
+          <div class="card-meta">
+            <div class="card-title">\u099f\u09bf\u0995\u09be\u09a6\u09be\u09a8 \u0995\u09b0\u09cd\u09ae\u09b8\u09c2\u099a\u09bf (EPI)</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af\u09b8\u09c7\u09ac\u09be</span>
+              <span class="badge badge-seasonal">\u09ae\u09cc\u09b8\u09c1\u09ae\u09c0 \u09b8\u09ae\u09cd\u09aa\u09cd\u09b0\u09b8\u09be\u09b0\u09a3</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">\ud83d\udccb \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf</div>
+          <div class="card-desc">\u0987\u0989\u09a8\u09bf\u09af\u09bc\u09a8 \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0 \u09ac\u09be \u0995\u09ae\u09bf\u0989\u09a8\u09bf\u099f\u09bf \u0995\u09cd\u09b2\u09bf\u09a8\u09bf\u0995\u09c7 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09bf\u09a4 \u09a6\u09bf\u09a8\u09c7 \u09af\u09be\u09a8\u0964 \u09b6\u09bf\u09b6\u09c1\u09b0 \u099c\u09a8\u09cd\u09ae\u09a8\u09bf\u09ac\u09a8\u09cd\u09a7\u09a8 \u09b8\u09a8\u09a6 \u09b8\u09be\u09a5\u09c7 \u0986\u09a8\u09c1\u09a8\u0964 \u099f\u09bf\u0995\u09be \u0995\u09be\u09b0\u09cd\u09a1 \u09b8\u0982\u0997\u09cd\u09b0\u09b9 \u0995\u09b0\u09c1\u09a8\u0964</div>
+          <div class="seasonal-box">
+            <div class="s-label">\ud83d\uddd3\ufe0f \u09ae\u09cc\u09b8\u09c1\u09ae\u09c0 \u09ac\u09bf\u09b6\u09c7\u09b7 \u09a4\u09a5\u09cd\u09af</div>
+            <div class="s-text">\u09ac\u09be\u09b0\u09cd\u09b7\u09bf\u0995 <strong>EPI \u09b8\u09aa\u09cd\u09a4\u09be\u09b9</strong> \u09aa\u09cd\u09b0\u09a4\u09bf \u09ac\u099b\u09b0 \u09ae\u09be\u09b0\u09cd\u099a\u2013\u098f\u09aa\u09cd\u09b0\u09bf\u09b2 \u0993 \u0985\u0995\u09cd\u099f\u09cb\u09ac\u09b0\u2013\u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09ae\u09be\u09b8\u09c7 \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4 \u09b9\u09af\u09bc\u0964 \u0987\u09a8\u09ab\u09cd\u09b2\u09c1\u09af\u09bc\u09c7\u099e\u09cd\u099c\u09be \u099f\u09bf\u0995\u09be \u09b8\u09be\u09a7\u09be\u09b0\u09a3\u09a4 \u0985\u0995\u09cd\u099f\u09cb\u09ac\u09b0 \u09a5\u09c7\u0995\u09c7 \u09aa\u09be\u0993\u09af\u09bc\u09be \u09af\u09be\u09af\u09bc\u0964</div>
+          </div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>\u09aa\u09be\u0993\u09af\u09bc\u09be \u09af\u09be\u09af\u09bc:</strong>&nbsp;BCG, \u09aa\u09cb\u09b2\u09bf\u0993, \u09b9\u09c7\u09aa\u09be\u099f\u09be\u0987\u099f\u09bf\u09b8-B, \u09b9\u09be\u09ae \u09b8\u09b9 \u09b8\u0995\u09b2 \u099f\u09bf\u0995\u09be \u09ac\u09bf\u09a8\u09be\u09ae\u09c2\u09b2\u09cd\u09af\u09c7</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://dghs.gov.bd" target="_blank" class="btn-primary">\ud83d\udd17 DGHS \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2</a>
+        </div>
+      </div>
+
+      <!-- Ambulance -->
+      <div class="service-card c-health">
+        <div class="card-header">
+          <div class="card-icon">\ud83d\ude91</div>
+          <div class="card-meta">
+            <div class="card-title">\u099c\u09b0\u09c1\u09b0\u09bf \u0985\u09cd\u09af\u09be\u09ae\u09cd\u09ac\u09c1\u09b2\u09c7\u09a8\u09cd\u09b8 \u09b8\u09c7\u09ac\u09be</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af\u09b8\u09c7\u09ac\u09be</span>
+              <span class="badge badge-online">\u09e8\u09ea/\u09ed</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">\ud83d\udccb \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf</div>
+          <div class="card-desc">\u099c\u09be\u09a4\u09c0\u09af\u09bc \u099c\u09b0\u09c1\u09b0\u09bf \u09b8\u09c7\u09ac\u09be \u09a8\u09ae\u09cd\u09ac\u09b0 <strong>999</strong> \u09ac\u09be \u0989\u09aa\u099c\u09c7\u09b2\u09be \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0995\u09ae\u09aa\u09cd\u09b2\u09c7\u0995\u09cd\u09b8\u09c7\u09b0 \u09b8\u09b0\u09be\u09b8\u09b0\u09bf \u09a8\u09ae\u09cd\u09ac\u09b0\u09c7 \u0995\u09b2 \u0995\u09b0\u09c1\u09a8\u0964 \u0985\u09ac\u09b8\u09cd\u09a5\u09be\u09a8 \u0993 \u09b0\u09cb\u0997\u09c0\u09b0 \u0985\u09ac\u09b8\u09cd\u09a5\u09be \u099c\u09be\u09a8\u09be\u09a8\u0964</div>
+          <div class="card-info-row">
+            <div class="info-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#d32f2f" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.36 12.9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72"/></svg>
+              \u09b9\u09c7\u09b2\u09cd\u09aa\u09b2\u09be\u0987\u09a8: 999 / 16000
+            </div>
+          </div>
+          <div class="card-info-row" style="margin-top:-4px;">
+            <div class="info-item"><strong>\u09aa\u09be\u0993\u09af\u09bc\u09be \u09af\u09be\u09af\u09bc:</strong>&nbsp;\u09a6\u09bf\u09a8\u09b0\u09be\u09a4 \u09e8\u09ea \u0998\u09a3\u09cd\u099f\u09be, \u09b8\u09aa\u09cd\u09a4\u09be\u09b9\u09c7\u09b0 \u09ed \u09a6\u09bf\u09a8</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://meghna.comilla.gov.bd" target="_blank" class="btn-primary">\ud83d\udd17 \u09a4\u09a5\u09cd\u09af \u09a6\u09c7\u0996\u09c1\u09a8</a>
+        </div>
+      </div>
+
+      <!-- Agriculture Advisory -->
+      <div class="service-card c-agri">
+        <div class="card-header">
+          <div class="card-icon">\ud83c\udf3e</div>
+          <div class="card-meta">
+            <div class="card-title">\u0995\u09c3\u09b7\u09bf \u09aa\u09b0\u09be\u09ae\u09b0\u09cd\u09b6 \u09b8\u09c7\u09ac\u09be</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">\u0995\u09c3\u09b7\u09bf\u09b8\u09c7\u09ac\u09be</span>
+              <span class="badge badge-seasonal">\u09ae\u09cc\u09b8\u09c1\u09ae\u09bf \u09ac\u09aa\u09a8 \u09a4\u09a5\u09cd\u09af</span>
+            </div>
+          </div>
+        </div
