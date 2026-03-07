@@ -1,0 +1,341 @@
+<!-- 
+  POLITICAL INSIGHTS BD
+  Homepage → National Intelligence Section Widget
+  WordPress Custom HTML Block
+-->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+  .pibd-home-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto;
+    font-family: 'Inter', Arial, sans-serif;
+  }
+
+  /* ══ MAIN CARD ══ */
+  .pibd-home-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+    border: 2px solid #15803d;
+    position: relative;
+  }
+
+  /* Top red stripe */
+  .pibd-home-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #dc2626, #15803d, #dc2626);
+    background-size: 200% 100%;
+    animation: stripe-anim 3s linear infinite;
+  }
+  @keyframes stripe-anim {
+    0%   { background-position: 0% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* ══ INNER LAYOUT ══ */
+  .pibd-home-inner {
+    display: flex;
+    align-items: stretch;
+    min-height: 220px;
+  }
+
+  /* Left green panel */
+  .pibd-home-left {
+    background: linear-gradient(160deg, #14532d 0%, #15803d 60%, #16a34a 100%);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-width: 180px;
+    max-width: 200px;
+    text-align: center;
+  }
+
+  .pibd-home-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+    animation: icon-float 3s ease-in-out infinite;
+  }
+  @keyframes icon-float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+  }
+
+  .pibd-home-live {
+    background: #dc2626;
+    color: white;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .pibd-home-live span {
+    width: 7px; height: 7px;
+    background: white;
+    border-radius: 50%;
+    animation: blink2 1.2s ease-in-out infinite;
+  }
+  @keyframes blink2 {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+
+  /* Right content */
+  .pibd-home-right {
+    padding: 28px 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .pibd-home-tag {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #dc2626;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .pibd-home-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #14532d;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+
+  .pibd-home-desc {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #4b5563;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  /* Features row */
+  .pibd-home-features {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .pibd-home-feat {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #15803d;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .pibd-home-feat.red {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #dc2626;
+  }
+
+  /* CTA Buttons */
+  .pibd-home-cta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .pibd-home-btn-primary {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white !important;
+    text-decoration: none !important;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    box-shadow: 0 4px 14px rgba(220,38,38,0.35);
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+    letter-spacing: 0.2px;
+  }
+  .pibd-home-btn-primary:hover {
+    background: linear-gradient(135deg, #b91c1c, #991b1b) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220,38,38,0.45);
+  }
+
+  .pibd-home-btn-secondary {
+    background: #ffffff;
+    color: #15803d !important;
+    text-decoration: none !important;
+    padding: 11px 22px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 2px solid #15803d;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .pibd-home-btn-secondary:hover {
+    background: #15803d !important;
+    color: white !important;
+    transform: translateY(-2px);
+  }
+
+  .pibd-home-note {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    margin-left: 4px;
+  }
+
+  /* ══ STATS BOTTOM BAR ══ */
+  .pibd-home-stats {
+    background: #14532d;
+    padding: 12px 28px;
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .pibd-home-stat {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    padding: 6px 10px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .pibd-home-stat:last-child { border-right: none; }
+  .pibd-home-stat-num {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+  }
+  .pibd-home-stat-num.gold { color: #fde68a; }
+  .pibd-home-stat-num.red  { color: #fca5a5; }
+  .pibd-home-stat-lbl {
+    display: block;
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-top: 3px;
+  }
+
+  /* ══ MOBILE ══ */
+  @media (max-width: 768px) {
+    .pibd-home-inner   { flex-direction: column; }
+    .pibd-home-left    { max-width: 100%; min-width: unset; flex-direction: row; padding: 18px 20px; gap: 16px; }
+    .pibd-home-icon    { font-size: 2.2rem; }
+    .pibd-home-right   { padding: 20px 20px; }
+    .pibd-home-title   { font-size: 1.2rem; }
+    .pibd-home-stats   { padding: 10px 14px; }
+    .pibd-home-stat-num{ font-size: 0.95rem; }
+  }
+  @media (max-width: 480px) {
+    .pibd-home-stats   { display: none; }
+    .pibd-home-features{ display: none; }
+    .pibd-home-btn-primary { padding: 10px 20px; font-size: 0.82rem; }
+    .pibd-home-btn-secondary { padding: 9px 16px; font-size: 0.78rem; }
+    .pibd-home-title   { font-size: 1.05rem; }
+    .pibd-home-desc    { font-size: 0.82rem; }
+  }
+</style>
+
+<div class="pibd-home-section">
+  <div class="pibd-home-card">
+
+    <!-- INNER -->
+    <div class="pibd-home-inner">
+
+      <!-- LEFT PANEL -->
+      <div class="pibd-home-left">
+        <div class="pibd-home-icon">🛡️</div>
+        <div class="pibd-home-live">
+          <span></span> LIVE
+        </div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.65rem;text-align:center;line-height:1.4;">
+          Real-time<br/>Intelligence
+        </div>
+      </div>
+
+      <!-- RIGHT CONTENT -->
+      <div class="pibd-home-right">
+        <div class="pibd-home-tag">🔴 Political Insights BD — Exclusive</div>
+
+        <h3 class="pibd-home-title">National Threat Analyzer Dashboard</h3>
+
+        <p class="pibd-home-desc">
+          বাংলাদেশ · ভারত · আন্তর্জাতিক — ৯৪+ মিডিয়া আউটলেট রিয়েল-টাইম মনিটর করুন।
+          AI-চালিত Bias Detection, Narrative Tracking এবং Political Threat Intelligence।
+        </p>
+
+        <div class="pibd-home-features">
+          <span class="pibd-home-feat">⚡ 5-Tier Scraper</span>
+          <span class="pibd-home-feat">🧠 AI Analysis</span>
+          <span class="pibd-home-feat">📰 94+ Outlets</span>
+          <span class="pibd-home-feat red">⚠️ Threat Detection</span>
+          <span class="pibd-home-feat">🌐 WordPress Auto-Publish</span>
+        </div>
+
+        <div class="pibd-home-cta">
+          <a class="pibd-home-btn-primary"
+             href="https://politicalinsightsbd.com/national-intelligence/"
+             target="_self">
+            🛡️ Dashboard দেখুন
+          </a>
+          <a class="pibd-home-btn-secondary"
+             href="https://dashboard1342-pibbd-media-intel.hf.space"
+             target="_blank" rel="noopener">
+            ↗ Full Screen
+          </a>
+          <span class="pibd-home-note">৩০–৬০ সেকেন্ডে লোড হবে</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="pibd-home-stats">
+      <div class="pibd-home-stat">
+        <span class="pibd-home-stat-num">94+</span>
+        <span class="pibd-home-stat-lbl">মিডিয়া আউটলেট</span>
+      </div>
+      <div class="pibd-home-stat">
+        <span class="pibd-home-stat-num gold">5</span>
+        <span class="pibd-home-stat-lbl">স্ক্র্যাপার টায়ার</span>
+      </div>
+      <div class="pibd-home-stat">
+        <span class="pibd-home-stat-num red">LIVE</span>
+        <span class="pibd-home-stat-lbl">রিয়েল-টাইম</span>
+      </div>
+      <div class="pibd-home-stat">
+        <span class="pibd-home-stat-num">BD·IN·INT</span>
+        <span class="pibd-home-stat-lbl">কভারেজ</span>
+      </div>
+      <div class="pibd-home-stat">
+        <span class="pibd-home-stat-num gold">AI</span>
+        <span class="pibd-home-stat-lbl">থ্রেট ইন্টেলিজেন্স</span>
+      </div>
+      <div class="pibd-home-stat">
+        <span class="pibd-home-stat-num">FREE</span>
+        <span class="pibd-home-stat-lbl">সম্পূর্ণ বিনামূল্যে</span>
+      </div>
+    </div>
+
+  </div>
+</div>
