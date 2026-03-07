@@ -3,390 +3,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Political Insights BD — Part 1: Header, Hero & Impact</title>
-<meta name="description" content="Bangladesh's leading political analysis, policy research, and strategic consulting platform.">
+<title>PIBBD \u2014 Hero</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;700;800&family=Noto+Serif+Bengali:wght@400;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;700;800&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
-   DESIGN TOKENS
-═══════════════════════════════════════════ */
+
 :root {
-  --green:#006A4E;--green-d:#004f3a;--green-l:#e6f2ee;--green-ll:#f0f8f5;
-  --red:#F42A41;--red-d:#c41f31;--red-l:#fff0f1;
-  --white:#ffffff;--off-white:#f9fafb;--ink:#0d1117;--ink-soft:#1a2332;
-  --gray:#5a6474;--gray-l:#8a95a3;
-  --border:1px solid #dee2e8;--border-d:2px solid var(--ink);
-  --shadow-sm:0 2px 8px rgba(0,0,0,.07);--shadow-md:0 8px 32px rgba(0,0,0,.10);
-  --radius-sm:4px;--radius:8px;--radius-lg:14px;
-  --header-h:84px;--header-s:62px;
-  --T:0.3s cubic-bezier(.4,0,.2,1);
+  --green:    #006A4E;
+  --green-d:  #004f3a;
+  --green-l:  #e6f2ee;
+  --red:      #F42A41;
+  --red-d:    #c41f31;
+  --red-l:    #fff0f1;
+  --white:    #ffffff;
+  --ink:      #0d1117;
+  --ink-soft: #1a2332;
+  --gray:     #5a6474;
+  --gray-l:   #8a95a3;
+  --T:        0.3s cubic-bezier(.4,0,.2,1);
+  --radius-sm:4px;
+  --radius:   8px;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;font-size:16px;}
-body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;padding-top:var(--header-h);}
-img{display:block;max-width:100%;}
-a{color:inherit;text-decoration:none;}
-button{cursor:pointer;font-family:inherit;}
 
-/* ═══ HEADER ═══ */
-#hdr{position:fixed;top:0;left:0;right:0;height:var(--header-h);z-index:9999;background:transparent;transition:background var(--T),height var(--T),box-shadow var(--T),border-bottom var(--T);border-bottom:1px solid transparent;}
-#hdr.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);height:var(--header-s);border-bottom:var(--border);box-shadow:0 2px 20px rgba(0,106,78,.08);}
-.hdr-inner{max-width:1360px;width:92%;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;gap:2rem;}
-.hdr-logo img{height:54px;width:auto;transition:height var(--T),filter var(--T);filter:brightness(0) invert(1);}
-#hdr.scrolled .hdr-logo img{height:42px;filter:none;}
-.hdr-nav{display:flex;align-items:center;gap:1.6rem;}
-.hdr-nav a{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.92);position:relative;padding-bottom:3px;white-space:nowrap;transition:color var(--T);}
-#hdr.scrolled .hdr-nav a{color:var(--ink);}
-.hdr-nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--green);transition:width .25s ease;}
-.hdr-nav a:hover::after{width:100%;}
-.hdr-nav a:hover{color:var(--green)!important;}
-.hdr-cta{background:var(--red);color:#fff!important;padding:9px 20px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:var(--radius-sm);border:none;transition:background var(--T),transform .15s;white-space:nowrap;}
-.hdr-cta::after{display:none!important;}
-.hdr-cta:hover{background:var(--red-d);transform:translateY(-2px);}
-.ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:6px;}
-.ham-btn span{display:block;width:26px;height:2px;background:#fff;border-radius:2px;transition:background var(--T),transform .3s;}
-#hdr.scrolled .ham-btn span{background:var(--ink);}
-.ham-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.ham-btn.open span:nth-child(2){opacity:0;}
-.ham-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mob-wa-btn{display:none;align-items:center;gap:6px;background:#25D366;color:#fff;border:none;border-radius:var(--radius-sm);padding:7px 10px;font-size:10px;font-weight:800;white-space:nowrap;text-decoration:none;transition:background var(--T),transform .15s;flex-shrink:0;}
-.mob-wa-btn:hover{background:#1da851;transform:translateY(-1px);}
-.mob-wa-icon{width:18px;height:18px;flex-shrink:0;}
-.mob-nav{display:none;position:fixed;top:var(--header-s);left:0;right:0;background:#fff;border-bottom:2px solid var(--green);box-shadow:var(--shadow-md);flex-direction:column;padding:1rem 5%;z-index:9998;animation:slideDown .25s ease;}
-.mob-nav.open{display:flex;}
-@keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
-.mob-nav a{font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);padding:.8rem 0;border-bottom:var(--border);display:flex;align-items:center;gap:.6rem;}
-.mob-nav a:last-child{border:none;}
-.mob-nav a:hover{color:var(--green);}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
 
-/* ═══ HERO ═══ */
-#hdr:not(.scrolled) .hdr-nav a{color:var(--ink)!important;}
-#hdr:not(.scrolled) .hdr-logo img{filter:none!important;}
-#hdr:not(.scrolled) .ham-btn span{background:var(--ink)!important;}
-#hero{background:var(--white);min-height:calc(100vh - var(--header-h));display:flex;flex-direction:column;position:relative;overflow:hidden;border-bottom:3px solid var(--green);}
-/* Multi-layer gradient background */
-#hero::before{content:'';position:absolute;inset:0;background:
-  radial-gradient(ellipse 60% 70% at 85% 30%,rgba(0,106,78,.09) 0%,transparent 70%),
-  radial-gradient(ellipse 45% 55% at 10% 80%,rgba(244,42,65,.06) 0%,transparent 65%),
-  radial-gradient(circle 400px at 70% 60%,rgba(0,106,78,.04) 0%,transparent 100%),
-  radial-gradient(circle 300px at 20% 30%,rgba(244,42,65,.03) 0%,transparent 100%);
-  pointer-events:none;z-index:0;}
+/* \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+   HERO SECTION
+\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 */
+#hero {
+  background: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--green);
+}
+
+/* Multi-layer gradient bg */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 85% 30%, rgba(0,106,78,.09) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 55% at 10% 80%, rgba(244,42,65,.06) 0%, transparent 65%),
+    radial-gradient(circle 400px at 70% 60%, rgba(0,106,78,.04) 0%, transparent 100%),
+    radial-gradient(circle 300px at 20% 30%, rgba(244,42,65,.03) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* PIBD watermark */
-#hero::after{content:'PIBD';position:absolute;right:-2rem;bottom:-1rem;font-family:'Playfair Display',serif;font-size:clamp(8rem,18vw,18rem);font-weight:900;color:rgba(0,106,78,.04);line-height:1;pointer-events:none;z-index:0;letter-spacing:-.04em;}
+#hero::after {
+  content: 'PIBD';
+  position: absolute;
+  right: -2rem;
+  bottom: -1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(8rem, 18vw, 18rem);
+  font-weight: 900;
+  color: rgba(0,106,78,.04);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: -.04em;
+}
 
-/* ═══ HERO BACKGROUND GRAPHICS ═══ */
-.hero-bg-graphics{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+/* \u2500\u2500 BG GRAPHICS \u2500\u2500 */
+.hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 
-/* Large rotating circle — BD flag inspired */
-.hero-bg-circle-1{position:absolute;top:8%;right:5%;width:420px;height:420px;border-radius:50%;border:1.5px solid rgba(0,106,78,.06);animation:heroRotate 60s linear infinite;}
-.hero-bg-circle-2{position:absolute;top:12%;right:9%;width:340px;height:340px;border-radius:50%;border:1.5px dashed rgba(0,106,78,.05);animation:heroRotate 45s linear infinite reverse;}
-.hero-bg-circle-3{position:absolute;bottom:10%;left:3%;width:280px;height:280px;border-radius:50%;border:1.5px solid rgba(244,42,65,.05);animation:heroRotate 50s linear infinite;}
+.hero-bg-c1 { position: absolute; top: 8%;  right: 5%;  width: 420px; height: 420px; border-radius: 50%; border: 1.5px solid rgba(0,106,78,.06); animation: hRot 60s linear infinite; }
+.hero-bg-c2 { position: absolute; top: 12%; right: 9%;  width: 340px; height: 340px; border-radius: 50%; border: 1.5px dashed rgba(0,106,78,.05); animation: hRot 45s linear infinite reverse; }
+.hero-bg-c3 { position: absolute; bottom: 10%; left: 3%; width: 280px; height: 280px; border-radius: 50%; border: 1.5px solid rgba(244,42,65,.05); animation: hRot 50s linear infinite; }
+.hero-bg-rc { position: absolute; top: 18%; right: 14%; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(244,42,65,.06) 0%, transparent 70%); animation: hPulse 8s ease-in-out infinite; }
 
-/* Red circle — flag reference */
-.hero-bg-red-circle{position:absolute;top:18%;right:14%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(244,42,65,.06) 0%,rgba(244,42,65,.02) 50%,transparent 70%);animation:heroPulse 8s ease-in-out infinite;}
+.hero-grid-lines {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0,106,78,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,106,78,.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 70% 60% at 75% 40%, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 75% 40%, black 0%, transparent 70%);
+}
 
-/* Floating dots */
-.hero-dot{position:absolute;border-radius:50%;animation:heroFloat 6s ease-in-out infinite;}
-.hero-dot-1{width:8px;height:8px;background:rgba(0,106,78,.12);top:20%;left:12%;animation-delay:0s;animation-duration:7s;}
-.hero-dot-2{width:6px;height:6px;background:rgba(244,42,65,.15);top:35%;right:20%;animation-delay:1s;animation-duration:5s;}
-.hero-dot-3{width:10px;height:10px;background:rgba(0,106,78,.08);bottom:25%;left:8%;animation-delay:2s;animation-duration:8s;}
-.hero-dot-4{width:5px;height:5px;background:rgba(244,42,65,.1);top:60%;right:8%;animation-delay:0.5s;animation-duration:6s;}
-.hero-dot-5{width:7px;height:7px;background:rgba(0,106,78,.1);top:15%;left:45%;animation-delay:3s;animation-duration:9s;}
-.hero-dot-6{width:4px;height:4px;background:rgba(244,42,65,.12);bottom:35%;right:35%;animation-delay:1.5s;animation-duration:7s;}
-.hero-dot-7{width:9px;height:9px;background:rgba(0,106,78,.06);bottom:15%;left:40%;animation-delay:4s;animation-duration:6.5s;}
+.hero-corner-tl { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 120px solid rgba(0,106,78,.04); border-bottom: 120px solid transparent; }
+.hero-corner-br { position: absolute; bottom: 0; right: 0; width: 0; height: 0; border-right: 160px solid rgba(244,42,65,.03); border-top: 160px solid transparent; }
+.hero-diag      { position: absolute; top: 0; right: 38%; width: 1px; height: 100%; background: linear-gradient(180deg, transparent 0%, rgba(0,106,78,.06) 30%, rgba(0,106,78,.06) 70%, transparent 100%); transform: rotate(15deg); transform-origin: top center; }
 
-/* Geometric grid lines */
-.hero-grid-lines{position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(0,106,78,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,106,78,.025) 1px,transparent 1px);
-  background-size:80px 80px;
-  mask-image:radial-gradient(ellipse 70% 60% at 75% 40%,black 0%,transparent 70%);
-  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 75% 40%,black 0%,transparent 70%);}
+.hero-dot { position: absolute; border-radius: 50%; animation: hFloat 6s ease-in-out infinite; }
+.hd1 { width:8px;  height:8px;  background:rgba(0,106,78,.12);  top:20%; left:12%;  animation-duration:7s;   animation-delay:0s; }
+.hd2 { width:6px;  height:6px;  background:rgba(244,42,65,.15); top:35%; right:20%; animation-duration:5s;   animation-delay:1s; }
+.hd3 { width:10px; height:10px; background:rgba(0,106,78,.08);  bottom:25%; left:8%; animation-duration:8s;  animation-delay:2s; }
+.hd4 { width:5px;  height:5px;  background:rgba(244,42,65,.1);  top:60%; right:8%;  animation-duration:6s;   animation-delay:.5s; }
+.hd5 { width:7px;  height:7px;  background:rgba(0,106,78,.1);   top:15%; left:45%;  animation-duration:9s;   animation-delay:3s; }
+.hd6 { width:4px;  height:4px;  background:rgba(244,42,65,.12); bottom:35%; right:35%; animation-duration:7s; animation-delay:1.5s; }
+.hd7 { width:9px;  height:9px;  background:rgba(0,106,78,.06);  bottom:15%; left:40%; animation-duration:6.5s; animation-delay:4s; }
 
-/* Corner decorative triangles */
-.hero-corner-tl{position:absolute;top:0;left:0;width:0;height:0;border-left:120px solid rgba(0,106,78,.04);border-bottom:120px solid transparent;}
-.hero-corner-br{position:absolute;bottom:0;right:0;width:0;height:0;border-right:160px solid rgba(244,42,65,.03);border-top:160px solid transparent;}
+.hero-cross { position: absolute; width: 16px; height: 16px; opacity: .12; }
+.hero-cross::before, .hero-cross::after { content: ''; position: absolute; background: var(--green); }
+.hero-cross::before { width: 16px; height: 1.5px; top: 50%; left: 0; transform: translateY(-50%); }
+.hero-cross::after  { width: 1.5px; height: 16px; left: 50%; top: 0; transform: translateX(-50%); }
+.hc1 { top: 25%; left: 25%; }
+.hc2 { top: 70%; left: 55%; opacity: .08; }
+.hc3 { top: 45%; right: 12%; opacity: .1; }
 
-/* Diagonal accent line */
-.hero-diag-line{position:absolute;top:0;right:38%;width:1px;height:100%;background:linear-gradient(180deg,transparent 0%,rgba(0,106,78,.06) 30%,rgba(0,106,78,.06) 70%,transparent 100%);transform:rotate(15deg);transform-origin:top center;}
+.hero-diamond { position: absolute; width: 10px; height: 10px; border: 1.5px solid rgba(0,106,78,.1); transform: rotate(45deg); animation: hFloat 7s ease-in-out infinite; }
+.hdm1 { top: 30%; right: 28%; animation-delay: 2s; }
+.hdm2 { bottom: 20%; left: 18%; animation-delay: 0s; border-color: rgba(244,42,65,.1); }
+.hdm3 { top: 55%; left: 35%; animation-delay: 3.5s; width: 7px; height: 7px; }
 
-/* Cross/Plus marks */
-.hero-cross{position:absolute;width:16px;height:16px;opacity:.12;}
-.hero-cross::before,.hero-cross::after{content:'';position:absolute;background:var(--green);}
-.hero-cross::before{width:16px;height:1.5px;top:50%;left:0;transform:translateY(-50%);}
-.hero-cross::after{width:1.5px;height:16px;left:50%;top:0;transform:translateX(-50%);}
-.hero-cross-1{top:25%;left:25%;}
-.hero-cross-2{top:70%;left:55%;opacity:.08;}
-.hero-cross-3{top:45%;right:12%;opacity:.1;width:12px;height:12px;}
-.hero-cross-3::before{width:12px;}
-.hero-cross-3::after{height:12px;}
+@keyframes hRot   { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes hPulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.15); opacity: .6; } }
+@keyframes hFloat { 0%,100% { transform: translateY(0) translateX(0); } 25% { transform: translateY(-12px) translateX(5px); } 50% { transform: translateY(-6px) translateX(-4px); } 75% { transform: translateY(-15px) translateX(3px); } }
 
-/* Small diamond shapes */
-.hero-diamond{position:absolute;width:10px;height:10px;border:1.5px solid rgba(0,106,78,.1);transform:rotate(45deg);animation:heroFloat 7s ease-in-out infinite;}
-.hero-diamond-1{top:30%;right:28%;animation-delay:2s;}
-.hero-diamond-2{bottom:20%;left:18%;animation-delay:0s;border-color:rgba(244,42,65,.1);}
-.hero-diamond-3{top:55%;left:35%;animation-delay:3.5s;width:7px;height:7px;}
+/* BD flag top stripe */
+.hero-flag-stripe {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--green) 60%, var(--red) 60%);
+  z-index: 1;
+}
 
-/* Animations */
-@keyframes heroRotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-@keyframes heroPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.15);opacity:.6;}}
-@keyframes heroFloat{0%,100%{transform:translateY(0) translateX(0);}25%{transform:translateY(-12px) translateX(5px);}50%{transform:translateY(-6px) translateX(-4px);}75%{transform:translateY(-15px) translateX(3px);}}
-.hero-flag-stripe{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--green) 60%,var(--red) 60%);z-index:1;}
-.hero-grid{max-width:1360px;width:92%;margin:0 auto;flex:1;display:grid;grid-template-columns:1.15fr 1fr;gap:0;align-items:center;padding:4.5rem 0 4rem;position:relative;z-index:1;}
-.hero-left{padding-right:4.5rem;border-right:1.5px solid var(--green-l);}
-.hero-eyebrow{display:flex;align-items:center;gap:.7rem;margin-bottom:1.6rem;flex-wrap:wrap;}
-.hero-eyebrow-bn{font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:700;color:var(--green);letter-spacing:.02em;}
-.hero-eyebrow-divider{width:4px;height:4px;border-radius:50%;background:var(--red);flex-shrink:0;}
-.hero-eyebrow-en{font-size:10px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);}
-.hero-title{margin-bottom:1.6rem;line-height:1;}
-.ht-line-en{display:block;font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,5.6rem);font-weight:900;letter-spacing:-.03em;color:var(--ink);line-height:.95;}
-.ht-line-en .hl-g{color:var(--green);}
-.ht-line-en .hl-r{color:var(--red);font-style:italic;}
-.ht-line-bn{display:block;font-family:'Noto Serif Bengali',serif;font-size:clamp(1.5rem,2.8vw,2.6rem);font-weight:700;color:var(--gray);line-height:1.4;margin-top:.35rem;letter-spacing:.01em;}
-.ht-line-bn strong{font-weight:900;color:var(--green);}
-.hero-rule{display:flex;align-items:center;gap:.8rem;margin:1.6rem 0;}
-.hero-rule-line{height:2px;background:linear-gradient(90deg,var(--green),transparent);flex:1;max-width:120px;}
-.hero-rule-circle{width:10px;height:10px;border-radius:50%;background:var(--red);flex-shrink:0;box-shadow:0 0 0 4px rgba(244,42,65,.15);}
-.hero-sub{margin-bottom:2.2rem;}
-.hero-sub-en{font-size:.96rem;font-weight:500;color:var(--gray);line-height:1.7;margin-bottom:.5rem;}
-.hero-sub-bn{font-family:'Noto Serif Bengali',sans-serif;font-size:.88rem;color:var(--gray-l);line-height:1.75;}
-.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;}
-.btn-g{background:var(--green);color:#fff;padding:13px 26px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:var(--radius-sm);border:2px solid var(--green);display:inline-flex;align-items:center;gap:7px;transition:all var(--T);box-shadow:0 4px 14px rgba(0,106,78,.2);}
-.btn-g:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,106,78,.3);}
-.btn-ghost-w{background:transparent;color:var(--ink);padding:13px 26px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:var(--radius-sm);border:2px solid var(--ink);display:inline-flex;align-items:center;gap:7px;transition:all var(--T);}
-.btn-ghost-w:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px);}
-.hero-right{padding-left:3.5rem;display:flex;flex-direction:column;gap:1.2rem;}
-.hero-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;}
-.hstat{background:var(--white);border:1.5px solid var(--green-l);border-radius:var(--radius);padding:1.2rem .8rem;text-align:center;transition:all var(--T);position:relative;overflow:hidden;}
-.hstat::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;}
-.hstat:hover{border-color:var(--green);box-shadow:0 6px 18px rgba(0,106,78,.1);transform:translateY(-3px);}
-.hstat:hover::after{transform:scaleX(1);}
-.hstat-n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--green);line-height:1;}
-.hstat-n sup{font-size:.9rem;color:var(--red);}
-.hstat-l{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-top:.3rem;}
-.hero-feat-cards{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
-.hfc{background:var(--white);border:1.5px solid var(--green-l);border-radius:var(--radius);padding:1.2rem 1rem;transition:all var(--T);position:relative;overflow:hidden;}
-.hfc::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--green);transition:height .3s ease;}
-.hfc:hover::before{height:100%;}
-.hfc:hover{border-color:var(--green);box-shadow:0 6px 18px rgba(0,106,78,.1);transform:translateY(-3px);}
-.hfc-icon{font-size:1.4rem;margin-bottom:.5rem;}
-.hfc-num{font-size:9px;font-weight:900;letter-spacing:.16em;color:var(--red);margin-bottom:.3rem;}
-.hfc-t{font-size:.84rem;font-weight:800;color:var(--ink);margin-bottom:.2rem;}
-.hfc-d{font-size:.74rem;color:var(--gray);line-height:1.45;font-family:'Noto Serif Bengali',sans-serif;}
-.hero-live-tag{display:inline-flex;align-items:center;gap:7px;background:var(--red-l);border:1px solid rgba(244,42,65,.25);color:var(--red);font-size:9px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;padding:.38rem .9rem;border-radius:20px;margin-bottom:1rem;}
-.hero-live-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;animation:pls 1.5s ease infinite;}
-@keyframes pls{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.6);}}
+/* \u2500\u2500 CONTENT GRID \u2500\u2500 */
+.hero-inner {
+  max-width: 1360px;
+  width: 92%;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
-/* ═══ TICKER ═══ */
-.ticker{background:var(--green);overflow:hidden;height:36px;display:flex;align-items:center;border-bottom:2px solid var(--green-d);position:relative;}
-.ticker-label{flex-shrink:0;background:var(--red);color:#fff;font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;padding:0 1.2rem;height:100%;display:flex;align-items:center;gap:6px;white-space:nowrap;z-index:2;}
-.ticker-label::after{content:'';position:absolute;left:68px;top:0;bottom:0;width:24px;background:linear-gradient(90deg,var(--red),transparent);pointer-events:none;}
-.ticker-track{overflow:hidden;flex:1;}
-.ticker-inner{display:inline-flex;white-space:nowrap;animation:ticker 36s linear infinite;gap:0;}
-.ticker-inner span{font-size:11px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.92);padding:0 28px;display:flex;align-items:center;gap:8px;}
-.ticker-inner span::before{content:'●';font-size:6px;color:var(--red);opacity:.8;}
-@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.hero-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  padding: 5rem 0 4rem;
+  position: relative;
+  z-index: 1;
+  gap: 0;
+}
 
-/* ═══ IMPACT BAR ═══ */
-.impact-bar{background:var(--green);border-bottom:3px solid var(--green-d);}
-.impact-inner{max-width:1360px;width:92%;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
-.impact-item{padding:2rem 1.5rem;text-align:center;border-right:1px solid rgba(255,255,255,.15);position:relative;}
-.impact-item:last-child{border-right:none;}
-.impact-num{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:#fff;line-height:1;}
-.impact-num span{color:#a8f3d8;}
-.impact-lbl{font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:.35rem;}
-.impact-desc{font-family:'Noto Serif Bengali',sans-serif;font-size:.76rem;color:rgba(255,255,255,.4);margin-top:.3rem;line-height:1.4;}
+/* \u2500\u2500 LEFT \u2500\u2500 */
+.hero-left {
+  padding-right: 4.5rem;
+  border-right: 1.5px solid var(--green-l);
+}
 
-/* ═══ SCROLL TOP ═══ */
-#scrollTopBtn{position:fixed;bottom:1.8rem;right:1.8rem;width:44px;height:44px;border-radius:var(--radius-sm);background:var(--green);color:#fff;border:none;font-size:1rem;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);transition:all var(--T);z-index:900;box-shadow:0 4px 16px rgba(0,106,78,.35);}
-#scrollTopBtn.vis{opacity:1;transform:none;}
-#scrollTopBtn:hover{background:var(--green-d);transform:translateY(-2px)!important;}
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
+}
+.hero-eyebrow-bn {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: .02em;
+}
+.hero-eyebrow-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.hero-eyebrow-en  { font-size: 10px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); }
 
-/* ═══ RESPONSIVE ═══ */
-@media(max-width:1024px){.hero-grid{grid-template-columns:1fr;gap:2.5rem;padding:3rem 0;}.hero-left{padding-right:0;border-right:none;border-bottom:1.5px solid var(--green-l);padding-bottom:2.5rem;}.hero-right{padding-left:0;}.impact-inner{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:768px){:root{--header-h:66px;--header-s:58px;}body{padding-top:var(--header-h);}.hdr-nav,.hdr-cta{display:none;}.hdr-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:0;width:94%;}.mob-wa-btn{display:flex;justify-self:start;}.hdr-logo{justify-self:center;}.hdr-logo img{height:40px;}#hdr.scrolled .hdr-logo img{height:36px;filter:none;}.ham-btn{display:flex;justify-self:end;}.hero-stat-row{grid-template-columns:repeat(3,1fr);}.hero-feat-cards{grid-template-columns:1fr 1fr;}}
-.mob-wa-num{display:none;}.mob-wa-btn{padding:8px;border-radius:50%;}
-@media(max-width:480px){.hero-stat-row{grid-template-columns:1fr 1fr;}.hero-feat-cards{grid-template-columns:1fr;}.impact-inner{grid-template-columns:1fr;}.hero-btns{flex-direction:column;}.hero-btns a{justify-content:center;}}
-</style>
-</head>
-<body>
+.hero-title { margin-bottom: 1.6rem; line-height: 1; }
+.ht-en {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 5.5vw, 5.6rem);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  color: var(--ink);
+  line-height: .95;
+}
+.ht-en .hl-g { color: var(--green); }
+.ht-en .hl-r { color: var(--red); font-style: italic; }
+.ht-bn {
+  display: block;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.6rem);
+  font-weight: 700;
+  color: var(--gray);
+  line-height: 1.4;
+  margin-top: .35rem;
+  letter-spacing: .01em;
+}
+.ht-bn strong { font-weight: 900; color: var(--green); }
+.ht-bn .red   { color: var(--red); }
 
-<!-- ═══════════════════════════════════════
-     HEADER
-═══════════════════════════════════════ -->
-<header id="hdr">
-  <div class="hdr-inner">
-    <a href="https://wa.me/8801989666676" target="_blank" class="mob-wa-btn" aria-label="WhatsApp">
-      <svg class="mob-wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </a>
-    <a href="/" class="hdr-logo">
-      <img src="https://politicalinsightsbd.com/wp-content/uploads/2026/02/WhatsApp_Image_2025-12-21_at_07.18.21-removebg-preview-1.webp" alt="Political Insights BD">
-    </a>
-    <nav class="hdr-nav" style="justify-self:end;">
-      <a href="https://politicalinsightsbd.com/about/">About</a>
-      <a href="https://politicalinsightsbd.com/research/">Research</a>
-      <a href="https://politicalinsightsbd.com/policy/">Policy</a>
-      <a href="https://politicalinsightsbd.com/report/">Reports</a>
-      <a href="https://politicalinsightsbd.com/all-insights/">Insights</a>
-      <a href="https://politicalinsightsbd.com/services/">Services</a>
-    </nav>
-    <a href="https://wa.me/8801989666676" target="_blank" class="hdr-cta">Get in Touch</a>
-    <button class="ham-btn" id="hamBtn" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
-</header>
-<div class="mob-nav" id="mobNav">
-  <a href="https://politicalinsightsbd.com/about/">🏛 About</a>
-  <a href="https://politicalinsightsbd.com/research/">🔬 Research</a>
-  <a href="https://politicalinsightsbd.com/policy/">📋 Policy</a>
-  <a href="https://politicalinsightsbd.com/report/">📄 Reports</a>
-  <a href="https://politicalinsightsbd.com/all-insights/">💡 All Insights</a>
-  <a href="https://politicalinsightsbd.com/services/">⚙️ Services</a>
-  <a href="https://wa.me/8801989666676" target="_blank" style="color:var(--green)!important;">📲 WhatsApp</a>
-  <a href="/cdn-cgi/l/email-protection#20434f4e544143546050494242440e4f5247" style="color:var(--green)!important;">✉️ <span class="__cf_email__" data-cfemail="b7d4d8d9c3d6d4c3f7c7ded5d5d399d8c5d0">[email&#160;protected]</span></a>
-</div>
+.hero-rule { display: flex; align-items: center; gap: .8rem; margin: 1.6rem 0; }
+.hero-rule-line   { height: 2px; background: linear-gradient(90deg, var(--green), transparent); flex: 1; max-width: 120px; }
+.hero-rule-circle { width: 10px; height: 10px; border-radius: 50%; background: var(--red); flex-shrink: 0; box-shadow: 0 0 0 4px rgba(244,42,65,.15); }
 
-<!-- ═══════════════════════════════════════
-     HERO SECTION
-═══════════════════════════════════════ -->
-<section id="hero">
-  <div class="hero-flag-stripe"></div>
+.hero-sub { margin-bottom: 2.2rem; }
+.hero-sub-en { font-size: .96rem; font-weight: 500; color: var(--gray); line-height: 1.7; margin-bottom: .5rem; }
+.hero-sub-bn { font-family: 'Noto Serif Bengali', serif; font-size: .88rem; color: var(--gray-l); line-height: 1.75; }
 
-  <!-- ═══ BACKGROUND GRAPHICS ═══ -->
-  <div class="hero-bg-graphics">
-    <!-- Rotating circles -->
-    <div class="hero-bg-circle-1"></div>
-    <div class="hero-bg-circle-2"></div>
-    <div class="hero-bg-circle-3"></div>
-    <!-- BD flag red glow -->
-    <div class="hero-bg-red-circle"></div>
-    <!-- Grid lines -->
-    <div class="hero-grid-lines"></div>
-    <!-- Floating dots -->
-    <div class="hero-dot hero-dot-1"></div>
-    <div class="hero-dot hero-dot-2"></div>
-    <div class="hero-dot hero-dot-3"></div>
-    <div class="hero-dot hero-dot-4"></div>
-    <div class="hero-dot hero-dot-5"></div>
-    <div class="hero-dot hero-dot-6"></div>
-    <div class="hero-dot hero-dot-7"></div>
-    <!-- Corner accents -->
-    <div class="hero-corner-tl"></div>
-    <div class="hero-corner-br"></div>
-    <!-- Diagonal line -->
-    <div class="hero-diag-line"></div>
-    <!-- Cross marks -->
-    <div class="hero-cross hero-cross-1"></div>
-    <div class="hero-cross hero-cross-2"></div>
-    <div class="hero-cross hero-cross-3"></div>
-    <!-- Diamond shapes -->
-    <div class="hero-diamond hero-diamond-1"></div>
-    <div class="hero-diamond hero-diamond-2"></div>
-    <div class="hero-diamond hero-diamond-3"></div>
-  </div>
-  <div style="max-width:1360px;width:92%;margin:0 auto;flex:1;display:flex;flex-direction:column;">
-    <div class="hero-grid">
-      <div class="hero-left">
-        <div class="hero-eyebrow">
-          <span class="hero-eyebrow-bn">রাজনৈতিক বিশ্লেষক ও নীতি পরামর্শদাতা</span>
-          <span class="hero-eyebrow-divider"></span>
-          <span class="hero-eyebrow-en">Political Analyst & Policy Advisor</span>
-        </div>
-        <h1 class="hero-title">
-          <span class="ht-line-en"><span class="hl-g">Modern</span><span class="hl-r"> Political</span></span>
-          <span class="ht-line-en" style="color:var(--ink);">Analysis</span>
-          <span class="ht-line-bn"><strong>Analyzing Politics,</strong> <strong style="color:var(--red);">Empowering Citizens</strong></span>
-        </h1>
-        <div class="hero-rule">
-          <div class="hero-rule-line"></div>
-          <div class="hero-rule-circle"></div>
-          <div class="hero-rule-line" style="background:linear-gradient(90deg,transparent,var(--red));"></div>
-        </div>
-        <div class="hero-sub">
-          <p class="hero-sub-en">Bangladesh's leading data-driven political analysis, policy research, and strategic consulting platform for democratic transition.</p>
-          <p class="hero-sub-bn">বাংলাদেশের রাজনৈতিক প্রেক্ষাপটে evidence-based insights এবং কৌশলগত পরামর্শ — গণতান্ত্রিক সংস্কারের পথে।</p>
-        </div>
-        <div class="hero-btns">
-          <a href="https://politicalinsightsbd.com/services/" class="btn-g">Services ↓</a>
-          <a href="https://politicalinsightsbd.com/about/" class="btn-ghost-w">About Us →</a>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div><div class="hero-live-tag">Election 2026 — Final Results Live</div></div>
-        <div class="hero-stat-row">
-          <div class="hstat"><div class="hstat-n">৮০<sup>+</sup></div><div class="hstat-l">বিশ্লেষণ</div></div>
-          <div class="hstat"><div class="hstat-n">২<sup>+</sup></div><div class="hstat-l">বছর</div></div>
-          <div class="hstat"><div class="hstat-n">১০<sup>+</sup></div><div class="hstat-l">প্রজেক্ট</div></div>
-        </div>
-        <div class="hero-feat-cards">
-          <div class="hfc"><div class="hfc-icon">📊</div><div class="hfc-num">01</div><div class="hfc-t">Data Insights</div><div class="hfc-d">তথ্যভিত্তিক রাজনৈতিক বিশ্লেষণ</div></div>
-          <div class="hfc"><div class="hfc-icon">🔬</div><div class="hfc-num">02</div><div class="hfc-t">Policy Research</div><div class="hfc-d">আন্তর্জাতিক মানের নীতি গবেষণা</div></div>
-          <div class="hfc"><div class="hfc-icon">🗳️</div><div class="hfc-num">03</div><div class="hfc-t">Election 2026</div><div class="hfc-d">BNP+ ২১২ আসন — চূড়ান্ত ফলাফল</div></div>
-          <div class="hfc"><div class="hfc-icon">🏛️</div><div class="hfc-num">04</div><div class="hfc-t">Governance</div><div class="hfc-d">সুশাসন ও স্বচ্ছতা কাঠামো</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+.hero-btns { display: flex; gap: .9rem; flex-wrap: wrap; }
+.btn-g {
+  background: var(--green);
+  color: #fff;
+  padding: 13px 26px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--green);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all var(--T);
+  box-shadow: 0 4px 14px rgba(0,106,78,.2);
+}
+.btn-g:hover { background: var(--green-d); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,106,78,.3); }
 
-<!-- ═══════════════════════════════════════
-     NEWS TICKER
-═══════════════════════════════════════ -->
-<div class="ticker">
-  <div class="ticker-label">🔴 Breaking</div>
-  <div class="ticker-track">
-    <div class="ticker-inner">
-      <span>Election 2026 Final Results: BNP Alliance 212 Seats</span>
-      <span>Constitutional Reform Watch — January 2026</span>
-      <span>ICT Policy Deep Dive — New Report Published</span>
-      <span>Transitional Justice: International Tribunal Update</span>
-      <span>Voter Sentiment Field Data — North Bengal Districts</span>
-      <span>Political Insights BD — আধুনিক রাজনৈতিক বিশ্লেষণ</span>
-      <span>Digital Manipulation and Modern Journalism — New Analysis</span>
-      <span>NCP–Jamaat Alliance Strategic Assessment</span>
-      <span>Election 2026 Final Results: BNP Alliance 212 Seats</span>
-      <span>Constitutional Reform Watch — January 2026</span>
-      <span>ICT Policy Deep Dive — New Report Published</span>
-      <span>Transitional Justice: International Tribunal Update</span>
-      <span>Voter Sentiment Field Data — North Bengal Districts</span>
-      <span>Political Insights BD — আধুনিক রাজনৈতিক বিশ্লেষণ</span>
-      <span>Digital Manipulation and Modern Journalism — New Analysis</span>
-      <span>NCP–Jamaat Alliance Strategic Assessment</span>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     IMPACT BAR
-═══════════════════════════════════════ -->
-<div class="impact-bar">
-  <div class="impact-inner">
-    <div class="impact-item"><div class="impact-num">৮০<span>+</span></div><div class="impact-lbl">Analysis Reports</div><div class="impact-desc">যাচাইকৃত রাজনৈতিক বিশ্লেষণ</div></div>
-    <div class="impact-item"><div class="impact-num">২<span>+</span></div><div class="impact-lbl">Years Active</div><div class="impact-desc">মাঠ পর্যায়ের নিরবচ্ছিন্ন অভিজ্ঞতা</div></div>
-    <div class="impact-item"><div class="impact-num">১০<span>+</span></div><div class="impact-lbl">Projects Done</div><div class="impact-desc">সফল নীতি প্রজেক্ট বাস্তবায়ন</div></div>
-    <div class="impact-item"><div class="impact-num">300</div><div class="impact-lbl">Seats Tracked</div><div class="impact-desc">২০২৬ নির্বাচনের পূর্ণ মনিটরিং</div></div>
-  </div>
-</div>
-
-<button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
-
-<!-- ═══════════════════════════════════════
-     JAVASCRIPT — PART 1
-═══════════════════════════════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* Header Scroll */
-const hdr = document.getElementById('hdr');
-window.addEventListener('scroll', () => {
-  hdr.classList.toggle('scrolled', window.scrollY > 60);
-  document.getElementById('scrollTopBtn').classList.toggle('vis', window.scrollY > 400);
-});
-
-/* Mobile Nav */
-const hamBtn = document.getElementById('hamBtn');
-const mobNav = document.getElementById('mobNav');
-hamBtn.addEventListener('click', () => {
-  hamBtn.classList.toggle('open');
-  mobNav.classList.toggle('open');
-});
-mobNav.querySelector
+.btn-out {
+  background: transparent;
+  color: var(--ink);
+  padding: 13px 26px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all var(--T);
+}
+.btn-out:hover
