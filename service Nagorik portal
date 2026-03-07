@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>\u0989\u09aa\u099c\u09c7\u09b2\u09be \u09a8\u09be\u0997\u09b0\u09bf\u0995 \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2 \u2014 \u09b8\u09c7\u09ac\u09be\u09b8\u09ae\u09c2\u09b9</title>
+<title>উপজেলা নাগরিক পোর্টাল — সেবাসমূহ</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -544,51 +544,17 @@
 </head>
 <body>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-top">
-    <div class="hero-logo">
-      <div class="logo-circle">\ud83c\udfdb\ufe0f</div>
-      <div class="logo-text">
-        <h1>\u0989\u09aa\u099c\u09c7\u09b2\u09be \u09a8\u09be\u0997\u09b0\u09bf\u0995 \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2</h1>
-        <p>\u0997\u09a3\u09aa\u09cd\u09b0\u099c\u09be\u09a4\u09a8\u09cd\u09a4\u09cd\u09b0\u09c0 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09b8\u09b0\u0995\u09be\u09b0</p>
-      </div>
-    </div>
-    <div class="hero-badge">\u0987-\u09b8\u09c7\u09ac\u09be \u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0</div>
-  </div>
-  <div class="hero-main">
-    <h2>\u09b8\u0995\u09b2 \u09a8\u09be\u0997\u09b0\u09bf\u0995 \u09b8\u09c7\u09ac\u09be \u098f\u0995 \u099c\u09be\u09af\u09bc\u0997\u09be\u09af\u09bc</h2>
-    <p>\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af, \u09b6\u09bf\u0995\u09cd\u09b7\u09be, \u0995\u09c3\u09b7\u09bf, \u0985\u09ac\u0995\u09be\u09a0\u09be\u09ae\u09cb \u0993 \u09a6\u09c1\u09b0\u09cd\u09af\u09cb\u0997 \u2014 \u0989\u09aa\u099c\u09c7\u09b2\u09be\u09b0 \u09b8\u09ac \u09b8\u09c7\u09ac\u09be \u09b8\u09b9\u099c\u09c7 \u0996\u09c1\u0981\u099c\u09c1\u09a8 \u098f\u09ac\u0982 \u09b8\u09b0\u09be\u09b8\u09b0\u09bf \u0986\u09ac\u09c7\u09a6\u09a8 \u0995\u09b0\u09c1\u09a8\u0964</p>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">\u09e7\u09eb+</div>
-        <div class="stat-label">\u09b8\u09c7\u09ac\u09be \u09ac\u09bf\u09ad\u09be\u0997</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">\u09eb\u099f\u09bf</div>
-        <div class="stat-label">\u09aa\u09cd\u09b0\u09a7\u09be\u09a8 \u0995\u09cd\u09af\u09be\u099f\u09be\u0997\u09b0\u09bf</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">\u09e8\u09ea/\u09ed</div>
-        <div class="stat-label">\u0985\u09a8\u09b2\u09be\u0987\u09a8 \u09b8\u09c7\u09ac\u09be</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">\u09eb\u09ec\u09eb+</div>
-        <div class="stat-label">\u0989\u09aa\u099c\u09c7\u09b2\u09be</div>
-      </div>
-    </div>
-  </div>
-</header>
+
 
 <!-- FILTER TABS -->
 <nav class="filter-bar">
-  <button class="filter-tab active" onclick="filterSection('all', this)">\ud83d\udd37 \u09b8\u0995\u09b2 \u09b8\u09c7\u09ac\u09be</button>
-  <button class="filter-tab" onclick="filterSection('health', this)">\ud83c\udfe5 \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0993 \u0995\u09c3\u09b7\u09bf</button>
-  <button class="filter-tab" onclick="filterSection('edu', this)">\ud83d\udcda \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0993 \u09a6\u0995\u09cd\u09b7\u09a4\u09be</button>
-  <button class="filter-tab" onclick="filterSection('license', this)">\ud83d\udccb \u09b2\u09be\u0987\u09b8\u09c7\u09a8\u09cd\u09b8 \u0993 \u0986\u0987\u09a8</button>
-  <button class="filter-tab" onclick="filterSection('infra', this)">\ud83d\udd27 \u0985\u09ac\u0995\u09be\u09a0\u09be\u09ae\u09cb</button>
-  <button class="filter-tab" onclick="filterSection('disaster', this)">\ud83c\udd98 \u09a6\u09c1\u09b0\u09cd\u09af\u09cb\u0997 \u0993 \u09a4\u09cd\u09b0\u09be\u09a3</button>
-  <button class="filter-tab" onclick="filterSection('pets', this)">\ud83d\udc04 \u09aa\u09b6\u09c1 \u0993 \u09ae\u09ce\u09b8\u09cd\u09af</button>
+  <button class="filter-tab active" onclick="filterSection('all', this)">🔷 সকল সেবা</button>
+  <button class="filter-tab" onclick="filterSection('health', this)">🏥 স্বাস্থ্য ও কৃষি</button>
+  <button class="filter-tab" onclick="filterSection('edu', this)">📚 শিক্ষা ও দক্ষতা</button>
+  <button class="filter-tab" onclick="filterSection('license', this)">📋 লাইসেন্স ও আইন</button>
+  <button class="filter-tab" onclick="filterSection('infra', this)">🔧 অবকাঠামো</button>
+  <button class="filter-tab" onclick="filterSection('disaster', this)">🆘 দুর্যোগ ও ত্রাণ</button>
+  <button class="filter-tab" onclick="filterSection('pets', this)">🐄 পশু ও মৎস্য</button>
 </nav>
 
 <!-- MAIN -->
@@ -596,22 +562,22 @@
 
   <!-- SEASONAL NOTICE -->
   <div class="seasonal-notice">
-    <div class="sn-icon">\ud83c\udf0a</div>
+    <div class="sn-icon">🌊</div>
     <div class="sn-content">
-      <h4>\u26a0\ufe0f \u09ae\u09cc\u09b8\u09c1\u09ae\u09c0 \u09b8\u09a4\u09b0\u09cd\u0995\u09ac\u09be\u09b0\u09cd\u09a4\u09be \u2014 \u09b8\u0995\u09cd\u09b0\u09bf\u09af\u09bc \u09b8\u09c7\u09ac\u09be\u09b8\u09ae\u09c2\u09b9</h4>
-      <p>\u09ac\u09a8\u09cd\u09af\u09be \u09ae\u09cc\u09b8\u09c1\u09ae (\u099c\u09c1\u09a8\u2013\u09b8\u09c7\u09aa\u09cd\u099f\u09c7\u09ae\u09cd\u09ac\u09b0) \u0993 \u0998\u09c2\u09b0\u09cd\u09a3\u09bf\u099d\u09a1\u09bc \u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4\u09bf \u0995\u09be\u09b0\u09cd\u09af\u0995\u09cd\u09b0\u09ae \u099a\u09b2\u099b\u09c7\u0964 VGF/VGD \u09a4\u09be\u09b2\u09bf\u0995\u09be \u09a8\u09bf\u09ac\u09a8\u09cd\u09a7\u09a8, \u0986\u09b6\u09cd\u09b0\u09af\u09bc\u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0 \u09a4\u09a5\u09cd\u09af \u098f\u09ac\u0982 \u09a4\u09cd\u09b0\u09be\u09a3 \u09ac\u09bf\u09a4\u09b0\u09a3 \u09b8\u0982\u0995\u09cd\u09b0\u09be\u09a8\u09cd\u09a4 \u09b8\u09ac \u0986\u09aa\u09a1\u09c7\u099f \u09a8\u09bf\u099a\u09c7\u09b0 \u09a6\u09c1\u09b0\u09cd\u09af\u09cb\u0997 \u09ac\u09bf\u09ad\u09be\u0997\u09c7 \u09aa\u09be\u09ac\u09c7\u09a8\u0964 \u09b8\u09b0\u09cd\u09ac\u09b6\u09c7\u09b7 \u09a4\u09a5\u09cd\u09af\u09c7\u09b0 \u099c\u09a8\u09cd\u09af <a href="https://reliefweb.int/report/bangladesh/bangladesh-cyclone-early-action-protocol-2025-annual-report-eap-no-eap2021bd06-operation-no-mdrbd033-5-march-2026" target="_blank" style="color:#e65100;font-weight:600;">ReliefWeb \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2</a> \u09a6\u09c7\u0996\u09c1\u09a8\u0964</p>
+      <h4>⚠️ মৌসুমী সতর্কবার্তা — সক্রিয় সেবাসমূহ</h4>
+      <p>বন্যা মৌসুম (জুন–সেপ্টেম্বর) ও ঘূর্ণিঝড় প্রস্তুতি কার্যক্রম চলছে। VGF/VGD তালিকা নিবন্ধন, আশ্রয়কেন্দ্র তথ্য এবং ত্রাণ বিতরণ সংক্রান্ত সব আপডেট নিচের দুর্যোগ বিভাগে পাবেন। সর্বশেষ তথ্যের জন্য <a href="https://reliefweb.int/report/bangladesh/bangladesh-cyclone-early-action-protocol-2025-annual-report-eap-no-eap2021bd06-operation-no-mdrbd033-5-march-2026" target="_blank" style="color:#e65100;font-weight:600;">ReliefWeb বাংলাদেশ পোর্টাল</a> দেখুন।</p>
     </div>
   </div>
 
-  <!-- \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 -->
+  <!-- ═══════════════════════════════════════ -->
   <!-- SECTION 1: HEALTH & AGRICULTURE -->
-  <!-- \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 -->
+  <!-- ═══════════════════════════════════════ -->
   <div class="service-section" id="section-health">
     <div class="section-title">
-      <div class="section-icon" style="background:#fde8e8;">\ud83c\udfe5</div>
+      <div class="section-icon" style="background:#fde8e8;">🏥</div>
       <div>
-        <h3>\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0993 \u0995\u09c3\u09b7\u09bf \u09b8\u09c7\u09ac\u09be</h3>
-        <span>Health & Agriculture \u2014 \u09b8\u09b0\u09be\u09b8\u09b0\u09bf \u09b8\u09b0\u0995\u09be\u09b0\u09bf \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2\u09c7 \u0986\u09ac\u09c7\u09a6\u09a8 \u0995\u09b0\u09c1\u09a8</span>
+        <h3>স্বাস্থ্য ও কৃষি সেবা</h3>
+        <span>Health & Agriculture — সরাসরি সরকারি পোর্টালে আবেদন করুন</span>
       </div>
       <div class="divider-line"></div>
     </div>
@@ -621,107 +587,616 @@
       <!-- Health Complex -->
       <div class="service-card c-health">
         <div class="card-header">
-          <div class="card-icon">\ud83c\udfe8</div>
+          <div class="card-icon">🏨</div>
           <div class="card-meta">
-            <div class="card-title">\u0989\u09aa\u099c\u09c7\u09b2\u09be \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0995\u09ae\u09aa\u09cd\u09b2\u09c7\u0995\u09cd\u09b8 \u09b8\u09c7\u09ac\u09be</div>
+            <div class="card-title">উপজেলা স্বাস্থ্য কমপ্লেক্স সেবা</div>
             <div class="card-badges">
-              <span class="badge badge-cat">\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af\u09b8\u09c7\u09ac\u09be</span>
-              <span class="badge badge-online">\u0985\u09a8\u09b2\u09be\u0987\u09a8 \u09a4\u09a5\u09cd\u09af</span>
+              <span class="badge badge-cat">স্বাস্থ্যসেবা</span>
+              <span class="badge badge-online">অনলাইন তথ্য</span>
             </div>
           </div>
         </div>
         <div class="card-body">
-          <div class="desc-label">\ud83d\udccb \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf</div>
-          <div class="card-desc">\u0989\u09aa\u099c\u09c7\u09b2\u09be \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0995\u09ae\u09aa\u09cd\u09b2\u09c7\u0995\u09cd\u09b8\u09c7 \u09b8\u09b0\u09be\u09b8\u09b0\u09bf \u0997\u09bf\u09af\u09bc\u09c7 \u09ac\u09be \u09a8\u09cd\u09af\u09be\u09b6\u09a8\u09be\u09b2 \u09b9\u09c7\u09b2\u09a5 \u09b9\u09c7\u09b2\u09cd\u09aa\u09b2\u09be\u0987\u09a8 <strong>\u09e7\u09ec\u09e6\u09e6\u09e6</strong> \u09a8\u09ae\u09cd\u09ac\u09b0\u09c7 \u0995\u09b2 \u0995\u09b0\u09c1\u09a8\u0964 \u09b0\u09c7\u099c\u09bf\u09b8\u09cd\u099f\u09cd\u09b0\u09c7\u09b6\u09a8 \u0995\u09be\u0989\u09a8\u09cd\u099f\u09be\u09b0\u09c7 \u099c\u09be\u09a4\u09c0\u09af\u09bc \u09aa\u09b0\u09bf\u099a\u09af\u09bc\u09aa\u09a4\u09cd\u09b0 \u09a6\u09c7\u0996\u09bf\u09af\u09bc\u09c7 \u099f\u09cb\u0995\u09c7\u09a8 \u09a8\u09bf\u09a8\u0964</div>
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">উপজেলা স্বাস্থ্য কমপ্লেক্সে সরাসরি গিয়ে বা ন্যাশনাল হেলথ হেল্পলাইন <strong>১৬০০০</strong> নম্বরে কল করুন। রেজিস্ট্রেশন কাউন্টারে জাতীয় পরিচয়পত্র দেখিয়ে টোকেন নিন।</div>
           <div class="card-info-row">
             <div class="info-item">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#388e3c" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-              \u09b8\u0995\u09be\u09b2 \u09ee\u099f\u09be \u2013 \u09ac\u09bf\u0995\u09be\u09b2 \u09eb\u099f\u09be
+              সকাল ৮টা – বিকাল ৫টা
             </div>
             <div class="info-item">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#388e3c" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              \u09b8\u0995\u09b2\u09c7\u09b0 \u099c\u09a8\u09cd\u09af \u09ac\u09bf\u09a8\u09be\u09ae\u09c2\u09b2\u09cd\u09af\u09c7
+              সকলের জন্য বিনামূল্যে
             </div>
           </div>
           <div class="card-info-row" style="margin-top:-4px;">
             <div class="info-item" style="font-size:12px;">
-              <strong>\u09aa\u09be\u0993\u09af\u09bc\u09be \u09af\u09be\u09af\u09bc:</strong>&nbsp;\u09ac\u09b9\u09bf\u0983\u09ac\u09bf\u09ad\u09be\u0997 \u09b8\u09c7\u09ac\u09be, \u09b2\u09cd\u09af\u09be\u09ac \u09aa\u09b0\u09c0\u0995\u09cd\u09b7\u09be, \u09a1\u09be\u0995\u09cd\u09a4\u09be\u09b0 \u09aa\u09b0\u09be\u09ae\u09b0\u09cd\u09b6, \u09ad\u09b0\u09cd\u09a4\u09bf \u09b8\u09c1\u09ac\u09bf\u09a7\u09be
+              <strong>পাওয়া যায়:</strong>&nbsp;বহিঃবিভাগ সেবা, ল্যাব পরীক্ষা, ডাক্তার পরামর্শ, ভর্তি সুবিধা
             </div>
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://meghna.comilla.gov.bd/en/site/page/EeiW" target="_blank" class="btn-primary">\ud83d\udd17 \u09b8\u09c7\u09ac\u09be \u09a4\u09be\u09b2\u09bf\u0995\u09be \u09a6\u09c7\u0996\u09c1\u09a8</a>
-          <a href="https://www.researchgate.net/publication/342612505" target="_blank" class="btn-secondary">\ud83d\udcd6 \u09a4\u09a5\u09cd\u09af</a>
+          <a href="https://meghna.comilla.gov.bd/en/site/page/EeiW" target="_blank" class="btn-primary">🔗 সেবা তালিকা দেখুন</a>
+          <a href="https://www.researchgate.net/publication/342612505" target="_blank" class="btn-secondary">📖 তথ্য</a>
         </div>
       </div>
 
       <!-- EPI Vaccination -->
       <div class="service-card c-health">
         <div class="card-header">
-          <div class="card-icon">\ud83d\udc89</div>
+          <div class="card-icon">💉</div>
           <div class="card-meta">
-            <div class="card-title">\u099f\u09bf\u0995\u09be\u09a6\u09be\u09a8 \u0995\u09b0\u09cd\u09ae\u09b8\u09c2\u099a\u09bf (EPI)</div>
+            <div class="card-title">টিকাদান কর্মসূচি (EPI)</div>
             <div class="card-badges">
-              <span class="badge badge-cat">\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af\u09b8\u09c7\u09ac\u09be</span>
-              <span class="badge badge-seasonal">\u09ae\u09cc\u09b8\u09c1\u09ae\u09c0 \u09b8\u09ae\u09cd\u09aa\u09cd\u09b0\u09b8\u09be\u09b0\u09a3</span>
+              <span class="badge badge-cat">স্বাস্থ্যসেবা</span>
+              <span class="badge badge-seasonal">মৌসুমী সম্প্রসারণ</span>
             </div>
           </div>
         </div>
         <div class="card-body">
-          <div class="desc-label">\ud83d\udccb \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf</div>
-          <div class="card-desc">\u0987\u0989\u09a8\u09bf\u09af\u09bc\u09a8 \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0 \u09ac\u09be \u0995\u09ae\u09bf\u0989\u09a8\u09bf\u099f\u09bf \u0995\u09cd\u09b2\u09bf\u09a8\u09bf\u0995\u09c7 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09bf\u09a4 \u09a6\u09bf\u09a8\u09c7 \u09af\u09be\u09a8\u0964 \u09b6\u09bf\u09b6\u09c1\u09b0 \u099c\u09a8\u09cd\u09ae\u09a8\u09bf\u09ac\u09a8\u09cd\u09a7\u09a8 \u09b8\u09a8\u09a6 \u09b8\u09be\u09a5\u09c7 \u0986\u09a8\u09c1\u09a8\u0964 \u099f\u09bf\u0995\u09be \u0995\u09be\u09b0\u09cd\u09a1 \u09b8\u0982\u0997\u09cd\u09b0\u09b9 \u0995\u09b0\u09c1\u09a8\u0964</div>
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">ইউনিয়ন স্বাস্থ্য কেন্দ্র বা কমিউনিটি ক্লিনিকে নির্ধারিত দিনে যান। শিশুর জন্মনিবন্ধন সনদ সাথে আনুন। টিকা কার্ড সংগ্রহ করুন।</div>
           <div class="seasonal-box">
-            <div class="s-label">\ud83d\uddd3\ufe0f \u09ae\u09cc\u09b8\u09c1\u09ae\u09c0 \u09ac\u09bf\u09b6\u09c7\u09b7 \u09a4\u09a5\u09cd\u09af</div>
-            <div class="s-text">\u09ac\u09be\u09b0\u09cd\u09b7\u09bf\u0995 <strong>EPI \u09b8\u09aa\u09cd\u09a4\u09be\u09b9</strong> \u09aa\u09cd\u09b0\u09a4\u09bf \u09ac\u099b\u09b0 \u09ae\u09be\u09b0\u09cd\u099a\u2013\u098f\u09aa\u09cd\u09b0\u09bf\u09b2 \u0993 \u0985\u0995\u09cd\u099f\u09cb\u09ac\u09b0\u2013\u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09ae\u09be\u09b8\u09c7 \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4 \u09b9\u09af\u09bc\u0964 \u0987\u09a8\u09ab\u09cd\u09b2\u09c1\u09af\u09bc\u09c7\u099e\u09cd\u099c\u09be \u099f\u09bf\u0995\u09be \u09b8\u09be\u09a7\u09be\u09b0\u09a3\u09a4 \u0985\u0995\u09cd\u099f\u09cb\u09ac\u09b0 \u09a5\u09c7\u0995\u09c7 \u09aa\u09be\u0993\u09af\u09bc\u09be \u09af\u09be\u09af\u09bc\u0964</div>
+            <div class="s-label">🗓️ মৌসুমী বিশেষ তথ্য</div>
+            <div class="s-text">বার্ষিক <strong>EPI সপ্তাহ</strong> প্রতি বছর মার্চ–এপ্রিল ও অক্টোবর–নভেম্বর মাসে অনুষ্ঠিত হয়। ইনফ্লুয়েঞ্জা টিকা সাধারণত অক্টোবর থেকে পাওয়া যায়।</div>
           </div>
           <div class="card-info-row">
-            <div class="info-item"><strong>\u09aa\u09be\u0993\u09af\u09bc\u09be \u09af\u09be\u09af\u09bc:</strong>&nbsp;BCG, \u09aa\u09cb\u09b2\u09bf\u0993, \u09b9\u09c7\u09aa\u09be\u099f\u09be\u0987\u099f\u09bf\u09b8-B, \u09b9\u09be\u09ae \u09b8\u09b9 \u09b8\u0995\u09b2 \u099f\u09bf\u0995\u09be \u09ac\u09bf\u09a8\u09be\u09ae\u09c2\u09b2\u09cd\u09af\u09c7</div>
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;BCG, পোলিও, হেপাটাইটিস-B, হাম সহ সকল টিকা বিনামূল্যে</div>
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://dghs.gov.bd" target="_blank" class="btn-primary">\ud83d\udd17 DGHS \u09aa\u09cb\u09b0\u09cd\u099f\u09be\u09b2</a>
+          <a href="https://dghs.gov.bd" target="_blank" class="btn-primary">🔗 DGHS পোর্টাল</a>
         </div>
       </div>
 
       <!-- Ambulance -->
       <div class="service-card c-health">
         <div class="card-header">
-          <div class="card-icon">\ud83d\ude91</div>
+          <div class="card-icon">🚑</div>
           <div class="card-meta">
-            <div class="card-title">\u099c\u09b0\u09c1\u09b0\u09bf \u0985\u09cd\u09af\u09be\u09ae\u09cd\u09ac\u09c1\u09b2\u09c7\u09a8\u09cd\u09b8 \u09b8\u09c7\u09ac\u09be</div>
+            <div class="card-title">জরুরি অ্যাম্বুলেন্স সেবা</div>
             <div class="card-badges">
-              <span class="badge badge-cat">\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af\u09b8\u09c7\u09ac\u09be</span>
-              <span class="badge badge-online">\u09e8\u09ea/\u09ed</span>
+              <span class="badge badge-cat">স্বাস্থ্যসেবা</span>
+              <span class="badge badge-online">২৪/৭</span>
             </div>
           </div>
         </div>
         <div class="card-body">
-          <div class="desc-label">\ud83d\udccb \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf</div>
-          <div class="card-desc">\u099c\u09be\u09a4\u09c0\u09af\u09bc \u099c\u09b0\u09c1\u09b0\u09bf \u09b8\u09c7\u09ac\u09be \u09a8\u09ae\u09cd\u09ac\u09b0 <strong>999</strong> \u09ac\u09be \u0989\u09aa\u099c\u09c7\u09b2\u09be \u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u0995\u09ae\u09aa\u09cd\u09b2\u09c7\u0995\u09cd\u09b8\u09c7\u09b0 \u09b8\u09b0\u09be\u09b8\u09b0\u09bf \u09a8\u09ae\u09cd\u09ac\u09b0\u09c7 \u0995\u09b2 \u0995\u09b0\u09c1\u09a8\u0964 \u0985\u09ac\u09b8\u09cd\u09a5\u09be\u09a8 \u0993 \u09b0\u09cb\u0997\u09c0\u09b0 \u0985\u09ac\u09b8\u09cd\u09a5\u09be \u099c\u09be\u09a8\u09be\u09a8\u0964</div>
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">জাতীয় জরুরি সেবা নম্বর <strong>999</strong> বা উপজেলা স্বাস্থ্য কমপ্লেক্সের সরাসরি নম্বরে কল করুন। অবস্থান ও রোগীর অবস্থা জানান।</div>
           <div class="card-info-row">
             <div class="info-item">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#d32f2f" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.36 12.9a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72"/></svg>
-              \u09b9\u09c7\u09b2\u09cd\u09aa\u09b2\u09be\u0987\u09a8: 999 / 16000
+              হেল্পলাইন: 999 / 16000
             </div>
           </div>
           <div class="card-info-row" style="margin-top:-4px;">
-            <div class="info-item"><strong>\u09aa\u09be\u0993\u09af\u09bc\u09be \u09af\u09be\u09af\u09bc:</strong>&nbsp;\u09a6\u09bf\u09a8\u09b0\u09be\u09a4 \u09e8\u09ea \u0998\u09a3\u09cd\u099f\u09be, \u09b8\u09aa\u09cd\u09a4\u09be\u09b9\u09c7\u09b0 \u09ed \u09a6\u09bf\u09a8</div>
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;দিনরাত ২৪ ঘণ্টা, সপ্তাহের ৭ দিন</div>
           </div>
         </div>
         <div class="card-footer">
-          <a href="https://meghna.comilla.gov.bd" target="_blank" class="btn-primary">\ud83d\udd17 \u09a4\u09a5\u09cd\u09af \u09a6\u09c7\u0996\u09c1\u09a8</a>
+          <a href="https://meghna.comilla.gov.bd" target="_blank" class="btn-primary">🔗 তথ্য দেখুন</a>
         </div>
       </div>
 
       <!-- Agriculture Advisory -->
       <div class="service-card c-agri">
         <div class="card-header">
-          <div class="card-icon">\ud83c\udf3e</div>
+          <div class="card-icon">🌾</div>
           <div class="card-meta">
-            <div class="card-title">\u0995\u09c3\u09b7\u09bf \u09aa\u09b0\u09be\u09ae\u09b0\u09cd\u09b6 \u09b8\u09c7\u09ac\u09be</div>
+            <div class="card-title">কৃষি পরামর্শ সেবা</div>
             <div class="card-badges">
-              <span class="badge badge-cat">\u0995\u09c3\u09b7\u09bf\u09b8\u09c7\u09ac\u09be</span>
-              <span class="badge badge-seasonal">\u09ae\u09cc\u09b8\u09c1\u09ae\u09bf \u09ac\u09aa\u09a8 \u09a4\u09a5\u09cd\u09af</span>
+              <span class="badge badge-cat">কৃষিসেবা</span>
+              <span class="badge badge-seasonal">মৌসুমি বপন তথ্য</span>
             </div>
           </div>
-        </div
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">উপজেলা কৃষি অফিসে সরাসরি যোগাযোগ করুন। কৃষি কল সেন্টার <strong>16123</strong>-এ কল করুন। উপ-সহকারী কৃষি কর্মকর্তা মাঠ পরিদর্শনে আসবেন।</div>
+          <div class="seasonal-box">
+            <div class="s-label">🗓️ মৌসুমী বপন সময়সূচি</div>
+            <div class="s-text">
+              <strong>বোরো ধান:</strong> ডিসেম্বর–জানুয়ারি বপন | <strong>আমন:</strong> জুন–আগস্ট | <strong>সরিষা:</strong> অক্টোবর–নভেম্বর | মৌসুমী সার বিতরণ সূচির জন্য <a href="https://saluaup.kishoreganj.gov.bd" target="_blank" style="color:var(--green-deep);font-weight:600;">কৃষি অফিস পোর্টাল</a> দেখুন।
+            </div>
+          </div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;ফসলের রোগ নির্ণয়, আধুনিক চাষ পদ্ধতি, সার ও বীজ পরামর্শ</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://saluaup.kishoreganj.gov.bd" target="_blank" class="btn-primary">🔗 কৃষি সেবা পোর্টাল</a>
+          <a href="https://ashwadiaup.noakhali.gov.bd" target="_blank" class="btn-secondary">📋 সেবা তালিকা</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 2: LIVESTOCK & FISHERY (PETS) -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="service-section" id="section-pets">
+    <div class="pets-section">
+      <div class="pets-header">
+        <div class="pets-icon-big">🐄</div>
+        <div>
+          <h3>প্রাণিসম্পদ ও মৎস্য সেবা</h3>
+          <p>গবাদি পশু চিকিৎসা, কৃত্রিম প্রজনন ও মাছ চাষ — পশু ও মৎস্য বিভাগ</p>
+        </div>
+      </div>
+      <div class="service-grid">
+
+        <!-- Livestock Treatment -->
+        <div class="service-card c-agri" style="background:#fff;">
+          <div class="card-header">
+            <div class="card-icon">🐮</div>
+            <div class="card-meta">
+              <div class="card-title">গবাদি পশুর চিকিৎসা সেবা</div>
+              <div class="card-badges">
+                <span class="badge badge-cat">প্রাণিসম্পদ</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="desc-label">📋 পদ্ধতি</div>
+            <div class="card-desc">উপজেলা প্রাণিসম্পদ অফিসে যোগাযোগ করুন। ভেটেরিনারি সার্জনের কাছ থেকে প্রেসক্রিপশন নিন। জরুরি ক্ষেত্রে মাঠে পরিদর্শনের ব্যবস্থা আছে।</div>
+            <div class="seasonal-box">
+              <div class="s-label">🗓️ মৌসুমী টিকাদান</div>
+              <div class="s-text"><strong>FMD (খুরারোগ):</strong> মার্চ–এপ্রিল ও অক্টোবর | <strong>ব্রুসেলোসিস:</strong> বার্ষিক ক্যাম্পেইন | তারিখের জন্য <a href="https://dls.gov.bd" target="_blank" style="color:var(--green-deep);font-weight:600;">DLS পোর্টাল</a> দেখুন।</div>
+            </div>
+            <div class="card-info-row">
+              <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;চিকিৎসা, টিকা, কৃত্রিম প্রজনন সেবা</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://dls.gov.bd" target="_blank" class="btn-primary">🔗 DLS পোর্টাল</a>
+          </div>
+        </div>
+
+        <!-- Artificial Insemination -->
+        <div class="service-card c-agri" style="background:#fff;">
+          <div class="card-header">
+            <div class="card-icon">🔬</div>
+            <div class="card-meta">
+              <div class="card-title">কৃত্রিম প্রজনন সেবা (AI)</div>
+              <div class="card-badges">
+                <span class="badge badge-cat">প্রাণিসম্পদ</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="desc-label">📋 পদ্ধতি</div>
+            <div class="card-desc">উপজেলা প্রাণিসম্পদ অফিসের AI টেকনিশিয়ানের সাথে যোগাযোগ করুন। গাভী গরমে আসার ৮–১২ ঘণ্টার মধ্যে AI করাতে হবে।</div>
+            <div class="card-info-row">
+              <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;সারা বছর (নির্ধারিত টেকনিশিয়ানের মাধ্যমে)</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://dls.gov.bd" target="_blank" class="btn-primary">🔗 তথ্য দেখুন</a>
+          </div>
+        </div>
+
+        <!-- Fish Farming -->
+        <div class="service-card c-agri" style="background:#fff;">
+          <div class="card-header">
+            <div class="card-icon">🐟</div>
+            <div class="card-meta">
+              <div class="card-title">মাছ চাষ পরামর্শ সেবা</div>
+              <div class="card-badges">
+                <span class="badge badge-cat">মৎস্য</span>
+                <span class="badge badge-seasonal">মৌসুমী পোনা</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="desc-label">📋 পদ্ধতি</div>
+            <div class="card-desc">উপজেলা মৎস্য অফিসে আবেদন করুন। মাঠ কর্মকর্তা পুকুর পরিদর্শন করবেন এবং আধুনিক চাষ পদ্ধতির পরামর্শ দেবেন।</div>
+            <div class="seasonal-box">
+              <div class="s-label">🗓️ মৌসুমী পোনা সংগ্রহ</div>
+              <div class="s-text"><strong>রুই, কাতলা পোনা:</strong> মে–জুলাই | <strong>তেলাপিয়া:</strong> সারা বছর | <strong>চিংড়ি পোস্ট লার্ভা:</strong> মার্চ–মে। আরও তথ্যের জন্য <a href="https://fisheries.gov.bd" target="_blank" style="color:var(--green-deep);font-weight:600;">মৎস্য অধিদপ্তর</a> দেখুন।</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://fisheries.gov.bd" target="_blank" class="btn-primary">🔗 মৎস্য পোর্টাল</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 3: EDUCATION & SKILLS -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="service-section" id="section-edu">
+    <div class="section-title">
+      <div class="section-icon" style="background:#e3f2fd;">📚</div>
+      <div>
+        <h3>শিক্ষা ও দক্ষতা উন্নয়ন</h3>
+        <span>Education & Skills Development</span>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="service-grid">
+
+      <!-- Scholarship -->
+      <div class="service-card c-edu">
+        <div class="card-header">
+          <div class="card-icon">🎓</div>
+          <div class="card-meta">
+            <div class="card-title">বৃত্তি ও উপবৃত্তি সেবা</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">শিক্ষাসেবা</span>
+              <span class="badge badge-seasonal">মৌসুমী আবেদন</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">শিক্ষা প্রতিষ্ঠানের প্রধানের মাধ্যমে আবেদন করুন। উপবৃত্তির জন্য মোবাইল ব্যাংকিং (বিকাশ/নগদ) নম্বর লাগবে।</div>
+          <div class="seasonal-box">
+            <div class="s-label">🗓️ আবেদনের সময়</div>
+            <div class="s-text"><strong>Primary Stipend:</strong> অক্টোবর–নভেম্বর | <strong>JSC/SSC বৃত্তি:</strong> ফলাফলের পর মার্চ–এপ্রিল | সর্বশেষ সার্কুলারের জন্য <a href="https://shed.gov.bd" target="_blank" style="color:#1565c0;font-weight:600;">শিক্ষা প্রকৌশল বিভাগ</a> দেখুন।</div>
+          </div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;প্রাথমিক থেকে উচ্চমাধ্যমিক — সকল স্তরে</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://dse.gov.bd" target="_blank" class="btn-primary">🔗 শিক্ষা পোর্টাল</a>
+          <a href="https://stipend.dpe.gov.bd" target="_blank" class="btn-secondary">📋 আবেদন</a>
+        </div>
+      </div>
+
+      <!-- Youth Training -->
+      <div class="service-card c-edu">
+        <div class="card-header">
+          <div class="card-icon">💼</div>
+          <div class="card-meta">
+            <div class="card-title">যুব উন্নয়ন বৃত্তিমূলক প্রশিক্ষণ</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">দক্ষতা উন্নয়ন</span>
+              <span class="badge badge-seasonal">ব্যাচভিত্তিক</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">উপজেলা যুব উন্নয়ন অফিসে গিয়ে ফরম সংগ্রহ করুন। বয়স ১৮–৩৫ বছর, শিক্ষাগত যোগ্যতা অনুযায়ী আবেদন করুন।</div>
+          <div class="seasonal-box">
+            <div class="s-label">🗓️ ব্যাচ সময়সূচি</div>
+            <div class="s-text">প্রতি বছর ২টি ব্যাচ — <strong>জানুয়ারি</strong> ও <strong>জুলাই</strong>। হাঁস-মুরগি পালন, কম্পিউটার, সেলাই, ইলেকট্রিক্যাল কোর্স পাওয়া যায়। সার্কুলারের জন্য <a href="https://dss.chandpur.gov.bd" target="_blank" style="color:#1565c0;font-weight:600;">সমাজসেবা অফিস</a> দেখুন।</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://dys.gov.bd" target="_blank" class="btn-primary">🔗 যুব অধিদপ্তর</a>
+          <a href="https://dss.chandpur.gov.bd" target="_blank" class="btn-secondary">📋 পল্লী সেবা</a>
+        </div>
+      </div>
+
+      <!-- School Database -->
+      <div class="service-card c-edu">
+        <div class="card-header">
+          <div class="card-icon">🏫</div>
+          <div class="card-meta">
+            <div class="card-title">শিক্ষা প্রতিষ্ঠান ডাটাবেজ</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">শিক্ষাসেবা</span>
+              <span class="badge badge-online">অনলাইন</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">উপজেলার সকল শিক্ষা প্রতিষ্ঠানের তালিকা, EIIN নম্বর, প্রধান শিক্ষকের তথ্য ও ফলাফল দেখুন BANBEIS পোর্টালে।</div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;প্রাথমিক, মাধ্যমিক, কলেজ ও মাদ্রাসা — সকল তথ্য</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://banbeis.gov.bd" target="_blank" class="btn-primary">🔗 BANBEIS পোর্টাল</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 4: LICENSE & LEGAL -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="service-section" id="section-license">
+    <div class="section-title">
+      <div class="section-icon" style="background:#f3e5f5;">📋</div>
+      <div>
+        <h3>লাইসেন্স ও আইনি সেবা</h3>
+        <span>License & Legal Services</span>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="service-grid">
+
+      <!-- Trade License -->
+      <div class="service-card c-license">
+        <div class="card-header">
+          <div class="card-icon">🏪</div>
+          <div class="card-meta">
+            <div class="card-title">ট্রেড লাইসেন্স প্রদান ও নবায়ন</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">লাইসেন্স</span>
+              <span class="badge badge-seasonal">বার্ষিক নবায়ন</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">উপজেলা পরিষদ বা পৌরসভা অফিসে গিয়ে ফরম পূরণ করুন। জাতীয় পরিচয়পত্র, দোকান ভাড়ার দলিল ও ব্যবসার ছবি জমা দিন। ফি পরিশোধের রশিদ সংরক্ষণ করুন।</div>
+          <div class="seasonal-box">
+            <div class="s-label">🗓️ নবায়নের সময়</div>
+            <div class="s-text"><strong>বার্ষিক নবায়ন:</strong> প্রতি বছর জুলাই–সেপ্টেম্বরের মধ্যে। নতুন ইস্যু সারা বছর পাওয়া যায়। জরিমানা এড়াতে সময়মতো নবায়ন করুন।</div>
+          </div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;ব্যক্তি মালিকানা, অংশীদারিত্ব ও কোম্পানি ব্যবসার জন্য</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://www.scribd.com/document/632966121/Upazila-Parishad" target="_blank" class="btn-primary">🔗 উপজেলা পরিষদ তথ্য</a>
+        </div>
+      </div>
+
+      <!-- Village Court -->
+      <div class="service-card c-license">
+        <div class="card-header">
+          <div class="card-icon">⚖️</div>
+          <div class="card-meta">
+            <div class="card-title">গ্রাম আদালত ও সালিশ সেবা</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">আইনি সেবা</span>
+              <span class="badge badge-online">বিনামূল্যে</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">ইউনিয়ন পরিষদ চেয়ারম্যানের কাছে লিখিত আবেদন দিন। শুনানির তারিখ নির্ধারণ করা হবে। উভয় পক্ষের উপস্থিতিতে বিরোধ নিষ্পত্তি হবে।</div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;পারিবারিক বিবাদ, জমির সীমানা, ছোটখাটো অপরাধ নিষ্পত্তি (সর্বোচ্চ ৭৫,০০০ টাকা পর্যন্ত)</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://www.scribd.com/document/489664269/Al" target="_blank" class="btn-primary">🔗 আইনি তথ্য দেখুন</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 5: INFRASTRUCTURE -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="service-section" id="section-infra">
+    <div class="section-title">
+      <div class="section-icon" style="background:#fff3e0;">🔧</div>
+      <div>
+        <h3>অবকাঠামো ও ইউটিলিটি সেবা</h3>
+        <span>Infrastructure & Utility Services</span>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="service-grid">
+
+      <!-- LGED Roads -->
+      <div class="service-card c-infra">
+        <div class="card-header">
+          <div class="card-icon">🛣️</div>
+          <div class="card-meta">
+            <div class="card-title">রাস্তা মেরামত ও নির্মাণ (LGED)</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">অবকাঠামো</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">উপজেলা প্রকৌশলী (LGED) অফিসে লিখিত আবেদন করুন। ইউনিয়ন পরিষদ চেয়ারম্যানের মাধ্যমে সুপারিশ পাঠান। বার্ষিক উন্নয়ন পরিকল্পনায় অন্তর্ভুক্তির জন্য আবেদন দিন।</div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;গ্রামীণ সড়ক, সেতু, কালভার্ট, পানি নিষ্কাশন</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="http://lged.daudkandi.comilla.gov.bd/bn/site/page/Dzze" target="_blank" class="btn-primary">🔗 LGED সেবা তালিকা</a>
+        </div>
+      </div>
+
+      <!-- Electricity -->
+      <div class="service-card c-infra">
+        <div class="card-header">
+          <div class="card-icon">⚡</div>
+          <div class="card-meta">
+            <div class="card-title">পল্লী বিদ্যুৎ নতুন সংযোগ</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">বিদ্যুৎসেবা</span>
+              <span class="badge badge-online">অনলাইন আবেদন</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">PBS অফিসে গিয়ে বা <strong>apps.rebpbs.com</strong>-এ অনলাইনে আবেদন করুন। জাতীয় পরিচয়পত্র, জমির দলিল ও ছবি প্রয়োজন। নির্ধারিত ফি পরিশোধ করুন।</div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;আবাসিক, বাণিজ্যিক ও কৃষি সংযোগ, মিটার সমস্যা সমাধান</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://reb.gov.bd" target="_blank" class="btn-primary">🔗 পল্লী বিদ্যুৎ পোর্টাল</a>
+        </div>
+      </div>
+
+      <!-- Tube Well -->
+      <div class="service-card c-infra">
+        <div class="card-header">
+          <div class="card-icon">💧</div>
+          <div class="card-meta">
+            <div class="card-title">গভীর নলকূপ স্থাপন সেবা</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">পানি সেবা</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">জনস্বাস্থ্য প্রকৌশল অধিদপ্তর (DPHE) উপজেলা অফিসে আবেদন করুন। ওয়ার্ড মেম্বারের মাধ্যমে সুপারিশ নিন।</div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;বিশুদ্ধ পানির নলকূপ, আর্সেনিক পরীক্ষা, স্যানিটেশন সেবা</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://dphe.gov.bd" target="_blank" class="btn-primary">🔗 DPHE পোর্টাল</a>
+          <a href="https://ramgarh.khagrachhari.gov.bd" target="_blank" class="btn-secondary">📋 উপজেলা সেবা</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 6: DISASTER & RELIEF -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="service-section" id="section-disaster">
+    <div class="section-title">
+      <div class="section-icon" style="background:#fce4ec;">🆘</div>
+      <div>
+        <h3>দুর্যোগ ব্যবস্থাপনা ও ত্রাণ সেবা</h3>
+        <span>Disaster Management & Relief Services</span>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="service-grid">
+
+      <!-- VGF/VGD -->
+      <div class="service-card c-disaster">
+        <div class="card-header">
+          <div class="card-icon">🍚</div>
+          <div class="card-meta">
+            <div class="card-title">VGF/VGD ত্রাণ সহায়তা</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">ত্রাণ সেবা</span>
+              <span class="badge badge-seasonal">দুর্যোগকালীন</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">ইউনিয়ন পরিষদে আবেদন করুন। ওয়ার্ড মেম্বার ও চেয়ারম্যানের সুপারিশে তালিকায় অন্তর্ভুক্তি হবে। উপজেলা নির্বাহী অফিসার চূড়ান্ত অনুমোদন দেন।</div>
+          <div class="seasonal-box">
+            <div class="s-label">🗓️ কখন পাওয়া যায়</div>
+            <div class="s-text"><strong>VGF:</strong> বন্যা (আগস্ট–অক্টোবর), ঘূর্ণিঝড়, খরার পর | <strong>VGD:</strong> সারা বছর দরিদ্র মহিলাদের জন্য | সর্বশেষ আপডেটের জন্য <a href="https://reliefweb.int/report/bangladesh/bangladesh-cyclone-early-action-protocol-2025-annual-report-eap-no-eap2021bd06-operation-no-mdrbd033-5-march-2026" target="_blank" style="color:#c62828;font-weight:600;">ReliefWeb Bangladesh</a> দেখুন।</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://reliefweb.int/report/bangladesh/bangladesh-cyclone-early-action-protocol-2025-annual-report-eap-no-eap2021bd06-operation-no-mdrbd033-5-march-2026" target="_blank" class="btn-primary">🔗 ReliefWeb রিপোর্ট</a>
+          <a href="https://ddm.gov.bd" target="_blank" class="btn-secondary">📋 DDM পোর্টাল</a>
+        </div>
+      </div>
+
+      <!-- Shelter -->
+      <div class="service-card c-disaster">
+        <div class="card-header">
+          <div class="card-icon">🏕️</div>
+          <div class="card-meta">
+            <div class="card-title">দুর্যোগকালীন আশ্রয়কেন্দ্র</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">দুর্যোগ সেবা</span>
+              <span class="badge badge-seasonal">ঘূর্ণিঝড় মৌসুম</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">দুর্যোগের সংকেতে স্থানীয় ইউনিয়ন পরিষদ বা উপজেলা নির্বাহী অফিসারের নির্দেশ অনুযায়ী নিকটতম আশ্রয়কেন্দ্রে যান।</div>
+          <div class="seasonal-box">
+            <div class="s-label">🗓️ সক্রিয় মৌসুম</div>
+            <div class="s-text"><strong>ঘূর্ণিঝড় মৌসুম:</strong> এপ্রিল–জুন ও অক্টোবর–নভেম্বর | <strong>বন্যা মৌসুম:</strong> জুন–সেপ্টেম্বর। সাইক্লোন EAP ২০২৫ বার্ষিক প্রতিবেদন <a href="https://reliefweb.int/report/bangladesh/bangladesh-cyclone-early-action-protocol-2025-annual-report-eap-no-eap2021bd06-operation-no-mdrbd033-5-march-2026" target="_blank" style="color:#c62828;font-weight:600;">এখানে পড়ুন</a>।</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://ddm.gov.bd" target="_blank" class="btn-primary">🔗 দুর্যোগ ব্যবস্থাপনা</a>
+        </div>
+      </div>
+
+      <!-- Cash Transfer -->
+      <div class="service-card c-disaster">
+        <div class="card-header">
+          <div class="card-icon">💵</div>
+          <div class="card-meta">
+            <div class="card-title">সামাজিক সুরক্ষা ভাতা সেবা</div>
+            <div class="card-badges">
+              <span class="badge badge-cat">সমাজসেবা</span>
+              <span class="badge badge-online">মোবাইল পেমেন্ট</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="desc-label">📋 পদ্ধতি</div>
+          <div class="card-desc">উপজেলা সমাজসেবা অফিসে আবেদন করুন। বয়স্ক ভাতা, বিধবা ভাতা, প্রতিবন্ধী ভাতার জন্য পৃথক ফরম পূরণ করুন। NID ও সনদপত্র জমা দিন।</div>
+          <div class="card-info-row">
+            <div class="info-item"><strong>পাওয়া যায়:</strong>&nbsp;বয়স্ক ভাতা, বিধবা ভাতা, প্রতিবন্ধী ভাতা, মাতৃত্বকালীন ভাতা</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="http://dss.madhupur.tangail.gov.bd" target="_blank" class="btn-primary">🔗 সমাজসেবা পোর্টাল</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTTOM QUICK LINKS -->
+  <div style="margin-top: 48px; padding: 28px 32px; background: var(--white); border-radius: 18px; border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
+    <div style="font-family:'Noto Serif Bengali',serif; font-size:18px; font-weight:700; color:var(--text-dark); margin-bottom:18px; display:flex; align-items:center; gap:10px;">
+      🔗 <span>গুরুত্বপূর্ণ সরকারি পোর্টালসমূহ</span>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
+      <a href="https://www.bangladesh.gov.bd" target="_blank" style="background:var(--green-mist); border:1px solid var(--border); border-radius:10px; padding:12px 16px; text-decoration:none; color:var(--green-deep); font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='var(--green-pale)'" onmouseout="this.style.background='var(--green-mist)'">🏛️ জাতীয় পোর্টাল</a>
+      <a href="https://services.nidw.gov.bd" target="_blank" style="background:var(--green-mist); border:1px solid var(--border); border-radius:10px; padding:12px 16px; text-decoration:none; color:var(--green-deep); font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='var(--green-pale)'" onmouseout="this.style.background='var(--green-mist)'">🪪 জাতীয় পরিচয়পত্র</a>
+      <a href="https://bdris.gov.bd" target="_blank" style="background:var(--green-mist); border:1px solid var(--border); border-radius:10px; padding:12px 16px; text-decoration:none; color:var(--green-deep); font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='var(--green-pale)'" onmouseout="this.style.background='var(--green-mist)'">📄 জন্মনিবন্ধন</a>
+      <a href="https://land.gov.bd" target="_blank" style="background:var(--green-mist); border:1px solid var(--border); border-radius:10px; padding:12px 16px; text-decoration:none; color:var(--green-deep); font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='var(--green-pale)'" onmouseout="this.style.background='var(--green-mist)'">🗺️ ভূমি সেবা</a>
+      <a href="https://ekpay.gov.bd" target="_blank" style="background:var(--green-mist); border:1px solid var(--border); border-radius:10px; padding:12px 16px; text-decoration:none; color:var(--green-deep); font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='var(--green-pale)'" onmouseout="this.style.background='var(--green-mist)'">💳 ekPay সেবা পেমেন্ট</a>
+      <a href="https://dgfood.gov.bd" target="_blank" style="background:var(--green-mist); border:1px solid var(--border); border-radius:10px; padding:12px 16px; text-decoration:none; color:var(--green-deep); font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='var(--green-pale)'" onmouseout="this.style.background='var(--green-mist)'">🌾 খাদ্য অধিদপ্তর</a>
+    </div>
+  </div>
+
+</main>
+
+
+
+<script>
+  function filterSection(type, btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    const sections = {
+      health: 'section-health',
+      pets: 'section-pets',
+      edu: 'section-edu',
+      license: 'section-license',
+      infra: 'section-infra',
+      disaster: 'section-disaster',
+    };
+
+    if (type === 'all') {
+      document.querySelectorAll('.service-section').forEach(s => s.classList.remove('hidden'));
+    } else {
+      document.querySelectorAll('.service-section').forEach(s => s.classList.add('hidden'));
+      const target = document.getElementById(sections[type]);
+      if (target) target.classList.remove('hidden');
+    }
+    window.scrollTo({ top: 240, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
