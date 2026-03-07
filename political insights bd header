@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIBBD — Ultra Header</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;700;800&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   PIBBD ULTRA HEADER — v3.0
+═══════════════════════════════════════════ */
+
+:root {
+  --green:       #006A4E;
+  --green-d:     #004f3a;
+  --green-l:     #e6f2ee;
+  --green-glow:  rgba(0,106,78,.18);
+  --red:         #F42A41;
+  --red-d:       #c41f31;
+  --white:       #ffffff;
+  --ink:         #0d1117;
+  --ink-soft:    #1a2332;
+  --gray:        #5a6474;
+  --border:      rgba(0,106,78,.14);
+
+  --hdr-h:       80px;   /* full height */
+  --hdr-s:       60px;   /* scrolled height */
+  --T:           0.35s cubic-bezier(.4,0,.2,1);
+  --T-fast:      0.18s cubic-bezier(.4,0,.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #fff;
+  padding-top: var(--hdr-h);
+  color: var(--ink);
+  min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; background: none; border: none; }
+
+/* ══════════════════════════════════
+   HEADER SHELL
+══════════════════════════════════ */
+#pibbd-hdr {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--hdr-s);
+  z-index: 9999;
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(22px) saturate(200%);
+  -webkit-backdrop-filter: blur(22px) saturate(200%);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 32px rgba(0,106,78,.09), 0 1px 0 rgba(0,106,78,.06);
+  transition: height var(--T), box-shadow var(--T);
+}
+
+/* Top accent strip — BD flag inspired */
+#pibbd-hdr::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green) 55%, var(--red) 55%);
+  z-index: 2;
+}
+
+/* Glow line at bottom */
+#pibbd-hdr::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 5%; right: 5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green-glow) 30%, rgba(244,42,65,.15) 70%, transparent);
+}
+
+/* SCROLLED STATE — kept for scroll animation on real pages */
+#pibbd-hdr.scrolled {
+  box-shadow: 0 6px 40px rgba(0,106,78,.12);
+}
+
+/* ══════════════════════════════════
+   INNER LAYOUT
+══════════════════════════════════ */
+.hdr-wrap {
+  max-width: 1380px;
+  width: 93%;
+  margin: 0 auto;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0 2rem;
+}
+
+/* ══════════════════════════════════
+   LOGO
+══════════════════════════════════ */
+.hdr-logo {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  flex-shrink: 0;
+}
+.hdr-logo img {
+  height: 44px;
+  width: auto;
+  transition: height var(--T);
+  filter: none;
+}
+/* Logo wordmark beside image */
+.hdr-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.hdr-logo-text strong {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  color: var(--green);
+  text-transform: uppercase;
+}
+.hdr-logo-text span {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 9.5px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+/* ══════════════════════════════════
+   DESKTOP NAV
+══════════════════════════════════ */
+.hdr-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  height: 100%;
+}
+
+/* Each nav item wrapper (supports dropdowns) */
+.nav-item {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 13px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-radius: 6px;
+  transition: color var(--T-fast), background var(--T-fast);
+  white-space: nowrap;
+  position: relative;
+}
+#pibbd-hdr.scrolled .nav-link { color: var(--ink-soft); }
+.nav-link:hover { color: var(--green) !important; background: var(--green-l); }
+
+/* Active indicator dot */
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 50%;
+  transform: translateX(-50%);
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+/* Dropdown arrow */
+.nav-arrow {
+  width: 10px; height: 10px;
+  flex-shrink: 0;
+  transition: transform var(--T-fast);
+  opacity: .6;
+}
+.nav-item:hover .nav-arrow { transform: rotate(180deg); }
+
+/* ── MEGA DROPDOWN ── */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.12), 0 4px 16px rgba(0,106,78,.06);
+  padding: .6rem .5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--T-fast), transform var(--T-fast);
+  z-index: 999;
+}
+.nav-item:hover .nav-dropdown,
+.nav-item:focus-within .nav-dropdown {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px; left: 50%;
+  transform: translateX(-50%);
+  width: 12px; height: 6px;
+  clip-path: polygon(0 100%,50% 0,100% 100%);
+  background: #fff;
+}
+.nav-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: .55rem .85rem;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  border-radius: 8px;
+  letter-spacing: .03em;
+  transition: background var(--T-fast), color var(--T-fast), padding-left var(--T-fast);
+}
+.nav-dropdown a:hover {
+  background: var(--green-l);
+  color: var(--green);
+  padding-left: 1.2rem;
+}
+.nav-dropdown a .dd-icon { font-size: 14px; flex-shrink: 0; }
+.nav-dropdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: .4rem .85rem;
+}
+
+/* ══════════════════════════════════
+   RIGHT ACTIONS
+══════════════════════════════════ */
+.hdr-actions {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  flex-shrink: 0;
+}
+
+/* Search toggle */
+.hdr-search-btn {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink);
+  transition: background var(--T-fast), color var(--T-fast);
+}
+#pibbd-hdr.scrolled .hdr-search-btn { color: var(--ink); }
+.hdr-search-btn:hover { background: var(--green-l); color: var(--green) !important; }
+
+/* WhatsApp button */
+.hdr-wa {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #25D366;
+  color: #fff;
+  padding: 7px 14px 7px 10px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: background var(--T-fast), transform var(--T-fast), box-shadow var(--T-fast);
+  white-space: nowrap;
+}
+.hdr-wa:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,211,102,.3); }
+.hdr-wa svg { width: 16px; height: 16px; flex-shrink: 0; }
+.hdr-wa-text { display: none; }
+
+/* CTA button */
+.hdr-cta {
+  background: var(--red);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 7px;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  transition: background var(--T-fast), transform var(--T-fast), box-shadow var(--T-fast);
+  white-space: nowrap;
+}
+.hdr-cta:hover { background: var(--red-d); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(244,42,65,.3); }
+
+/* Hamburger */
+.hdr-ham {
+  display: none;
+  flex-direction: column;
+  gap: 5.5px;
+  padding: 7px;
+  border-radius: 8px;
+  transition: background var(--T-fast);
+}
+.hdr-ham:hover { background: rgba(255,255,255,.1); }
+#pibbd-hdr.scrolled .hdr-ham:hover { background: var(--green-l); }
+.hdr-ham span {
+  display: block;
+  width: 24px; height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: background var(--T-fast), transform .3s, opacity .2s, width .2s;
+  transform-origin: center;
+}
+.hdr-ham.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hdr-ham.open span:nth-child(2) { opacity: 0; width: 0; }
+.hdr-ham.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* ══════════════════════════════════
+   INLINE SEARCH BAR
+══════════════════════════════════ */
+.hdr-search-panel {
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--green);
+  box-shadow: 0 12px 40px rgba(0,0,0,.12);
+  padding: 1rem 5%;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--T), transform var(--T);
+  z-index: 9998;
+}
+.hdr-search-panel.open {
+  opacity: 1;
+  transform: none;
+  pointer-events: all;
+}
+.hdr-search-panel input {
+  flex: 1;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  outline: none;
+  color: var(--ink);
+  transition: border-color var(--T-fast), box-shadow var(--T-fast);
+}
+.hdr-search-panel input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(0,106,78,.1);
+}
+.hdr-search-panel input::placeholder { color: #aab; }
+.hdr-search-close {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray);
+  font-size: 18px;
+  transition: background var(--T-fast), color var(--T-fast);
+}
+.hdr-search-close:hover { background: rgba(244,42,65,.08); color: var(--red); }
+
+/* ══════════════════════════════════
+   MOBILE DRAWER
+══════════════════════════════════ */
+.mob-drawer {
+  position: fixed;
+  top: var(--hdr-h);
+  left: 0; right: 0;
+  bottom: 0;
+  z-index: 9997;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+/* Overlay */
+.mob-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity var(--T);
+}
+
+/* Slide panel */
+.mob-panel {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  background: #fff;
+  border-bottom: 3px solid var(--green);
+  box-shadow: 0 16px 48px rgba(0,0,0,.15);
+  padding: 0 0 1.5rem;
+  transform: translateY(-100%);
+  transition: transform var(--T);
+  max-height: calc(100vh - var(--hdr-h));
+  overflow-y: auto;
+}
+
+/* Drawer open state */
+.mob-drawer.open { pointer-events: all; }
+.mob-drawer.open .mob-overlay { opacity: 1; }
+.mob-drawer.open .mob-panel { transform: none; }
+
+/* Mobile nav header strip */
+.mob-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .9rem 5% .7rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: .4rem;
+}
+.mob-panel-title {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.mob-panel-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(244,42,65,.08);
+  color: var(--red);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(244,42,65,.2);
+}
+.mob-panel-badge::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: mob-pulse 1.5s infinite;
+}
+@keyframes mob-pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.4; transform:scale(1.6); }
+}
+
+/* Mobile nav links */
+.mob-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .8rem 5%;
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  letter-spacing: .03em;
+  border-bottom: 1px solid rgba(0,0,0,.04);
+  transition: background var(--T-fast), color var(--T-fast), padding-left var(--T-fast);
+}
+.mob-nav-link:hover { background: var(--green-l); color: var(--green); padding-left: calc(5% + 8px); }
+.mob-nav-link:last-of-type { border-bottom: none; }
+.mob-nav-link .mob-icon { font-size: 1rem; }
+.mob-nav-link .mob-arr { font-size: .75rem; opacity: .35; }
+
+/* Mobile accordion sub */
+.mob-nav-expand {
+  background: rgba(0,106,78,.025);
+  border-bottom: 1px solid rgba(0,106,78,.07);
+  padding: .3rem 0;
+  display: none;
+}
+.mob-nav-expand.open { display: block; }
+.mob-nav-expand a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: .6rem 7%;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--gray);
+  transition: color var(--T-fast);
+}
+.mob-nav-expand a:hover { color: var(--green); }
+
+/* Mobile bottom actions */
+.mob-actions {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  padding: 1rem 5% 0;
+  margin-top: .4rem;
+  border-top: 1px solid var(--border);
+}
+.mob-wa-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25D366;
+  color: #fff;
+  padding: 11px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: background var(--T-fast);
+}
+.mob-wa-full:hover { background: #1da851; }
+.mob-wa-full svg { width: 18px; height: 18px; }
+.mob-cta-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--red);
+  color: #fff;
+  padding: 11px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: background var(--T-fast);
+}
+.mob-cta-full:hover { background: var(--red-d); }
+
+/* ══════════════════════════════════
+   SCROLL PROGRESS BAR
+══════════════════════════════════ */
+.hdr-progress {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--green), var(--red));
+  transition: width .1s linear;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity var(--T), width .1s linear;
+}
+#pibbd-hdr.scrolled .hdr-progress { opacity: 1; }
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (min-width: 1100px) {
+  .hdr-wa-text { display: inline; }
+}
+
+@media (max-width: 1099px) {
+  .hdr-cta { display: none; }
+}
+
+@media (max-width: 860px) {
+  .hdr-nav { display: none; }
+  .hdr-ham { display: flex; }
+}
+
+@media (max-width: 600px) {
+  :root { --hdr-h: 62px; --hdr-s: 56px; }
+  .hdr-logo img { height: 42px; }
+  #pibbd-hdr.scrolled .hdr-logo img { height: 34px; }
+  .hdr-wa { padding: 8px; border-radius: 50%; }
+  .hdr-wa span:not(svg *) { display: none; }
+  .hdr-wa { gap: 0; }
+}
+
+
+</style>
+</head>
+<body>
+
+
+
+<header id="pibbd-hdr">
+
+  <!-- Scroll progress bar -->
+  <div class="hdr-progress" id="hdrProgress"></div>
+
+  <div class="hdr-wrap">
+
+    <!-- ── LOGO ── -->
+    <a href="https://politicalinsightsbd.com/" class="hdr-logo" aria-label="Political Insights BD Home">
+      <img
+        src="https://politicalinsightsbd.com/wp-content/uploads/2026/02/WhatsApp_Image_2025-12-21_at_07.18.21-removebg-preview-1.webp"
+        alt="Political Insights BD"
+        width="200" height="50"
+      >
+      <div class="hdr-logo-text">
+        <strong>PIBBD</strong>
+        <span>রাজনৈতিক বিশ্লেষণ</span>
+      </div>
+    </a>
+
+    <!-- ── DESKTOP NAV ── -->
+    <nav class="hdr-nav" aria-label="Primary Navigation">
+
+      <div class="nav-item">
+        <a href="https://politicalinsightsbd.com/about/" class="nav-link">About</a>
+      </div>
+
+      <div class="nav-item">
+        <a href="https://politicalinsightsbd.com/research/" class="nav-link">
+          Research
+          <svg class="nav-arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l4 4 4-4"/></svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="https://politicalinsightsbd.com/research/"><span class="dd-icon">🔬</span> All Research</a>
+          <a href="https://politicalinsightsbd.com/report/"><span class="dd-icon">📄</span> Reports</a>
+          <a href="https://politicalinsightsbd.com/all-insights/"><span class="dd-icon">💡</span> Insights</a>
+          <div class="nav-dropdown-divider"></div>
+          <a href="https://politicalinsightsbd.com/policy/"><span class="dd-icon">📋</span> Policy Analysis</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="https://politicalinsightsbd.com/policy/" class="nav-link">Policy</a>
+      </div>
+
+      <div class="nav-item">
+        <a href="https://politicalinsightsbd.com/report/" class="nav-link">
+          Reports
+          <svg class="nav-arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l4 4 4-4"/></svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="#"><span class="dd-icon">🗳️</span> Election 2026</a>
+          <a href="#"><span class="dd-icon">🌐</span> Geopolitics</a>
+          <a href="#"><span class="dd-icon">🤖</span> AI & Digital</a>
+          <a href="#"><span class="dd-icon">⚖️</span> Governance</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="https://politicalinsightsbd.com/all-insights/" class="nav-link">Insights</a>
+      </div>
+
+      <div class="nav-item">
+        <a href="https://politicalinsightsbd.com/services/" class="nav-link">
+          Services
+          <svg class="nav-arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l4 4 4-4"/></svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="#"><span class="dd-icon">🏛️</span> Political Consulting</a>
+          <a href="#"><span class="dd-icon">📊</span> Data Analysis</a>
+          <a href="#"><span class="dd-icon">🎯</span> Campaign Strategy</a>
+          <a href="#"><span class="dd-icon">✍️</span> Research Writing</a>
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- ── RIGHT ACTIONS ── -->
+    <div class="hdr-actions">
+
+      <!-- Search -->
+      <button class="hdr-search-btn" id="searchToggle" aria-label="Search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/8801989666676" target="_blank" rel="noopener" class="hdr-wa" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="hdr-wa-text">WhatsApp</span>
+      </a>
+
+      <!-- CTA -->
+      <a href="https://wa.me/8801989666676" target="_blank" class="hdr-cta">Get in Touch</a>
+
+      <!-- Hamburger -->
+      <button class="hdr-ham" id="hamToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Inline search panel -->
+  <div class="hdr-search-panel" id="searchPanel" role="search">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aab" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" placeholder="Search analyses, reports, insights…" id="searchInput" aria-label="Site search">
+    <button class="hdr-search-close" id="searchClose" aria-label="Close search">✕</button>
+  </div>
+
+</header>
+
+<!-- Mobile Drawer -->
+<div class="mob-drawer" id="mobDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mob-overlay" id="mobOverlay"></div>
+  <div class="mob-panel" id="mobPanel">
+
+    <div class="mob-panel-header">
+      <span class="mob-panel-title">Navigation</span>
+      <span class="mob-panel-badge">Election 2026 Live</span>
+    </div>
+
+    <a href="https://politicalinsightsbd.com/about/" class="mob-nav-link">
+      <span><span class="mob-icon">🏛</span> About</span>
+      <span class="mob-arr">›</span>
+    </a>
+
+    <a href="https://politicalinsightsbd.com/research/" class="mob-nav-link" id="mobResearch" role="button">
+      <span><span class="mob-icon">🔬</span> Research</span>
+      <span class="mob-arr">›</span>
+    </a>
+    <div class="mob-nav-expand" id="mobResearchSub">
+      <a href="https://politicalinsightsbd.com/report/">📄 Reports</a>
+      <a href="https://politicalinsightsbd.com/all-insights/">💡 All Insights</a>
+      <a href="https://politicalinsightsbd.com/policy/">📋 Policy</a>
+    </div>
+
+    <a href="https://politicalinsightsbd.com/policy/" class="mob-nav-link">
+      <span><span class="mob-icon">📋</span> Policy</span>
+      <span class="mob-arr">›</span>
+    </a>
+
+    <a href="https://politicalinsightsbd.com/report/" class="mob-nav-link">
+      <span><span class="mob-icon">📄</span> Reports</span>
+      <span class="mob-arr">›</span>
+    </a>
+
+    <a href="https://politicalinsightsbd.com/all-insights/" class="mob-nav-link">
+      <span><span class="mob-icon">💡</span> Insights</span>
+      <span class="mob-arr">›</span>
+    </a>
+
+    <a href="https://politicalinsightsbd.com/services/" class="mob-nav-link">
+      <span><span class="mob-icon">⚙️</span> Services</span>
+      <span class="mob-arr">›</span>
+    </a>
+
+    <div class="mob-actions">
+      <a href="https://wa.me/8801989666676" target="_blank" class="mob-wa-full">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp — 01989 666 676
+      </a>
+      <a href="https://politicalinsightsbd.com/services/" class="mob-cta-full">
+        ✦ Get Consulting Services
+      </a>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+<script>
+(function () {
+  'use strict';
+
+  const hdr       = document.getElementById('pibbd-hdr');
+  const progress  = document.getElementById('hdrProgress');
+  const hamToggle = document.getElementById('hamToggle');
+  const mobDrawer = document.getElementById('mobDrawer');
+  const mobOverlay= document.getElementById('mobOverlay');
+  const searchToggle = document.getElementById('searchToggle');
+  const searchPanel  = document.getElementById('searchPanel');
+  const searchClose  = document.getElementById('searchClose');
+  const searchInput  = document.getElementById('searchInput');
+  const mobResearch  = document.getElementById('mobResearch');
+  const mobResearchSub = document.getElementById('mobResearchSub');
+
+  // ── SCROLL HANDLER ──
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const docH    = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docH > 0 ? (scrollY / docH) * 100 : 0;
+        progress.style.width = pct + '%';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ── MOBILE DRAWER ──
+  function openDrawer() {
+    mobDrawer.classList.add('open');
+    hamToggle.classList.add('open');
+    hamToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    mobDrawer.classList.remove('open');
+    hamToggle.classList.remove('open');
+    hamToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  hamToggle.addEventListener('click', () => {
+    mobDrawer.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+  mobOverlay.addEventListener('click', closeDrawer);
+
+  // Close on nav link click
+  document.querySelectorAll('.mob-nav-link[href]').forEach(a => {
+    if (a.getAttribute('href') && a.getAttribute('href') !== '#') {
+      a.addEventListener('click', closeDrawer);
+    }
+  });
+
+  // Mobile accordion
+  if (mobResearch) {
+    mobResearch.addEventListener('click', (e) => {
+      e.preventDefault();
+      mobResearchSub.classList.toggle('open');
+      const arr = mobResearch.querySelector('.mob-arr');
+      if (arr) arr.textContent = mobResearchSub.classList.contains('open') ? '↓' : '›';
+    });
+  }
+
+  // ── SEARCH PANEL ──
+  function openSearch() {
+    searchPanel.classList.add('open');
+    setTimeout(() => searchInput.focus(), 120);
+    closeDrawer();
+  }
+  function closeSearch() {
+    searchPanel.classList.remove('open');
+    searchInput.value = '';
+  }
+  searchToggle.addEventListener('click', () => {
+    searchPanel.classList.contains('open') ? closeSearch() : openSearch();
+  });
+  searchClose.addEventListener('click', closeSearch);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeSearch(); closeDrawer(); }
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+  });
+
+  // Search submit (connect to WP search)
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && searchInput.value.trim()) {
+      window.location.href = '/?s=' + encodeURIComponent(searchInput.value.trim());
+    }
+  });
+
+  // ── ACTIVE NAV LINK ──
+  const currentPath = window.location.pathname;
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href') || '';
+    if (href && currentPath.includes(href.replace('https://politicalinsightsbd.com', ''))) {
+      link.classList.add('active');
+    }
+  });
+
+  // ── SCROLL TOP BTN ──
+  const stb = document.getElementById('scrollTopBtn');
+  if (stb) stb.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+})();
+</script>
+
+</body>
+</html>
