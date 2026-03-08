@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIBBD — Our Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;700;800&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --green:    #006A4E;
+  --green-d:  #004f3a;
+  --green-l:  #e6f2ee;
+  --green-ll: #f0f8f5;
+  --red:      #F42A41;
+  --red-d:    #c41f31;
+  --red-l:    #fff0f1;
+  --ink:      #0d1117;
+  --ink-soft: #1a2332;
+  --gray:     #5a6474;
+  --gray-l:   #8a95a3;
+  --white:    #ffffff;
+  --off:      #f9fafb;
+  --border:   rgba(0,106,78,.12);
+  --T:        0.28s cubic-bezier(.4,0,.2,1);
+  --radius:   12px;
+  --radius-sm:6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--off); color: var(--ink); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+
+/* ══════════════════════════════════
+   TOOLS SECTION
+══════════════════════════════════ */
+#tools {
+  position: relative;
+  padding: 6rem 0 6rem;
+  background: var(--off);
+  overflow: hidden;
+}
+
+/* Subtle bg grid */
+#tools::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,106,78,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,106,78,.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Green glow top-right */
+#tools::after {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,106,78,.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tools-wrap {
+  max-width: 1360px;
+  width: 92%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── SECTION HEADER ── */
+.tools-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.tools-header-left {}
+
+.tools-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-l);
+  border: 1px solid rgba(0,106,78,.2);
+  color: var(--green);
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 1.1rem;
+}
+.tools-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+.tools-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+}
+.tools-title .hl { color: var(--green); }
+.tools-title .hl-r { color: var(--red); font-style: italic; }
+
+.tools-subtitle {
+  margin-top: .7rem;
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: .9rem;
+  color: var(--gray);
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.tools-count-badge {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  border: 2px solid var(--green-l);
+  background: var(--white);
+  box-shadow: 0 4px 20px rgba(0,106,78,.08);
+}
+.tools-count-badge strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--green);
+  line-height: 1;
+}
+.tools-count-badge span {
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gray-l);
+  margin-top: 2px;
+}
+
+/* ── DIVIDER ── */
+.tools-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.tools-divider-line { flex: 1; height: 1.5px; background: linear-gradient(90deg, var(--green), rgba(0,106,78,.08)); }
+.tools-divider-dot  { width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 3px rgba(244,42,65,.15); flex-shrink: 0; }
+.tools-divider-line2{ flex: 1; height: 1.5px; background: linear-gradient(90deg, rgba(0,106,78,.08), transparent); }
+
+/* ── TOOLS GRID ── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+/* ── TOOL CARD ── */
+.tool-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.6rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--T), box-shadow var(--T), border-color var(--T);
+  cursor: default;
+}
+
+/* Top color bar */
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s ease;
+}
+.tool-card:hover::before { transform: scaleX(1); }
+.tool-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,106,78,.12), 0 4px 16px rgba(0,0,0,.04);
+  border-color: rgba(0,106,78,.25);
+}
+
+/* Card number watermark */
+.tool-card::after {
+  content: attr(data-num);
+  position: absolute;
+  bottom: -8px; right: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(0,106,78,.04);
+  line-height: 1;
+  pointer-events: none;
+  transition: color var(--T);
+}
+.tool-card:hover::after { color: rgba(0,106,78,.07); }
+
+/* Card accent — left border on hover */
+.tool-card-accent {
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: linear-gradient(180deg, var(--green), var(--red));
+  transition: height .4s ease;
+  border-radius: 0 0 3px 0;
+}
+.tool-card:hover .tool-card-accent { height: 100%; }
+
+/* Icon area */
+.tool-icon-wrap {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform var(--T), box-shadow var(--T);
+}
+.tool-card:hover .tool-icon-wrap { transform: scale(1.08); }
+
+.icon-green { background: var(--green-l); box-shadow: 0 4px 12px rgba(0,106,78,.12); }
+.icon-red   { background: var(--red-l);   box-shadow: 0 4px 12px rgba(244,42,65,.1); }
+.icon-dark  { background: rgba(13,17,23,.06); box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+.icon-blue  { background: rgba(59,130,246,.08); box-shadow: 0 4px 12px rgba(59,130,246,.1); }
+.icon-amber { background: rgba(245,158,11,.08); box-shadow: 0 4px 12px rgba(245,158,11,.1); }
+.icon-purple{ background: rgba(139,92,246,.08); box-shadow: 0 4px 12px rgba(139,92,246,.1); }
+
+/* Tag */
+.tool-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 8.5px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: .6rem;
+}
+.tool-tag::before {
+  content: '';
+  width: 14px; height: 1.5px;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
+/* Title */
+.tool-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.22rem;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: .5rem;
+  letter-spacing: -.01em;
+}
+
+/* Bengali subtitle */
+.tool-name-bn {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: .8rem;
+  letter-spacing: .01em;
+}
+
+/* Description */
+.tool-desc {
+  font-size: .84rem;
+  color: var(--gray);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 1.4rem;
+}
+
+/* Features list */
+.tool-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  margin-bottom: 1.5rem;
+}
+.tool-features li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .78rem;
+  color: var(--gray);
+  font-weight: 500;
+}
+.tool-features li::before {
+  content: '✓';
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--green-l);
+  color: var(--green);
+  font-size: 9px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Status badge */
+.tool-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 1.2rem;
+  width: fit-content;
+}
+.status-live   { background: rgba(0,106,78,.08); color: var(--green); border: 1px solid rgba(0,106,78,.2); }
+.status-live::before   { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: statusPulse 1.5s infinite; }
+.status-beta   { background: rgba(245,158,11,.08); color: #d97706; border: 1px solid rgba(245,158,11,.2); }
+.status-beta::before   { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #d97706; }
+.status-coming { background: rgba(139,92,246,.08); color: #7c3aed; border: 1px solid rgba(139,92,246,.2); }
+.status-coming::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #7c3aed; }
+
+@keyframes statusPulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.4; transform:scale(1.7); }
+}
+
+/* CTA Button */
+.tool-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--green);
+  color: #fff;
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  border: 2px solid var(--green);
+  transition: all var(--T);
+  margin-top: auto;
+}
+.tool-btn:hover { background: var(--green-d); border-color: var(--green-d); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,106,78,.25); }
+.tool-btn-arrow {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem;
+  transition: transform var(--T), background var(--T);
+  flex-shrink: 0;
+}
+.tool-btn:hover .tool-btn-arrow { transform: translateX(3px); background: rgba(255,255,255,.3); }
+
+/* Coming soon button variant */
+.tool-btn-ghost {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  color: var(--gray);
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  border: 2px solid rgba(0,106,78,.15);
+  transition: all var(--T);
+  margin-top: auto;
+  cursor: not-allowed;
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 1100px) {
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .tools-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .tools-count-badge { display: none; }
+  #tools { padding: 4rem 0; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     TOOLS SECTION
+══════════════════════════════════ -->
+<section id="tools">
+  <div class="tools-wrap">
+
+    <!-- Section Header -->
+    <div class="tools-header">
+      <div class="tools-header-left">
+        <div class="tools-eyebrow">আমাদের টুলস — Our Tools</div>
+        <h2 class="tools-title">
+          <span class="hl">Civic &</span> <span class="hl-r">Political</span><br>Intelligence Tools
+        </h2>
+        <p class="tools-subtitle">রাজনৈতিক স্বচ্ছতা, নাগরিক ক্ষমতায়ন এবং ডেটা-চালিত সিদ্ধান্ত গ্রহণের জন্য PIBBD-এর বিশেষ টুলস।</p>
+      </div>
+      <div class="tools-count-badge">
+        <strong>06</strong>
+        <span>Tools</span>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="tools-divider">
+      <div class="tools-divider-line"></div>
+      <div class="tools-divider-dot"></div>
+      <div class="tools-divider-line2"></div>
+    </div>
+
+    <!-- Tools Grid -->
+    <div class="tools-grid">
+
+      <!-- 01 — Citizen Salary & Budget Calculator -->
+      <div class="tool-card" data-num="01">
+        <div class="tool-card-accent"></div>
+        <div class="tool-icon-wrap icon-green">💰</div>
+        <div class="tool-tag">Citizen Tool</div>
+        <div class="tool-name">Salary & Budget<br>Calculator</div>
+        <div class="tool-name-bn">নাগরিক বেতন ও বাজেট তুলনা</div>
+        <div class="tool-status status-live">Live</div>
+        <p class="tool-desc">সরকারি বাজেট বরাদ্দ এবং আপনার ব্যক্তিগত আয়-ব্যয়ের মধ্যে তুলনামূলক বিশ্লেষণ করুন। জাতীয় বাজেটে আপনার অংশ কতটুকু?</p>
+        <ul class="tool-features">
+          <li>Monthly salary vs national budget ratio</li>
+          <li>Tax burden & take-home calculation</li>
+          <li>Sector-wise budget comparison</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/tools/budget-calculator/" class="tool-btn">
+          Use Calculator
+          <span class="tool-btn-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- 02 — Digital Forensic -->
+      <div class="tool-card" data-num="02">
+        <div class="tool-card-accent"></div>
+        <div class="tool-icon-wrap icon-dark">🔍</div>
+        <div class="tool-tag">Forensic</div>
+        <div class="tool-name">Digital<br>Forensic Tool</div>
+        <div class="tool-name-bn">ডিজিটাল ফরেনসিক বিশ্লেষণ</div>
+        <div class="tool-status status-beta">Beta</div>
+        <p class="tool-desc">সোশ্যাল মিডিয়া পোস্ট, ছবি এবং ডিজিটাল কন্টেন্টের উৎস যাচাই করুন। ভুয়া তথ্য ও ম্যানিপুলেটেড মিডিয়া সনাক্ত করার জন্য পেশাদার টুল।</p>
+        <ul class="tool-features">
+          <li>Image metadata & reverse lookup</li>
+          <li>Account age & behavior analysis</li>
+          <li>Coordinated campaign detection</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/tools/digital-forensic/" class="tool-btn">
+          Launch Tool
+          <span class="tool-btn-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- 03 — AI Fact Check -->
+      <div class="tool-card" data-num="03">
+        <div class="tool-card-accent"></div>
+        <div class="tool-icon-wrap icon-red">🤖</div>
+        <div class="tool-tag">AI Powered</div>
+        <div class="tool-name">AI Fact<br>Check Engine</div>
+        <div class="tool-name-bn">AI ফ্যাক্ট চেক — সত্য যাচাই</div>
+        <div class="tool-status status-live">Live</div>
+        <p class="tool-desc">রাজনৈতিক বক্তব্য, সংবাদ শিরোনাম এবং দাবি যাচাই করুন আমাদের AI-চালিত ফ্যাক্ট চেক ইঞ্জিন দিয়ে — বাংলা ও ইংরেজি উভয় ভাষায়।</p>
+        <ul class="tool-features">
+          <li>Real-time claim verification</li>
+          <li>Source credibility scoring</li>
+          <li>Bengali & English support</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/tools/fact-check/" class="tool-btn">
+          Check Facts
+          <span class="tool-btn-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- 04 — Media Intelligence -->
+      <div class="tool-card" data-num="04">
+        <div class="tool-card-accent"></div>
+        <div class="tool-icon-wrap icon-blue">📡</div>
+        <div class="tool-tag">Intelligence</div>
+        <div class="tool-name">Media<br>Intelligence Hub</div>
+        <div class="tool-name-bn">মিডিয়া ইন্টেলিজেন্স ড্যাশবোর্ড</div>
+        <div class="tool-status status-live">Live</div>
+        <p class="tool-desc">বাংলাদেশের গণমাধ্যমের রিয়েল-টাইম মনিটরিং, ন্যারেটিভ ট্র্যাকিং এবং মিডিয়া বায়াস বিশ্লেষণ। কোন মিডিয়া কোন দিকে হেলছে?</p>
+        <ul class="tool-features">
+          <li>Multi-outlet narrative tracking</li>
+          <li>Political bias scoring</li>
+          <li>Trending topic radar</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/tools/media-intelligence/" class="tool-btn">
+          Open Dashboard
+          <span class="tool-btn-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- 05 — Nagorik Portal -->
+      <div class="tool-card" data-num="05">
+        <div class="tool-card-accent"></div>
+        <div class="tool-icon-wrap icon-amber">🏛️</div>
+        <div class="tool-tag">Civic Portal</div>
+        <div class="tool-name">Nagorik<br>Portal</div>
+        <div class="tool-name-bn">নাগরিক পোর্টাল — আপনার অধিকার</div>
+        <div class="tool-status status-beta">Beta</div>
+        <p class="tool-desc">নাগরিক সেবা, সরকারি তথ্য অ্যাক্সেস, অভিযোগ দাখিল এবং নির্বাচিত প্রতিনিধিদের কার্যক্রম ট্র্যাক করার জন্য এক জায়গা।</p>
+        <ul class="tool-features">
+          <li>MP & councillor activity tracker</li>
+          <li>Constituency-level data</li>
+          <li>Public complaint & RTI portal</li>
+        </ul>
+        <a href="https://politicalinsightsbd.com/tools/nagorik-portal/" class="tool-btn">
+          Enter Portal
+          <span class="tool-btn-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- 06 — Election Intelligence (Coming Soon) -->
+      <div class="tool-card" data-num="06">
+        <div class="tool-card-accent"></div>
+        <div class="tool-icon-wrap icon-purple">🗳️</div>
+        <div class="tool-tag">Election</div>
+        <div class="tool-name">Election<br>Intelligence Map</div>
+        <div class="tool-name-bn">নির্বাচনী ইন্টেলিজেন্স ম্যাপ</div>
+        <div class="tool-status status-coming">Coming Soon</div>
+        <p class="tool-desc">৩০০ আসনের রিয়েল-টাইম নির্বাচনী ডেটা, ভোটের ট্রেন্ড বিশ্লেষণ, প্রার্থী প্রোফাইল এবং constituency-ভিত্তিক পূর্বাভাস।</p>
+        <ul class="tool-features">
+          <li>300-seat live result tracking</li>
+          <li>Candidate profile comparison</li>
+          <li>Swing seat prediction model</li>
+        </ul>
+        <div class="tool-btn-ghost">
+          Notify Me
+          <span class="tool-btn-arrow" style="background:rgba(0,0,0,.06);color:var(--gray);">→</span>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</section>
+
+</body>
+</html>
