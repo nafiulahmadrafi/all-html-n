@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Footer — Political Insights BD</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green:     #006a4e;
+    --green-mid: #008a65;
+    --green-lt:  #e8f5f0;
+    --green-ltr: #c8e8dc;
+    --red:       #f42a41;
+    --red-lt:    #fff0f2;
+    --white:     #ffffff;
+    --text:      #0d1f17;
+    --text-mid:  #3a5445;
+    --muted:     #7a9488;
+    --border:    #daeee6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: #f5f8f6; }
+
+  /* ══ FOOTER ══ */
+  .pibd-footer {
+    background: #ffffff;
+    border-top: 3px solid var(--green);
+    width: 100%;
+  }
+
+  /* flag stripe top */
+  .footer-flag {
+    height: 4px;
+    background: linear-gradient(90deg, var(--green) 50%, var(--red) 50%);
+  }
+
+  /* ── contact bar ── */
+  .footer-contact-bar {
+    background: var(--green);
+    padding: .85rem 6vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .contact-bar-left {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: .82rem; color: rgba(255,255,255,.85);
+  }
+  .contact-bar-right { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: .4rem;
+    color: #fff; text-decoration: none; font-size: .8rem; font-weight: 600;
+    padding: .3rem .85rem; border-radius: 20px;
+    border: 1.5px solid rgba(255,255,255,.3);
+    transition: background .2s, border-color .2s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.6); }
+  .contact-link svg { width: 13px; height: 13px; }
+
+  /* ── main body ── */
+  .footer-body {
+    padding: 3.5rem 6vw 2.5rem;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  /* brand col */
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 800; letter-spacing: .02em;
+    color: var(--green); text-decoration: none;
+    display: inline-block; margin-bottom: 1rem;
+  }
+  .footer-logo span { color: var(--red); }
+
+  .footer-tagline {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: .82rem; color: var(--text-mid); line-height: 1.75;
+    margin-bottom: 1.4rem; max-width: 260px;
+  }
+
+  /* social row */
+  .footer-social { display: flex; gap: .55rem; flex-wrap: wrap; margin-top: .2rem; }
+  .social-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    text-decoration: none; border: 1.5px solid var(--border);
+    background: #fff; color: var(--text-mid);
+    transition: all .22s cubic-bezier(.165,.84,.44,1);
+  }
+  .social-icon svg { width: 17px; height: 17px; }
+  .social-icon:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,.1); }
+  .social-icon.facebook:hover  { background: #1877f2; border-color: #1877f2; color: #fff; }
+  .social-icon.youtube:hover   { background: #ff0000; border-color: #ff0000; color: #fff; }
+  .social-icon.twitter:hover   { background: #000;    border-color: #000;    color: #fff; }
+  .social-icon.linkedin:hover  { background: #0a66c2; border-color: #0a66c2; color: #fff; }
+  .social-icon.whatsapp:hover  { background: #25d366; border-color: #25d366; color: #fff; }
+  .social-icon.telegram:hover  { background: #229ed9; border-color: #229ed9; color: #fff; }
+  .social-icon.email:hover     { background: var(--green); border-color: var(--green); color: #fff; }
+
+  /* link cols */
+  .footer-col h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: .78rem; font-weight: 800; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: 1.1rem;
+    padding-bottom: .6rem;
+    border-bottom: 2px solid var(--green-ltr);
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+  .footer-links li a {
+    text-decoration: none; font-size: .85rem; color: var(--text-mid);
+    display: flex; align-items: center; gap: .45rem;
+    transition: color .18s, gap .18s;
+  }
+  .footer-links li a:hover { color: var(--green); gap: .65rem; }
+  .footer-links li a .link-arrow { font-size: .7rem; opacity: .5; transition: opacity .18s; }
+  .footer-links li a:hover .link-arrow { opacity: 1; }
+
+  /* sub-label inside col */
+  .footer-sub-label {
+    font-size: .68rem; font-weight: 800; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted);
+    margin: .9rem 0 .4rem;
+  }
+
+  /* external badge */
+  .ext-badge {
+    display: inline-block;
+    background: var(--red-lt); color: var(--red);
+    font-size: .58rem; font-weight: 800; padding: .1rem .45rem;
+    border-radius: 4px; margin-left: .3rem; vertical-align: middle;
+    letter-spacing: .04em;
+  }
+
+  /* ── divider ── */
+  .footer-divider {
+    border: none; border-top: 1px solid var(--border);
+    margin: 0 6vw;
+  }
+
+  /* ── bottom bar ── */
+  .footer-bottom {
+    padding: 1.2rem 6vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy { font-size: .76rem; color: var(--muted); }
+  .footer-copy strong { color: var(--green); font-weight: 700; }
+  .footer-bottom-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .footer-bottom-links a {
+    font-size: .75rem; color: var(--muted);
+    text-decoration: none; transition: color .18s;
+  }
+  .footer-bottom-links a:hover { color: var(--green); }
+  .footer-made {
+    font-size: .72rem; color: var(--muted);
+    display: flex; align-items: center; gap: .3rem;
+  }
+  .footer-made .heart { color: var(--red); }
+
+  /* ── responsive ── */
+  @media (max-width: 900px) {
+    .footer-body { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .footer-body { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 5vw 2rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: .6rem; }
+    .footer-contact-bar { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<footer class="pibd-footer">
+
+  <!-- flag stripe -->
+  <div class="footer-flag"></div>
+
+  <!-- contact bar -->
+  <div class="footer-contact-bar">
+    <span class="contact-bar-left">আমাদের সাথে সরাসরি যোগাযোগ করুন</span>
+    <div class="contact-bar-right">
+      <a href="https://wa.me/8801989666676" target="_blank" rel="noopener" class="contact-link">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.138.561 4.14 1.535 5.876L0 24l6.302-1.511A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.016-1.375l-.36-.213-3.732.895.936-3.634-.234-.375A9.818 9.818 0 1112 21.818z"/></svg>
+        WhatsApp
+      </a>
+      <a href="mailto:contact@pibbd.org" class="contact-link">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        contact@pibbd.org
+      </a>
+    </div>
+  </div>
+
+  <!-- main body -->
+  <div class="footer-body">
+
+    <!-- ── BRAND COL ── -->
+    <div class="footer-brand">
+      <a href="https://www.politicalinsightsbd.com" class="footer-logo">
+        Political<span>Insights</span> BD
+      </a>
+      <p class="footer-tagline">
+        বাংলাদেশের রাজনৈতিক প্রেক্ষাপটে তথ্যভিত্তিক বিশ্লেষণ, নীতি গবেষণা ও গণতান্ত্রিক সংস্কারের পথে স্বচ্ছতা নিশ্চিতে প্রতিশ্রুতিবদ্ধ।
+      </p>
+      <div class="footer-social">
+        <a href="https://facebook.com/politicalinsightsbd" target="_blank" rel="noopener" class="social-icon facebook" title="Facebook">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.276h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="https://youtube.com/@politicalinsightsbd" target="_blank" rel="noopener" class="social-icon youtube" title="YouTube">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="https://twitter.com/pibd_official" target="_blank" rel="noopener" class="social-icon twitter" title="X (Twitter)">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://linkedin.com/company/politicalinsightsbd" target="_blank" rel="noopener" class="social-icon linkedin" title="LinkedIn">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://t.me/politicalinsightsbd" target="_blank" rel="noopener" class="social-icon telegram" title="Telegram">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+        <a href="https://wa.me/8801989666676" target="_blank" rel="noopener" class="social-icon whatsapp" title="WhatsApp">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.138.561 4.14 1.535 5.876L0 24l6.302-1.511A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.016-1.375l-.36-.213-3.732.895.936-3.634-.234-.375A9.818 9.818 0 1112 21.818z"/></svg>
+        </a>
+        <a href="mailto:contact@pibbd.org" class="social-icon email" title="Email">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── COL 2: গবেষণা ও বিশ্লেষণ ── -->
+    <div class="footer-col">
+      <h4>গবেষণা ও বিশ্লেষণ</h4>
+      <ul class="footer-links">
+        <li>
+          <a href="https://politicalinsightsbd.com/research/">
+            <span class="link-arrow">›</span> গবেষণা (Research)
+          </a>
+        </li>
+        <li>
+          <a href="https://politicalinsightsbd.com/all-insights/">
+            <span class="link-arrow">›</span> সব ইনসাইটস
+          </a>
+        </li>
+        <li>
+          <a href="https://politicalinsightsbd.com/report/">
+            <span class="link-arrow">›</span> রিপোর্ট
+          </a>
+        </li>
+        <li>
+          <a href="https://politicalinsightsbd.com/policy/">
+            <span class="link-arrow">›</span> নীতি বিশ্লেষণ
+          </a>
+        </li>
+        <li>
+          <a href="https://politicalinsightsbd.com/national-intelligence/">
+            <span class="link-arrow">›</span> ন্যাশনাল ইন্টেলিজেন্স
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ── COL 3: নির্বাচন ও সেবা ── -->
+    <div class="footer-col">
+      <h4>নির্বাচন ও সেবা</h4>
+      <ul class="footer-links">
+        <li>
+          <a href="https://politicalinsightsbd.com/election/">
+            <span class="link-arrow">›</span> নির্বাচন ২০২৬
+          </a>
+        </li>
+        <li>
+          <a href="https://politicalinsightsbd.com/services/">
+            <span class="link-arrow">›</span> সেবাসমূহ
+          </a>
+        </li>
+        <li>
+          <a href="https://politicalinsightsbd.com/services/#consulting">
+            <span class="link-arrow">›</span> Political Consulting
+          </a>
+        </li>
+        <li>
+          <a href="https://politicalinsightsbd.com/services/#research">
+            <span class="link-arrow">›</span> Research Writing
+          </a>
+        </li>
+        <li>
+          <a href="https://politicalinsightsbd.com/about/">
+            <span class="link-arrow">›</span> আমাদের সম্পর্কে
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ── COL 4: টুলস ও যোগাযোগ ── -->
+    <div class="footer-col">
+      <h4>টুলস ও যোগাযোগ</h4>
+      <ul class="footer-links">
+        <li>
+          <a href="https://politicalinsightsbd.com/budget-calculator/">
+            <span class="link-arrow">›</span> বাজেট ক্যালকুলেটর
+          </a>
+        </li>
+        <li>
+          <a href="https://factcheckbd.org/" target="_blank" rel="noopener">
+            <span class="link-arrow">›</span> Fact Check BD
+            <span class="ext-badge">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://factcheckbd.org/FORENSIC/" target="_blank" rel="noopener">
+            <span class="link-arrow">›</span> Digital Forensic
+            <span class="ext-badge">↗</span>
+          </a>
+        </li>
+      </ul>
+
+      <p class="footer-sub-label">যোগাযোগ</p>
+      <ul class="footer-links">
+        <li>
+          <a href="https://wa.me/8801989666676" target="_blank" rel="noopener">
+            <span class="link-arrow">›</span> +880 1989-666676
+          </a>
+        </li>
+        <li>
+          <a href="mailto:contact@pibbd.org">
+            <span class="link-arrow">›</span> contact@pibbd.org
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- divider -->
+  <hr class="footer-divider">
+
+  <!-- bottom bar -->
+  <div class="footer-bottom">
+    <p class="footer-copy">
+      © ২০২৬ <strong>Political Insights BD</strong>. সর্বস্বত্ব সংরক্ষিত।
+    </p>
+    <div class="footer-bottom-links">
+      <a href="https://politicalinsightsbd.com/about/">Privacy Policy</a>
+      <a href="https://politicalinsightsbd.com/about/">Terms of Use</a>
+      <a href="https://politicalinsightsbd.com/about/">Disclaimer</a>
+    </div>
+    <p class="footer-made">
+      তৈরি করেছে PIBD Team <span class="heart">♥</span> বাংলাদেশে
+    </p>
+  </div>
+
+</footer>
+
+</body>
+</html>
