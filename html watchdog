@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GovWatch — Budget & Tender Integrity Monitor</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2236;
+    --border: #1f2d45;
+    --accent: #00e5a0;
+    --accent2: #ff4d6d;
+    --accent3: #f5a623;
+    --accent4: #4d9fff;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --danger: #ff4d6d;
+    --warn: #f5a623;
+    --ok: #00e5a0;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:var(--sans); min-height:100vh; overflow-x:hidden; }
+
+  /* GRID BG */
+  body::before {
+    content:'';
+    position:fixed; top:0; left:0; right:0; bottom:0;
+    background-image: linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events:none; z-index:0;
+  }
+
+  .app { position:relative; z-index:1; }
+
+  /* HEADER */
+  header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px; border-bottom:1px solid var(--border);
+    background:rgba(10,14,26,0.95); backdrop-filter:blur(10px);
+    position:sticky; top:0; z-index:100;
+  }
+  .logo { display:flex; align-items:center; gap:12px; }
+  .logo-icon {
+    width:36px; height:36px; background:var(--accent);
+    clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px;
+  }
+  .logo-text { font-family:var(--mono); font-weight:700; font-size:18px; letter-spacing:2px; color:var(--accent); }
+  .logo-sub { font-size:11px; color:var(--muted); letter-spacing:1px; margin-top:2px; }
+  .header-right { display:flex; align-items:center; gap:20px; }
+  .alert-badge {
+    background:var(--danger); color:#fff; font-family:var(--mono);
+    font-size:11px; padding:4px 10px; border-radius:2px; letter-spacing:1px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+  .live-dot { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); }
+  .live-dot::before { content:''; width:8px; height:8px; background:var(--ok); border-radius:50%; animation:pulse 1.5s infinite; }
+
+  /* NAV TABS */
+  .nav-tabs { display:flex; gap:0; border-bottom:1px solid var(--border); padding:0 28px; background:var(--surface); }
+  .tab {
+    padding:12px 20px; font-size:13px; font-weight:500; cursor:pointer;
+    border-bottom:2px solid transparent; color:var(--muted); transition:all 0.2s;
+    letter-spacing:0.5px; font-family:var(--mono);
+  }
+  .tab:hover { color:var(--text); }
+  .tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+  /* MAIN CONTENT */
+  .main { padding:24px 28px; }
+  .panel { display:none; }
+  .panel.active { display:block; }
+
+  /* STAT CARDS */
+  .stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+  .stat-card {
+    background:var(--surface); border:1px solid var(--border);
+    padding:20px; position:relative; overflow:hidden;
+  }
+  .stat-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  }
+  .stat-card.green::before { background:var(--ok); }
+  .stat-card.red::before { background:var(--danger); }
+  .stat-card.yellow::before { background:var(--warn); }
+  .stat-card.blue::before { background:var(--accent4); }
+  .stat-label { font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; font-family:var(--mono); }
+  .stat-value { font-size:32px; font-weight:700; font-family:var(--mono); margin:8px 0 4px; }
+  .stat-value.green { color:var(--ok); }
+  .stat-value.red { color:var(--danger); }
+  .stat-value.yellow { color:var(--warn); }
+  .stat-value.blue { color:var(--accent4); }
+  .stat-delta { font-size:12px; color:var(--muted); }
+  .stat-icon { position:absolute; right:16px; top:16px; font-size:28px; opacity:0.15; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family:var(--mono); font-size:13px; letter-spacing:2px;
+    color:var(--muted); text-transform:uppercase; margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  /* TWO-COL GRID */
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+  .three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:24px; }
+
+  /* CARD */
+  .card { background:var(--surface); border:1px solid var(--border); padding:20px; }
+
+  /* BUDGET BAR */
+  .budget-item { margin-bottom:16px; }
+  .budget-header { display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px; }
+  .budget-bar { height:8px; background:var(--bg); border-radius:1px; overflow:hidden; }
+  .budget-fill { height:100%; border-radius:1px; transition:width 1s ease; }
+  .budget-fill.ok { background:var(--ok); }
+  .budget-fill.warn { background:var(--warn); }
+  .budget-fill.danger { background:var(--danger); }
+
+  /* TABLE */
+  .data-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .data-table th {
+    text-align:left; padding:10px 12px; font-family:var(--mono); font-size:11px;
+    color:var(--muted); letter-spacing:1px; border-bottom:1px solid var(--border);
+    text-transform:uppercase;
+  }
+  .data-table td { padding:10px 12px; border-bottom:1px solid rgba(31,45,69,0.5); vertical-align:middle; }
+  .data-table tr:hover td { background:rgba(255,255,255,0.02); }
+  .data-table tr:last-child td { border-bottom:none; }
+
+  /* BADGES */
+  .badge {
+    display:inline-flex; align-items:center; gap:4px;
+    padding:3px 8px; font-size:11px; font-family:var(--mono);
+    letter-spacing:0.5px; border-radius:2px; font-weight:700;
+  }
+  .badge.ok { background:rgba(0,229,160,0.12); color:var(--ok); }
+  .badge.warn { background:rgba(245,166,35,0.12); color:var(--warn); }
+  .badge.danger { background:rgba(255,77,109,0.15); color:var(--danger); }
+  .badge.info { background:rgba(77,159,255,0.12); color:var(--accent4); }
+
+  /* PROGRESS RING */
+  .ring-container { display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; }
+  .ring-label { font-size:12px; color:var(--muted); font-family:var(--mono); }
+
+  /* TENDER TIMELINE */
+  .timeline-item { display:flex; gap:16px; margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+  .timeline-item:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+  .tl-left { display:flex; flex-direction:column; align-items:center; gap:4px; min-width:60px; }
+  .tl-days { font-family:var(--mono); font-size:22px; font-weight:700; line-height:1; }
+  .tl-days.ok { color:var(--ok); }
+  .tl-days.warn { color:var(--warn); }
+  .tl-days.danger { color:var(--danger); }
+  .tl-unit { font-size:10px; color:var(--muted); letter-spacing:1px; }
+  .tl-right { flex:1; }
+  .tl-name { font-size:14px; font-weight:600; margin-bottom:4px; }
+  .tl-meta { font-size:12px; color:var(--muted); display:flex; gap:16px; flex-wrap:wrap; }
+  .tl-bar { height:4px; background:var(--bg); margin-top:8px; border-radius:1px; }
+  .tl-bar-fill { height:100%; border-radius:1px; }
+
+  /* FLAGS */
+  .flag-item {
+    display:flex; align-items:flex-start; gap:14px;
+    padding:14px; margin-bottom:10px; border-left:3px solid;
+    background:rgba(255,255,255,0.02);
+  }
+  .flag-item.critical { border-color:var(--danger); }
+  .flag-item.high { border-color:var(--warn); }
+  .flag-item.medium { border-color:var(--accent4); }
+  .flag-icon { font-size:22px; flex-shrink:0; }
+  .flag-title { font-size:14px; font-weight:600; margin-bottom:4px; }
+  .flag-desc { font-size:12px; color:var(--muted); line-height:1.5; }
+  .flag-meta { font-size:11px; color:var(--muted); margin-top:6px; font-family:var(--mono); }
+
+  /* AI PANEL */
+  .ai-panel { background:var(--surface2); border:1px solid var(--border); padding:20px; margin-bottom:24px; }
+  .ai-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .ai-logo { background:var(--accent); color:#000; font-size:11px; font-weight:700; padding:3px 8px; font-family:var(--mono); }
+  .ai-title { font-family:var(--mono); font-size:13px; color:var(--accent); letter-spacing:1px; }
+  .ai-output {
+    font-size:13px; line-height:1.8; color:var(--text); white-space:pre-wrap;
+    max-height:300px; overflow-y:auto; padding-right:8px;
+  }
+  .ai-output::-webkit-scrollbar { width:4px; }
+  .ai-output::-webkit-scrollbar-track { background:var(--bg); }
+  .ai-output::-webkit-scrollbar-thumb { background:var(--border); }
+  .ai-loading { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:13px; }
+  .ai-loading-dots span {
+    display:inline-block; width:6px; height:6px; background:var(--accent);
+    border-radius:50%; margin:0 2px; animation:dotbounce 1.2s infinite;
+  }
+  .ai-loading-dots span:nth-child(2) { animation-delay:0.2s; }
+  .ai-loading-dots span:nth-child(3) { animation-delay:0.4s; }
+  @keyframes dotbounce { 0%,100%{transform:translateY(0);opacity:0.3} 50%{transform:translateY(-6px);opacity:1} }
+  .ai-btn {
+    background:var(--accent); color:#000; border:none; padding:10px 20px;
+    font-family:var(--mono); font-size:12px; font-weight:700; cursor:pointer;
+    letter-spacing:1px; transition:opacity 0.2s; margin-top:12px;
+  }
+  .ai-btn:hover { opacity:0.85; }
+  .ai-btn:disabled { opacity:0.4; cursor:not-allowed; }
+
+  /* FIELD WORK */
+  .field-card {
+    background:var(--surface); border:1px solid var(--border);
+    padding:16px; display:flex; gap:14px; align-items:flex-start;
+    margin-bottom:10px;
+  }
+  .field-status-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; margin-top:4px; }
+  .field-status-dot.active { background:var(--ok); box-shadow:0 0 8px var(--ok); }
+  .field-status-dot.delayed { background:var(--warn); }
+  .field-status-dot.stalled { background:var(--danger); box-shadow:0 0 8px var(--danger); }
+  .field-name { font-size:14px; font-weight:600; margin-bottom:4px; }
+  .field-meta { font-size:12px; color:var(--muted); line-height:1.6; }
+  .field-progress { margin-top:8px; }
+  .field-progress-bar { height:6px; background:var(--bg); border-radius:1px; overflow:hidden; margin-top:4px; }
+  .field-progress-fill { height:100%; border-radius:1px; }
+  .field-right { margin-left:auto; text-align:right; }
+  .field-pct { font-family:var(--mono); font-size:24px; font-weight:700; }
+  .field-pct.ok { color:var(--ok); }
+  .field-pct.warn { color:var(--warn); }
+  .field-pct.danger { color:var(--danger); }
+
+  /* INPUT */
+  .input-row { display:flex; gap:10px; margin-bottom:16px; }
+  .data-input {
+    flex:1; background:var(--bg); border:1px solid var(--border);
+    color:var(--text); padding:10px 14px; font-family:var(--sans); font-size:13px;
+    outline:none;
+  }
+  .data-input:focus { border-color:var(--accent); }
+  textarea.data-input { min-height:80px; resize:vertical; }
+
+  /* MINI CHART */
+  .mini-chart { display:flex; align-items:flex-end; gap:3px; height:50px; }
+  .bar-c { flex:1; background:var(--border); border-radius:1px 1px 0 0; position:relative; transition:all 0.5s; }
+  .bar-c:hover .bar-tooltip { display:block; }
+  .bar-tooltip {
+    display:none; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    background:#000; border:1px solid var(--border); padding:4px 8px;
+    font-size:10px; font-family:var(--mono); white-space:nowrap; z-index:10;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width:6px; height:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--border); }
+
+  /* RESPONSIVE */
+  @media(max-width:900px) {
+    .stat-grid { grid-template-columns:repeat(2,1fr); }
+    .two-col,.three-col { grid-template-columns:1fr; }
+  }
+  @media(max-width:600px) {
+    .stat-grid { grid-template-columns:1fr 1fr; }
+    header { padding:12px 16px; }
+    .main { padding:16px; }
+    .nav-tabs { padding:0 16px; overflow-x:auto; }
+  }
+
+  /* ENTER ANIMATION */
+  .panel.active .stat-card,
+  .panel.active .card,
+  .panel.active .ai-panel { animation: fadeup 0.4s ease both; }
+  .panel.active .stat-card:nth-child(1) { animation-delay:0.05s; }
+  .panel.active .stat-card:nth-child(2) { animation-delay:0.1s; }
+  .panel.active .stat-card:nth-child(3) { animation-delay:0.15s; }
+  .panel.active .stat-card:nth-child(4) { animation-delay:0.2s; }
+  @keyframes fadeup { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+  .section-divider { border:none; border-top:1px solid var(--border); margin:24px 0; }
+
+  .chip { display:inline-block; background:var(--bg); border:1px solid var(--border); padding:2px 8px; font-size:11px; font-family:var(--mono); color:var(--muted); margin:2px; }
+
+  .full-width { grid-column: 1/-1; }
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">⬡</div>
+    <div>
+      <div class="logo-text">GOVWATCH</div>
+      <div class="logo-sub">BUDGET & TENDER INTEGRITY MONITOR</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="live-dot">LIVE</div>
+    <div class="alert-badge">⚠ 4 ALERTS</div>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="nav-tabs">
+  <div class="tab active" onclick="switchTab('budget')">📊 BUDGET</div>
+  <div class="tab" onclick="switchTab('tender')">📋 TENDERS</div>
+  <div class="tab" onclick="switchTab('fieldwork')">🏗️ FIELD WORK</div>
+  <div class="tab" onclick="switchTab('corruption')">🔴 CORRUPTION FLAGS</div>
+  <div class="tab" onclick="switchTab('ai')">🤖 AI ANALYSIS</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ========== BUDGET PANEL ========== -->
+<div class="panel active" id="panel-budget">
+
+  <div class="stat-grid">
+    <div class="stat-card green">
+      <div class="stat-icon">💰</div>
+      <div class="stat-label">Total Annual Budget</div>
+      <div class="stat-value green">₦4.8B</div>
+      <div class="stat-delta">FY 2024–2025 Approved</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-icon">📤</div>
+      <div class="stat-label">Total Disbursed</div>
+      <div class="stat-value blue">₦2.94B</div>
+      <div class="stat-delta">61.2% of total budget</div>
+    </div>
+    <div class="stat-card yellow">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-label">Actual Spent</div>
+      <div class="stat-value yellow">₦2.11B</div>
+      <div class="stat-delta">71.7% of disbursed</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-icon">🚨</div>
+      <div class="stat-label">Unaccounted Gap</div>
+      <div class="stat-value red">₦830M</div>
+      <div class="stat-delta">Disbursed but not receipted</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- Department Budgets -->
+    <div class="card">
+      <div class="section-title">Department Budget vs Actual</div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Infrastructure & Roads</span><span style="color:var(--ok)">₦980M / ₦1.2B</span></div>
+        <div class="budget-bar"><div class="budget-fill ok" style="width:82%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Education</span><span style="color:var(--ok)">₦620M / ₦800M</span></div>
+        <div class="budget-bar"><div class="budget-fill ok" style="width:78%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Healthcare</span><span style="color:var(--warn)">₦740M / ₦720M</span></div>
+        <div class="budget-bar"><div class="budget-fill warn" style="width:103%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Water & Sanitation</span><span style="color:var(--danger)">₦310M / ₦200M</span></div>
+        <div class="budget-bar"><div class="budget-fill danger" style="width:100%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Agriculture</span><span style="color:var(--ok)">₦190M / ₦380M</span></div>
+        <div class="budget-bar"><div class="budget-fill ok" style="width:50%"></div></div>
+      </div>
+      <div class="budget-item">
+        <div class="budget-header"><span>Social Services</span><span style="color:var(--warn)">₦270M / ₦500M</span></div>
+        <div class="budget-bar"><div class="budget-fill warn" style="width:54%"></div></div>
+      </div>
+    </div>
+
+    <!-- Monthly Spend Trend -->
+    <div class="card">
+      <div class="section-title">Monthly Expenditure Trend</div>
+      <div class="mini-chart" style="height:120px; align-items:flex-end; margin-bottom:8px;">
+        <div class="bar-c" style="height:45%; background:var(--accent4)"><div class="bar-tooltip">Jul: ₦180M</div></div>
+        <div class="bar-c" style="height:52%; background:var(--accent4)"><div class="bar-tooltip">Aug: ₦208M</div></div>
+        <div class="bar-c" style="height:38%; background:var(--accent4)"><div class="bar-tooltip">Sep: ₦152M</div></div>
+        <div class="bar-c" style="height:65%; background:var(--accent4)"><div class="bar-tooltip">Oct: ₦260M</div></div>
+        <div class="bar-c" style="height:70%; background:var(--accent4)"><div class="bar-tooltip">Nov: ₦280M</div></div>
+        <div class="bar-c" style="height:88%; background:var(--warn)"><div class="bar-tooltip">Dec: ₦352M ⚠</div></div>
+        <div class="bar-c" style="height:55%; background:var(--accent4)"><div class="bar-tooltip">Jan: ₦220M</div></div>
+        <div class="bar-c" style="height:60%; background:var(--accent4)"><div class="bar-tooltip">Feb: ₦240M</div></div>
+        <div class="bar-c" style="height:100%; background:var(--danger)"><div class="bar-tooltip">Mar: ₦418M 🚨</div></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--muted); font-family:var(--mono);">
+        <span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span><span>NOV</span><span>DEC</span><span>JAN</span><span>FEB</span><span>MAR</span>
+      </div>
+      <div style="margin-top:16px; padding:12px; background:rgba(255,77,109,0.08); border-left:3px solid var(--danger);">
+        <div style="font-size:12px; color:var(--danger); font-family:var(--mono);">⚠ ANOMALY DETECTED</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">March expenditure is 74% above monthly average. End-of-quarter rush spending pattern detected.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detailed Budget Table -->
+  <div class="card">
+    <div class="section-title">Budget Line Items — Detail View</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Department</th>
+          <th>Approved (₦)</th>
+          <th>Disbursed (₦)</th>
+          <th>Spent (₦)</th>
+          <th>Utilization</th>
+          <th>Status</th>
+          <th>Variance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Infrastructure & Roads</td>
+          <td>1,200,000,000</td>
+          <td>980,000,000</td>
+          <td>780,000,000</td>
+          <td>
+            <div class="budget-bar" style="width:120px"><div class="budget-fill ok" style="width:65%"></div></div>
+          </td>
+          <td><span class="badge ok">✓ ON TRACK</span></td>
+          <td style="color:var(--ok)">+0%</td>
+        </tr>
+        <tr>
+          <td>Education</td>
+          <td>800,000,000</td>
+          <td>620,000,000</td>
+          <td>490,000,000</td>
+          <td><div class="budget-bar" style="width:120px"><div class="budget-fill ok" style="width:61%"></div></div></td>
+          <td><span class="badge ok">✓ ON TRACK</span></td>
+          <td style="color:var(--ok)">+0%</td>
+        </tr>
+        <tr>
+          <td>Healthcare</td>
+          <td>720,000,000</td>
+          <td>740,000,000</td>
+          <td>738,000,000</td>
+          <td><div class="budget-bar" style="width:120px"><div class="budget-fill danger" style="width:100%"></div></div></td>
+          <td><span class="badge danger">🚨 OVERRUN</span></td>
+          <td style="color:var(--danger)">+2.8%</td>
+        </tr>
+        <tr>
+          <td>Water & Sanitation</td>
+          <td>200,000,000</td>
+          <td>310,000,000</td>
+          <td>308,000,000</td>
+          <td><div class="budget-bar" style="width:120px"><div class="budget-fill danger" style="width:100%"></div></div></td>
+          <td><span class="badge danger">🚨 CRITICAL</span></td>
+          <td style="color:var(--danger)">+55%</td>
+        </tr>
+        <tr>
+          <td>Agriculture</td>
+          <td>380,000,000</td>
+          <td>190,000,000</td>
+          <td>88,000,000</td>
+          <td><div class="budget-bar" style="width:120px"><div class="budget-fill warn" style="width:23%"></div></div></td>
+          <td><span class="badge warn">⚠ UNDERUSED</span></td>
+          <td style="color:var(--warn)">-50%</td>
+        </tr>
+        <tr>
+          <td>Social Services</td>
+          <td>500,000,000</td>
+          <td>270,000,000</td>
+          <td>210,000,000</td>
+          <td><div class="budget-bar" style="width:120px"><div class="budget-fill warn" style="width:42%"></div></div></td>
+          <td><span class="badge warn">⚠ LOW</span></td>
+          <td style="color:var(--warn)">-46%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ========== TENDER PANEL ========== -->
+<div class="panel" id="panel-tender">
+
+  <div class="stat-grid">
+    <div class="stat-card blue">
+      <div class="stat-icon">📋</div>
+      <div class="stat-label">Active Tenders</div>
+      <div class="stat-value blue">24</div>
+      <div class="stat-delta">Across all departments</div>
+    </div>
+    <div class="stat-card yellow">
+      <div class="stat-icon">⏱️</div>
+      <div class="stat-label">Exceeding Max Time</div>
+      <div class="stat-value yellow">7</div>
+      <div class="stat-delta">Beyond legal 90-day limit</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-icon">🔁</div>
+      <div class="stat-label">Duplicate Tenders</div>
+      <div class="stat-value red">3</div>
+      <div class="stat-delta">Same scope detected</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-icon">✅</div>
+      <div class="stat-label">Completed On-Time</div>
+      <div class="stat-value green">11</div>
+      <div class="stat-delta">This fiscal year</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- Tender Timeline -->
+    <div class="card">
+      <div class="section-title">Tender Time Tracker (Days Elapsed)</div>
+
+      <div class="timeline-item">
+        <div class="tl-left">
+          <div class="tl-days danger">127</div>
+          <div class="tl-unit">DAYS</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-name">Abuja-Kano Highway Expansion</div>
+          <div class="tl-meta"><span>Water & Sanitation</span><span>Awarded: ₦2.1B</span><span>Contractor: NovaBuild Ltd</span></div>
+          <div class="tl-bar"><div class="tl-bar-fill danger" style="width:100%; background:var(--danger)"></div></div>
+        </div>
+        <span class="badge danger">OVERDUE</span>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-left">
+          <div class="tl-days warn">88</div>
+          <div class="tl-unit">DAYS</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-name">Rural Electrification Phase 3</div>
+          <div class="tl-meta"><span>Infrastructure</span><span>Awarded: ₦890M</span><span>Contractor: PowerGrid NG</span></div>
+          <div class="tl-bar"><div class="tl-bar-fill warn" style="width:98%; background:var(--warn)"></div></div>
+        </div>
+        <span class="badge warn">CRITICAL</span>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-left">
+          <div class="tl-days ok">42</div>
+          <div class="tl-unit">DAYS</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-name">Primary School Renovation (Batch A)</div>
+          <div class="tl-meta"><span>Education</span><span>Awarded: ₦340M</span><span>Contractor: EduBuild Co</span></div>
+          <div class="tl-bar"><div class="tl-bar-fill ok" style="width:47%; background:var(--ok)"></div></div>
+        </div>
+        <span class="badge ok">ON TRACK</span>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-left">
+          <div class="tl-days danger">164</div>
+          <div class="tl-unit">DAYS</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-name">Community Water Boreholes (Zone 4)</div>
+          <div class="tl-meta"><span>Water & Sanitation</span><span>Awarded: ₦120M</span><span>Contractor: AquaTech NG</span></div>
+          <div class="tl-bar"><div class="tl-bar-fill danger" style="width:100%; background:var(--danger)"></div></div>
+        </div>
+        <span class="badge danger">CRITICAL</span>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-left">
+          <div class="tl-days ok">18</div>
+          <div class="tl-unit">DAYS</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-name">State Hospital Equipment Supply</div>
+          <div class="tl-meta"><span>Healthcare</span><span>Awarded: ₦560M</span><span>Contractor: MedSupply Int'l</span></div>
+          <div class="tl-bar"><div class="tl-bar-fill ok" style="width:20%; background:var(--ok)"></div></div>
+        </div>
+        <span class="badge ok">ACTIVE</span>
+      </div>
+    </div>
+
+    <!-- Duplicate Detection -->
+    <div class="card">
+      <div class="section-title">Duplicate Tender Detection</div>
+
+      <div class="flag-item critical" style="margin-bottom:12px">
+        <div class="flag-icon">🔁</div>
+        <div>
+          <div class="flag-title">DUPLICATE — Community Water Boreholes</div>
+          <div class="flag-desc">TND-2024-089 & TND-2024-112 share identical scope: "Drilling of 20 boreholes in Zone 4". Different contractors, 34-day gap between awards.</div>
+          <div class="flag-meta">TND-089: AquaTech NG (₦120M) | TND-112: WaterFirst Ltd (₦118M)</div>
+        </div>
+      </div>
+
+      <div class="flag-item critical" style="margin-bottom:12px">
+        <div class="flag-icon">🔁</div>
+        <div>
+          <div class="flag-title">NEAR-DUPLICATE — Road Rehabilitation</div>
+          <div class="flag-desc">TND-2024-044 & TND-2024-099 — 91% textual similarity in scope. Same road segment (km 12–28) listed in both tenders.</div>
+          <div class="flag-meta">TND-044: QuickPave Ltd (₦88M) | TND-099: RoadMasters (₦94M)</div>
+        </div>
+      </div>
+
+      <div class="flag-item high">
+        <div class="flag-icon">⚠️</div>
+        <div>
+          <div class="flag-title">SPLIT TENDER DETECTED</div>
+          <div class="flag-desc">4 separate tenders below ₦50M threshold for school furniture across 4 LGAs appear to be artificially split to avoid open competitive bidding.</div>
+          <div class="flag-meta">TND-2024-201 to 204 — Total: ₦196M | Min threshold: ₦200M</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Tenders Table -->
+  <div class="card">
+    <div class="section-title">All Active Tenders</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Tender ID</th>
+          <th>Description</th>
+          <th>Contractor</th>
+          <th>Value (₦)</th>
+          <th>Days Elapsed</th>
+          <th>Max Days</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="tenderTableBody">
+        <tr><td>TND-2024-001</td><td>Highway Expansion Phase 1</td><td>NovaBuild Ltd</td><td>2,100,000,000</td><td style="color:var(--danger)">127</td><td>90</td><td><span class="badge danger">OVERDUE</span></td></tr>
+        <tr><td>TND-2024-002</td><td>Rural Electrification Ph3</td><td>PowerGrid NG</td><td>890,000,000</td><td style="color:var(--warn)">88</td><td>90</td><td><span class="badge warn">CRITICAL</span></td></tr>
+        <tr><td>TND-2024-003</td><td>School Renovation Batch A</td><td>EduBuild Co</td><td>340,000,000</td><td style="color:var(--ok)">42</td><td>90</td><td><span class="badge ok">ACTIVE</span></td></tr>
+        <tr><td>TND-2024-004</td><td>Water Boreholes Zone 4</td><td>AquaTech NG</td><td>120,000,000</td><td style="color:var(--danger)">164</td><td>90</td><td><span class="badge danger">OVERDUE</span></td></tr>
+        <tr><td>TND-2024-005</td><td>Hospital Equipment Supply</td><td>MedSupply Int'l</td><td>560,000,000</td><td style="color:var(--ok)">18</td><td>90</td><td><span class="badge ok">ACTIVE</span></td></tr>
+        <tr><td>TND-2024-006</td><td>Market Renovation Downtown</td><td>CivicBuild NG</td><td>78,000,000</td><td style="color:var(--danger)">102</td><td>90</td><td><span class="badge danger">OVERDUE</span></td></tr>
+        <tr><td>TND-2024-007</td><td>Bridge Rehabilitation X-4</td><td>BridgePro Ltd</td><td>430,000,000</td><td style="color:var(--ok)">55</td><td>90</td><td><span class="badge ok">ACTIVE</span></td></tr>
+        <tr><td>TND-2024-008</td><td>Ambulance Fleet Procurement</td><td>AutoFleet NG</td><td>290,000,000</td><td style="color:var(--warn)">79</td><td>90</td><td><span class="badge warn">AT RISK</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ========== FIELD WORK PANEL ========== -->
+<div class="panel" id="panel-fieldwork">
+
+  <div class="stat-grid">
+    <div class="stat-card green">
+      <div class="stat-icon">🏗️</div>
+      <div class="stat-label">Active Sites</div>
+      <div class="stat-value green">18</div>
+      <div class="stat-delta">Ongoing field operations</div>
+    </div>
+    <div class="stat-card yellow">
+      <div class="stat-icon">⏳</div>
+      <div class="stat-label">Delayed Projects</div>
+      <div class="stat-value yellow">6</div>
+      <div class="stat-delta">Behind schedule</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-icon">🛑</div>
+      <div class="stat-label">Stalled / Abandoned</div>
+      <div class="stat-value red">2</div>
+      <div class="stat-delta">No activity 30+ days</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-icon">📍</div>
+      <div class="stat-label">Verified On-Site</div>
+      <div class="stat-value blue">14</div>
+      <div class="stat-delta">Physical inspection done</div>
+    </div>
+  </div>
+
+  <div class="section-title">Field Work Status — All Projects</div>
+
+  <div class="field-card">
+    <div class="field-status-dot active"></div>
+    <div style="flex:1">
+      <div class="field-name">Abuja-Kano Highway Phase 1 — Km 0–45</div>
+      <div class="field-meta">📍 Abuja North Zone &nbsp;|&nbsp; Supervisor: Engr. Musa Abdullahi &nbsp;|&nbsp; Last Inspection: 2 days ago</div>
+      <div class="field-progress">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>Progress</span><span>72%</span></div>
+        <div class="field-progress-bar"><div class="field-progress-fill ok" style="width:72%;background:var(--ok)"></div></div>
+      </div>
+    </div>
+    <div class="field-right"><div class="field-pct ok">72%</div></div>
+  </div>
+
+  <div class="field-card">
+    <div class="field-status-dot delayed"></div>
+    <div style="flex:1">
+      <div class="field-name">Zone 4 Borehole Drilling (20 units)</div>
+      <div class="field-meta">📍 Katsina LGA &nbsp;|&nbsp; Supervisor: Engr. Fatima Bello &nbsp;|&nbsp; Last Inspection: 18 days ago ⚠️</div>
+      <div class="field-progress">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>Progress</span><span>28%</span></div>
+        <div class="field-progress-bar"><div class="field-progress-fill warn" style="width:28%;background:var(--warn)"></div></div>
+      </div>
+    </div>
+    <div class="field-right"><div class="field-pct warn">28%</div></div>
+  </div>
+
+  <div class="field-card">
+    <div class="field-status-dot stalled"></div>
+    <div style="flex:1">
+      <div class="field-name">Market Renovation — Downtown Plaza</div>
+      <div class="field-meta">📍 Central Zone &nbsp;|&nbsp; Supervisor: N/A — UNASSIGNED &nbsp;|&nbsp; Last Activity: 38 days ago 🚨</div>
+      <div class="field-progress">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>Progress</span><span>12%</span></div>
+        <div class="field-progress-bar"><div class="field-progress-fill danger" style="width:12%;background:var(--danger)"></div></div>
+      </div>
+    </div>
+    <div class="field-right"><div class="field-pct danger">12%</div></div>
+  </div>
+
+  <div class="field-card">
+    <div class="field-status-dot stalled"></div>
+    <div style="flex:1">
+      <div class="field-name">Bridge Rehabilitation — Crossing X-4</div>
+      <div class="field-meta">📍 River State Corridor &nbsp;|&nbsp; Supervisor: Engr. Chidi Okafor &nbsp;|&nbsp; Last Activity: 31 days ago 🚨</div>
+      <div class="field-progress">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>Progress</span><span>45%</span></div>
+        <div class="field-progress-bar"><div class="field-progress-fill danger" style="width:45%;background:var(--danger)"></div></div>
+      </div>
+    </div>
+    <div class="field-right"><div class="field-pct danger">45%</div></div>
+  </div>
+
+  <div class="field-card">
+    <div class="field-status-dot active"></div>
+    <div style="flex:1">
+      <div class="field-name">Primary School Renovation — Batch A (12 Schools)</div>
+      <div class="field-meta">📍 North-East LGA &nbsp;|&nbsp; Supervisor: Engr. Amina Suleiman &nbsp;|&nbsp; Last Inspection: 1 day ago</div>
+      <div class="field-progress">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>Progress</span><span>58%</span></div>
+        <div class="field-progress-bar"><div class="field-progress-fill ok" style="width:58%;background:var(--ok)"></div></div>
+      </div>
+    </div>
+    <div class="field-right"><div class="field-pct ok">58%</div></div>
+  </div>
+
+  <div class="field-card">
+    <div class="field-status-dot active"></div>
+    <div style="flex:1">
+      <div class="field-name">Ambulance Fleet Procurement & Delivery</div>
+      <div class="field-meta">📍 State Health Dept. &nbsp;|&nbsp; Supervisor: Dr. Yusuf Garba &nbsp;|&nbsp; Last Inspection: 4 days ago</div>
+      <div class="field-progress">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>Progress</span><span>67%</span></div>
+        <div class="field-progress-bar"><div class="field-progress-fill ok" style="width:67%;background:var(--ok)"></div></div>
+      </div>
+    </div>
+    <div class="field-right"><div class="field-pct ok">67%</div></div>
+  </div>
+
+</div>
+
+<!-- ========== CORRUPTION FLAGS PANEL ========== -->
+<div class="panel" id="panel-corruption">
+
+  <div class="stat-grid">
+    <div class="stat-card red">
+      <div class="stat-icon">🚨</div>
+      <div class="stat-label">Critical Flags</div>
+      <div class="stat-value red">4</div>
+      <div class="stat-delta">Require immediate action</div>
+    </div>
+    <div class="stat-card yellow">
+      <div class="stat-icon">⚠️</div>
+      <div class="stat-label">High Risk Flags</div>
+      <div class="stat-value yellow">7</div>
+      <div class="stat-delta">Under investigation</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-icon">🔍</div>
+      <div class="stat-label">Medium Risk</div>
+      <div class="stat-value blue">12</div>
+      <div class="stat-delta">Monitoring required</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-icon">✅</div>
+      <div class="stat-label">Cleared Flags</div>
+      <div class="stat-value green">8</div>
+      <div class="stat-delta">Resolved this quarter</div>
+    </div>
+  </div>
+
+  <div class="section-title">Critical Corruption Indicators</div>
+
+  <div class="flag-item critical">
+    <div class="flag-icon">💰</div>
+    <div style="flex:1">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start">
+        <div class="flag-title">Budget Overrun Without Authorization — Water & Sanitation</div>
+        <span class="badge danger">CRITICAL</span>
+      </div>
+      <div class="flag-desc">Department spent ₦310M against approved ₦200M — a 55% overrun. No supplementary budget approval found. Funds disbursed in 3 tranches to 2 contractors without competitive bidding documentation.</div>
+      <div class="flag-meta">Dept: Water & Sanitation &nbsp;|&nbsp; Amount: ₦110M excess &nbsp;|&nbsp; Reported: Mar 2, 2025</div>
+      <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+        <span class="chip">NO APPROVAL DOCS</span>
+        <span class="chip">SPLIT PAYMENT</span>
+        <span class="chip">SINGLE-SOURCED</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flag-item critical">
+    <div class="flag-icon">🔁</div>
+    <div style="flex:1">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start">
+        <div class="flag-title">Duplicate Tender Award — Borehole Drilling Zone 4</div>
+        <span class="badge danger">CRITICAL</span>
+      </div>
+      <div class="flag-desc">Two separate tenders (TND-2024-089 and TND-2024-112) were awarded for identical scope: drilling 20 boreholes in Zone 4. Both contractors received mobilization fees. No cancellation of first tender on record.</div>
+      <div class="flag-meta">Tender IDs: TND-089 & TND-112 &nbsp;|&nbsp; Combined Loss: ₦238M &nbsp;|&nbsp; Officer: Procurement Unit B</div>
+      <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+        <span class="chip">DOUBLE AWARD</span>
+        <span class="chip">MOBILIZATION PAID x2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flag-item critical">
+    <div class="flag-icon">🏚️</div>
+    <div style="flex:1">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start">
+        <div class="flag-title">Ghost Project — Market Renovation Stalled 38 Days</div>
+        <span class="badge danger">CRITICAL</span>
+      </div>
+      <div class="flag-desc">TND-2024-006 for downtown market renovation has received ₦60M (75% of contract value) as advance payment. No supervisor assigned. Site inspection shows 12% completion. Contractor unresponsive for 38 days.</div>
+      <div class="flag-meta">Contractor: CivicBuild NG &nbsp;|&nbsp; Paid: ₦60M / ₦78M &nbsp;|&nbsp; Last activity: 38 days ago</div>
+      <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+        <span class="chip">ADVANCE OVERPAID</span>
+        <span class="chip">NO SUPERVISOR</span>
+        <span class="chip">CONTRACTOR MISSING</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flag-item critical">
+    <div class="flag-icon">🪓</div>
+    <div style="flex:1">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start">
+        <div class="flag-title">Tender Splitting to Avoid Competitive Threshold</div>
+        <span class="badge danger">CRITICAL</span>
+      </div>
+      <div class="flag-desc">4 school furniture contracts totalling ₦196M were split into separate awards just below the ₦50M open-bid threshold. All awarded to same parent company (AceFurniture Ltd and 3 related entities with same registered address).</div>
+      <div class="flag-meta">TND-2024-201 to 204 &nbsp;|&nbsp; All recipients: AceFurniture & affiliates &nbsp;|&nbsp; Total: ₦196M</div>
+      <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+        <span class="chip">THRESHOLD AVOIDANCE</span>
+        <span class="chip">RELATED PARTIES</span>
+        <span class="chip">NO OPEN BID</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">High Risk Flags</div>
+
+  <div class="flag-item high">
+    <div class="flag-icon">📅</div>
+    <div style="flex:1">
+      <div class="flag-title">End-of-Quarter Rush Spending — March Anomaly</div>
+      <div class="flag-desc">March 2025 expenditure of ₦418M is 74% above monthly average. 6 contracts awarded in last 3 days of fiscal quarter without adequate documentation. Pattern consistent with year-end abuse.</div>
+      <div class="flag-meta">Dept: Multiple &nbsp;|&nbsp; Amount: ₦418M &nbsp;|&nbsp; Date: Mar 28–31, 2025</div>
+    </div>
+    <span class="badge warn">HIGH</span>
+  </div>
+
+  <div class="flag-item high">
+    <div class="flag-icon">👤</div>
+    <div style="flex:1">
+      <div class="flag-title">Single Contractor — 34% of All Awards</div>
+      <div class="flag-desc">NovaBuild Ltd has received 8 out of 24 active contracts this fiscal year. Director appears in state procurement committee membership roster — potential conflict of interest.</div>
+      <div class="flag-meta">Contractor: NovaBuild Ltd &nbsp;|&nbsp; Total Awards: ₦4.1B &nbsp;|&nbsp; Committee Link: Confirmed</div>
+    </div>
+    <span class="badge warn">HIGH</span>
+  </div>
+
+  <div class="flag-item medium">
+    <div class="flag-icon">📄</div>
+    <div style="flex:1">
+      <div class="flag-title">Missing Performance Bonds — 5 Contracts</div>
+      <div class="flag-desc">5 contracts worth ₦780M do not have performance bond documentation on file. This is a statutory requirement under the Public Procurement Act.</div>
+      <div class="flag-meta">Tenders: TND-2024-007, 008, 014, 017, 019 &nbsp;|&nbsp; Total Value: ₦780M</div>
+    </div>
+    <span class="badge info">MEDIUM</span>
+  </div>
+</div>
+
+<!-- ========== AI PANEL ========== -->
+<div class="panel" id="panel-ai">
+
+  <div class="ai-panel">
+    <div class="ai-header">
+      <span class="ai-logo">AI</span>
+      <span class="ai-title">CLAUDE — CORRUPTION PATTERN ANALYSIS ENGINE</span>
+    </div>
+    <div id="aiOutput" class="ai-output" style="color:var(--muted); font-style:italic;">Click "Run AI Analysis" to analyze all budget, tender, and field data for corruption indicators...</div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+      <button class="ai-btn" id="analyzeBtn" onclick="runAIAnalysis()">🤖 RUN FULL AI ANALYSIS</button>
+      <button class="ai-btn" style="background:var(--surface2); color:var(--accent); border:1px solid var(--accent);" onclick="runCustomQuery()">💬 CUSTOM QUERY</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="section-title">Custom AI Investigation Query</div>
+    <div class="input-row">
+      <textarea class="data-input" id="customQuery" placeholder="E.g. 'Which contractors have received the most contracts this year?' or 'Analyze patterns in Water & Sanitation overspend' or 'What are the highest risk tenders?'"></textarea>
+    </div>
+    <button class="ai-btn" onclick="runCustomQuery()">🔍 INVESTIGATE</button>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="section-title">AI Risk Score by Department</div>
+      <div id="riskScores">
+        <div class="budget-item">
+          <div class="budget-header"><span>Water & Sanitation</span><span style="color:var(--danger)">Risk: 94/100</span></div>
+          <div class="budget-bar"><div class="budget-fill danger" style="width:94%"></div></div>
+        </div>
+        <div class="budget-item">
+          <div class="budget-header"><span>Infrastructure</span><span style="color:var(--warn)">Risk: 67/100</span></div>
+          <div class="budget-bar"><div class="budget-fill warn" style="width:67%"></div></div>
+        </div>
+        <div class="budget-item">
+          <div class="budget-header"><span>Healthcare</span><span style="color:var(--warn)">Risk: 58/100</span></div>
+          <div class="budget-bar"><div class="budget-fill warn" style="width:58%"></div></div>
+        </div>
+        <div class="budget-item">
+          <div class="budget-header"><span>Education</span><span style="color:var(--ok)">Risk: 22/100</span></div>
+          <div class="budget-bar"><div class="budget-fill ok" style="width:22%"></div></div>
+        </div>
+        <div class="budget-item">
+          <div class="budget-header"><span>Agriculture</span><span style="color:var(--ok)">Risk: 18/100</span></div>
+          <div class="budget-bar"><div class="budget-fill ok" style="width:18%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Add New Tender / Project</div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <input class="data-input" type="text" id="newTenderName" placeholder="Tender / Project Name">
+        <input class="data-input" type="text" id="newTenderValue" placeholder="Contract Value (₦)">
+        <input class="data-input" type="text" id="newTenderContractor" placeholder="Contractor Name">
+        <input class="data-input" type="number" id="newTenderDays" placeholder="Days Elapsed">
+        <button class="ai-btn" onclick="addTender()">➕ ADD & SCAN FOR FLAGS</button>
+        <div id="addResult" style="font-size:12px; color:var(--muted); font-family:var(--mono);"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end main -->
+</div><!-- end app -->
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+// DATA CONTEXT for AI
+const DATA_CONTEXT = `
+GOVERNMENT BUDGET & TENDER MONITORING DATA — FY 2024-2025
+
+BUDGET SUMMARY:
+- Total Approved Budget: ₦4.8 Billion
+- Total Disbursed: ₦2.94B (61.2%)
+- Actual Spent: ₦2.11B (71.7% of disbursed)
+- Unaccounted Gap: ₦830M (disbursed but not receipted)
+
+DEPARTMENT SPENDING:
+- Infrastructure & Roads: Approved ₦1.2B, Spent ₦780M — ON TRACK
+- Education: Approved ₦800M, Spent ₦490M — ON TRACK  
+- Healthcare: Approved ₦720M, Spent ₦738M — OVERRUN by 2.8%
+- Water & Sanitation: Approved ₦200M, Spent ₦308M — OVERRUN by 55% (CRITICAL)
+- Agriculture: Approved ₦380M, Spent ₦88M — UNDERUTILIZED 50%
+- Social Services: Approved ₦500M, Spent ₦210M — UNDERUTILIZED 46%
+
+TENDER STATUS (24 active):
+- 7 tenders exceeding 90-day legal maximum
+- 3 duplicate tenders detected
+- 11 completed on time
+- Notable overdues: TND-2024-001 (127 days), TND-2024-004 (164 days), TND-2024-006 (102 days)
+
+CORRUPTION FLAGS:
+1. CRITICAL: Water & Sanitation budget overrun ₦110M without authorization
+2. CRITICAL: Duplicate tender award for borehole drilling — double mobilization paid (TND-089 & TND-112, ₦238M)
+3. CRITICAL: Ghost project — Market Renovation, ₦60M paid, 12% done, contractor missing 38 days
+4. CRITICAL: Tender splitting (4 awards) to avoid ₦50M competitive bidding threshold — all to related entities (AceFurniture family)
+5. HIGH: End-of-quarter rush spending in March — ₦418M (74% above average), 6 contracts in last 3 days
+6. HIGH: Single contractor NovaBuild Ltd holds 34% of all contracts, director on procurement committee
+7. MEDIUM: 5 contracts missing performance bonds totalling ₦780M
+
+FIELD WORK:
+- 18 active sites, 6 delayed, 2 stalled/abandoned
+- Market Renovation: stalled 38 days, 12% progress
+- Bridge X-4: stalled 31 days, 45% progress
+- Zone 4 Boreholes: 28% progress, supervisor last seen 18 days ago
+`;
+
+async function runAIAnalysis() {
+  const btn = document.getElementById('analyzeBtn');
+  const output = document.getElementById('aiOutput');
+  btn.disabled = true;
+  btn.textContent = '⏳ ANALYZING...';
+  output.innerHTML = '<div class="ai-loading">Scanning all data for corruption patterns <div class="ai-loading-dots"><span></span><span></span><span></span></div></div>';
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{
+          role: "user",
+          content: `You are a senior government anti-corruption auditor and forensic financial analyst. Analyze the following government budget and tender data and provide a structured corruption risk assessment. Be specific, factual, and actionable. Use plain text with clear sections.
+
+${DATA_CONTEXT}
+
+Provide:
+1. EXECUTIVE SUMMARY (2-3 sentences on overall risk level)
+2. TOP 3 MOST URGENT ISSUES (with estimated financial exposure)
+3. SUSPICIOUS PATTERNS (cross-referencing multiple data points)
+4. RECOMMENDED IMMEDIATE ACTIONS (numbered list)
+5. OVERALL CORRUPTION RISK SCORE: X/100
+
+Be direct and specific. Format clearly with section headers.`
+        }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || "").join("") || "No response received.";
+    output.style.fontStyle = 'normal';
+    output.style.color = 'var(--text)';
+
+    // Typed output
+    let i = 0;
+    output.textContent = '';
+    const interval = setInterval(() => {
+      if (i < text.length) {
+        output.textContent += text[i++];
+        output.scrollTop = output.scrollHeight;
+      } else {
+        clearInterval(interval);
+      }
+    }, 10);
+
+  } catch (e) {
+    output.innerHTML = `<span style="color:var(--danger)">Error: ${e.message}. Please check your connection.</span>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = '🔄 RE-RUN ANALYSIS';
+}
+
+async function runCustomQuery() {
+  const query = document.getElementById('customQuery').value.trim();
+  if (!query) { document.getElementById('customQuery').focus(); return; }
+
+  const output = document.getElementById('aiOutput');
+  output.innerHTML = '<div class="ai-loading">Processing query <div class="ai-loading-dots"><span></span><span></span><span></span></div></div>';
+
+  // Scroll to AI panel
+  document.querySelectorAll('.tab')[4].click();
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{
+          role: "user",
+          content: `You are a government anti-corruption monitoring AI. Here is the full dataset:
+
+${DATA_CONTEXT}
+
+User query: ${query}
+
+Answer concisely and specifically based only on the data provided. If the query involves corruption risks, be direct about what the data shows.`
+        }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || "").join("") || "No response.";
+    output.style.fontStyle = 'normal';
+    output.style.color = 'var(--text)';
+    let i = 0;
+    output.textContent = '';
+    const interval = setInterval(() => {
+      if (i < text.length) { output.textContent += text[i++]; output.scrollTop = output.scrollHeight; }
+      else clearInterval(interval);
+    }, 8);
+  } catch(e) {
+    output.innerHTML = `<span style="color:var(--danger)">Error: ${e.message}</span>`;
+  }
+}
+
+function addTender() {
+  const name = document.getElementById('newTenderName').value.trim();
+  const value = document.getElementById('newTenderValue').value.trim();
+  const contractor = document.getElementById('newTenderContractor').value.trim();
+  const days = parseInt(document.getElementById('newTenderDays').value) || 0;
+  const result = document.getElementById('addResult');
+
+  if (!name || !contractor) { result.textContent = '⚠ Please fill in tender name and contractor.'; result.style.color = 'var(--warn)'; return; }
+
+  const flags = [];
+  if (days > 90) flags.push('🚨 EXCEEDS MAX 90-DAY LIMIT');
+  if (days > 60) flags.push('⚠ APPROACHING MAX TIME');
+  if (parseInt(value?.replace(/,/g,'')) > 2000000000) flags.push('⚠ HIGH VALUE — ENHANCED SCRUTINY REQUIRED');
+
+  const tbody = document.getElementById('tenderTableBody');
+  const newId = 'TND-2025-' + String(tbody.children.length + 1).padStart(3,'0');
+  const statusBadge = days > 90 ? '<span class="badge danger">OVERDUE</span>' : days > 60 ? '<span class="badge warn">AT RISK</span>' : '<span class="badge ok">ACTIVE</span>';
+  const row = `<tr><td>${newId}</td><td>${name}</td><td>${contractor}</td><td>${value || 'TBD'}</td><td style="color:${days>90?'var(--danger)':days>60?'var(--warn)':'var(--ok)'}">${days}</td><td>90</td><td>${statusBadge}</td></tr>`;
+  tbody.insertAdjacentHTML('afterbegin', row);
+
+  result.style.color = flags.length ? 'var(--warn)' : 'var(--ok)';
+  result.textContent = flags.length ? '⚠ FLAGS: ' + flags.join(' | ') : '✓ Added successfully. No immediate flags detected.';
+
+  document.getElementById('newTenderName').value = '';
+  document.getElementById('newTenderValue').value = '';
+  document.getElementById('newTenderContractor').value = '';
+  document.getElementById('newTenderDays').value = '';
+}
+
+// Allow Enter on custom query to submit
+document.getElementById('customQuery').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.ctrlKey) runCustomQuery();
+});
+</script>
+</body>
+</html>
