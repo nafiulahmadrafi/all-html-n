@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বাংলাদেশ মন্ত্রিসভা — ২০২৬</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Serif+Bengali:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--emerald:#006a4e;--crimson:#f42a41;--gold:#c9a84c;--gold-light:#f0d078;--bg:#f8f5ef;--bg2:#ffffff;--dark:#0f1b14;--text:#1a2e20;--muted:#7a8c7e;--border:#d9d0be;--shadow:rgba(0,106,78,0.12);--serif:'Noto Serif Bengali',serif;--display:'Playfair Display',serif;--mono:'JetBrains Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--serif);min-height:100vh;overflow-x:hidden}
+.hero{background:var(--emerald);position:relative;overflow:hidden}
+.hero-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(201,168,76,.15) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(244,42,65,.1) 0%,transparent 40%),repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.02) 20px,rgba(255,255,255,.02) 21px)}
+.hero-top{display:flex;align-items:center;justify-content:space-between;padding:16px 40px 0}
+.emblem{width:64px;height:64px;background:radial-gradient(circle,var(--gold) 0%,#8a6a1a 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 0 0 3px rgba(201,168,76,.3),0 8px 24px rgba(0,0,0,.3)}
+.hero-content{padding:24px 40px 36px;position:relative;z-index:1;text-align:center}
+.hero-title{font-family:var(--display);font-size:clamp(22px,4vw,44px);color:var(--gold-light);letter-spacing:1px;line-height:1.2;margin-bottom:6px;text-shadow:0 2px 12px rgba(0,0,0,.3)}
+.hero-subtitle{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:3px;text-transform:uppercase;font-family:var(--mono);margin-bottom:20px}
+.hero-stats{display:inline-flex;border:1px solid rgba(201,168,76,.3)}
+.hero-stat{padding:12px 24px;border-right:1px solid rgba(201,168,76,.3);text-align:center}
+.hero-stat:last-child{border-right:none}
+.hero-stat-num{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--gold-light);line-height:1}
+.hero-stat-label{font-size:9px;color:rgba(255,255,255,.45);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
+.controls{position:sticky;top:0;z-index:100;background:var(--dark);padding:12px 40px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:2px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.search-wrap{flex:1;min-width:180px;max-width:360px;position:relative}
+.search-input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(201,168,76,.3);color:#fff;padding:9px 14px 9px 36px;font-family:var(--serif);font-size:13px;outline:none;transition:border-color .2s}
+.search-input::placeholder{color:rgba(255,255,255,.3)}
+.search-input:focus{border-color:var(--gold)}
+.s-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:12px}
+.filter-btn{background:transparent;border:1px solid rgba(201,168,76,.3);color:rgba(255,255,255,.6);padding:7px 14px;font-family:var(--mono);font-size:10px;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:1px}
+.filter-btn:hover,.filter-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold)}
+.view-toggle{display:flex;gap:4px;margin-left:auto}
+.view-btn{background:transparent;border:1px solid rgba(201,168,76,.3);color:rgba(255,255,255,.5);padding:7px 11px;cursor:pointer;transition:all .2s;font-size:13px}
+.view-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold)}
+.result-count{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.35);white-space:nowrap}
+.container{padding:28px 40px;position:relative;z-index:1}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.section-header .line{flex:1;height:1px;background:linear-gradient(to right,var(--gold),transparent)}
+.section-header .line.rev{background:linear-gradient(to left,var(--gold),transparent)}
+.section-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;white-space:nowrap;padding:4px 12px;border:1px solid var(--gold);background:rgba(201,168,76,.05)}
+.pm-card{background:linear-gradient(135deg,var(--emerald) 0%,#004535 100%);border:1px solid var(--gold);display:flex;overflow:hidden;position:relative;box-shadow:0 8px 40px rgba(0,106,78,.25);cursor:pointer;transition:transform .2s,box-shadow .2s;margin-bottom:32px;animation:slideUp .6s ease both}
+.pm-card:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(0,106,78,.35)}
+.pm-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold))}
+.pm-avatar{width:150px;min-height:200px;flex-shrink:0;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:60px;position:relative;overflow:hidden}
+.pm-avatar::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,rgba(0,69,53,.8))}
+.pm-info{padding:28px 32px;flex:1}
+.pm-badge{display:inline-block;background:var(--gold);color:var(--dark);font-family:var(--mono);font-size:9px;font-weight:700;padding:3px 10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.pm-name{font-family:var(--display);font-size:30px;font-weight:900;color:var(--gold-light);line-height:1.15;margin-bottom:4px}
+.pm-title-en{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:16px;font-family:var(--mono)}
+.pm-min-list{display:flex;flex-direction:column;gap:6px}
+.pm-min-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.8)}
+.pm-min-item::before{content:'';width:6px;height:6px;background:var(--gold);flex-shrink:0;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)}
+.pm-meta{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:20px;flex-wrap:wrap}
+.pm-meta-item{font-size:10px;font-family:var(--mono);color:rgba(255,255,255,.4)}
+.pm-meta-item span{color:var(--gold-light);display:block;font-size:11px;margin-top:1px}
+.ministers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.ministers-grid.list-view{grid-template-columns:1fr}
+.minister-card{background:var(--bg2);border:1px solid var(--border);overflow:hidden;position:relative;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:pointer;animation:slideUp .5s ease both}
+.minister-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px var(--shadow);border-color:var(--gold)}
+.minister-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--emerald);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.minister-card:hover::before{transform:scaleX(1)}
+.card-top{display:flex}
+.card-avatar{width:88px;height:88px;flex-shrink:0;background:linear-gradient(135deg,#e8f5f0,#d4ebe2);display:flex;align-items:center;justify-content:center;font-size:34px;border-right:1px solid var(--border);position:relative;overflow:hidden}
+.card-num{position:absolute;bottom:4px;right:4px;font-family:var(--mono);font-size:9px;font-weight:700;color:var(--emerald);background:rgba(255,255,255,.9);padding:1px 5px}
+.card-header{padding:13px 15px;flex:1}
+.card-name{font-size:14px;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:4px}
+.card-badge{display:inline-block;background:var(--emerald);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:1px;padding:2px 7px;margin-bottom:6px}
+.card-date{font-family:var(--mono);font-size:10px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.card-ministries{padding:10px 14px 13px;border-top:1px solid var(--border);background:rgba(0,106,78,.025)}
+.min-count-label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.min-tag{display:inline-flex;align-items:center;gap:4px;background:rgba(0,106,78,.07);border:1px solid rgba(0,106,78,.15);color:var(--emerald);font-size:11px;padding:4px 8px;margin:2px;line-height:1.35}
+.min-tag::before{content:'▸';font-size:8px;color:var(--gold)}
+.ministers-grid.list-view .minister-card{display:flex;align-items:stretch}
+.ministers-grid.list-view .card-top{flex-shrink:0;border-right:1px solid var(--border)}
+.ministers-grid.list-view .card-ministries{flex:1;border-top:none;display:flex;align-items:center;flex-wrap:wrap;align-content:center;padding:10px 14px}
+.export-bar{margin:0 40px 22px;background:var(--dark);border:1px solid rgba(201,168,76,.3);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.export-text{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.4)}
+.export-text strong{color:var(--gold)}
+.export-btns{display:flex;gap:8px}
+.export-btn{background:transparent;border:1px solid rgba(201,168,76,.4);color:var(--gold);padding:6px 14px;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+.export-btn:hover{background:var(--gold);color:var(--dark)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;backdrop-filter:blur(5px);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--dark);border:1px solid var(--gold);width:90%;max-width:680px;max-height:82vh;overflow:hidden;display:flex;flex-direction:column;animation:modalIn .3s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.05)}
+.modal-title{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:2px}
+.modal-close{background:none;border:1px solid rgba(201,168,76,.3);color:var(--gold);cursor:pointer;padding:3px 10px;font-size:16px;transition:all .2s}
+.modal-close:hover{background:var(--gold);color:var(--dark)}
+.modal-body{overflow-y:auto;padding:18px;flex:1}
+.json-out{font-family:var(--mono);font-size:12px;line-height:1.9;white-space:pre;overflow-x:auto}
+.jk{color:#f0d078}.js{color:#98c98a}.jn{color:#79c0ff}.jb{color:#ff7b72}.jp{color:#c9a84c}
+.modal-footer{padding:12px 18px;border-top:1px solid rgba(201,168,76,.3);display:flex;gap:10px}
+.copy-btn{background:var(--gold);color:var(--dark);border:none;padding:8px 18px;cursor:pointer;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1px;transition:opacity .2s}
+.copy-btn:hover{opacity:.85}
+.no-results{text-align:center;padding:50px 20px;color:var(--muted);font-family:var(--mono);font-size:13px;grid-column:1/-1}
+.no-results span{font-size:36px;display:block;margin-bottom:10px}
+footer{background:var(--dark);padding:22px 40px;text-align:center;margin-top:40px;border-top:2px solid var(--gold)}
+.footer-text{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1px;line-height:1.8}
+.footer-text strong{color:var(--gold)}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold)}
+@media(max-width:768px){.hero-content,.container{padding-left:16px;padding-right:16px}.controls{padding:10px 16px}.pm-card{flex-direction:column}.pm-avatar{width:100%;min-height:100px}.ministers-grid{grid-template-columns:1fr}.export-bar{margin:0 16px 18px}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-top">
+    <div style="font-size:10px;color:rgba(255,255,255,.4);font-family:var(--mono);letter-spacing:2px">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</div>
+    <div class="emblem">🏛️</div>
+    <div style="font-size:10px;color:rgba(255,255,255,.4);font-family:var(--mono);letter-spacing:2px;text-align:right">GOVT. OF BANGLADESH</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-title">বাংলাদেশ মন্ত্রিসভা</div>
+    <div style="font-family:var(--mono);font-size:clamp(11px,2vw,16px);color:rgba(255,255,255,.6);letter-spacing:4px;margin-bottom:6px">CABINET OF BANGLADESH · ২০২৬</div>
+    <div class="hero-subtitle">নিয়োগের তারিখ: ১৭ ফেব্রুয়ারি ২০২৬</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">১</div><div class="hero-stat-label">প্রধানমন্ত্রী</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">২৫</div><div class="hero-stat-label">মন্ত্রী</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="totalMinistries">৩৮</div><div class="hero-stat-label">মন্ত্রণালয়</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">১৭/০২</div><div class="hero-stat-label">তারিখ</div></div>
+    </div>
+  </div>
+  <div style="display:flex;height:4px"><div style="flex:1;background:#006a4e"></div><div style="width:80px;background:var(--crimson)"></div></div>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="s-icon">🔍</span>
+    <input class="search-input" type="text" id="searchInput" placeholder="নাম বা মন্ত্রণালয় খুঁজুন..." oninput="filterCards()">
+  </div>
+  <button class="filter-btn active" onclick="filterBy('all',this)">সকল</button>
+  <button class="filter-btn" onclick="filterBy('multi',this)">একাধিক মন্ত্রণালয়</button>
+  <button class="filter-btn" onclick="filterBy('single',this)">একক মন্ত্রণালয়</button>
+  <button class="filter-btn" onclick="showFullJSON()">📋 JSON</button>
+  <div class="view-toggle">
+    <button class="view-btn active" id="gridBtn" onclick="setView('grid')">⊞</button>
+    <button class="view-btn" id="listBtn" onclick="setView('list')">☰</button>
+  </div>
+  <div class="result-count" id="resultCount">২৫ জন মন্ত্রী দেখাচ্ছে</div>
+</div>
+
+<div class="export-bar">
+  <div class="export-text"><strong>DATA FORMAT:</strong> JSON · CSV &nbsp;|&nbsp; <strong>VERSION:</strong> 1.0.0 &nbsp;|&nbsp; <strong>LAST UPDATED:</strong> ১২ মার্চ ২০২৬ &nbsp;|&nbsp; <strong>TOTAL MEMBERS:</strong> 26</div>
+  <div class="export-btns">
+    <button class="export-btn" onclick="downloadJSON()">⬇ JSON</button>
+    <button class="export-btn" onclick="downloadCSV()">⬇ CSV</button>
+    <button class="export-btn" onclick="showFullJSON()">👁 VIEW ALL</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section-header" style="margin-bottom:16px">
+    <div class="line"></div>
+    <div class="section-label">◆ মাননীয় প্রধানমন্ত্রী</div>
+    <div class="line rev"></div>
+  </div>
+  <div id="pmSection"></div>
+
+  <div class="section-header" style="margin-bottom:16px">
+    <div class="line"></div>
+    <div class="section-label">◆ মাননীয় মন্ত্রীগণ</div>
+    <div class="line rev"></div>
+  </div>
+  <div class="ministers-grid" id="ministersGrid"></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">JSON DATA</div>
+      <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body"><pre class="json-out" id="jsonOutput"></pre></div>
+    <div class="modal-footer">
+      <button class="copy-btn" onclick="copyJSON()">📋 COPY JSON</button>
+      <button class="copy-btn" style="background:var(--emerald);color:#fff" onclick="document.getElementById('modalOverlay').classList.remove('open')">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-text">
+    <strong>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার — মন্ত্রিপরিষদ বিভাগ</strong><br>
+    GOVERNMENT OF THE PEOPLE'S REPUBLIC OF BANGLADESH &nbsp;|&nbsp; CABINET DIVISION<br>
+    <strong>DATA v1.0 · 2026 · JSON POWERED</strong>
+  </div>
+</footer>
+
+<script>
+const CABINET = {
+  meta:{title:"বাংলাদেশ মন্ত্রিসভা ২০২৬",title_en:"Cabinet of Bangladesh 2026",government:"গণপ্রজাতন্ত্রী বাংলাদেশ সরকার",version:"1.0.0",total_members:26,total_ministers:25,appointment_date:"2026-02-17",data_updated:"2026-03-12",source:"মন্ত্রিপরিষদ বিভাগ"},
+  prime_minister:{sl:1,name_bn:"জনাব তারেক রহমান",name_en:"Mr. Tarique Rahman",designation_bn:"প্রধানমন্ত্রী",designation_en:"Prime Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"মন্ত্রিপরিষদ বিভাগ",name_en:"Cabinet Division",allocation_date:"2026-02-17"},{sl:2,name_bn:"প্রতিরক্ষা মন্ত্রণালয়",name_en:"Ministry of Defence",allocation_date:"2026-02-17"},{sl:3,name_bn:"সশস্ত্র বাহিনী বিভাগ",name_en:"Armed Forces Division",allocation_date:"2026-02-17"}]},
+  ministers:[
+    {sl:1,name_bn:"মির্জা ফখরুল ইসলাম আলমগীর",name_en:"Mirza Fakhrul Islam Alamgir",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"স্থানীয় সরকার, পল্লী উন্নয়ন ও সমবায় মন্ত্রণালয়",name_en:"Ministry of Local Government, Rural Development & Cooperatives",allocation_date:"2026-02-17"}]},
+    {sl:2,name_bn:"জনাব আমির খসরু মাহমুদ চৌধুরী",name_en:"Mr. Amir Khasru Mahmud Chowdhury",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"অর্থ মন্ত্রণালয়",name_en:"Ministry of Finance",allocation_date:"2026-02-17"},{sl:2,name_bn:"পরিকল্পনা মন্ত্রণালয়",name_en:"Ministry of Planning",allocation_date:"2026-02-17"}]},
+    {sl:3,name_bn:"জনাব সালাহউদ্দিন আহমদ",name_en:"Mr. Salahuddin Ahmed",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"স্বরাষ্ট্র মন্ত্রণালয়",name_en:"Ministry of Home Affairs",allocation_date:"2026-02-17"}]},
+    {sl:4,name_bn:"জনাব ইকবাল হাসান মাহমুদ",name_en:"Mr. Iqbal Hasan Mahmud",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"বিদ্যুৎ, জ্বালানি ও খনিজ সম্পদ মন্ত্রণালয়",name_en:"Ministry of Power, Energy & Mineral Resources",allocation_date:"2026-02-17"}]},
+    {sl:5,name_bn:"জনাব আবু জাফর মোঃ জাহিদ হোসেন",name_en:"Mr. Abu Jafar Md. Zahid Hossain",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"মহিলা ও শিশু বিষয়ক মন্ত্রণালয়",name_en:"Ministry of Women and Children Affairs",allocation_date:"2026-02-17"},{sl:2,name_bn:"সমাজকল্যাণ মন্ত্রণালয়",name_en:"Ministry of Social Welfare",allocation_date:"2026-02-17"}]},
+    {sl:6,name_bn:"ড. খলিলুর রহমান",name_en:"Dr. Khalilur Rahman",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"পররাষ্ট্র মন্ত্রণালয়",name_en:"Ministry of Foreign Affairs",allocation_date:"2026-02-17"}]},
+    {sl:7,name_bn:"জনাব আবদুল আউয়াল মিন্টু",name_en:"Mr. Abdul Awal Mintu",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"পরিবেশ, বন ও জলবায়ু পরিবর্তন মন্ত্রণালয়",name_en:"Ministry of Environment, Forest & Climate Change",allocation_date:"2026-02-17"}]},
+    {sl:8,name_bn:"কাজী শাহ মোফাজ্জাল হোসাইন (কায়কোবাদ)",name_en:"Kazi Shah Mofazzal Hossain (Kaikobad)",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"ধর্ম বিষয়ক মন্ত্রণালয়",name_en:"Ministry of Religious Affairs",allocation_date:"2026-02-17"}]},
+    {sl:9,name_bn:"জনাব মিজানুর রহমান মিনু",name_en:"Mr. Mizanur Rahman Minu",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"ভূমি মন্ত্রণালয়",name_en:"Ministry of Land",allocation_date:"2026-02-17"}]},
+    {sl:10,name_bn:"জনাব নিতাই রায় চৌধুরী",name_en:"Mr. Nitai Roy Chowdhury",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"সংস্কৃতি বিষয়ক মন্ত্রণালয়",name_en:"Ministry of Cultural Affairs",allocation_date:"2026-02-17"}]},
+    {sl:11,name_bn:"খন্দকার আব্দুল মুক্তাদির",name_en:"Khandaker Abdul Muktadir",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"শিল্প মন্ত্রণালয়",name_en:"Ministry of Industries",allocation_date:"2026-02-17"},{sl:2,name_bn:"বস্ত্র ও পাট মন্ত্রণালয়",name_en:"Ministry of Textiles and Jute",allocation_date:"2026-02-17"},{sl:3,name_bn:"বাণিজ্য মন্ত্রণালয়",name_en:"Ministry of Commerce",allocation_date:"2026-02-17"}]},
+    {sl:12,name_bn:"জনাব আরিফুল হক চৌধুরী",name_en:"Mr. Ariful Haque Chowdhury",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"শ্রম ও কর্মসংস্থান মন্ত্রণালয়",name_en:"Ministry of Labour and Employment",allocation_date:"2026-02-17"},{sl:2,name_bn:"প্রবাসী কল্যাণ ও বৈদেশিক কর্মসংস্থান মন্ত্রণালয়",name_en:"Ministry of Expatriates' Welfare and Overseas Employment",allocation_date:"2026-02-17"}]},
+    {sl:13,name_bn:"জনাব জহির উদ্দিন স্বপন",name_en:"Mr. Zahir Uddin Swapan",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"তথ্য ও সম্প্রচার মন্ত্রণালয়",name_en:"Ministry of Information and Broadcasting",allocation_date:"2026-02-17"}]},
+    {sl:14,name_bn:"জনাব মোহাম্মদ আমিন উর রশিদ",name_en:"Mr. Mohammad Amin Ur Rashid",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"খাদ্য মন্ত্রণালয়",name_en:"Ministry of Food",allocation_date:"2026-02-17"},{sl:2,name_bn:"মৎস্য ও প্রাণিসম্পদ মন্ত্রণালয়",name_en:"Ministry of Fisheries and Livestock",allocation_date:"2026-02-17"},{sl:3,name_bn:"কৃষি মন্ত্রণালয়",name_en:"Ministry of Agriculture",allocation_date:"2026-02-17"}]},
+    {sl:15,name_bn:"মিজ্ আফরোজা খানম (রিতা)",name_en:"Ms. Afroza Khanam (Rita)",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"বেসামরিক বিমান পরিবহন ও পর্যটন মন্ত্রণালয়",name_en:"Ministry of Civil Aviation and Tourism",allocation_date:"2026-02-17"}]},
+    {sl:16,name_bn:"জনাব মোঃ শহীউদ্দীন চৌধুরী এ্যানি",name_en:"Mr. Md. Shahiuddin Chowdhury Annie",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"পানি সম্পদ মন্ত্রণালয়",name_en:"Ministry of Water Resources",allocation_date:"2026-02-17"}]},
+    {sl:17,name_bn:"জনাব আসাদুল হাবিব দুলু",name_en:"Mr. Asadul Habib Dulu",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"দুর্যোগ ব্যবস্থাপনা ও ত্রাণ মন্ত্রণালয়",name_en:"Ministry of Disaster Management and Relief",allocation_date:"2026-02-17"}]},
+    {sl:18,name_bn:"জনাব মোঃ আসাদুজ্জামান",name_en:"Mr. Md. Asaduzzaman",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"আইন, বিচার ও সংসদ বিষয়ক মন্ত্রণালয়",name_en:"Ministry of Law, Justice and Parliamentary Affairs",allocation_date:"2026-02-17"}]},
+    {sl:19,name_bn:"জনাব জাকারিয়া তাহের",name_en:"Mr. Zakaria Taher",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"গৃহায়ন ও গণপূর্ত মন্ত্রণালয়",name_en:"Ministry of Housing and Public Works",allocation_date:"2026-02-17"}]},
+    {sl:20,name_bn:"জনাব দীপেন দেওয়ান",name_en:"Mr. Dipen Dewan",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"পার্বত্য চট্টগ্রাম বিষয়ক মন্ত্রণালয়",name_en:"Ministry of Chittagong Hill Tracts Affairs",allocation_date:"2026-02-17"}]},
+    {sl:21,name_bn:"জনাব আ ন ম এহছানুল হক মিলন",name_en:"Mr. A N M Ehsanul Haq Milon",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"শিক্ষা মন্ত্রণালয়",name_en:"Ministry of Education",allocation_date:"2026-02-17"},{sl:2,name_bn:"প্রাথমিক ও গণশিক্ষা মন্ত্রণালয়",name_en:"Ministry of Primary and Mass Education",allocation_date:"2026-02-17"}]},
+    {sl:22,name_bn:"সরদার মোঃ সাখাওয়াত হোসেন",name_en:"Sardar Md. Sakhawat Hossain",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়",name_en:"Ministry of Health and Family Welfare",allocation_date:"2026-02-17"}]},
+    {sl:23,name_bn:"ফকির মাহবুব আনাম",name_en:"Fakir Mahbub Anam",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"ডাক, টেলিযোগাযোগ ও তথ্যপ্রযুক্তি মন্ত্রণালয়",name_en:"Ministry of Posts, Telecommunications and IT",allocation_date:"2026-02-17"},{sl:2,name_bn:"বিজ্ঞান ও প্রযুক্তি মন্ত্রণালয়",name_en:"Ministry of Science and Technology",allocation_date:"2026-02-17"}]},
+    {sl:24,name_bn:"শেখ রবিউল আলম",name_en:"Sheikh Rabiul Alam",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-02-17",ministries:[{sl:1,name_bn:"সড়ক পরিবহন ও সেতু মন্ত্রণালয়",name_en:"Ministry of Road Transport and Bridges",allocation_date:"2026-02-17"},{sl:2,name_bn:"রেলপথ মন্ত্রণালয়",name_en:"Ministry of Railways",allocation_date:"2026-02-17"},{sl:3,name_bn:"নৌপরিবহন মন্ত্রণালয়",name_en:"Ministry of Shipping",allocation_date:"2026-02-17"}]},
+    {sl:25,name_bn:"আহমেদ আযম খান",name_en:"Ahmed Azam Khan",designation_bn:"মন্ত্রী",designation_en:"Minister",appointment_date:"2026-03-12",ministries:[{sl:1,name_bn:"মুক্তিযুদ্ধ বিষয়ক মন্ত্রণালয়",name_en:"Ministry of Liberation War Affairs",allocation_date:"2026-03-12"}]}
+  ]
+};
+
+const AVATARS = ['🏛️','👔','🎓','⚖️','💼','🌿','✈️','🏗️','📚','🌾','💊','📡','🚂','🎭','🤝','🌊','🔥','🏠','⛰️','🌐','🎪','🏅','🔬','🛡️','🌟'];
+
+let currentFilter = 'all';
+let currentView = 'grid';
+let currentJSON = '';
+
+function renderPM() {
+  const pm = CABINET.prime_minister;
+  const minsHtml = pm.ministries.map(m => `<div class="pm-min-item"><span>${m.name_bn}</span><span style="font-size:10px;color:rgba(255,255,255,.4);font-family:var(--mono)">${m.name_en}</span></div>`).join('');
+  document.getElementById('pmSection').innerHTML = `
+    <div class="pm-card" onclick="showPersonJSON(-1)">
+      <div class="pm-avatar">🏛️</div>
+      <div class="pm-info">
+        <div class="pm-badge">ক্রম: ০১ · প্রধানমন্ত্রী · PRIME MINISTER</div>
+        <div class="pm-name">${pm.name_bn}</div>
+        <div class="pm-title-en">${pm.name_en}</div>
+        <div class="pm-min-list">${minsHtml}</div>
+        <div class="pm-meta">
+          <div class="pm-meta-item">নিয়োগের তারিখ<span>${pm.appointment_date}</span></div>
+          <div class="pm-meta-item">মোট মন্ত্রণালয়<span>${pm.ministries.length}টি</span></div>
+          <div class="pm-meta-item">পদবি<span>${pm.designation_en}</span></div>
+          <div class="pm-meta-item" style="margin-left:auto;cursor:pointer;color:rgba(201,168,76,.6);font-size:9px;letter-spacing:1px">📋 JSON দেখুন</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderMinisters(filtered) {
+  const grid = document.getElementById('ministersGrid');
+  const data = filtered || CABINET.ministers;
+  if(!data.length){
+    grid.innerHTML = '<div class="no-results"><span>🔍</span>কোনো ফলাফল পাওয়া যায়নি</div>';
+    document.getElementById('resultCount').textContent = '০ জন মন্ত্রী';
+    return;
+  }
+  grid.innerHTML = data.map((m,i) => {
+    const av = AVATARS[i % AVATARS.length];
+    const minTags = m.ministries.map(mn => `<span class="min-tag">${mn.name_bn}</span>`).join('');
+    const isNew = m.appointment_date !== '2026-02-17';
+    return `
+    <div class="minister-card" onclick="showPersonJSON(${m.sl-1})" style="animation-delay:${i*0.04}s">
+      ${isNew ? `<div style="position:absolute;top:8px;right:8px;background:var(--crimson);color:#fff;font-family:var(--mono);font-size:8px;padding:2px 6px;letter-spacing:1px;z-index:2">NEW</div>` : ''}
+      <div class="card-top">
+        <div class="card-avatar">
+          <span>${av}</span>
+          <div class="card-num">${String(m.sl).padStart(2,'0')}</div>
+        </div>
+        <div class="card-header">
+          <div class="card-badge">${m.designation_bn} · ${m.designation_en}</div>
+          <div class="card-name">${m.name_bn}</div>
+          <div style="font-size:10px;color:var(--muted);font-family:var(--mono);margin-bottom:4px">${m.name_en}</div>
+          <div class="card-date">📅 ${m.appointment_date}</div>
+        </div>
+      </div>
+      <div class="card-ministries">
+        <div class="min-count-label">মন্ত্রণালয় (${m.ministries.length}টি)</div>
+        ${minTags}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('resultCount').textContent = `${data.length} জন মন্ত্রী দেখাচ্ছে`;
+}
+
+function filterCards() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  let data = CABINET.ministers;
+  if(currentFilter === 'multi') data = data.filter(m => m.ministries.length > 1);
+  if(currentFilter === 'single') data = data.filter(m => m.ministries.length === 1);
+  if(q) data = data.filter(m =>
+    m.name_bn.toLowerCase().includes(q) ||
+    m.name_en.toLowerCase().includes(q) ||
+    m.ministries.some(mn => mn.name_bn.toLowerCase().includes(q) || mn.name_en.toLowerCase().includes(q))
+  );
+  renderMinisters(data);
+}
+
+function filterBy(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = type;
+  document.getElementById('searchInput').value = '';
+  renderMinisters(type === 'multi' ? CABINET.ministers.filter(m=>m.ministries.length>1) : type === 'single' ? CABINET.ministers.filter(m=>m.ministries.length===1) : null);
+}
+
+function setView(v) {
+  currentView = v;
+  document.getElementById('ministersGrid').classList.toggle('list-view', v === 'list');
+  document.getElementById('gridBtn').classList.toggle('active', v === 'grid');
+  document.getElementById('listBtn').classList.toggle('active', v === 'list');
+}
+
+function syntaxHighlight(json) {
+  json = json.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, match => {
+    let cls = 'jn';
+    if(/^"/.test(match)) cls = /:$/.test(match) ? 'jk' : 'js';
+    else if(/true|false/.test(match)) cls = 'jb';
+    else if(/null/.test(match)) cls = 'jp';
+    return `<span class="${cls}">${match}</span>`;
+  });
+}
+
+function showPersonJSON(idx) {
+  const person = idx === -1 ? CABINET.prime_minister : CABINET.ministers[idx];
+  const jsonStr = JSON.stringify(person, null, 2);
+  currentJSON = jsonStr;
+  document.getElementById('modalTitle').textContent = `JSON · ${person.name_en} · ${person.designation_en}`;
+  document.getElementById('jsonOutput').innerHTML = syntaxHighlight(jsonStr);
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function showFullJSON() {
+  const jsonStr = JSON.stringify(CABINET, null, 2);
+  currentJSON = jsonStr;
+  document.getElementById('modalTitle').textContent = `FULL CABINET JSON · ${CABINET.meta.total_members} MEMBERS · v${CABINET.meta.version}`;
+  document.getElementById('jsonOutput').innerHTML = syntaxHighlight(jsonStr);
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function copyJSON() {
+  navigator.clipboard.writeText(currentJSON).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓ COPIED!';
+    setTimeout(() => btn.textContent = '📋 COPY JSON', 2000);
+  });
+}
+
+function closeModal(e) {
+  if(e.target === document.getElementById('modalOverlay'))
+    document.getElementById('modalOverlay').classList.remove('open');
+}
+
+function downloadJSON() {
+  const blob = new Blob([JSON.stringify(CABINET, null, 2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'bangladesh_cabinet_2026.json'; a.click();
+}
+
+function downloadCSV() {
+  const rows = [['ক্রম','নাম (বাংলা)','নাম (English)','পদবি','নিয়োগের তারিখ','মন্ত্রণালয়','Ministry (EN)']];
+  // PM
+  CABINET.prime_minister.ministries.forEach((m,i) => {
+    rows.push([i===0?'1':'', i===0?CABINET.prime_minister.name_bn:'', i===0?CABINET.prime_minister.name_en:'', i===0?CABINET.prime_minister.designation_bn:'', i===0?CABINET.prime_minister.appointment_date:'', m.name_bn, m.name_en]);
+  });
+  // Ministers
+  CABINET.ministers.forEach(minister => {
+    minister.ministries.forEach((m,i) => {
+      rows.push([i===0?minister.sl:'', i===0?minister.name_bn:'', i===0?minister.name_en:'', i===0?minister.designation_bn:'', i===0?minister.appointment_date:'', m.name_bn, m.name_en]);
+    });
+  });
+  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'bangladesh_cabinet_2026.csv'; a.click();
+}
+
+// Count total ministries
+function countTotalMinistries() {
+  const pmCount = CABINET.prime_minister.ministries.length;
+  const minCount = CABINET.ministers.reduce((s,m) => s + m.ministries.length, 0);
+  document.getElementById('totalMinistries').textContent = (pmCount + minCount).toString();
+}
+
+// INIT
+renderPM();
+renderMinisters();
+countTotalMinistries();
+</script>
+</body>
+</html>
