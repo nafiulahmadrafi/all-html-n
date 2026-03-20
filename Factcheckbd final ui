@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FactCheckBD - Universal Navigation</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #3b82f6;
+  --blue-dark: #2563eb;
+  --blue-light: #60a5fa;
+  --teal: #14b8a6;
+  --green: #10b981;
+  --text: #1e293b;
+  --text-soft: #64748b;
+  --bg: #f8fafc;
+  --bg-light: #ffffff;
+  --border: rgba(59,130,246,0.12);
+  --shadow: rgba(59,130,246,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+  font-family: 'Hind Siliguri', sans-serif; 
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ══ STICKY TOP HEADER ══ */
+.top-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10001;
+  height: 58px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 16px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.top-header.scrolled {
+  height: 54px;
+  box-shadow: 0 4px 24px rgba(59,130,246,0.12);
+  background: rgba(255,255,255,0.98);
+}
+
+.brand-section { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+
+/* Logo with CSS-generated design */
+.brand-logo {
+  width: 40px; height: 40px; border-radius: 11px;
+  overflow: visible; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+  position: relative;
+}
+.top-header.scrolled .brand-logo { 
+  width: 36px; height: 36px; 
+  box-shadow: 0 2px 12px rgba(59,130,246,0.25);
+}
+
+/* Checkmark inside logo */
+.brand-logo::before {
+  content: '✓';
+  font-size: 28px;
+  color: white;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.top-header.scrolled .brand-logo::before {
+  font-size: 25px;
+}
+
+/* Hide image if present */
+.brand-logo img { 
+  display: none;
+}
+
+/* FactCheckBD Branding */
+.brand-title {
+  font-family: 'DM Sans', sans-serif; 
+  font-size: 1.1rem; 
+  font-weight: 700;
+  color: var(--text); 
+  letter-spacing: -0.02em; 
+  transition: all 0.3s;
+}
+.top-header.scrolled .brand-title { font-size: 1rem; }
+
+.brand-title .fact { color: var(--text); }
+.brand-title .check { color: var(--blue); }
+.brand-title .bd { 
+  color: var(--blue); 
+  font-weight: 800;
+}
+
+/* Tagline (hidden on mobile) */
+.brand-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem;
+  color: var(--text-soft);
+  display: none;
+}
+
+/* ══ LOGIN/PROFILE SECTION ══ */
+.auth-section {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.login-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 16px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  border: none; cursor: pointer; text-decoration: none;
+  color: #fff; font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  box-shadow: 0 2px 12px rgba(59,130,246,0.25);
+  transition: all 0.2s;
+}
+.login-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(59,130,246,0.35);
+}
+.login-btn svg {
+  width: 18px; height: 18px; stroke: #fff;
+  fill: none; stroke-width: 2;
+}
+
+.profile-btn {
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+  padding: 5px 12px 5px 6px; border-radius: 50px;
+  border: 1px solid var(--border); background: var(--bg-light);
+  transition: all 0.2s; text-decoration: none; position: relative;
+}
+.profile-btn:hover { 
+  background: var(--bg); 
+  border-color: var(--blue);
+  transform: scale(1.02); 
+}
+
+.user-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 700; 
+  color: #fff; position: relative; border: 2px solid rgba(255,255,255,0.95);
+  flex-shrink: 0;
+}
+.online-dot { 
+  position: absolute; bottom: 0; right: 0; 
+  width: 9px; height: 9px; background: var(--green); 
+  border-radius: 50%; border: 2px solid #fff; 
+}
+
+.user-details { display: flex; flex-direction: column; gap: 1px; }
+.user-name { 
+  font-family: 'DM Sans', sans-serif; font-size: 0.8rem; 
+  font-weight: 700; color: var(--text); max-width: 120px; 
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
+}
+.user-location { 
+  font-family: 'DM Sans', sans-serif; font-size: 0.62rem; 
+  color: var(--text-soft); 
+}
+
+/* Profile Dropdown Menu */
+.profile-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  min-width: 220px; background: var(--bg-light);
+  border: 1px solid var(--border); border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(59,130,246,0.15);
+  opacity: 0; visibility: hidden; transform: translateY(-10px);
+  transition: all 0.25s ease;
+  z-index: 10002;
+}
+.profile-btn.active .profile-dropdown {
+  opacity: 1; visibility: visible; transform: translateY(0);
+}
+
+.dropdown-header {
+  padding: 1rem 1.1rem; border-bottom: 1px solid var(--border);
+}
+.dropdown-user-name {
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+  font-weight: 700; color: var(--text); margin-bottom: 3px;
+}
+.dropdown-user-email {
+  font-family: 'DM Sans', sans-serif; font-size: 0.72rem;
+  color: var(--text-soft);
+}
+
+.dropdown-menu {
+  padding: 0.5rem;
+}
+.dropdown-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0.75rem 1rem; border-radius: 10px;
+  text-decoration: none; color: var(--text);
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  transition: all 0.18s; cursor: pointer;
+  border: none; background: transparent;
+  width: 100%; text-align: left;
+}
+.dropdown-item:hover {
+  background: rgba(59,130,246,0.08);
+  color: var(--blue);
+}
+.dropdown-item svg {
+  width: 20px; height: 20px; stroke: var(--text-soft);
+  fill: none; stroke-width: 2; flex-shrink: 0;
+}
+.dropdown-item:hover svg { stroke: var(--blue); }
+
+.dropdown-divider {
+  height: 1px; background: var(--border);
+  margin: 0.5rem 0.8rem;
+}
+
+.dropdown-logout {
+  color: #ef4444;
+}
+.dropdown-logout:hover {
+  background: rgba(239,68,68,0.08);
+  color: #ef4444;
+}
+.dropdown-logout svg { stroke: #ef4444; }
+
+/* ══ BOTTOM NAVIGATION ══ */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 10001;
+  height: 68px; display: flex; align-items: center; justify-content: space-around;
+  padding: 8px 3% calc(8px + env(safe-area-inset-bottom, 0px));
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 20px var(--shadow);
+}
+
+.nav-btn {
+  flex: 1; display: flex; flex-direction: column; 
+  align-items: center; justify-content: center;
+  gap: 4px; padding: 8px 6px; border-radius: 16px; 
+  border: none; background: transparent; cursor: pointer; 
+  text-decoration: none; transition: all 0.2s; position: relative;
+  max-width: 90px;
+}
+.nav-btn:hover { background: rgba(59,130,246,0.08); transform: translateY(-2px); }
+.nav-btn.active { background: rgba(59,130,246,0.12); }
+.nav-btn.active::before { 
+  content: ''; position: absolute; top: 6px; 
+  width: 5px; height: 5px; background: var(--blue); 
+  border-radius: 50%; 
+}
+
+.nav-icon-wrap { 
+  width: 42px; height: 42px; display: flex; 
+  align-items: center; justify-content: center; 
+  border-radius: 12px; transition: all 0.2s;
+  position: relative;
+}
+.nav-btn:hover .nav-icon-wrap { transform: scale(1.08); }
+.nav-btn.active .nav-icon-wrap { 
+  background: linear-gradient(135deg, var(--blue-light), var(--teal));
+  box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+}
+
+.nav-icon-wrap svg { 
+  width: 24px; height: 24px; stroke: var(--text-soft); 
+  fill: none; stroke-width: 2; stroke-linecap: round; 
+  stroke-linejoin: round; transition: stroke 0.2s; 
+}
+.nav-btn:hover .nav-icon-wrap svg { stroke: var(--blue); }
+.nav-btn.active .nav-icon-wrap svg { stroke: #fff; }
+
+.nav-label { 
+  font-family: 'Hind Siliguri', sans-serif; 
+  font-size: 0.68rem; font-weight: 600; 
+  color: var(--text-soft); transition: color 0.2s; 
+}
+.nav-btn.active .nav-label, 
+.nav-btn:hover .nav-label { color: var(--blue); }
+
+.count-badge {
+  position: absolute; top: -4px; right: -4px;
+  min-width: 18px; height: 18px; background: #ef4444;
+  border-radius: 50%; border: 2px solid #fff;
+  font-family: 'DM Sans', sans-serif; font-size: 0.6rem;
+  font-weight: 700; color: #fff; display: none;
+  align-items: center; justify-content: center; padding: 0 4px;
+}
+.count-badge.show { display: flex; }
+
+/* ══ SHEET OVERLAY ══ */
+.sheet-overlay { 
+  position: fixed; inset: 0; z-index: 10000; 
+  pointer-events: none; opacity: 0; 
+  transition: opacity 0.25s ease-in-out; 
+}
+.sheet-overlay.open { pointer-events: all; opacity: 1; }
+.sheet-bg { 
+  position: absolute; inset: 0; 
+  background: rgba(15,23,42,0.4); 
+  backdrop-filter: blur(4px); 
+}
+
+.sheet-content {
+  position: absolute; bottom: 68px; left: 0; right: 0;
+  background: rgba(255,255,255,0.98); 
+  backdrop-filter: blur(28px);
+  border-radius: 28px 28px 0 0; 
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -8px 40px rgba(59,130,246,0.15);
+  padding: 1.4rem 1.2rem 2rem; 
+  max-height: 82vh; overflow-y: auto;
+  transform: translateY(40px); 
+  transition: transform 0.3s cubic-bezier(.23,1,.32,1);
+}
+.sheet-overlay.open .sheet-content { transform: translateY(0); }
+
+.sheet-handle { 
+  width: 40px; height: 5px; background: rgba(100,116,139,0.2); 
+  border-radius: 3px; margin: 0 auto 1.4rem; 
+}
+
+.sheet-header { 
+  display: flex; align-items: center; 
+  justify-content: space-between; margin-bottom: 1.2rem; 
+  padding: 0 0.3rem; 
+}
+.sheet-title { 
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; 
+  font-weight: 700; color: var(--text); 
+  display: flex; align-items: center; gap: 10px; 
+}
+.title-count { 
+  font-family: 'DM Sans', sans-serif; font-size: 0.65rem; 
+  font-weight: 700; color: var(--blue); 
+  background: rgba(59,130,246,0.12); 
+  border-radius: 50px; padding: 3px 9px; 
+}
+
+.close-sheet-btn { 
+  width: 32px; height: 32px; border-radius: 50%; 
+  background: rgba(100,116,139,0.08); border: none; 
+  cursor: pointer; font-size: 1rem; color: var(--text-soft); 
+  display: flex; align-items: center; justify-content: center; 
+  transition: all 0.18s; 
+}
+.close-sheet-btn:hover { 
+  background: rgba(59,130,246,0.15); 
+  color: var(--blue); transform: rotate(90deg); 
+}
+
+/* ══ LOGIN SHEET (Full Screen Modal) ══ */
+.login-overlay {
+  position: fixed; inset: 0; z-index: 10003;
+  pointer-events: none; opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.login-overlay.open { pointer-events: all; opacity: 1; }
+
+.login-bg {
+  position: absolute; inset: 0;
+  background: rgba(15,23,42,0.6);
+  backdrop-filter: blur(8px);
+}
+
+.login-modal {
+  position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);
+  width: 90%; max-width: 420px;
+  background: var(--bg-light);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(59,130,246,0.25);
+  padding: 2rem 1.8rem;
+  transition: transform 0.3s cubic-bezier(.23,1,.32,1);
+}
+.login-overlay.open .login-modal {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.login-header {
+  text-align: center; margin-bottom: 2rem;
+}
+
+/* Login Logo - FactCheckBD Style with CSS */
+.login-logo {
+  width: 80px; height: 80px; margin: 0 auto 1.2rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  display: flex; align-items: center; justify-content: center;
+  overflow: visible;
+  box-shadow: 0 8px 32px rgba(59,130,246,0.35);
+  position: relative;
+}
+.login-logo::before {
+  content: '✓';
+  font-size: 50px;
+  color: white;
+  font-weight: bold;
+  line-height: 1;
+}
+.login-logo img {
+  display: none;
+}
+
+.login-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+.login-title .fact { color: var(--text); }
+.login-title .check { color: var(--blue); }
+.login-title .bd { color: var(--blue); font-weight: 800; }
+
+.login-subtitle {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.9rem; color: var(--text-soft);
+}
+
+.login-form {
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+
+.form-group {
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.form-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--text);
+}
+.form-input {
+  padding: 0.9rem 1.1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.9rem; color: var(--text);
+  transition: all 0.2s;
+  outline: none;
+}
+.form-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+  background: var(--bg-light);
+}
+.form-input::placeholder {
+  color: var(--text-soft);
+}
+
+.form-options {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-top: -0.5rem;
+}
+.remember-me {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.8rem; color: var(--text);
+  cursor: pointer;
+}
+.remember-me input[type="checkbox"] {
+  width: 18px; height: 18px;
+  cursor: pointer;
+}
+.forgot-password {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.forgot-password:hover {
+  color: var(--blue-light);
+  text-decoration: underline;
+}
+
+.submit-btn {
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  border: none; border-radius: 12px;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(59,130,246,0.25);
+  transition: all 0.2s;
+}
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(59,130,246,0.35);
+}
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.divider {
+  display: flex; align-items: center;
+  gap: 1rem; margin: 1.5rem 0;
+}
+.divider-line {
+  flex: 1; height: 1px;
+  background: var(--border);
+}
+.divider-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem; color: var(--text-soft);
+}
+
+.social-login {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.social-btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-light);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.social-btn:hover {
+  border-color: var(--blue);
+  background: rgba(59,130,246,0.05);
+}
+.social-btn svg {
+  width: 20px; height: 20px;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+.signup-link a {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.signup-link a:hover {
+  color: var(--blue-light);
+  text-decoration: underline;
+}
+
+.close-login-btn {
+  position: absolute;
+  top: 1.2rem; right: 1.2rem;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(100,116,139,0.1);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; color: var(--text-soft);
+  transition: all 0.2s;
+}
+.close-login-btn:hover {
+  background: rgba(239,68,68,0.1);
+  color: #ef4444;
+  transform: rotate(90deg);
+}
+
+/* Site Info Card */
+.site-info-card {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg); border: 1px solid var(--border); 
+  border-radius: 14px; padding: 0.8rem 1.1rem; 
+  margin-bottom: 1.4rem;
+}
+.site-info-logo { 
+  width: 32px; height: 32px; border-radius: 9px; 
+  overflow: visible; flex-shrink: 0;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 12px rgba(59,130,246,0.25);
+  position: relative;
+}
+.site-info-logo::before {
+  content: '✓';
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  line-height: 1;
+}
+.site-info-logo img { 
+  display: none;
+}
+.site-info-text { flex: 1; }
+.site-info-name { 
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; 
+  font-weight: 700; color: var(--text); 
+}
+.site-info-url { 
+  font-family: 'DM Sans', sans-serif; font-size: 0.65rem; 
+  color: var(--text-soft); 
+}
+.site-status-dot { 
+  width: 8px; height: 8px; background: var(--green); 
+  border-radius: 50%; flex-shrink: 0; 
+}
+
+/* Search Box */
+.search-box {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-light); 
+  border: 1.5px solid var(--border); 
+  border-radius: 14px; padding: 0.7rem 1rem; 
+  margin-bottom: 1.4rem; transition: all 0.2s;
+}
+.search-box:focus-within { 
+  border-color: var(--blue); 
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1); 
+}
+.search-box svg { 
+  width: 18px; height: 18px; stroke: var(--text-soft); 
+  fill: none; stroke-width: 2; flex-shrink: 0; 
+}
+.search-box input { 
+  flex: 1; border: none; background: transparent; 
+  outline: none; font-family: 'Hind Siliguri', sans-serif; 
+  font-size: 0.9rem; color: var(--text); 
+}
+.search-box input::placeholder { color: var(--text-soft); }
+
+/* Section Label */
+.section-label { 
+  font-family: 'DM Sans', sans-serif; font-size: 0.65rem; 
+  font-weight: 700; letter-spacing: 0.08em; 
+  text-transform: uppercase; color: var(--text-soft); 
+  display: block; margin-bottom: 0.8rem; padding: 0 0.3rem; 
+}
+
+/* Link Cards */
+.link-cards { 
+  display: flex; flex-direction: column; 
+  gap: 0.6rem; margin-bottom: 1.6rem; 
+}
+.link-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 0.9rem 1.1rem; border-radius: 14px;
+  background: var(--bg-light); border: 1px solid var(--border);
+  text-decoration: none; transition: all 0.2s;
+}
+.link-card:hover { 
+  background: rgba(59,130,246,0.05); 
+  border-color: var(--blue); 
+  transform: translateX(4px); 
+  box-shadow: 0 2px 12px rgba(59,130,246,0.12);
+}
+.link-card.hidden { display: none; }
+
+.link-icon {
+  width: 40px; height: 40px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem; flex-shrink: 0;
+}
+.link-info { flex: 1; min-width: 0; }
+.link-title {
+  font-family: 'Hind Siliguri', sans-serif; font-size: 0.9rem;
+  font-weight: 600; color: var(--text); line-height: 1.35;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  margin-bottom: 2px;
+}
+.link-subtitle {
+  font-family: 'DM Sans', sans-serif; font-size: 0.65rem;
+  color: var(--text-soft); overflow: hidden; 
+  text-overflow: ellipsis; white-space: nowrap;
+}
+.link-arrow { 
+  font-size: 1rem; color: var(--text-soft); 
+  transition: transform 0.2s; 
+}
+.link-card:hover .link-arrow { 
+  transform: translateX(3px); color: var(--blue); 
+}
+
+/* Skeleton Loading */
+@keyframes shimmer { 
+  0%{background-position:200% 0} 
+  100%{background-position:-200% 0} 
+}
+.skeleton { 
+  background: linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%); 
+  background-size: 200% 100%; animation: shimmer 1.5s infinite; 
+  border-radius: 10px; 
+}
+.skel-cards { margin-bottom: 1.6rem; }
+.skel-card { 
+  display: flex; gap: 14px; padding: 0.9rem 1.1rem; 
+  border-radius: 14px; background: var(--bg-light); 
+  border: 1px solid var(--border); margin-bottom: 0.6rem; 
+}
+.skel-icon { width: 40px; height: 40px; border-radius: 11px; }
+.skel-text { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.skel-line { height: 12px; border-radius: 6px; }
+.skel-line.w80 { width: 80%; } 
+.skel-line.w50 { width: 50%; }
+
+/* Empty State */
+.empty-state { 
+  text-align: center; padding: 2.5rem 1rem; 
+  color: var(--text-soft); display: none; 
+}
+.empty-state.show { display: block; }
+.empty-icon { font-size: 2.8rem; margin-bottom: 0.8rem; }
+.empty-text { font-size: 0.9rem; line-height: 1.6; }
+
+/* Body Padding */
+body {
+  padding-top: 58px;
+  padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Scrollbar */
+.sheet-content::-webkit-scrollbar { width: 5px; }
+.sheet-content::-webkit-scrollbar-thumb { 
+  background: rgba(100,116,139,0.2); border-radius: 3px; 
+}
+
+/* ══ RESPONSIVE — MOBILE ══ */
+@media (max-width: 480px) {
+  .top-header { padding: 0 4%; height: 54px; }
+  .brand-logo { width: 36px; height: 36px; }
+  .brand-title { font-size: 0.95rem; }
+  .user-name { max-width: 90px; font-size: 0.75rem; }
+  .user-location { display: none; }
+  .user-avatar { width: 28px; height: 28px; font-size: 0.65rem; }
+  .login-btn { padding: 6px 14px; font-size: 0.8rem; }
+  
+  .bottom-nav { padding: 6px 2% calc(6px + env(safe-area-inset-bottom, 0px)); }
+  .nav-btn { padding: 6px 4px; max-width: 80px; }
+  .nav-icon-wrap { width: 38px; height: 38px; }
+  .nav-icon-wrap svg { width: 22px; height: 22px; }
+  .nav-label { font-size: 0.64rem; }
+  
+  .sheet-content { padding: 1.2rem 1rem 1.8rem; border-radius: 24px 24px 0 0; }
+  .link-card { padding: 0.8rem 1rem; }
+  .link-icon { width: 36px; height: 36px; font-size: 1rem; }
+  .link-title { font-size: 0.85rem; }
+  
+  .login-modal { 
+    width: 94%; max-width: none;
+    padding: 1.8rem 1.4rem; 
+  }
+  .login-title { font-size: 1.3rem; }
+  .profile-dropdown { min-width: 200px; }
+}
+
+/* ══ RESPONSIVE — DESKTOP ══ */
+@media (min-width: 769px) {
+  .bottom-nav {
+    max-width: 640px; left: 50%; right: auto;
+    transform: translateX(-50%); border-radius: 24px 24px 0 0;
+  }
+  .sheet-content { 
+    max-width: 720px; margin: 0 auto; 
+    left: 0; right: 0; border-radius: 32px 32px 0 0; 
+  }
+  .nav-btn { max-width: 100px; }
+  .brand-tagline { display: block; }
+}
+
+/* ══ ICON COLORS ══ */
+.ic-home { background: rgba(59,130,246,0.12); }
+.ic-search { background: rgba(20,184,166,0.12); }
+.ic-fact { background: rgba(16,185,129,0.12); }
+.ic-menu { background: rgba(139,92,246,0.12); }
+.ic-page { background: rgba(59,130,246,0.1); }
+.ic-post { background: rgba(168,85,247,0.1); }
+.ic-category { background: rgba(236,72,153,0.1); }
+.ic-contact { background: rgba(14,165,233,0.1); }
+.ic-about { background: rgba(20,184,166,0.1); }
+.ic-service { background: rgba(34,197,94,0.1); }
+
+/* Hide elements based on login state */
+.logged-out .profile-btn { display: none; }
+.logged-in .login-btn { display: none; }
+</style>
+</head>
+<body class="logged-out">
+
+<!-- ══ STICKY TOP HEADER ══ -->
+<header class="top-header" id="topHeader">
+  <a href="/" class="brand-section" id="brandLink">
+    <div class="brand-logo" id="brandLogoWrap">
+      <!-- Logo will be inserted here -->
+      <img id="siteLogo" src="" alt="FactCheckBD Logo">
+    </div>
+    <div>
+      <span class="brand-title">
+        <span class="fact">FactCheck</span><span class="bd">BD</span>
+      </span>
+      <div class="brand-tagline">First AI-Powered Fact-Checking Tool in BD</div>
+    </div>
+  </a>
+  
+  <div class="auth-section">
+    <!-- Login Button -->
+    <button class="login-btn" id="loginBtn" onclick="openLogin()">
+      <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+      <span>লগইন</span>
+    </button>
+    
+    <!-- Profile Button -->
+    <div class="profile-btn" id="profileBtn" onclick="toggleProfileMenu()">
+      <div class="user-avatar">
+        <span id="avatarText">AR</span>
+        <div class="online-dot"></div>
+      </div>
+      <div class="user-details">
+        <span class="user-name" id="userName">Ahmad Rafi</span>
+        <span class="user-location" id="userLoc">বাংলাদেশ</span>
+      </div>
+      
+      <!-- Profile Dropdown -->
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="dropdown-header">
+          <div class="dropdown-user-name" id="dropdownUserName">Ahmad Rafi</div>
+          <div class="dropdown-user-email" id="dropdownUserEmail">rafi@factcheckbd.org</div>
+        </div>
+        <div class="dropdown-menu">
+          <a href="/profile/" class="dropdown-item">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>আমার প্রোফাইল</span>
+          </a>
+          <a href="/settings/" class="dropdown-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/></svg>
+            <span>সেটিংস</span>
+          </a>
+          <a href="/dashboard/" class="dropdown-item">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>ড্যাশবোর্ড</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item dropdown-logout" onclick="logout()">
+            <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            <span>লগআউট</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ LOGIN MODAL ══ -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-bg" onclick="closeLogin()"></div>
+  <div class="login-modal">
+    <button class="close-login-btn" onclick="closeLogin()">✕</button>
+    
+    <div class="login-header">
+      <div class="login-logo" id="loginLogo">
+        <!-- Logo will be inserted here -->
+        <img src="" alt="FactCheckBD">
+      </div>
+      <h2 class="login-title">
+        <span class="fact">FactCheck</span><span class="bd">BD</span>
+      </h2>
+      <p class="login-subtitle">আপনার অ্যাকাউন্টে লগইন করুন</p>
+    </div>
+    
+    <form class="login-form" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label">ইমেইল বা ইউজারনেম</label>
+        <input type="text" class="form-input" id="loginUsername" placeholder="আপনার ইমেইল লিখুন" required>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">পাসওয়ার্ড</label>
+        <input type="password" class="form-input" id="loginPassword" placeholder="পাসওয়ার্ড লিখুন" required>
+      </div>
+      
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox" id="rememberMe">
+          <span>মনে রাখুন</span>
+        </label>
+        <a href="/forgot-password/" class="forgot-password">পাসওয়ার্ড ভুলে গেছেন?</a>
+      </div>
+      
+      <button type="submit" class="submit-btn">লগইন করুন</button>
+    </form>
+    
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-text">অথবা</span>
+      <div class="divider-line"></div>
+    </div>
+    
+    <div class="social-login">
+      <button class="social-btn" onclick="loginWithGoogle()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <span>Google</span>
+      </button>
+      <button class="social-btn" onclick="loginWithFacebook()">
+        <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <span>Facebook</span>
+      </button>
+    </div>
+    
+    <div class="signup-link">
+      নতুন ব্যবহারকারী? <a href="/register/">এখনই নিবন্ধন করুন</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BOTTOM NAVIGATION ══ -->
+<nav class="bottom-nav" role="navigation" aria-label="প্রধান নেভিগেশন">
+  <a href="/" class="nav-btn active" id="nb-home" onclick="activateNav('nb-home', event)">
+    <div class="nav-icon-wrap">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <span class="nav-label">হোম</span>
+  </a>
+
+  <a href="/ai_search/" class="nav-btn" id="nb-search" onclick="activateNav('nb-search', event)">
+    <div class="nav-icon-wrap">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <span class="nav-label">সার্চ</span>
+  </a>
+
+  <button class="nav-btn" id="nb-facts" onclick="openSheet('facts')">
+    <div class="nav-icon-wrap">
+      <span class="count-badge" id="factsBadge">0</span>
+      <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    </div>
+    <span class="nav-label">ফ্যাক্ট</span>
+  </button>
+
+  <button class="nav-btn" id="nb-menu" onclick="openSheet('menu')">
+    <div class="nav-icon-wrap">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </div>
+    <span class="nav-label">মেনু</span>
+  </button>
+</nav>
+
+<!-- Facts & Menu Sheets (same as before) -->
+<div class="sheet-overlay" id="factsOverlay">
+  <div class="sheet-bg" onclick="closeSheet('facts')"></div>
+  <div class="sheet-content">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <span class="sheet-title">✅ সকল ফ্যাক্ট চেক <span class="title-count" id="factsCount">...</span></span>
+      <button class="close-sheet-btn" onclick="closeSheet('facts')">✕</button>
+    </div>
+    <div class="site-info-card">
+      <div class="site-info-logo"><img src="" alt="Logo" id="factsLogo"></div>
+      <div class="site-info-text">
+        <div class="site-info-name">ফ্যাক্ট চেকিং</div>
+        <div class="site-info-url">সত্যতা যাচাই সেবা</div>
+      </div>
+      <div class="site-status-dot"></div>
+    </div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="factsSearchInput" placeholder="ফ্যাক্ট খুঁজুন..." oninput="searchFacts(this.value)">
+    </div>
+    <div class="skel-cards" id="factsSkeletons">
+      <div class="skel-card"><div class="skel-icon skeleton"></div><div class="skel-text"><div class="skel-line w80 skeleton"></div><div class="skel-line w50 skeleton"></div></div></div>
+      <div class="skel-card"><div class="skel-icon skeleton"></div><div class="skel-text"><div class="skel-line w80 skeleton"></div><div class="skel-line w50 skeleton"></div></div></div>
+    </div>
+    <div class="link-cards" id="factsList"></div>
+    <div class="empty-state" id="factsEmpty"><div class="empty-icon">🔍</div><div class="empty-text">কোনো ফ্যাক্ট চেক পাওয়া যায়নি</div></div>
+  </div>
+</div>
+
+<div class="sheet-overlay" id="menuOverlay">
+  <div class="sheet-bg" onclick="closeSheet('menu')"></div>
+  <div class="sheet-content">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <span class="sheet-title">🌐 সকল লিংক <span class="title-count" id="menuCount">...</span></span>
+      <button class="close-sheet-btn" onclick="closeSheet('menu')">✕</button>
+    </div>
+    <div class="site-info-card">
+      <div class="site-info-logo"><img src="" alt="Logo" id="menuLogo"></div>
+      <div class="site-info-text">
+        <div class="site-info-name">FactCheckBD</div>
+        <div class="site-info-url" id="menuSiteUrl">...</div>
+      </div>
+      <div class="site-status-dot"></div>
+    </div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="menuSearchInput" placeholder="লিংক খুঁজুন..." oninput="searchMenu(this.value)">
+    </div>
+    <div class="skel-cards" id="menuSkeletons">
+      <div class="skel-card"><div class="skel-icon skeleton"></div><div class="skel-text"><div class="skel-line w80 skeleton"></div><div class="skel-line w50 skeleton"></div></div></div>
+      <div class="skel-card"><div class="skel-icon skeleton"></div><div class="skel-text"><div class="skel-line w80 skeleton"></div><div class="skel-line w50 skeleton"></div></div></div>
+    </div>
+    <div id="menuContent"></div>
+    <div class="empty-state" id="menuEmpty"><div class="empty-icon">📁</div><div class="empty-text">কোনো লিংক পাওয়া যায়নি</div></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ══ CONFIGURATION ══ */
+const WP_URL = window.location.origin;
+
+const SITE_CONFIG = {
+  name: 'FactCheckBD',
+  tagline: 'First AI-Powered Fact-Checking Tool in BD',
+  homeUrl: WP_URL,
+  location: 'বাংলাদেশ',
+};
+
+/* ══ STATE ══ */
+const STATE = {
+  factsLoaded: false,
+  menuLoaded: false,
+  activeSheet: null,
+  allFacts: [],
+  allLinks: [],
+  isLoggedIn: false,
+  user: null,
+};
+
+/* ══ INITIALIZE ══ */
+(function init() {
+  // Site branding (CSS logos are auto-generated, no need to load images)
+  
+  document.getElementById('menuSiteUrl').textContent = WP_URL.replace('https://', '');
+  document.getElementById('brandLink').href = SITE_CONFIG.homeUrl || '/';
+
+  checkLoginStatus();
+  window.addEventListener('scroll', handleScroll);
+  document.addEventListener('click', handleOutsideClick);
+})();
+
+/* ══ STICKY HEADER ══ */
+function handleScroll() {
+  const header = document.getElementById('topHeader');
+  if (window.scrollY > 20) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+}
+
+/* ══ LOGIN SYSTEM ══ */
+function checkLoginStatus() {
+  const userData = localStorage.getItem('user');
+  if (userData) {
+    try {
+      STATE.user = JSON.parse(userData);
+      STATE.isLoggedIn = true;
+      document.body.classList.remove('logged-out');
+      document.body.classList.add('logged-in');
+      updateUserUI();
+    } catch(e) {
+      localStorage.removeItem('user');
+    }
+  }
+}
+
+function updateUserUI() {
+  if (!STATE.user) return;
+  const userName = STATE.user.name || 'User';
+  const userEmail = STATE.user.email || '';
+  document.getElementById('userName').textContent = userName;
+  document.getElementById('dropdownUserName').textContent = userName;
+  document.getElementById('dropdownUserEmail').textContent = userEmail;
+  const parts = userName.split(/\s+/);
+  const initials = parts.length >= 2
+    ? parts[0][0].toUpperCase() + parts[1][0].toUpperCase()
+    : userName.slice(0, 2).toUpperCase();
+  document.getElementById('avatarText').textContent = initials;
+}
+
+function openLogin() {
+  document.getElementById('loginOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLogin() {
+  document.getElementById('loginOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
+  const remember = document.getElementById('rememberMe').checked;
+  
+  const userData = {
+    name: 'Ahmad Rafi',
+    email: 'rafi@factcheckbd.org',
+    username: username,
+  };
+  
+  if (remember) {
+    localStorage.setItem('user', JSON.stringify(userData));
+  } else {
+    sessionStorage.setItem('user', JSON.stringify(userData));
+  }
+  
+  STATE.user = userData;
+  STATE.isLoggedIn = true;
+  document.body.classList.remove('logged-out');
+  document.body.classList.add('logged-in');
+  updateUserUI();
+  closeLogin();
+}
+
+function logout() {
+  localStorage.removeItem('user');
+  sessionStorage.removeItem('user');
+  STATE.user = null;
+  STATE.isLoggedIn = false;
+  document.body.classList.remove('logged-in');
+  document.body.classList.add('logged-out');
+  closeProfileMenu();
+  if (window.location.pathname !== '/') {
+    window.location.href = '/';
+  }
+}
+
+function loginWithGoogle() {
+  alert('Google লগইন শীঘ্রই আসছে!');
+}
+
+function loginWithFacebook() {
+  alert('Facebook লগইন শীঘ্রই আসছে!');
+}
+
+function toggleProfileMenu() {
+  document.getElementById('profileBtn').classList.toggle('active');
+}
+
+function closeProfileMenu() {
+  document.getElementById('profileBtn').classList.remove('active');
+}
+
+function handleOutsideClick(e) {
+  const profileBtn = document.getElementById('profileBtn');
+  if (profileBtn && !profileBtn.contains(e.target)) {
+    closeProfileMenu();
+  }
+}
+
+/* ══ NAVIGATION ══ */
+function activateNav(id, event) {
+  if (event) event.preventDefault();
+  document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(id)?.classList.add('active');
+}
+
+function openSheet(type) {
+  if (STATE.activeSheet === type) {
+    closeSheet(type);
+    return;
+  }
+  if (STATE.activeSheet) closeSheet(STATE.activeSheet);
+  STATE.activeSheet = type;
+  document.getElementById(type + 'Overlay').classList.add('open');
+  activateNav('nb-' + type);
+  if (type === 'facts') loadFacts();
+  if (type === 'menu') loadMenu();
+}
+
+function closeSheet(type) {
+  document.getElementById(type + 'Overlay').classList.remove('open');
+  STATE.activeSheet = null;
+  document.getElementById('nb-' + type)?.classList.remove('active');
+  if (type === 'facts') document.getElementById('factsSearchInput').value = '';
+  if (type === 'menu') document.getElementById('menuSearchInput').value = '';
+}
+
+/* ══ DATA FETCHING ══ */
+async function fetchData(url, timeout = 8000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  try {
+    const response = await fetch(url, { 
+      headers: { 'Accept': 'application/json' },
+      signal: controller.signal 
+    });
+    clearTimeout(timer);
+    return response.ok ? await response.json() : null;
+  } catch(e) {
+    clearTimeout(timer);
+    return null;
+  }
+}
+
+function sanitize(str) {
+  const div = document.createElement('div');
+  div.textContent = String(str || '');
+  return div.innerHTML;
+}
+
+const ICONS = {
+  fact: '✅', check: '✅', verify: '🔍', truth: '✅',
+  home: '🏠', about: 'ℹ️', service: '📋', contact: '📞',
+  blog: '✍️', news: '📰', post: '📝', page: '📄',
+  category: '🏷️', search: '🔍', menu: '☰'
+};
+
+function getIconForItem(slug, title) {
+  const text = ((slug || '') + ' ' + (title || '')).toLowerCase();
+  const key = Object.keys(ICONS).find(k => text.includes(k));
+  return ICONS[key] || '📄';
+}
+
+function getIconClass(type) {
+  const classes = {
+    fact: 'ic-fact', page: 'ic-page', post: 'ic-post',
+    category: 'ic-category', home: 'ic-home', about: 'ic-about',
+    service: 'ic-service', contact: 'ic-contact'
+  };
+  return classes[type] || 'ic-page';
+}
+
+async function fetchFactChecks() {
+  try {
+    let catParam = '';
+    const catRes = await fetchData(`${WP_URL}/wp-json/wp/v2/categories?slug=fact-check&_fields=id`);
+    if (catRes && catRes.length > 0) catParam = `&categories=${catRes[0].id}`;
+    const posts = await fetchData(`${WP_URL}/wp-json/wp/v2/posts?per_page=100&status=publish&orderby=date&order=desc&_fields=id,title,link,slug${catParam}`);
+    return posts || [];
+  } catch(e) {
+    return [
+      { id: 1, title: { rendered: 'ভাইরাল ছবির সত্যতা যাচাই' }, link: '#', slug: 'viral' },
+      { id: 2, title: { rendered: 'ফেসবুক পোস্ট যাচাই' }, link: '#', slug: 'fb' },
+    ];
+  }
+}
+
+async function fetchAllLinks() {
+  const links = [];
+  try {
+    const [pages, posts, cats] = await Promise.all([
+      fetchData(`${WP_URL}/wp-json/wp/v2/pages?per_page=100&status=publish&_fields=id,title,link,slug`),
+      fetchData(`${WP_URL}/wp-json/wp/v2/posts?per_page=100&status=publish&_fields=id,title,link,slug`),
+      fetchData(`${WP_URL}/wp-json/wp/v2/categories?per_page=50&_fields=id,name,link,slug`)
+    ]);
+    if (pages) links.push(...pages.map(p => ({ ...p, type: 'page', title: p.title?.rendered || p.title })));
+    if (posts) links.push(...posts.map(p => ({ ...p, type: 'post', title: p.title?.rendered || p.title })));
+    if (cats) links.push(...cats.filter(c => c.name !== 'Uncategorized').map(c => ({ ...c, type: 'category', title: c.name, slug: c.slug || '' })));
+    return links.length > 0 ? links : [
+      { title: 'হোম', link: '/', slug: 'home', type: 'page' },
+      { title: 'সম্পর্কে', link: '/about/', slug: 'about', type: 'page' },
+    ];
+  } catch(e) {
+    return [];
+  }
+}
+
+function renderFacts(facts) {
+  document.getElementById('factsSkeletons').style.display = 'none';
+  const listEl = document.getElementById('factsList');
+  listEl.innerHTML = '';
+  if (!facts || facts.length === 0) {
+    document.getElementById('factsEmpty').classList.add('show');
+    return;
+  }
+  STATE.allFacts = facts;
+  document.getElementById('factsCount').textContent = `${facts.length}টি`;
+  document.getElementById('factsBadge').textContent = facts.length > 99 ? '99+' : facts.length;
+  if (facts.length > 0) document.getElementById('factsBadge').classList.add('show');
+  
+  facts.forEach(fact => {
+    const title = sanitize(fact.title?.rendered || fact.title || 'ফ্যাক্ট');
+    const url = fact.link || '#';
+    const slug = fact.slug || '';
+    const icon = getIconForItem(slug, title);
+    const card = document.createElement('a');
+    card.href = url;
+    card.className = 'link-card';
+    card.dataset.search = (title + ' ' + slug).toLowerCase();
+    card.innerHTML = `
+      <div class="link-icon ic-fact">${icon}</div>
+      <div class="link-info">
+        <div class="link-title">${title}</div>
+        <div class="link-subtitle">${url.replace(WP_URL, '').slice(0, 50) || '/'}</div>
+      </div>
+      <span class="link-arrow">→</span>
+    `;
+    listEl.appendChild(card);
+  });
+}
+
+function renderMenu(links) {
+  document.getElementById('menuSkeletons').style.display = 'none';
+  const contentEl = document.getElementById('menuContent');
+  contentEl.innerHTML = '';
+  if (!links || links.length === 0) {
+    document.getElementById('menuEmpty').classList.add('show');
+    return;
+  }
+  STATE.allLinks = links;
+  document.getElementById('menuCount').textContent = `${links.length}টি`;
+  
+  const pages = links.filter(l => l.type === 'page');
+  const posts = links.filter(l => l.type === 'post');
+  const cats = links.filter(l => l.type === 'category');
+  
+  function renderSection(items, label, type) {
+    if (items.length === 0) return;
+    const section = document.createElement('div');
+    const labelEl = document.createElement('span');
+    labelEl.className = 'section-label';
+    labelEl.textContent = label;
+    section.appendChild(labelEl);
+    const cardsEl = document.createElement('div');
+    cardsEl.className = 'link-cards';
+    items.forEach(item => {
+      const title = sanitize(item.title || 'লিংক');
+      const url = item.link || '#';
+      const slug = item.slug || '';
+      const icon = getIconForItem(slug, title);
+      const card = document.createElement('a');
+      card.href = url;
+      card.className = 'link-card';
+      card.dataset.search = (title + ' ' + slug).toLowerCase();
+      card.dataset.section = type;
+      card.innerHTML = `
+        <div class="link-icon ${getIconClass(type)}">${icon}</div>
+        <div class="link-info">
+          <div class="link-title">${title}</div>
+          <div class="link-subtitle">${url.replace(WP_URL, '').slice(0, 50) || '/'}</div>
+        </div>
+        <span class="link-arrow">→</span>
+      `;
+      cardsEl.appendChild(card);
+    });
+    section.appendChild(cardsEl);
+    contentEl.appendChild(section);
+  }
+  
+  renderSection(pages, '📄 পাতা', 'page');
+  renderSection(posts, '📰 পোস্ট', 'post');
+  renderSection(cats, '🏷️ ক্যাটাগরি', 'category');
+}
+
+function searchFacts(query) {
+  const q = query.toLowerCase().trim();
+  const cards = document.querySelectorAll('#factsList .link-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const match = !q || card.dataset.search.includes(q);
+    card.classList.toggle('hidden', !match);
+    if (match) visible++;
+  });
+  document.getElementById('factsEmpty').classList.toggle('show', visible === 0 && q.length > 0);
+}
+
+function searchMenu(query) {
+  const q = query.toLowerCase().trim();
+  const cards = document.querySelectorAll('#menuContent .link-card');
+  const sections = document.querySelectorAll('#menuContent .section-label');
+  let visible = 0;
+  cards.forEach(card => {
+    const match = !q || card.dataset.search.includes(q);
+    card.classList.toggle('hidden', !match);
+    if (match) visible++;
+  });
+  sections.forEach(section => {
+    const nextCards = [];
+    let el = section.nextElementSibling;
+    while (el && el.classList.contains('link-cards')) {
+      nextCards.push(...el.querySelectorAll('.link-card:not(.hidden)'));
+      el = el.nextElementSibling;
+    }
+    section.style.display = nextCards.length > 0 ? 'block' : 'none';
+  });
+  document.getElementById('menuEmpty').classList.toggle('show', visible === 0 && q.length > 0);
+}
+
+async function loadFacts() {
+  if (STATE.factsLoaded) return;
+  STATE.factsLoaded = true;
+  const facts = await fetchFactChecks();
+  renderFacts(facts);
+}
+
+async function loadMenu() {
+  if (STATE.menuLoaded) return;
+  STATE.menuLoaded = true;
+  const links = await fetchAllLinks();
+  renderMenu(links);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (STATE.activeSheet) closeSheet(STATE.activeSheet);
+    else if (document.getElementById('loginOverlay').classList.contains('open')) closeLogin();
+    else if (document.getElementById('profileBtn').classList.contains('active')) closeProfileMenu();
+  }
+});
+</script>
+</body>
+</html>
