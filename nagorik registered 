@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>নাগরিক নিবন্ধন ফর্ম</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --np-blue: #1565c0;
+    --np-teal: #00838f;
+    --np-green: #22c55e;
+    --np-red: #ef4444;
+    --np-gold: #f59e0b;
+    --np-text: #0d1b2a;
+    --np-soft: #5a7a9a;
+    --np-bg: #f4f8ff;
+    --np-white: #ffffff;
+    --np-border: rgba(21,101,192,0.15);
+    --np-radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Hind Siliguri', sans-serif;
+    background: linear-gradient(135deg, #e8f0fe 0%, #f4f8ff 50%, #e0f7f9 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  /* ── FORM WRAPPER ── */
+  .np-register-wrap {
+    width: 100%;
+    max-width: 520px;
+    background: var(--np-white);
+    border-radius: 28px;
+    box-shadow: 0 20px 80px rgba(21,101,192,0.12), 0 4px 20px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  /* ── HEADER BANNER ── */
+  .np-form-banner {
+    background: linear-gradient(135deg, #0d2550 0%, #1565c0 55%, #0097a7 100%);
+    padding: 2rem 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .np-form-banner::before {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    top: -80px; right: -60px;
+  }
+  .np-form-banner::after {
+    content: '';
+    position: absolute;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+    bottom: -40px; left: 20px;
+  }
+  .np-banner-icon {
+    width: 52px; height: 52px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .np-banner-title {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    position: relative; z-index: 1;
+  }
+  .np-banner-sub {
+    color: rgba(255,255,255,0.72);
+    font-size: 0.82rem;
+    position: relative; z-index: 1;
+  }
+
+  /* ── PROGRESS STEPS ── */
+  .np-steps {
+    display: flex;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background: var(--np-bg);
+    border-bottom: 1px solid var(--np-border);
+    gap: 0;
+  }
+  .np-step {
+    display: flex; flex-direction: column; align-items: center;
+    flex: 1; cursor: pointer;
+    position: relative;
+  }
+  .np-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 16px; left: 50%; width: 100%;
+    height: 2px;
+    background: var(--np-border);
+    z-index: 0;
+    transition: background 0.3s;
+  }
+  .np-step.done:not(:last-child)::after { background: var(--np-blue); }
+  .np-step-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--np-white);
+    border: 2px solid var(--np-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+    color: var(--np-soft);
+    z-index: 1;
+    transition: all 0.3s;
+  }
+  .np-step.active .np-step-dot {
+    background: var(--np-blue);
+    border-color: var(--np-blue);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(21,101,192,0.3);
+  }
+  .np-step.done .np-step-dot {
+    background: var(--np-teal);
+    border-color: var(--np-teal);
+    color: #fff;
+  }
+  .np-step-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: var(--np-soft);
+    margin-top: 5px;
+    white-space: nowrap;
+  }
+  .np-step.active .np-step-label { color: var(--np-blue); }
+
+  /* ── FORM BODY ── */
+  .np-form-body {
+    padding: 1.8rem 2rem 2rem;
+  }
+
+  /* ── PANELS ── */
+  .np-panel { display: none; }
+  .np-panel.active { display: block; animation: panelIn 0.25s ease; }
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .np-panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--np-text);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .np-panel-title span { font-size: 1.1rem; }
+
+  /* ── FIELD ── */
+  .np-field { margin-bottom: 1rem; }
+  .np-field label {
+    display: block;
+    font-size: 0.77rem;
+    font-weight: 600;
+    color: var(--np-soft);
+    margin-bottom: 5px;
+    letter-spacing: 0.01em;
+  }
+  .np-field label .req { color: var(--np-red); }
+
+  .np-field input,
+  .np-field select,
+  .np-field textarea {
+    width: 100%;
+    padding: 0.72rem 1rem;
+    border: 1.5px solid var(--np-border);
+    border-radius: 11px;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.9rem;
+    color: var(--np-text);
+    background: var(--np-bg);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .np-field input:focus,
+  .np-field select:focus,
+  .np-field textarea:focus {
+    border-color: var(--np-blue);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(21,101,192,0.08);
+  }
+  .np-field textarea { resize: vertical; min-height: 80px; }
+  .np-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a7a9a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 2.5rem;
+  }
+
+  .np-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  /* ── AVATAR UPLOAD ── */
+  .np-avatar-upload {
+    display: flex; align-items: center; gap: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    background: var(--np-bg);
+    border-radius: 14px;
+    border: 1.5px dashed var(--np-border);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .np-avatar-upload:hover { border-color: var(--np-blue); background: rgba(21,101,192,0.03); }
+  .np-avatar-preview {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--np-blue), var(--np-teal));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: #fff;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .np-avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .np-avatar-upload-info h4 { font-size: 0.85rem; font-weight: 700; color: var(--np-text); margin-bottom: 2px; }
+  .np-avatar-upload-info p { font-size: 0.74rem; color: var(--np-soft); }
+  #avatarInput { display: none; }
+
+  /* ── RADIO / CHECKBOX ── */
+  .np-radio-group, .np-check-group {
+    display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px;
+  }
+  .np-radio-group label, .np-check-group label {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.84rem; cursor: pointer;
+    padding: 6px 12px;
+    background: var(--np-bg);
+    border: 1.5px solid var(--np-border);
+    border-radius: 50px;
+    transition: all 0.18s;
+    color: var(--np-text);
+  }
+  .np-radio-group input, .np-check-group input { display: none; }
+  .np-radio-group label:has(input:checked),
+  .np-check-group label:has(input:checked) {
+    background: rgba(21,101,192,0.08);
+    border-color: var(--np-blue);
+    color: var(--np-blue);
+    font-weight: 600;
+  }
+
+  /* ── PASSWORD FIELD ── */
+  .np-pw-wrap { position: relative; }
+  .np-pw-wrap input { padding-right: 2.8rem; }
+  .np-toggle-pw {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    border: none; background: none; cursor: pointer;
+    font-size: 1rem; color: var(--np-soft);
+    padding: 4px;
+  }
+
+  /* ── STRENGTH BAR ── */
+  .np-strength { margin-top: 6px; }
+  .np-strength-bar {
+    height: 4px; background: rgba(0,0,0,0.07);
+    border-radius: 50px; overflow: hidden;
+  }
+  .np-strength-fill {
+    height: 100%; width: 0%;
+    border-radius: 50px;
+    transition: width 0.3s, background 0.3s;
+  }
+  .np-strength-text { font-size: 0.7rem; color: var(--np-soft); margin-top: 4px; }
+
+  /* ── DIVIDER ── */
+  .np-divider {
+    border: none;
+    border-top: 1px solid var(--np-border);
+    margin: 1.2rem 0;
+  }
+
+  /* ── TERMS ── */
+  .np-terms-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 1rem;
+    font-size: 0.8rem; color: var(--np-soft);
+  }
+  .np-terms-row input[type="checkbox"] { margin-top: 2px; accent-color: var(--np-blue); flex-shrink: 0; }
+  .np-terms-row a { color: var(--np-blue); text-decoration: none; }
+
+  /* ── BUTTONS ── */
+  .np-btn-row {
+    display: flex; gap: 10px; align-items: center;
+    margin-top: 1.2rem;
+  }
+  .np-btn-back {
+    padding: 0.75rem 1.4rem;
+    border: 1.5px solid var(--np-border);
+    background: transparent;
+    border-radius: 50px;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--np-soft);
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .np-btn-back:hover { border-color: var(--np-blue); color: var(--np-blue); }
+
+  .np-btn-next, .np-btn-submit {
+    flex: 1;
+    padding: 0.88rem;
+    background: linear-gradient(135deg, var(--np-blue), #0097a7);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(21,101,192,0.25);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .np-btn-next:hover, .np-btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(21,101,192,0.35);
+  }
+  .np-btn-next:disabled, .np-btn-submit:disabled {
+    opacity: 0.6; transform: none; cursor: not-allowed;
+  }
+
+  /* ── ERROR ── */
+  .np-error {
+    color: var(--np-red);
+    font-size: 0.78rem;
+    margin-bottom: 0.5rem;
+    min-height: 1rem;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .np-error::before { content: '⚠️'; font-size: 0.7rem; }
+
+  /* ── SUCCESS STATE ── */
+  .np-success-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    gap: 1rem;
+  }
+  .np-success-icon {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--np-teal), var(--np-blue));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem;
+    box-shadow: 0 8px 30px rgba(0,131,143,0.3);
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .np-success-title { font-size: 1.3rem; font-weight: 700; color: var(--np-text); }
+  .np-success-sub { font-size: 0.85rem; color: var(--np-soft); line-height: 1.6; }
+  .np-success-pill {
+    background: rgba(0,131,143,0.08);
+    color: var(--np-teal);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  /* ── INFO BOX ── */
+  .np-info-box {
+    background: rgba(21,101,192,0.05);
+    border: 1px solid rgba(21,101,192,0.12);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    color: var(--np-soft);
+    margin-bottom: 1rem;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+
+  /* ── FOOTER ── */
+  .np-form-footer {
+    text-align: center;
+    padding: 1rem 2rem 1.5rem;
+    border-top: 1px solid var(--np-border);
+    font-size: 0.8rem;
+    color: var(--np-soft);
+  }
+  .np-form-footer a { color: var(--np-blue); text-decoration: none; font-weight: 600; }
+
+  /* RESPONSIVE */
+  @media (max-width: 480px) {
+    .np-form-body { padding: 1.4rem 1.2rem 1.5rem; }
+    .np-form-banner { padding: 1.5rem 1.2rem; }
+    .np-steps { padding: 1rem 1.2rem; }
+    .np-row { grid-template-columns: 1fr; }
+    .np-form-footer { padding: 1rem 1.2rem 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="np-register-wrap">
+
+  <!-- BANNER -->
+  <div class="np-form-banner">
+    <div class="np-banner-icon">🏛</div>
+    <div class="np-banner-title">নাগরিক নিবন্ধন</div>
+    <div class="np-banner-sub">আপনার তথ্য দিয়ে নাগরিক প্রোফাইল তৈরি করুন</div>
+  </div>
+
+  <!-- STEP PROGRESS -->
+  <div class="np-steps">
+    <div class="np-step active" id="step-dot-1" onclick="goToStep(1)">
+      <div class="np-step-dot">১</div>
+      <div class="np-step-label">মূল তথ্য</div>
+    </div>
+    <div class="np-step" id="step-dot-2" onclick="goToStep(2)">
+      <div class="np-step-dot">২</div>
+      <div class="np-step-label">ঠিকানা</div>
+    </div>
+    <div class="np-step" id="step-dot-3" onclick="goToStep(3)">
+      <div class="np-step-dot">৩</div>
+      <div class="np-step-label">পরিচয়</div>
+    </div>
+    <div class="np-step" id="step-dot-4" onclick="goToStep(4)">
+      <div class="np-step-dot">৪</div>
+      <div class="np-step-label">নিরাপত্তা</div>
+    </div>
+  </div>
+
+  <!-- FORM BODY -->
+  <div class="np-form-body" id="formBody">
+
+    <!-- ═══ PANEL 1: Basic Info ═══ -->
+    <div class="np-panel active" id="panel-1">
+      <div class="np-panel-title"><span>👤</span> মূল তথ্য</div>
+
+      <!-- Avatar Upload -->
+      <div class="np-avatar-upload" onclick="document.getElementById('avatarInput').click()">
+        <div class="np-avatar-preview" id="avatarPreview">🙂</div>
+        <div class="np-avatar-upload-info">
+          <h4>প্রোফাইল ছবি আপলোড করুন</h4>
+          <p>ক্লিক করুন • JPG, PNG • সর্বোচ্চ ২ MB</p>
+        </div>
+      </div>
+      <input type="file" id="avatarInput" accept="image/*" onchange="previewAvatar(this)">
+
+      <div class="np-row">
+        <div class="np-field">
+          <label>নাম (বাংলা) <span class="req">*</span></label>
+          <input type="text" id="nameBn" placeholder="মোহাম্মদ রহিম" required>
+        </div>
+        <div class="np-field">
+          <label>নাম (ইংরেজি) <span class="req">*</span></label>
+          <input type="text" id="nameEn" placeholder="Mohammad Rahim" required>
+        </div>
+      </div>
+
+      <div class="np-row">
+        <div class="np-field">
+          <label>ইমেইল ঠিকানা <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="example@email.com" required autocomplete="email">
+        </div>
+        <div class="np-field">
+          <label>মোবাইল নম্বর <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="01XXXXXXXXX" pattern="[0-9]{11}" required>
+        </div>
+      </div>
+
+      <div class="np-row">
+        <div class="np-field">
+          <label>জন্ম তারিখ <span class="req">*</span></label>
+          <input type="date" id="dob" required max="">
+        </div>
+        <div class="np-field">
+          <label>লিঙ্গ <span class="req">*</span></label>
+          <select id="gender" required>
+            <option value="">বেছে নিন</option>
+            <option value="male">পুরুষ</option>
+            <option value="female">মহিলা</option>
+            <option value="other">অন্যান্য</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="np-field">
+        <label>ধর্ম</label>
+        <select id="religion">
+          <option value="">বেছে নিন</option>
+          <option value="islam">ইসলাম</option>
+          <option value="hindu">হিন্দু</option>
+          <option value="christian">খ্রিস্টান</option>
+          <option value="buddhist">বৌদ্ধ</option>
+          <option value="other">অন্যান্য</option>
+        </select>
+      </div>
+
+      <div class="np-error" id="err-1"></div>
+      <div class="np-btn-row">
+        <button class="np-btn-next" onclick="nextStep(1)">পরবর্তী <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+
+    <!-- ═══ PANEL 2: Address ═══ -->
+    <div class="np-panel" id="panel-2">
+      <div class="np-panel-title"><span>📍</span> বর্তমান ঠিকানা</div>
+
+      <div class="np-row">
+        <div class="np-field">
+          <label>বিভাগ <span class="req">*</span></label>
+          <select id="division" required onchange="populateDistricts(this.value)">
+            <option value="">বিভাগ বেছে নিন</option>
+            <option value="dhaka">ঢাকা</option>
+            <option value="chattogram">চট্টগ্রাম</option>
+            <option value="rajshahi">রাজশাহী</option>
+            <option value="khulna">খুলনা</option>
+            <option value="barisal">বরিশাল</option>
+            <option value="sylhet">সিলেট</option>
+            <option value="rangpur">রংপুর</option>
+            <option value="mymensingh">ময়মনসিংহ</option>
+          </select>
+        </div>
+        <div class="np-field">
+          <label>জেলা <span class="req">*</span></label>
+          <select id="district" required>
+            <option value="">জেলা বেছে নিন</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="np-row">
+        <div class="np-field">
+          <label>উপজেলা / থানা <span class="req">*</span></label>
+          <input type="text" id="upazila" placeholder="উপজেলার নাম" required>
+        </div>
+        <div class="np-field">
+          <label>পোস্ট কোড</label>
+          <input type="text" id="postcode" placeholder="১২১৫" maxlength="4">
+        </div>
+      </div>
+
+      <div class="np-field">
+        <label>গ্রাম / মহল্লা / রোড</label>
+        <input type="text" id="village" placeholder="গ্রাম বা মহল্লার নাম">
+      </div>
+
+      <div class="np-field">
+        <label>বিস্তারিত ঠিকানা</label>
+        <textarea id="address" placeholder="বাসা নম্বর, রাস্তার নাম, এলাকা..."></textarea>
+      </div>
+
+      <hr class="np-divider">
+      <div class="np-panel-title" style="font-size:0.88rem; margin-bottom:0.8rem;"><span>🏘️</span> স্থায়ী ঠিকানা</div>
+
+      <div class="np-check-group" style="margin-bottom:1rem;">
+        <label><input type="checkbox" id="sameAddress" onchange="toggleSameAddress(this)"> বর্তমান ঠিকানার মতো</label>
+      </div>
+
+      <div id="permanentAddr">
+        <div class="np-row">
+          <div class="np-field">
+            <label>বিভাগ</label>
+            <select id="permDivision">
+              <option value="">বিভাগ বেছে নিন</option>
+              <option value="dhaka">ঢাকা</option>
+              <option value="chattogram">চট্টগ্রাম</option>
+              <option value="rajshahi">রাজশাহী</option>
+              <option value="khulna">খুলনা</option>
+              <option value="barisal">বরিশাল</option>
+              <option value="sylhet">সিলেট</option>
+              <option value="rangpur">রংপুর</option>
+              <option value="mymensingh">ময়মনসিংহ</option>
+            </select>
+          </div>
+          <div class="np-field">
+            <label>জেলা</label>
+            <input type="text" id="permDistrict" placeholder="জেলার নাম">
+          </div>
+        </div>
+        <div class="np-field">
+          <label>উপজেলা</label>
+          <input type="text" id="permUpazila" placeholder="উপজেলার নাম">
+        </div>
+      </div>
+
+      <div class="np-error" id="err-2"></div>
+      <div class="np-btn-row">
+        <button class="np-btn-back" onclick="prevStep(2)">← পূর্ববর্তী</button>
+        <button class="np-btn-next" onclick="nextStep(2)">পরবর্তী <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+
+    <!-- ═══ PANEL 3: Identity & Occupation ═══ -->
+    <div class="np-panel" id="panel-3">
+      <div class="np-panel-title"><span>🪪</span> পরিচয় ও পেশা</div>
+
+      <div class="np-row">
+        <div class="np-field">
+          <label>জাতীয় পরিচয়পত্র (NID)</label>
+          <input type="text" id="nid" placeholder="১৭ ডিজিটের NID নম্বর" maxlength="17">
+        </div>
+        <div class="np-field">
+          <label>জন্ম নিবন্ধন নম্বর</label>
+          <input type="text" id="birthReg" placeholder="জন্ম নিবন্ধন নম্বর" maxlength="17">
+        </div>
+      </div>
+
+      <div class="np-field">
+        <label>পেশা <span class="req">*</span></label>
+        <select id="occupation" required>
+          <option value="">পেশা বেছে নিন</option>
+          <option value="student">ছাত্র/ছাত্রী</option>
+          <option value="govt_employee">সরকারি চাকরিজীবী</option>
+          <option value="private_employee">বেসরকারি চাকরিজীবী</option>
+          <option value="business">ব্যবসায়ী</option>
+          <option value="farmer">কৃষক</option>
+          <option value="doctor">চিকিৎসক</option>
+          <option value="engineer">প্রকৌশলী</option>
+          <option value="teacher">শিক্ষক</option>
+          <option value="lawyer">আইনজীবী</option>
+          <option value="journalist">সাংবাদিক</option>
+          <option value="freelancer">ফ্রিল্যান্সার</option>
+          <option value="homemaker">গৃহিণী</option>
+          <option value="retired">অবসরপ্রাপ্ত</option>
+          <option value="other">অন্যান্য</option>
+        </select>
+      </div>
+
+      <div class="np-field">
+        <label>শিক্ষাগত যোগ্যতা</label>
+        <select id="education">
+          <option value="">বেছে নিন</option>
+          <option value="psc">পি.এস.সি</option>
+          <option value="jsc">জে.এস.সি</option>
+          <option value="ssc">এস.এস.সি</option>
+          <option value="hsc">এইচ.এস.সি</option>
+          <option value="diploma">ডিপ্লোমা</option>
+          <option value="bachelor">স্নাতক (অনার্স)</option>
+          <option value="master">স্নাতকোত্তর</option>
+          <option value="phd">পি.এইচ.ডি</option>
+          <option value="other">অন্যান্য</option>
+        </select>
+      </div>
+
+      <div class="np-field">
+        <label>রক্তের গ্রুপ</label>
+        <div class="np-radio-group">
+          <label><input type="radio" name="bloodGroup" value="A+"> A+</label>
+          <label><input type="radio" name="bloodGroup" value="A-"> A−</label>
+          <label><input type="radio" name="bloodGroup" value="B+"> B+</label>
+          <label><input type="radio" name="bloodGroup" value="B-"> B−</label>
+          <label><input type="radio" name="bloodGroup" value="AB+"> AB+</label>
+          <label><input type="radio" name="bloodGroup" value="AB-"> AB−</label>
+          <label><input type="radio" name="bloodGroup" value="O+"> O+</label>
+          <label><input type="radio" name="bloodGroup" value="O-"> O−</label>
+        </div>
+      </div>
+
+      <div class="np-field">
+        <label>প্রতিবন্ধী ব্যক্তি?</label>
+        <div class="np-radio-group">
+          <label><input type="radio" name="disability" value="no"> না</label>
+          <label><input type="radio" name="disability" value="yes"> হ্যাঁ</label>
+        </div>
+      </div>
+
+      <div class="np-field">
+        <label>আগ্রহের বিষয়</label>
+        <div class="np-check-group">
+          <label><input type="checkbox" value="education"> শিক্ষা</label>
+          <label><input type="checkbox" value="health"> স্বাস্থ্য</label>
+          <label><input type="checkbox" value="environment"> পরিবেশ</label>
+          <label><input type="checkbox" value="agriculture"> কৃষি</label>
+          <label><input type="checkbox" value="digital"> ডিজিটাল</label>
+          <label><input type="checkbox" value="rights"> অধিকার</label>
+        </div>
+      </div>
+
+      <div class="np-error" id="err-3"></div>
+      <div class="np-btn-row">
+        <button class="np-btn-back" onclick="prevStep(3)">← পূর্ববর্তী</button>
+        <button class="np-btn-next" onclick="nextStep(3)">পরবর্তী <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+
+    <!-- ═══ PANEL 4: Security ═══ -->
+    <div class="np-panel" id="panel-4">
+      <div class="np-panel-title"><span>🔐</span> নিরাপত্তা</div>
+
+      <div class="np-info-box">
+        ℹ️ শক্তিশালী পাসওয়ার্ড তৈরি করুন। কমপক্ষে ৮টি অক্ষর, সংখ্যা এবং বিশেষ চিহ্ন ব্যবহার করুন।
+      </div>
+
+      <div class="np-field">
+        <label>পাসওয়ার্ড <span class="req">*</span></label>
+        <div class="np-pw-wrap">
+          <input type="password" id="password" placeholder="কমপক্ষে ৮ অক্ষর" required minlength="8" autocomplete="new-password" oninput="checkStrength(this.value)">
+          <button type="button" class="np-toggle-pw" onclick="togglePw('password', this)">👁</button>
+        </div>
+        <div class="np-strength">
+          <div class="np-strength-bar"><div class="np-strength-fill" id="strengthFill"></div></div>
+          <div class="np-strength-text" id="strengthText"></div>
+        </div>
+      </div>
+
+      <div class="np-field">
+        <label>পাসওয়ার্ড নিশ্চিত করুন <span class="req">*</span></label>
+        <div class="np-pw-wrap">
+          <input type="password" id="confirmPassword" placeholder="পাসওয়ার্ড আবার টাইপ করুন" required autocomplete="new-password">
+          <button type="button" class="np-toggle-pw" onclick="togglePw('confirmPassword', this)">👁</button>
+        </div>
+      </div>
+
+      <div class="np-field">
+        <label>রেফারেল কোড (ঐচ্ছিক)</label>
+        <input type="text" id="referral" placeholder="রেফারেল কোড থাকলে লিখুন" maxlength="10">
+      </div>
+
+      <hr class="np-divider">
+
+      <div class="np-terms-row">
+        <input type="checkbox" id="terms" required>
+        <label for="terms">আমি <a href="#">শর্তাবলী</a> ও <a href="#">গোপনীয়তা নীতি</a> পড়েছি এবং সম্মত আছি।</label>
+      </div>
+
+      <div class="np-terms-row">
+        <input type="checkbox" id="newsletter">
+        <label for="newsletter">নতুন আপডেট ও সেবার তথ্য ইমেইলে পেতে চাই।</label>
+      </div>
+
+      <div class="np-error" id="err-4"></div>
+      <div class="np-btn-row">
+        <button class="np-btn-back" onclick="prevStep(4)">← পূর্ববর্তী</button>
+        <button class="np-btn-submit" onclick="submitForm()">
+          <span>নিবন্ধন করুন</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /form-body -->
+
+  <!-- SUCCESS STATE -->
+  <div class="np-success-state" id="successState">
+    <div class="np-success-icon">✅</div>
+    <div class="np-success-title">নিবন্ধন সম্পন্ন!</div>
+    <div class="np-success-sub">আপনার নাগরিক প্রোফাইল সফলভাবে তৈরি হয়েছে।<br>আপনার ইমেইলে একটি যাচাই লিংক পাঠানো হয়েছে।</div>
+    <div class="np-success-pill" id="successEmail">example@email.com</div>
+    <button class="np-btn-next" style="width:100%; margin-top:0.5rem;" onclick="resetForm()">নতুন নিবন্ধন করুন</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="np-form-footer" id="formFooter">
+    ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="#">লগইন করুন</a>
+  </div>
+
+</div>
+
+<script>
+'use strict';
+
+let currentStep = 1;
+const TOTAL_STEPS = 4;
+
+/* ── DISTRICT DATA ── */
+const DISTRICTS = {
+  dhaka: ['ঢাকা','গাজীপুর','নারায়ণগঞ্জ','টাঙ্গাইল','মানিকগঞ্জ','মুন্সিগঞ্জ','নরসিংদী','ফরিদপুর','গোপালগঞ্জ','মাদারীপুর'],
+  chattogram: ['চট্টগ্রাম','কক্সবাজার','কুমিল্লা','ফেনী','নোয়াখালী','লক্ষ্মীপুর','চাঁদপুর','ব্রাহ্মণবাড়িয়া','রাঙামাটি','খাগড়াছড়ি','বান্দরবান'],
+  rajshahi: ['রাজশাহী','নাটোর','নওগাঁ','চাঁপাইনবাবগঞ্জ','পাবনা','সিরাজগঞ্জ','বগুড়া','জয়পুরহাট'],
+  khulna: ['খুলনা','বাগেরহাট','সাতক্ষীরা','যশোর','নড়াইল','মাগুরা','ঝিনাইদহ','কুষ্টিয়া','মেহেরপুর','চুয়াডাঙ্গা'],
+  barisal: ['বরিশাল','পিরোজপুর','ভোলা','ঝালকাঠি','পটুয়াখালী','বরগুনা'],
+  sylhet: ['সিলেট','মৌলভীবাজার','হবিগঞ্জ','সুনামগঞ্জ'],
+  rangpur: ['রংপুর','দিনাজপুর','কুড়িগ্রাম','গাইবান্ধা','লালমনিরহাট','নীলফামারী','পঞ্চগড়','ঠাকুরগাঁও'],
+  mymensingh: ['ময়মনসিংহ','নেত্রকোণা','জামালপুর','শেরপুর']
+};
+
+function populateDistricts(division) {
+  const sel = document.getElementById('district');
+  sel.innerHTML = '<option value="">জেলা বেছে নিন</option>';
+  if (!division || !DISTRICTS[division]) return;
+  DISTRICTS[division].forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d; opt.textContent = d;
+    sel.appendChild(opt);
+  });
+}
+
+/* ── STEP NAVIGATION ── */
+function goToStep(step) {
+  if (step > currentStep) return; // only go back via click
+  currentStep = step;
+  updateUI();
+}
+
+function nextStep(from) {
+  if (!validateStep(from)) return;
+  currentStep = from + 1;
+  updateUI();
+  document.querySelector('.np-register-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function prevStep(from) {
+  currentStep = from - 1;
+  updateUI();
+  document.querySelector('.np-register-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function updateUI() {
+  // Panels
+  document.querySelectorAll('.np-panel').forEach((p, i) => {
+    p.classList.toggle('active', i + 1 === currentStep);
+  });
+  // Step dots
+  document.querySelectorAll('.np-step').forEach((s, i) => {
+    const stepNum = i + 1;
+    s.classList.remove('active', 'done');
+    if (stepNum === currentStep) s.classList.add('active');
+    else if (stepNum < currentStep) s.classList.add('done');
+  });
+  // Dots show checkmark for done
+  document.querySelectorAll('.np-step.done .np-step-dot').forEach(d => {
+    d.textContent = '✓';
+  });
+  const nums = ['১','২','৩','৪'];
+  document.querySelectorAll('.np-step').forEach((s, i) => {
+    if (!s.classList.contains('done')) s.querySelector('.np-step-dot').textContent = nums[i];
+  });
+}
+
+/* ── VALIDATION ── */
+function validateStep(step) {
+  const errEl = document.getElementById('err-' + step);
+  errEl.textContent = '';
+
+  if (step === 1) {
+    const nameBn = document.getElementById('nameBn').value.trim();
+    const nameEn = document.getElementById('nameEn').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const dob = document.getElementById('dob').value;
+    const gender = document.getElementById('gender').value;
+
+    if (!nameBn) { errEl.textContent = 'বাংলায় নাম লিখুন'; return false; }
+    if (!nameEn) { errEl.textContent = 'ইংরেজিতে নাম লিখুন'; return false; }
+    if (!email || !email.includes('@')) { errEl.textContent = 'সঠিক ইমেইল ঠিকানা দিন'; return false; }
+    if (!phone || phone.length !== 11) { errEl.textContent = '১১ ডিজিটের মোবাইল নম্বর দিন'; return false; }
+    if (!dob) { errEl.textContent = 'জন্ম তারিখ দিন'; return false; }
+    if (!gender) { errEl.textContent = 'লিঙ্গ বেছে নিন'; return false; }
+    return true;
+  }
+
+  if (step === 2) {
+    const division = document.getElementById('division').value;
+    const district = document.getElementById('district').value;
+    const upazila = document.getElementById('upazila').value.trim();
+    if (!division) { errEl.textContent = 'বিভাগ বেছে নিন'; return false; }
+    if (!district) { errEl.textContent = 'জেলা বেছে নিন'; return false; }
+    if (!upazila) { errEl.textContent = 'উপজেলার নাম লিখুন'; return false; }
+    return true;
+  }
+
+  if (step === 3) {
+    const occ = document.getElementById('occupation').value;
+    if (!occ) { errEl.textContent = 'পেশা বেছে নিন'; return false; }
+    return true;
+  }
+
+  return true;
+}
+
+/* ── SUBMIT ── */
+function submitForm() {
+  const errEl = document.getElementById('err-4');
+  errEl.textContent = '';
+
+  const pw = document.getElementById('password').value;
+  const cpw = document.getElementById('confirmPassword').value;
+  const terms = document.getElementById('terms').checked;
+
+  if (pw.length < 8) { errEl.textContent = 'পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে'; return; }
+  if (pw !== cpw) { errEl.textContent = 'পাসওয়ার্ড দুটো মিলছে না'; return; }
+  if (!terms) { errEl.textContent = 'শর্তাবলীতে সম্মত হতে হবে'; return; }
+
+  // Show success
+  const email = document.getElementById('email').value;
+  document.getElementById('formBody').style.display = 'none';
+  document.getElementById('formFooter').style.display = 'none';
+  document.getElementById('successEmail').textContent = email;
+  document.getElementById('successState').style.display = 'flex';
+  document.querySelector('.np-steps').style.display = 'none';
+}
+
+function resetForm() {
+  document.getElementById('formBody').style.display = 'block';
+  document.getElementById('formFooter').style.display = 'block';
+  document.getElementById('successState').style.display = 'none';
+  document.querySelector('.np-steps').style.display = 'flex';
+  currentStep = 1;
+  updateUI();
+  // reset form fields
+  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]), select, textarea').forEach(el => el.value = '');
+  document.getElementById('avatarPreview').innerHTML = '🙂';
+  document.getElementById('strengthFill').style.width = '0%';
+  document.getElementById('strengthText').textContent = '';
+}
+
+/* ── PASSWORD STRENGTH ── */
+function checkStrength(val) {
+  const fill = document.getElementById('strengthFill');
+  const text = document.getElementById('strengthText');
+  if (!val) { fill.style.width = '0%'; text.textContent = ''; return; }
+
+  let score = 0;
+  if (val.length >= 8) score++;
+  if (/[A-Z]/.test(val)) score++;
+  if (/[0-9]/.test(val)) score++;
+  if (/[^A-Za-z0-9]/.test(val)) score++;
+
+  const levels = [
+    { w:'20%', c:'#ef4444', t:'দুর্বল' },
+    { w:'45%', c:'#f59e0b', t:'মোটামুটি' },
+    { w:'70%', c:'#3b82f6', t:'ভালো' },
+    { w:'100%', c:'#22c55e', t:'শক্তিশালী ✓' },
+  ];
+  const l = levels[Math.min(score - 1, 3)] || levels[0];
+  fill.style.width = l.w;
+  fill.style.background = l.c;
+  text.textContent = l.t;
+  text.style.color = l.c;
+}
+
+/* ── TOGGLE PASSWORD ── */
+function togglePw(id, btn) {
+  const inp = document.getElementById(id);
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+}
+
+/* ── AVATAR PREVIEW ── */
+function previewAvatar(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const preview = document.getElementById('avatarPreview');
+      preview.innerHTML = `<img src="${e.target.result}" alt="avatar">`;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+/* ── SAME ADDRESS ── */
+function toggleSameAddress(cb) {
+  document.getElementById('permanentAddr').style.opacity = cb.checked ? '0.4' : '1';
+  document.getElementById('permanentAddr').style.pointerEvents = cb.checked ? 'none' : 'auto';
+}
+
+/* ── INIT ── */
+document.getElementById('dob').max = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
