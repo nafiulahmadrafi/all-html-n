@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ব্লগ ও বিশ্লেষণ | Political Insights BD</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'SolaimanLipi';src:url('https://fonts.maateen.me/solaiman-lipi/SolaimanLipi.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'SolaimanLipi';src:url('https://fonts.maateen.me/solaiman-lipi/SolaimanLipi_Bold.woff2') format('woff2');font-weight:700 800 900;font-display:swap}
+:root{
+  --bg:#f5f3ee;--bg-alt:#faf8f4;--bg-pure:#ffffff;--surface:#eeeae2;--border:#e2ddd4;--border-s:#d5cfc5;
+  --ink:#1a1710;--ink-2:#3a3428;--muted:#7a7060;--muted-l:#a09880;
+  --gold:#b8922a;--gold-b:#d4a83a;--gold-pale:#fdf3d0;--gold-bg:#faf4e6;
+  --royal:#0d1b3e;--royal-m:#1a3a7c;--royal-b:#2e5fad;
+  --sh-sm:0 2px 12px rgba(26,23,16,.08);--sh-md:0 8px 32px rgba(26,23,16,.10);--sh-lg:0 20px 60px rgba(26,23,16,.13);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'SolaimanLipi','Noto Sans Bengali',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--surface)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* HEADER */
+#main-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(245,243,238,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all .3s}
+.header-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:72px}
+.logo-wrap{display:flex;align-items:center;gap:13px;text-decoration:none}
+.logo-main{font-family:'Cinzel',serif;font-size:1.08rem;font-weight:700;background:linear-gradient(135deg,var(--gold),#c49a20);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:.04em}
+.logo-sub{font-size:.6rem;color:var(--muted-l);letter-spacing:2.5px;text-transform:uppercase;margin-top:3px}
+nav{display:flex;align-items:center;gap:2px}
+nav a{color:var(--ink-2);font-size:.83rem;font-weight:500;padding:7px 14px;border-radius:8px;text-decoration:none;transition:all .22s}
+nav a:hover,.nav-active{color:var(--gold)!important;background:var(--gold-bg)!important}
+.nav-cta{background:linear-gradient(135deg,var(--royal),#0a1428)!important;color:#fff!important;font-weight:700!important;padding:8px 22px!important;border-radius:100px!important;box-shadow:0 4px 16px rgba(13,27,62,.2)!important;margin-left:6px}
+.nav-cta:hover{transform:translateY(-1px);color:#fff!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.ham span{width:24px;height:2px;background:var(--gold);border-radius:2px;transition:.3s}
+#mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(245,243,238,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:999;padding:20px 28px;flex-direction:column;gap:4px;box-shadow:var(--sh-md)}
+#mobile-menu.open{display:flex}
+#mobile-menu a{color:var(--ink-2);font-size:.9rem;padding:10px 14px;border-radius:8px;text-decoration:none}
+#mobile-menu a:hover{background:var(--gold-bg);color:var(--gold)}
+#mobile-menu .mob-cta{background:var(--royal);color:#fff!important;border-radius:10px;margin-top:8px;text-align:center}
+
+/* PAGE HERO */
+.page-hero{background:linear-gradient(148deg,#0d1b3e 0%,#122250 38%,#0f1c40 65%,#091228 100%);padding:140px 28px 80px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 65% at 68% 38%,rgba(212,168,58,.08),transparent 55%)}
+.page-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px}
+.page-hero-inner{max-width:1320px;margin:0 auto;position:relative;z-index:2;text-align:center}
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,168,58,.12);border:1px solid rgba(212,168,58,.35);color:#f5d878;padding:7px 20px;border-radius:100px;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:22px;animation:fade-up .7s ease both}
+.page-title{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.1;color:#fff;font-weight:800;letter-spacing:-.02em;margin-bottom:16px;animation:fade-up .8s .1s ease both}
+.page-sub{font-size:1rem;color:rgba(255,255,255,.55);max-width:580px;margin:0 auto;line-height:1.9;animation:fade-up .8s .2s ease both}
+@keyframes fade-up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* BREADCRUMB */
+.breadcrumb{background:var(--bg-pure);border-bottom:1px solid var(--border);padding:14px 28px}
+.breadcrumb-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--muted)}
+.breadcrumb a{color:var(--muted);text-decoration:none;transition:.2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb-cur{color:var(--ink);font-weight:600}
+
+/* BLOG MAIN */
+.blog-main{max-width:1320px;margin:0 auto;padding:52px 28px 80px;display:grid;grid-template-columns:1fr 320px;gap:44px;align-items:start}
+
+/* SEARCH & FILTER BAR */
+.filter-bar{background:var(--bg-pure);border:1px solid var(--border);border-radius:16px;padding:22px 24px;margin-bottom:28px;box-shadow:var(--sh-sm)}
+.search-wrap{position:relative;margin-bottom:16px}
+.search-input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:11px 16px 11px 44px;font-family:'SolaimanLipi','Noto Sans Bengali',sans-serif;font-size:.87rem;color:var(--ink);outline:none;transition:.25s}
+.search-input:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(184,146,42,.1)}
+.search-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted-l);font-size:.95rem;pointer-events:none}
+.filter-label{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.cat-pills{display:flex;flex-wrap:wrap;gap:8px}
+.cat-pill{padding:6px 14px;border-radius:100px;font-size:.78rem;font-weight:600;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
+.cat-pill:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+.cat-pill.active{background:var(--royal);border-color:var(--royal);color:#fff}
+
+/* RESULTS INFO */
+.results-info{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.results-count{font-size:.8rem;color:var(--muted)}
+.results-count strong{color:var(--ink)}
+.sort-select{background:var(--bg-pure);border:1.5px solid var(--border);border-radius:8px;padding:7px 12px;font-family:'SolaimanLipi','Noto Sans Bengali',sans-serif;font-size:.78rem;color:var(--ink);outline:none;cursor:pointer}
+
+/* BLOG CARDS */
+.blog-grid{display:flex;flex-direction:column;gap:20px}
+.blog-card{background:var(--bg-pure);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:200px 1fr;transition:all .28s;text-decoration:none;box-shadow:var(--sh-sm)}
+.blog-card:hover{transform:translateY(-3px);border-color:rgba(184,146,42,.25);box-shadow:var(--sh-lg)}
+.blog-card-thumb{min-height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;flex-shrink:0}
+.blog-card-body{padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between}
+.blog-card-top{flex:1}
+.blog-cat{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:8px}
+.blog-card-title{font-size:1rem;font-weight:700;color:var(--royal);line-height:1.5;margin-bottom:8px}
+.blog-card-excerpt{font-size:.8rem;color:var(--muted);line-height:1.78;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.blog-card-meta{display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+.blog-author-img{width:28px;height:28px;border-radius:50%;background:var(--gold-bg);border:1px solid rgba(184,146,42,.25);display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.blog-author-name{font-size:.73rem;font-weight:600;color:var(--ink-2)}
+.blog-date{font-size:.7rem;color:var(--muted-l)}
+.blog-read-time{font-size:.7rem;color:var(--muted-l);margin-left:auto;background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:2px 9px}
+
+/* NO RESULTS */
+.no-results{text-align:center;padding:60px 20px;background:var(--bg-pure);border:1px solid var(--border);border-radius:16px;display:none}
+.no-results.show{display:block}
+.no-results-ico{font-size:3rem;margin-bottom:12px}
+.no-results-text{font-size:.93rem;color:var(--muted)}
+
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:36px;flex-wrap:wrap}
+.pg-btn{min-width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .2s;border:1.5px solid var(--border);background:var(--bg-pure);color:var(--muted);text-decoration:none;padding:0 10px}
+.pg-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+.pg-btn.active{background:var(--royal);border-color:var(--royal);color:#fff}
+.pg-btn.disabled{opacity:.35;cursor:default;pointer-events:none}
+.pg-dots{color:var(--muted-l);font-size:.85rem;padding:0 4px}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:22px;position:sticky;top:90px}
+.sidebar-widget{background:var(--bg-pure);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:var(--sh-sm)}
+.widget-title{font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.trending-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);text-decoration:none;transition:.2s}
+.trending-item:last-child{border-bottom:none;padding-bottom:0}
+.trending-item:hover .trending-title{color:var(--gold)}
+.trending-num{width:24px;height:24px;flex-shrink:0;background:var(--gold-bg);border:1px solid rgba(184,146,42,.22);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:var(--gold);font-family:'Cinzel',serif}
+.trending-title{font-size:.79rem;font-weight:600;color:var(--ink);line-height:1.55;transition:.2s}
+.trending-meta{font-size:.68rem;color:var(--muted-l);margin-top:3px}
+
+.cat-list{display:flex;flex-direction:column;gap:8px}
+.cat-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;cursor:pointer;transition:.2s;text-decoration:none}
+.cat-row:hover{background:var(--bg)}
+.cat-row-name{font-size:.82rem;color:var(--ink-2);font-weight:500}
+.cat-row-count{font-size:.7rem;font-weight:700;color:var(--gold);background:var(--gold-bg);border:1px solid rgba(184,146,42,.2);border-radius:100px;padding:1px 9px}
+
+.tag-cloud{display:flex;flex-wrap:wrap;gap:7px}
+.tag{padding:5px 12px;background:var(--bg);border:1.5px solid var(--border);border-radius:100px;font-size:.72rem;font-weight:500;color:var(--muted);cursor:pointer;transition:.2s}
+.tag:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+
+/* NEWSLETTER */
+.newsletter-widget{background:linear-gradient(135deg,var(--royal),#142254);border-radius:16px;padding:22px;position:relative;overflow:hidden}
+.newsletter-widget::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 20%,rgba(212,168,58,.1),transparent)}
+.newsletter-widget::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.nw-title{font-size:.9rem;font-weight:800;color:#fff;margin-bottom:8px;position:relative;z-index:1}
+.nw-sub{font-size:.76rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:14px;position:relative;z-index:1}
+.nw-input{width:100%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:8px;padding:9px 13px;font-family:'SolaimanLipi','Noto Sans Bengali',sans-serif;font-size:.82rem;color:#fff;outline:none;margin-bottom:10px;position:relative;z-index:1}
+.nw-input::placeholder{color:rgba(255,255,255,.35)}
+.nw-input:focus{border-color:rgba(212,168,58,.5)}
+.nw-btn{width:100%;background:linear-gradient(135deg,var(--gold-b),#a07020);color:#0a0a14;padding:9px;border-radius:8px;font-weight:800;font-size:.82rem;border:none;cursor:pointer;position:relative;z-index:1;transition:.25s}
+.nw-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(184,146,42,.35)}
+
+/* FOOTER */
+footer{background:var(--royal);color:rgba(255,255,255,.75);padding:64px 0 28px;border-top:4px solid var(--gold)}
+.footer-inner{max-width:1320px;margin:0 auto;padding:0 28px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand{display:flex;flex-direction:column;gap:16px}
+.footer-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.footer-logo-text .main{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;background:linear-gradient(135deg,var(--gold-b),#f0d060);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-logo-text .sub{font-size:.6rem;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.footer-desc{font-size:.79rem;color:rgba(255,255,255,.45);line-height:1.85;max-width:300px}
+.footer-socials{display:flex;gap:10px;margin-top:4px}
+.social-btn{width:36px;height:36px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.45);font-size:.85rem;text-decoration:none;transition:.25s}
+.social-btn:hover{background:rgba(212,168,58,.15);color:var(--gold-b);border-color:rgba(212,168,58,.3)}
+.footer-col h4{font-size:.7rem;font-weight:700;color:var(--gold-b);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:16px}
+.footer-links{display:flex;flex-direction:column;gap:9px}
+.footer-links a{font-size:.79rem;color:rgba(255,255,255,.38);text-decoration:none;transition:.22s;display:flex;align-items:center;gap:6px}
+.footer-links a::before{content:'›';color:rgba(212,168,42,.4);font-size:1rem}
+.footer-links a:hover{color:var(--gold-b);transform:translateX(3px)}
+.footer-divider{height:1px;background:rgba(255,255,255,.08);margin-bottom:24px}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:.74rem;color:rgba(255,255,255,.28)}
+.footer-copy span{color:var(--gold-b);opacity:.8}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:.72rem;color:rgba(255,255,255,.22);text-decoration:none;transition:.22s}
+.footer-bottom-links a:hover{color:var(--gold-b)}
+
+@media(max-width:1100px){.blog-main{grid-template-columns:1fr}.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:18px}}
+@media(max-width:768px){
+  nav,.ham-hide{display:none}.ham{display:flex}
+  .blog-main{padding:32px 18px 60px}
+  .blog-card{grid-template-columns:1fr}.blog-card-thumb{height:120px}
+  .sidebar{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="main-header">
+  <div class="header-inner">
+    <a href="pibbd-homepage-light.html" class="logo-wrap">
+      <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--royal),#142254);border:1.5px solid rgba(212,168,58,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:var(--gold-b)">P</div>
+      <div class="logo-text-wrap">
+        <div class="logo-main">Political Insights BD</div>
+        <div class="logo-sub">Strategic Intelligence</div>
+      </div>
+    </a>
+    <nav>
+      <a href="pibbd-homepage-light.html">হোম</a>
+      <a href="about.html">সম্পর্কে</a>
+      <a href="blogs.html" class="nav-active">ব্লগ</a>
+      <a href="pibbd-homepage-light.html#services">সেবা</a>
+      <a href="pibbd-homepage-light.html#contact">যোগাযোগ</a>
+      <a href="pibbd-homepage-light.html#contact" class="nav-cta">পরামর্শ নিন</a>
+    </nav>
+    <div class="ham" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</header>
+<div id="mobile-menu">
+  <a href="pibbd-homepage-light.html">হোম</a>
+  <a href="about.html">সম্পর্কে</a>
+  <a href="blogs.html">ব্লগ</a>
+  <a href="pibbd-homepage-light.html#services">সেবা</a>
+  <a href="pibbd-homepage-light.html#contact">যোগাযোগ</a>
+  <a href="pibbd-homepage-light.html#contact" class="mob-cta">পরামর্শ নিন</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-badge">✦ ব্লগ ও বিশ্লেষণ</div>
+    <h1 class="page-title">রাজনৈতিক জ্ঞান ও<br><span style="background:linear-gradient(135deg,var(--gold-b),#f0d060);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">গভীর বিশ্লেষণ</span></h1>
+    <p class="page-sub">তৃণমূল রাজনীতি থেকে জাতীয় কৌশল — বাংলাদেশের রাজনৈতিক প্রেক্ষাপট বুঝতে আমাদের বিশেষজ্ঞ বিশ্লেষণ পড়ুন</p>
+  </div>
+</section>
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="pibbd-homepage-light.html">হোম</a>
+    <span style="color:var(--muted-l)">›</span>
+    <span class="breadcrumb-cur">ব্লগ</span>
+  </div>
+</div>
+
+<!-- BLOG MAIN -->
+<div class="blog-main">
+  <!-- LEFT: POSTS -->
+  <div>
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <span class="search-ico">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="ব্লগ খুঁজুন... (শিরোনাম, বিষয় বা লেখক)" oninput="filterPosts()">
+      </div>
+      <div class="filter-label">ক্যাটাগরি অনুযায়ী ফিল্টার করুন</div>
+      <div class="cat-pills">
+        <div class="cat-pill active" data-cat="all" onclick="filterByCategory(this)">সকল</div>
+        <div class="cat-pill" data-cat="তৃণমূল" onclick="filterByCategory(this)">তৃণমূল</div>
+        <div class="cat-pill" data-cat="বিশ্লেষণ" onclick="filterByCategory(this)">বিশ্লেষণ</div>
+        <div class="cat-pill" data-cat="ঝুঁকি" onclick="filterByCategory(this)">ঝুঁকি</div>
+        <div class="cat-pill" data-cat="নির্বাচন" onclick="filterByCategory(this)">নির্বাচন</div>
+        <div class="cat-pill" data-cat="কৌশল" onclick="filterByCategory(this)">কৌশল</div>
+        <div class="cat-pill" data-cat="গবেষণা" onclick="filterByCategory(this)">গবেষণা</div>
+        <div class="cat-pill" data-cat="ডিজিটাল" onclick="filterByCategory(this)">ডিজিটাল</div>
+      </div>
+    </div>
+
+    <div class="results-info">
+      <div class="results-count"><strong id="resultCount">১২</strong> টি পোস্ট পাওয়া গেছে</div>
+      <select class="sort-select" onchange="sortPosts(this.value)">
+        <option value="latest">সর্বশেষ</option>
+        <option value="popular">জনপ্রিয়</option>
+        <option value="oldest">পুরোনো</option>
+      </select>
+    </div>
+
+    <!-- BLOG CARDS -->
+    <div class="blog-grid" id="blogGrid"></div>
+    <div class="no-results" id="noResults">
+      <div class="no-results-ico">📭</div>
+      <p class="no-results-text">এই অনুসন্ধানে কোনো পোস্ট পাওয়া যায়নি। অন্য কীওয়ার্ড বা ক্যাটাগরি ব্যবহার করুন।</p>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- TRENDING -->
+    <div class="sidebar-widget">
+      <div class="widget-title">🔥 ট্রেন্ডিং পোস্ট</div>
+      <a href="single-post.html" class="trending-item">
+        <div class="trending-num">১</div>
+        <div>
+          <div class="trending-title">২০২৬ নির্বাচনে তৃণমূল কৌশল কেন সবচেয়ে গুরুত্বপূর্ণ</div>
+          <div class="trending-meta">৪৫০০+ পাঠক · ৭ মিনিট</div>
+        </div>
+      </a>
+      <a href="single-post.html" class="trending-item">
+        <div class="trending-num">২</div>
+        <div>
+          <div class="trending-title">সোশ্যাল মিডিয়া ম্যানিপুলেশন: কীভাবে চিনবেন?</div>
+          <div class="trending-meta">৩২০০+ পাঠক · ৫ মিনিট</div>
+        </div>
+      </a>
+      <a href="single-post.html" class="trending-item">
+        <div class="trending-num">৩</div>
+        <div>
+          <div class="trending-title">জনমত জরিপের ফলাফল বিশ্লেষণ পদ্ধতি</div>
+          <div class="trending-meta">২৮০০+ পাঠক · ৯ মিনিট</div>
+        </div>
+      </a>
+      <a href="single-post.html" class="trending-item">
+        <div class="trending-num">৪</div>
+        <div>
+          <div class="trending-title">রাজনৈতিক ব্র্যান্ডিংয়ে ভুলগুলো এড়ানোর উপায়</div>
+          <div class="trending-meta">২৪০০+ পাঠক · ৬ মিনিট</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="sidebar-widget">
+      <div class="widget-title">📂 ক্যাটাগরি</div>
+      <div class="cat-list">
+        <a href="#" class="cat-row" onclick="filterByName('all');return false"><span class="cat-row-name">সকল পোস্ট</span><span class="cat-row-count">১২</span></a>
+        <a href="#" class="cat-row" onclick="filterByName('তৃণমূল');return false"><span class="cat-row-name">তৃণমূল</span><span class="cat-row-count">৩</span></a>
+        <a href="#" class="cat-row" onclick="filterByName('বিশ্লেষণ');return false"><span class="cat-row-name">বিশ্লেষণ</span><span class="cat-row-count">৩</span></a>
+        <a href="#" class="cat-row" onclick="filterByName('ঝুঁকি');return false"><span class="cat-row-name">ঝুঁকি</span><span class="cat-row-count">২</span></a>
+        <a href="#" class="cat-row" onclick="filterByName('নির্বাচন');return false"><span class="cat-row-name">নির্বাচন</span><span class="cat-row-count">২</span></a>
+        <a href="#" class="cat-row" onclick="filterByName('কৌশল');return false"><span class="cat-row-name">কৌশল</span><span class="cat-row-count">১</span></a>
+        <a href="#" class="cat-row" onclick="filterByName('ডিজিটাল');return false"><span class="cat-row-name">ডিজিটাল</span><span class="cat-row-count">১</span></a>
+      </div>
+    </div>
+
+    <!-- TAGS -->
+    <div class="sidebar-widget">
+      <div class="widget-title">🏷️ ট্যাগ</div>
+      <div class="tag-cloud">
+        <span class="tag">নির্বাচন</span><span class="tag">ভোটার</span><span class="tag">কৌশল</span><span class="tag">ডেটা</span>
+        <span class="tag">সোশ্যাল মিডিয়া</span><span class="tag">জনমত</span><span class="tag">বিএনপি</span><span class="tag">আওয়ামী লীগ</span>
+        <span class="tag">তৃণমূল</span><span class="tag">গণতন্ত্র</span><span class="tag">AI</span><span class="tag">ক্যাম্পেইন</span>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter-widget">
+      <div class="nw-title">📬 নিউজলেটার সাবস্ক্রাইব করুন</div>
+      <p class="nw-sub">সর্বশেষ রাজনৈতিক বিশ্লেষণ সরাসরি আপনার ইনবক্সে পান</p>
+      <input type="email" class="nw-input" placeholder="আপনার ইমেইল ঠিকানা">
+      <button class="nw-btn">সাবস্ক্রাইব করুন →</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="pibbd-homepage-light.html" class="footer-logo">
+          <div style="width:44px;height:44px;background:rgba(212,168,58,.12);border:1px solid rgba(212,168,58,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:700;font-size:1rem;color:var(--gold-b)">P</div>
+          <div class="footer-logo-text"><div class="main">Political Insights BD</div><div class="sub">Strategic Intelligence</div></div>
+        </a>
+        <p class="footer-desc">বাংলাদেশের প্রথম পূর্ণাঙ্গ রাজনৈতিক বুদ্ধিমত্তা ও কৌশলগত পরামর্শ প্রতিষ্ঠান।</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">f</a><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">▶</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>সেবাসমূহ</h4><div class="footer-links">
+        <a href="package-1-trinamul-connect.html">তৃণমূল কানেক্ট</a>
+        <a href="package-2-strategic-dominance.html">স্ট্র্যাটেজিক ডমিন্যান্স</a>
+        <a href="package-3-statesman-elite.html">স্টেটসম্যান এলিট</a>
+        <a href="package-4-political-branding.html">পলিটিক্যাল ব্র্যান্ডিং</a>
+      </div></div>
+      <div class="footer-col"><h4>পেইজসমূহ</h4><div class="footer-links">
+        <a href="pibbd-homepage-light.html">হোম</a>
+        <a href="about.html">আমাদের সম্পর্কে</a>
+        <a href="blogs.html">ব্লগ</a>
+        <a href="pibbd-homepage-light.html#contact">যোগাযোগ</a>
+      </div></div>
+      <div class="footer-col"><h4>যোগাযোগ</h4><div class="footer-links">
+        <a href="#">info@pibbd.org</a><a href="#">ঢাকা, বাংলাদেশ</a><a href="#">www.pibbd.org</a>
+      </div></div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© ২০২৬ <span>Political Insights BD (PIBBD)</span>. সর্বস্বত্ব সংরক্ষিত।</div>
+      <div class="footer-bottom-links"><a href="#">গোপনীয়তা</a><a href="#">শর্তাবলী</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== DATA =====
+const allPosts = [
+  {id:1,cat:'তৃণমূল',emoji:'🗳️',bg:'linear-gradient(135deg,#1e6640,#28a05e)',catStyle:'background:#dcfce7;color:#166534',title:'২০২৬ নির্বাচনে তৃণমূল কৌশল কেন সবচেয়ে গুরুত্বপূর্ণ',excerpt:'জনসংযোগ ও তৃণমূল সংগঠনের শক্তি ছাড়া কোনো নির্বাচনী প্রচারণাই সফল হতে পারে না। এই বিশ্লেষণে আমরা দেখাচ্ছি কীভাবে তৃণমূল কৌশল নির্বাচনের ফলাফল নির্ধারণ করে।',author:'ড. আরিফ হোসেন',authorEmoji:'👨‍💼',date:'১৫ মার্চ, ২০২৬',readTime:'৭ মিনিট',views:4500,date_val:'2026-03-15'},
+  {id:2,cat:'বিশ্লেষণ',emoji:'📊',bg:'linear-gradient(135deg,#0d1b3e,#1a3a7c)',catStyle:'background:#dbeafe;color:#1e40af',title:'সংসদীয় নির্বাচনে ডেটা বিশ্লেষণের ভূমিকা',excerpt:'আধুনিক রাজনৈতিক প্রচারণায় ডেটা বিজ্ঞান একটি অপরিহার্য হাতিয়ার হয়ে উঠেছে। ভোটার ডেটা বিশ্লেষণ করে কীভাবে কৌশল তৈরি করা যায় তা এখানে আলোচনা করা হয়েছে।',author:'ফারিহা তাসনিম',authorEmoji:'👩‍💻',date:'১২ মার্চ, ২০২৬',readTime:'৯ মিনিট',views:3200,date_val:'2026-03-12'},
+  {id:3,cat:'ঝুঁকি',emoji:'⚠️',bg:'linear-gradient(135deg,#7c2d12,#c2410c)',catStyle:'background:#fff1f2;color:#9f1239',title:'রাজনৈতিক প্রতিপক্ষের অপপ্রচার মোকাবেলার কৌশল',excerpt:'নির্বাচনের সময় অপপ্রচার ও ভুল তথ্য প্রচার একটি সাধারণ কৌশল। কীভাবে এই ঝুঁকি চিহ্নিত করে কার্যকরভাবে মোকাবেলা করবেন তা জানুন।',author:'মো. সালাহউদ্দিন',authorEmoji:'📊',date:'১০ মার্চ, ২০২৬',readTime:'৬ মিনিট',views:2800,date_val:'2026-03-10'},
+  {id:4,cat:'নির্বাচন',emoji:'🏛️',bg:'linear-gradient(135deg,#1a3a7c,#2e5fad)',catStyle:'background:#eef2ff;color:#3730a3',title:'ইউনিয়ন পরিষদ নির্বাচন: জয়ের পাঁচটি মূল চাবিকাঠি',excerpt:'স্থানীয় সরকার নির্বাচনে জয়লাভের জন্য জাতীয় রাজনীতির চেয়ে ভিন্ন কৌশল প্রয়োজন। এই গভীর বিশ্লেষণে উঠে এসেছে সফল প্রার্থীদের পাঁচটি সাধারণ গুণ।',author:'নুসরাত জাহান',authorEmoji:'🎙️',date:'৮ মার্চ, ২০২৬',readTime:'১১ মিনিট',views:2400,date_val:'2026-03-08'},
+  {id:5,cat:'তৃণমূল',emoji:'🤝',bg:'linear-gradient(135deg,#166534,#16a34a)',catStyle:'background:#dcfce7;color:#166534',title:'পাড়া সভা থেকে রাজনৈতিক গণমাধ্যম — তৃণমূল সংযোগের নতুন রূপ',excerpt:'গ্রামীণ ও শহুরে তৃণমূলে সংযোগ স্থাপনের আধুনিক পদ্ধতি এখন পরিবর্তিত হচ্ছে। ডিজিটাল যুগে তৃণমূল কর্মীদের সক্রিয় রাখার নতুন উপায় জানুন।',author:'ড. আরিফ হোসেন',authorEmoji:'👨‍💼',date:'৫ মার্চ, ২০২৬',readTime:'৮ মিনিট',views:1900,date_val:'2026-03-05'},
+  {id:6,cat:'ডিজিটাল',emoji:'📱',bg:'linear-gradient(135deg,#0e7490,#06b6d4)',catStyle:'background:#f0fdfa;color:#0f766e',title:'সোশ্যাল মিডিয়া ম্যানিপুলেশন: চেনার ও প্রতিরোধের উপায়',excerpt:'ফেসবুক, ইউটিউব ও টিকটকে রাজনৈতিক অপপ্রচারের ধরন বদলে গেছে। AI-জেনারেটেড কন্টেন্ট ও ফেক প্রোফাইল সনাক্তের পদ্ধতি এখানে বিস্তারিত আলোচনা করা হয়েছে।',author:'ফারিহা তাসনিম',authorEmoji:'👩‍💻',date:'২ মার্চ, ২০২৬',readTime:'৫ মিনিট',views:3200,date_val:'2026-03-02'},
+  {id:7,cat:'বিশ্লেষণ',emoji:'🧮',bg:'linear-gradient(135deg,#4c1d95,#7c3aed)',catStyle:'background:#dbeafe;color:#1e40af',title:'বাংলাদেশের ভোটার আচরণ: একটি দশকীয় বিশ্লেষণ',excerpt:'২০১৪ থেকে ২০২৪ পর্যন্ত বাংলাদেশের ভোটার আচরণের পরিবর্তন পর্যালোচনা করে দেখা যাচ্ছে কিছু উল্লেখযোগ্য প্যাটার্ন যা ভবিষ্যৎ নির্বাচনে প্রভাব ফেলবে।',author:'মো. সালাহউদ্দিন',authorEmoji:'📊',date:'২৬ ফেব্রুয়ারি, ২০২৬',readTime:'১৩ মিনিট',views:1800,date_val:'2026-02-26'},
+  {id:8,cat:'কৌশল',emoji:'🎯',bg:'linear-gradient(135deg,#92400e,#b8922a)',catStyle:'background:var(--gold-bg);color:var(--gold)',title:'রাজনৈতিক ব্র্যান্ডিং: ব্যক্তিত্বকে ব্র্যান্ডে পরিণত করা',excerpt:'একজন রাজনীতিক কীভাবে তার ব্যক্তিগত পরিচয়কে একটি শক্তিশালী রাজনৈতিক ব্র্যান্ডে পরিণত করতে পারেন? সফল উদাহরণ ও ব্যর্থতার পাঠ থেকে শিখুন।',author:'নুসরাত জাহান',authorEmoji:'🎙️',date:'২০ ফেব্রুয়ারি, ২০২৬',readTime:'৭ মিনিট',views:2100,date_val:'2026-02-20'},
+  {id:9,cat:'গবেষণা',emoji:'📋',bg:'linear-gradient(135deg,#1e3a5f,#2563eb)',catStyle:'background:#eff6ff;color:#1d4ed8',title:'জনমত জরিপ পদ্ধতি: বিশ্বাসযোগ্য ডেটা সংগ্রহের নির্দেশিকা',excerpt:'সঠিক নমুনা নির্বাচন, প্রশ্নমালা ডিজাইন ও ফিল্ড রিসার্চের মাধ্যমে নির্ভরযোগ্য জনমত জরিপ পরিচালনার পদ্ধতি এই বিস্তারিত গাইডে আলোচনা করা হয়েছে।',author:'মো. সালাহউদ্দিন',authorEmoji:'📊',date:'১৫ ফেব্রুয়ারি, ২০২৬',readTime:'১০ মিনিট',views:1500,date_val:'2026-02-15'},
+  {id:10,cat:'নির্বাচন',emoji:'🗺️',bg:'linear-gradient(135deg,#0d1b3e,#1a5c8a)',catStyle:'background:#eef2ff;color:#3730a3',title:'নির্বাচনী এলাকা ম্যাপিং: বিজয়ের ভৌগোলিক বিশ্লেষণ',excerpt:'একটি নির্বাচনী এলাকার মানচিত্র বিশ্লেষণ করে কীভাবে ভোটার বিতরণ, শক্তিশালী ঘাঁটি ও দুর্বল এলাকা চিহ্নিত করবেন তার পূর্ণ পদ্ধতি।',author:'ড. আরিফ হোসেন',authorEmoji:'👨‍💼',date:'১০ ফেব্রুয়ারি, ২০২৬',readTime:'৮ মিনিট',views:1700,date_val:'2026-02-10'},
+  {id:11,cat:'তৃণমূল',emoji:'🌱',bg:'linear-gradient(135deg,#14532d,#15803d)',catStyle:'background:#dcfce7;color:#166534',title:'ওয়ার্ড কমিটি গঠন ও কার্যকর ব্যবস্থাপনা',excerpt:'দলীয় তৃণমূল সংগঠনের প্রাণকেন্দ্র হলো ওয়ার্ড কমিটি। কীভাবে একটি শক্তিশালী ওয়ার্ড কমিটি গঠন করবেন এবং তা সক্রিয় ও কার্যকর রাখবেন।',author:'ড. আরিফ হোসেন',authorEmoji:'👨‍💼',date:'৫ ফেব্রুয়ারি, ২০২৬',readTime:'৬ মিনিট',views:1300,date_val:'2026-02-05'},
+  {id:12,cat:'বিশ্লেষণ',emoji:'🔬',bg:'linear-gradient(135deg,#312e81,#4338ca)',catStyle:'background:#dbeafe;color:#1e40af',title:'রাজনৈতিক বিরোধী পক্ষ বিশ্লেষণ: SWOT পদ্ধতি',excerpt:'প্রতিযোগিতামূলক রাজনীতিতে প্রতিপক্ষের শক্তি, দুর্বলতা, সুযোগ ও হুমকি বিশ্লেষণ করা অপরিহার্য। কর্পোরেট SWOT কৌশলকে রাজনীতিতে প্রয়োগের পদ্ধতি।',author:'ফারিহা তাসনিম',authorEmoji:'👩‍💻',date:'১ ফেব্রুয়ারি, ২০২৬',readTime:'১১ মিনিট',views:1600,date_val:'2026-02-01'},
+];
+
+const POSTS_PER_PAGE = 6;
+let currentCat = 'all';
+let currentSearch = '';
+let currentPage = 1;
+let currentSort = 'latest';
+let filteredPosts = [...allPosts];
+
+function getFilteredAndSorted(){
+  let posts = allPosts.filter(p=>{
+    const matchCat = currentCat==='all' || p.cat===currentCat;
+    const q = currentSearch.toLowerCase();
+    const matchSearch = !q || p.title.includes(q) || p.author.toLowerCase().includes(q) || p.cat.includes(q) || p.excerpt.includes(q);
+    return matchCat && matchSearch;
+  });
+  if(currentSort==='popular') posts.sort((a,b)=>b.views-a.views);
+  else if(currentSort==='oldest') posts.sort((a,b)=>new Date(a.date_val)-new Date(b.date_val));
+  else posts.sort((a,b)=>new Date(b.date_val)-new Date(a.date_val));
+  return posts;
+}
+
+function renderPosts(){
+  filteredPosts = getFilteredAndSorted();
+  const total = filteredPosts.length;
+  const totalPages = Math.ceil(total/POSTS_PER_PAGE);
+  if(currentPage>totalPages) currentPage=1;
+  const start=(currentPage-1)*POSTS_PER_PAGE, end=start+POSTS_PER_PAGE;
+  const pagePosts=filteredPosts.slice(start,end);
+
+  const grid=document.getElementById('blogGrid');
+  const noRes=document.getElementById('noResults');
+  const countEl=document.getElementById('resultCount');
+
+  // Bangla numerals
+  const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+  countEl.textContent=bn(total);
+
+  if(total===0){grid.innerHTML='';noRes.classList.add('show')}
+  else{noRes.classList.remove('show');
+    grid.innerHTML=pagePosts.map(p=>`
+      <a href="single-post.html" class="blog-card">
+        <div class="blog-card-thumb" style="background:${p.bg}">${p.emoji}</div>
+        <div class="blog-card-body">
+          <div class="blog-card-top">
+            <div class="blog-cat" style="${p.catStyle}">${p.cat}</div>
+            <div class="blog-card-title">${p.title}</div>
+            <div class="blog-card-excerpt">${p.excerpt}</div>
+          </div>
+          <div class="blog-card-meta">
+            <div class="blog-author-img">${p.authorEmoji}</div>
+            <div>
+              <div class="blog-author-name">${p.author}</div>
+              <div class="blog-date">${p.date}</div>
+            </div>
+            <div class="blog-read-time">⏱ ${p.readTime}</div>
+          </div>
+        </div>
+      </a>`).join('');
+  }
+  renderPagination(totalPages);
+}
+
+function renderPagination(totalPages){
+  const pg=document.getElementById('pagination');
+  if(totalPages<=1){pg.innerHTML='';return}
+  const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+  let html='';
+  html+=`<span class="pg-btn${currentPage===1?' disabled':''}" onclick="gotoPage(${currentPage-1})">← আগে</span>`;
+  for(let i=1;i<=totalPages;i++){
+    if(totalPages>7&&i>2&&i<totalPages-1&&Math.abs(i-currentPage)>1){
+      if(i===3||i===totalPages-2) html+=`<span class="pg-dots">…</span>`;
+    } else {
+      html+=`<span class="pg-btn${i===currentPage?' active':''}" onclick="gotoPage(${i})">${bn(i)}</span>`;
+    }
+  }
+  html+=`<span class="pg-btn${currentPage===totalPages?' disabled':''}" onclick="gotoPage(${currentPage+1})">পরে →</span>`;
+  pg.innerHTML=html;
+}
+
+function gotoPage(p){
+  const total=Math.ceil(filteredPosts.length/POSTS_PER_PAGE);
+  if(p<1||p>total) return;
+  currentPage=p;
+  renderPosts();
+  document.querySelector('.filter-bar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function filterByCategory(el){
+  document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  currentCat=el.dataset.cat;
+  currentPage=1;
+  renderPosts();
+}
+
+function filterByName(cat){
+  currentCat=cat;
+  currentPage=1;
+  document.querySelectorAll('.cat-pill').forEach(p=>{
+    p.classList.toggle('active',p.dataset.cat===cat);
+  });
+  renderPosts();
+}
+
+function filterPosts(){
+  currentSearch=document.getElementById('searchInput').value;
+  currentPage=1;
+  renderPosts();
+}
+
+function sortPosts(val){currentSort=val;currentPage=1;renderPosts()}
+
+window.addEventListener('scroll',()=>{
+  const h=document.getElementById('main-header');
+  h.style.background=window.scrollY>60?'rgba(245,243,238,.97)':'rgba(245,243,238,.92)';
+  h.style.boxShadow=window.scrollY>60?'0 4px 24px rgba(26,23,16,.1)':'none';
+});
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open')}
+
+renderPosts();
+</script>
+</body>
+</html>
